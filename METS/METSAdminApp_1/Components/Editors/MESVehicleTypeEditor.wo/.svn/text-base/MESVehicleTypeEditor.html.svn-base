@@ -1,0 +1,19 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href="#">Vehicle Types</a></li>
+	<webobject name = "IsNotNewObject">
+		<li><webobject name = "VehicleTypeName"></webobject></li>
+	</webobject>
+	<webobject name = "IsNewObject">
+		<li>New Vehicle Type</li>
+	</webobject>
+</webobject>
+<webobject name = "StaticColumn">
+	<wo:METSInfoBar>General Information</wo:METSInfoBar>
+	<div class = "row-fluid">
+		<webobject name = "MessagesPanel" />
+		<webobject name = "VehicleTypeForm">
+			<wo:METSTextInput helpText = "Required Information" labelText = "Name" value = "$object.name"></wo:METSTextInput>
+			<webobject name = "FormSubmissionBar"></webobject>
+		</webobject>
+	</div>
+</webobject>

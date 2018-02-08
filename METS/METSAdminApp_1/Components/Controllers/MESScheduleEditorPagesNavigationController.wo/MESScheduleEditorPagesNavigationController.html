@@ -1,0 +1,26 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href = "#"><webobject name = "CurrentHubName"></webobject></a></li>
+	<webobject name = "ListPageKey">
+		<li>Schedules</li>
+	</webobject>
+	<webobject name = "ListPayoutsPageKey">
+		<li><wo:link action = "$returnToSchedules">Schedules</wo:link></li>
+		<li>
+			<webobject name = "DriverName"></webobject>&nbsp;
+			<webobject name = "ScheduleStartDateTime"></webobject> - 
+			<webobject name = "ScheduleEndDateTime"></webobject>
+		</li>
+	</webobject>
+	<webobject name = "EditPageKey">
+		<li><wo:link action = "$returnToSchedules">Schedules</wo:link></li>
+		<li>
+			<webobject name = "IsNewObject">New</webobject>
+			<webobject name = "IsNotNewObject"><webobject name = "ScheduleDate"></webobject></webobject>
+		</li>
+	</webobject>
+</webobject>
+<webobject name = "StaticColumn">
+	<div class = "row-fluid">
+		<webobject name = "SwitchComponent"></webobject>
+	</div>
+</webobject>

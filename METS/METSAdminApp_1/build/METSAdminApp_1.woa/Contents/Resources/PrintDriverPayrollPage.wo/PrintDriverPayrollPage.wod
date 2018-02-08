@@ -1,0 +1,21 @@
+DriverName : WOString {
+	value = driver|fullName(false);
+}
+
+DriverPayrollTable : ListDriverPayrollTable {
+	driverPayroll = driverPayroll;
+}
+
+EndDate : WOString {
+	dateformat = "%m/%d/%y";
+	value = endDate;
+}
+
+PrintPagesWrappers : PrintPagesWrapper {
+	pageTitle = "Driver Payroll";
+}
+
+StartDate : WOString {
+	dateformat = "%m/%d/%y";
+	value = startDate;
+}

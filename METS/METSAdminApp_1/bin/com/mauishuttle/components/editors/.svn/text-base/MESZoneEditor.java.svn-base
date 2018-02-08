@@ -1,0 +1,52 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.interfaces.MESEditorInterface;
+import com.mauishuttle.eo.MESZone;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSMutableArray;
+
+@SuppressWarnings("serial")
+public class MESZoneEditor extends MESNonSynchronizingEditor implements MESEditorInterface {
+
+	private MESZone _currentZone;
+	public MESZone _zone;
+	
+	public MESZoneEditor(WOContext context) {
+        super(context);
+    }
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESZone> hubZones() {
+
+		NSMutableArray<MESZone> hubZones = MESZone.fetchMESZones(ec(), 
+				MESZone.HUB.eq(session().currentHub()),
+				MESZone.NAME.ascs()).mutableClone();
+	
+		hubZones.removeObject(object());
+		
+		return hubZones;
+	
+	}
+
+	public MESZone object() {
+	
+		if(_currentZone == null) {
+			_currentZone = (MESZone)valueForBinding("object");
+		}
+		
+		return _currentZone;
+
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+		
+		try {
+			_currentZone = (MESZone)object;
+		} catch (ClassCastException e) {
+			throw new ClassCastException("Object must be of type MESZone");
+		}
+		
+	}
+
+}

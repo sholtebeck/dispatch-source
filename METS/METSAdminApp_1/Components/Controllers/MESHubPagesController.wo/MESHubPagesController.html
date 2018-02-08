@@ -1,0 +1,84 @@
+<webobject name = "PageWrapper">
+	<webobject name = "ResizeColumn">
+		<span class="prg-handle">&harr;</span>
+		<webobject name = "LeftNavigationUpdateContainer">
+			<ul class="prg-column-header-bar">
+				<webobject name = "ViewHubObjectsListItem">
+					<webobject name = "ViewHubObjectsAction"><span><i class="icon-road">&nbsp;</i></span></webobject>
+				</webobject>
+			</ul>
+			<webobject name = "StaticColumn">
+				<ul class="prg-tree nav">
+					<webobject name = "ViewHubObjectsNavigationPageKey">
+						<webobject name = "IsSuperAdministrator">
+							<webobject name = "ActiveAccountTreeNavigation"></webobject>
+							<webobject name = "InactiveAccountTreeNavigation"></webobject>
+							<webobject name = "BookerTreeNavigation"></webobject>
+							<webobject name = "DriverTreeNavigation"></webobject>
+						</webobject>
+						<webobject name = "IsSuperAdministrator">
+							<webobject name = "LocationsTreeNavigation"></webobject>
+						</webobject>
+						<webobject name = "PhonesTreeNavigation"></webobject>
+						<webobject name = "ServicesExclusiveTreeNavigation"></webobject>
+						<webobject name = "ServicesSharedTreeNavigation"></webobject>
+						<webobject name = "VehiclesTreeNavigation"></webobject>
+						<webobject name = "IsSuperAdministrator">
+							<li>
+								<webobject name = "ZonesExpansion">
+									<ul>
+										<webobject name = "AirportZonesTreeNavigation"></webobject>
+										<webobject name = "StandardZoneTreeNavigation"></webobject>
+									</ul>
+								</webobject>
+							</li>	
+						</webobject>
+					</webobject>
+				</ul>
+				<webobject name = "FooterBar">
+					<li>
+						<webobject name = "FooterContextMenu"><span><i class="icon-plus"></i></span></webobject>
+						<ul class="dropdown-menu">
+							<webobject name = "ViewHubObjectsNavigationPageKey">
+								<webobject name = "IsSuperAdministrator">
+									<li><webobject name = "AddNewAccountLink">Create New Account</webobject></li>
+									<li><webobject name = "AddNewBookerLink">Create New Booker</webobject></li>
+									<li><webobject name = "AddNewDriverLink">Create New Driver</webobject></li>
+								</webobject>
+								<li><webobject name = "AddNewLocationLink">Create New Location</webobject></li>
+								<li><webobject name = "AddNewPhoneLink">Create New Phone</webobject></li>
+								<webobject name = "IsSuperAdministrator">
+									<li><webobject name = "AddNewExclusiveServiceLink">Create New Service (exclusive)</webobject></li>
+									<li><webobject name = "AddNewSharedServiceLink">Create New Service (shared)</webobject></li>
+								</webobject>
+									<li><webobject name = "AddNewVehicleLink">Create New Vehicle</webobject></li>
+								<webobject name = "IsSuperAdministrator">
+									<li><webobject name = "AddNewAirportZoneLink">Create New Zone (airport)</webobject></li>
+									<li><webobject name = "AddNewZoneLink">Create New Zone (standard)</webobject></li>
+								</webobject>
+							</webobject>
+						</ul>
+					</li>	
+				</webobject>
+			</webobject>
+		</webobject>		
+	</webobject>
+	<webobject name = "AlleyColumn">&nbsp;</webobject>
+	<webobject name = "MainTableColumn">	
+		<div class = "row-fluid">
+			<webobject name = "ViewHubObjectsPageKey">
+				<webobject name = "SelectedObjectIsDefined">
+					<webobject name = "SelectedObjectIsAccount">
+						<webobject name = "MESAccountPageController"></webobject>
+					</webobject>
+					<webobject name = "SelectedObjectIsNotAnAccount">
+						<webobject name = "HubObjectEditor"></webobject>
+					</webobject>
+				</webobject>
+				<webobject name = "SelectedObjectIsNotDefined">
+					<webobject name = "BlankPage"></webobject>
+				</webobject>
+			</webobject>
+		</div>
+	</webobject>	
+</webobject>

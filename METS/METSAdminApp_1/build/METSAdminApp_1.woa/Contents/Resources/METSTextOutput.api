@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+    <wo class="METSTextOutput" wocomponentcontent="true">    <binding name="labelText"/>
+    <binding name="value"/>
+    <binding name="numberformat"/>
+    <binding name="dateformatter"/>
+    <binding name="printPage"/>
+    </wo>
+</wodefinitions>

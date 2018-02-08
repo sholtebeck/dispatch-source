@@ -1,0 +1,45 @@
+<webobject name = "Wrapper">
+	<webobject name = "BreadCrumbs">
+		<li><a href = "#">Accounting</a></li>
+		<li>Outstanding Payment by Account</li>
+	</webobject>
+	<webobject name = "SearchForm">
+		<div class = "row-fluid prg-prepend-top">
+			<div class = "offset-left">
+				<label>Hubs</label>
+				<webobject name = "HubSelector"></webobject>	
+				<label>Collected:</label>
+				<webobject name = "SentToBillingSelector"></webobject>	
+				<label>Invoiced:</label>
+				<webobject name = "PaidSelector"></webobject>	
+				<label>Start Date:</label>
+				<webobject name = "StartDateSelector"></webobject>
+				<label>End Date:</label>
+				<webobject name = "EndDateSelector"></webobject>
+				<a href="#" class="btn btn-primary prg-pad-left" onclick = "document.OutstandingPaymentsForm.submit();">Search <i class="icon-search icon-white">&nbsp;</i></a>
+			</div>
+		</div>	
+	</webobject>
+	<wo:METSInfoBar>Data</wo:METSInfoBar>
+	<webobject name = "StaticColumn">
+		<div class = "row-fluid">
+			<div class="span12">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Account</th>
+							<th>Service Orders</th>
+							<th>Vouchers</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<webobject name = "AccountsRepetition">
+							<webobject name = "AccountDataRow"></webobject>
+						</webobject>
+					</tbody>				
+				</table>
+			</div>
+		</div>
+	</webobject>
+</webobject>

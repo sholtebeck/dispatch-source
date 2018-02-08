@@ -1,0 +1,9 @@
+Form : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	isNewObject = object.isNewObject;
+	submitAction = navigationController.saveChanges;
+}

@@ -1,0 +1,220 @@
+<webobject name = "PaidOutForm">
+	<webobject name = "MessagesPanel"></webobject>
+	<div class="row-fluid">
+		<div class="span12">
+			<table class="table table-striped table-bordered prg-square-table">
+				<thead>
+					<tr>
+						<th>Confirmed</th>
+						<th>Driver</th>
+						<th>Scheduled</th>
+						<th>Vehicles</th>
+						<th>Phone</th>
+						<webobject name = "IsNotPrintPage">
+							<th>Notes</th>
+						</webobject>
+						<th>CC Terminal</th>
+						<th>Break Time</th>
+						<th>Actual Finish Time</th>
+						<th>Hours</th>
+						<webobject name = "IsNotPrintPage">
+							<th>Actions</th>
+						</webobject>
+					</tr>
+				</thead>
+				<tbody>
+					<webobject name = "ScheduleSummary"></webobject>
+				</tbody>
+			</table>		
+			<table class="table table-striped table-bordered prg-square-table">
+				<thead>
+					<tr>
+						<webobject name = "IsNotPrintPage">
+							<th>Confirmation Number</th>
+						</webobject>
+						<th>Pick Up Time</th>
+						<th>Pick Up Location</th>
+						<th>Drop Off Location</th>
+						<th>Passenger Name</th>
+						<th>Number of Passengers</th>	
+						<th>Service</th>
+						<th>Billing</th>
+					</tr>
+				</thead>
+				<webobject name = "HasResults">
+					<tbody>
+						<webobject name = "ScheduleDispatchesRepetition">
+							<tr>
+								<webobject name = "IsNotPrintPage">
+									<td>
+										<webobject name = "InspectDispatch"><webobject name = "DispatchConfirmationNumber"></webobject></webobject>
+										<wo:if condition = "$displayStatus">
+											<br/><webobject name = "DispatchStatus"></webobject>
+										</wo:if>	
+									</td>
+								</webobject>
+								<td><webobject name = "PickUpTime"></webobject></td>
+								<td><webobject name = "DispatchPickupLocation"></webobject></td>
+								<td><webobject name = "DropOffLocation"></webobject></td>
+								<td><webobject name = "PassengerName" /></td>
+								<td><webobject name = "NumberOfPassengers" /></td>
+								<td><webobject name = "ServiceName"></webobject></td>
+								<td>
+									<webobject name = "IsPrintPage">
+										Tip: <webobject name = "TipAmount" />
+									</webobject>
+									<webobject name = "HasPaymentInformation">
+										<webobject name = "PaymentInfoRepetition">
+											<webobject name = "IsPrintPage">
+												<webobject name = "DriverCollect">
+													<webobject name = "PaymentInfoType" />
+												</webobject>										
+												<webobject name = "DriverDoNotCollect">
+													DNC 
+													<webobject name = "DispatchHasAccount">
+														- <webobject name = "DispatchAccountName" />
+													</webobject>
+												</webobject>
+											</webobject>
+											<webobject name = "IsNotPrintPage">
+												<table>
+													<tr>
+														<td>
+															<webobject name = "PaymentInfoType" /><br/>
+															DT: <webobject name = "DriverTipAmount" />	
+														</td>
+														<webobject name = "IsSuperUser">
+															<webobject name = "IsVoucherOrServiceOrderPaymentType">
+																<td>Sent to Billing: <webobject name = "SendToBillingCheckbox"></webobject></td>
+															</webobject>
+															<webobject name = "IsNotVoucherOrServiceOrderPaymentType">
+																<td>Paid: <webobject name = "BillingPaidCheckbox"></webobject></td>
+															</webobject>
+														</webobject>
+													</tr>
+												</table>	
+											</webobject>
+										</webobject>	
+									</webobject>
+									<webobject name = "DoesNotHavePaymentInformation">
+										<wo:if condition = "$dispatch.isOnlineReservation">
+											<b>DNC - PAID ONLINE</b><br/>
+											Subtotal: <webobject name = "DispatchTransferAmount" /><br/>
+											Misc. Fee: <webobject name = "DispatchMiscFees" /><br/>	
+											DT: <webobject name = "DriverTip" />
+										</wo:if>
+										<wo:else>
+											<wo:if condition = "$dispatch.isParentPaid">
+												<b>DNC- PAID IN PARENT</b><br/>
+												Subtotal: <webobject name = "DispatchTransferAmount" /><br/>
+												Misc. Fee: <webobject name = "DispatchMiscFees" /><br/>	
+												DT: <webobject name = "DriverTip" />
+											</wo:if>
+										</wo:else>
+									</webobject>
+								</td>
+							</tr>
+							<webobject name = "IsPrintPage">
+								<tr class = "print-notes">
+									<td colspan = "4">
+										<h6>Driver Notes</h6>
+										<webobject name = "DriverNotes"></webobject>
+									</td>
+									<td colspan = "3">
+										<h6>Misc Fees</h6>
+										<webobject name = "MiscellaneousFeesSummary" />
+									</td>
+								</tr>
+							</webobject>
+						</webobject>
+					</tbody>
+					<webobject name = "IsNotPrintPage">
+						<tfoot>
+							<tr>
+								<td class = "prg-text-align-right" colspan = "8" style = "padding-right: 15px;">
+									<label for = "CheckAll">
+										Check/Uncheck All
+									</label>
+									<input id = "CheckAll" type = "checkbox" onclick="checkAll(this.form, this.checked);" />
+								</td>
+							</tr>
+							<tr>
+								<td class = "prg-text-align-right" colspan = "8">
+									<webobject name = "IsSuperUser">
+										<webobject name = "SubmitButton"></webobject>
+									</webobject>
+									<webobject name = "PrintButton">Print <i class="icon-print icon-white">&nbsp;</i></webobject>
+								</td>
+							</tr>
+						</tfoot>
+					</webobject>
+				</webobject>
+				<webobject name = "NoResults">
+					<tbody>
+						<tr>
+							<td colspan = "6">There are no dispatches assigned during this schedule's shift.</td>
+						</tr>
+					</tbody>
+				</webobject>
+			</table>
+		</div>
+		<webobject name = "IsNotPrintPage">
+			<webobject name = "IsSupervisor">
+				<div class = "row-fluid prg-append-bottom">
+					<div class = "span4 offset8">
+						<table class="table table-striped table-bordered">
+							<tr>
+								<webobject name = "FooterTableDivider">Dispatch Count</webobject>
+								<td><webobject name = "DispatchCount"></webobject></td>
+							</tr>
+							<webobject name = "IsSuperUser">
+								<tr>
+									<webobject name = "FooterTableDivider">Cash Sub-Total</webobject>
+									<td><webobject name = "CashSubTotal"></webobject></td>
+								</tr>
+								<tr>
+									<webobject name = "FooterTableDivider">Tips Owed</webobject>
+									<td class = "red">(<webobject name = "TipsOwed"></webobject>)</td>
+								</tr>
+								<tr>
+									<webobject name = "FooterTableDivider">Cash Total</webobject>
+									<webobject name = "CashTotalContainer">
+										<webobject name = "CashTotal" />
+									</webobject>
+								</tr>
+								<tr>
+									<webobject name = "FooterTableDivider">COMP Total</webobject>
+									<td><webobject name = "CompTotal"></webobject></td>
+								</tr>
+								<tr>
+									<webobject name = "FooterTableDivider">Credit Card Total</webobject>
+									<td><webobject name = "CreditCardTotal"></webobject></td>		
+								</tr>
+								<tr>
+									<webobject name = "FooterTableDivider">Service Order Total</webobject>
+									<td><webobject name = "ServiceOrderTotal"></webobject></td>		
+								</tr>
+								<tr>
+									<webobject name = "FooterTableDivider">Vouchers</webobject>
+									<td><webobject name = "VouchersTotal"></webobject></td>		
+								</tr>
+								<tr>
+									<webobject name = "FooterTableDivider">Payments Total</webobject>
+									<td><webobject name = "PaymentTotal"></webobject></td>		
+								</tr>
+								<tr>
+									<webobject name = "FooterTableDivider">Payments Total (PAID)</webobject>
+									<td><webobject name = "PaymentsTotalPaid"></webobject></td>		
+								</tr>
+								<tr>
+									<webobject name = "FooterTableDivider">Payments Total (UNPAID)</webobject>
+									<td><webobject name = "PaymentsTotalUnPaid"></webobject></td>		
+								</tr>
+							</webobject>
+						</table>
+					</div>
+				</div>	
+			</webobject>
+		</webobject>	
+	</div>	
+</webobject>

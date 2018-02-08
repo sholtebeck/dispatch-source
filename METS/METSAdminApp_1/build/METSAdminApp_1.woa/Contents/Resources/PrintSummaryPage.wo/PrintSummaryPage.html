@@ -1,0 +1,12 @@
+<p>Dear <webobject name = "CustomerName"></webobject>,</p>
+<p>Please find the information for your travel service below:</p>
+<webobject name = "SummaryPage"></webobject>
+<wo:if condition = "$object.hasChildren">
+	<webobject name = "ChildRoutesRepetition">
+		<p>Additional Leg</p>
+		<webobject name = "ChildSummaryPage"></webobject>
+	</webobject>
+</wo:if>
+<p>If you believe there are any mistakes or if you need to make any changes to your itinierary please call 800-833-2303</p>
+<p>Thank you,</p>
+<p>Hawaii Executive Transportation</p>

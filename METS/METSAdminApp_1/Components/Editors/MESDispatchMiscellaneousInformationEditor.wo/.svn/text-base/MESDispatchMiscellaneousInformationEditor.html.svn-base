@@ -1,0 +1,16 @@
+<wo:METSHorizontalForm action = "$saveChanges">
+	<webobject name = "RequiresChildSeatsSelector"></webobject>
+	<webobject name = "ChildSeatsUpdateContainer">
+		<webobject name = "RequiresChildSeats">
+			<wo:METSTextInput labelText = "Infants" value = "$object.infant"></wo:METSTextInput>
+			<wo:METSTextInput labelText = "Toddlers" value = "$object.toddler"></wo:METSTextInput>
+			<wo:METSTextInput labelText = "Child Seats" value = "$object.childSeats"></wo:METSTextInput>
+			<wo:METSTextInput labelText = "Boosters" value = "$object.booster"></wo:METSTextInput>
+		</webobject>
+	</webobject>
+	<webobject name = "RequiresChildSeatsSelectorObserveField"></webobject>
+	<webobject name = "MiscFees"></webobject>
+	<webobject name = "MiscFeesNotes"></webobject>
+	<webobject name = "GreetRadioButtonSelector"></webobject>
+	<wo:METSFormSubmissionBar isNewObject = "$object.isNewObject" submitButtonText = "Save and Continues" submitAction = "$saveChanges" />
+</wo:METSHorizontalForm>

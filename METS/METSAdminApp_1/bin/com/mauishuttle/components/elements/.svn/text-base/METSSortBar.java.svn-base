@@ -1,0 +1,16 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class METSSortBar extends METSUIElements {
+
+	public METSSortBar(WOContext context) {
+        super(context);
+    }
+
+	public String defaultClassName() {
+		return "prg-sort-bar";
+	}	
+
+}

@@ -1,0 +1,80 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+CurrentAccount : WOString {
+	value = account.name;
+}
+
+ConfirmationNumber : WOString {
+	value = payment.dispatch.confirmationNumber;
+}
+
+DropOffLocation : WOString {
+	value = payment.dispatch.dropOffLocation.nameWithZone;
+}
+
+Form : WOForm {
+	
+}
+
+NumberPassengers : WOString {
+	numberformat = "0";
+	value = payment.dispatch.numberPassengers;
+}
+
+Paid : WOCheckBox {
+	checked = sentToBilling;
+}
+
+PassengerName : WOString {
+	value = payment.dispatch.customerLastName;
+}
+
+PaymentAmount : WOString {
+	value = payment.amount;
+}
+
+PaymentsRepetition : WORepetition {
+	item = payment;
+	list = payments;
+}
+
+PaymentType : WOString {
+	value = paymentInfo;
+}
+
+PickUpDateTime : WOString {
+	dateformat = "%m/%d/%y %H:%M";
+	value = payment.dispatch.reservationDate;
+}
+
+PickUpLocation : WOString {
+	value = payment.dispatch.pickUpLocation.nameWithZone;
+}
+
+ReturnToAccountsPage : WOHyperlink {
+	action = returnToAccounts;
+}
+
+Service : WOString {
+	value = payment.dispatch.service.name;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+SubmitButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary prg-pad-left";
+	value = "Update";
+}
+
+Status : WOString {
+	value = payment.dispatch.statusKey;
+}
+
+Wrapper : AccountingController {
+	
+}

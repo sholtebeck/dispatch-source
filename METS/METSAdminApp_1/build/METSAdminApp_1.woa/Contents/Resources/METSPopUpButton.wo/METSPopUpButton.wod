@@ -1,0 +1,28 @@
+HasHelpText : WOConditional {
+	condition = hasHelpText;
+}
+
+HelpText : WOString {
+	value = ^helpText;
+}
+
+Label : WOGenericContainer {
+	class = "control-label";
+	elementName = "label";
+	for = id;
+}
+
+LabelText : WOString {
+	value = ^labelText;	
+}
+
+PopUpButton : WOPopUpButton {
+	class = inputClassName;
+	disabled = ^disabled;
+	displayString = ^displayString;
+	id = id;
+	item = ^item;
+	list = ^list;
+	noSelectionString = ^noSelectionString;
+	selection = ^selection;
+}

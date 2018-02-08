@@ -1,0 +1,18 @@
+AccountSelectorPopUpButton : METSPopUpButton {
+	displayString = account.name;
+	helpText = "Required Information";
+	item = account;
+	labelText = "Account";
+	list = hubAccounts;
+	noSelectionString = "Please select an account";
+	selection = object.account;
+}
+
+HasParent : WOConditional {
+	condition = object.hasParent;
+}
+
+NoParent : WOConditional {
+	condition = object.hasParent;
+	negate = true;
+}

@@ -1,0 +1,39 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+
+import er.extensions.components.ERXStatelessComponent;
+
+@SuppressWarnings("serial")
+public class METSMessagePanel extends ERXStatelessComponent {
+	
+	public String _message;
+	
+    public METSMessagePanel(WOContext context) {
+        super(context);
+    }
+
+    public boolean synchronizesVariablesWithBindings() {
+    	return false;
+    }
+    
+    @SuppressWarnings("unchecked")
+	public NSArray<String> errors() {
+    	return (NSArray<String>)valueForBinding("errors");
+    }
+    
+    @SuppressWarnings("unchecked")
+	public NSArray<String> messages() {
+    	return (NSArray<String>)valueForBinding("messages");
+    }
+
+	public boolean hasError() {
+		return errors() != null && errors().size() > 0;
+	}
+
+	public boolean hasMessages() {
+		return messages() != null && messages().size() > 0;
+	}
+
+}

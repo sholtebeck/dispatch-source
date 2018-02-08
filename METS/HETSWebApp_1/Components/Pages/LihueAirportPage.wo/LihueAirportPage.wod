@@ -1,0 +1,33 @@
+AirportNavigation : AirportNavigation {
+	index = 3;
+}
+
+FacebookButton : FacebookButton {
+	css = "span-6-5";
+}
+
+Main : PageWrapper {
+	pageTitle = document.pageTitle;
+	metaDescription = document.metaDescription;
+}
+
+PageContent : WOString {
+	escapeHTML = false;
+	value = document.textContent;
+}
+
+ReservationWidget : ReservationWidget {
+	selectedValue = "LIH";
+}
+
+TerminalMap : WOImage {
+	alt = "Map of the Lihue Airport Terminal";
+	filename = "images/airports/lihue-airport-terminal.gif";
+}
+
+TerminalMapZoom : MTMediaBox {
+	rel ="lightbox";
+	framework = "app";
+	filename = "images/airports/lihue-airport-terminal-large.gif";
+	title = "Lihue Airport Terminal Map";
+}

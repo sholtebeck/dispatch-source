@@ -1,0 +1,83 @@
+AlleyColumn : METSTableColumn {
+	class = "prg-alley";
+}
+
+DriverReportsNavigationPageKey : WOKeyValueConditional {
+	key = "navigationPageKey";
+	value = "DriverReports";
+}
+
+DriverScheduleReportComponent : DriverScheduleReportsPage {
+	reportType = selectedReport;
+}
+
+DriverReportsTab : WOGenericContainer {
+	class = driverReportsTabClassName;
+	elementName = "li";
+}
+
+LeftNavigationUpdateContainer : MTAjaxUpdateContainer {
+	id = "METSLeftNavigationUpdateContainer";
+}
+
+ListDriverReportsLink : MTAjaxUpdateLink {
+	action = listDriverReports;
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+}
+
+ListMiscellaneousReportsLink : MTAjaxUpdateLink {
+	action = listMiscellaneousReports;
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+}
+
+ListRevenueReportsLink : MTAjaxUpdateLink {
+	action = listRevenueReports;
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+}
+
+MainTableColumn : METSTableColumn {
+	class = "prg-main-column";
+	id = "PRGMainColumn";
+}
+
+MiscellaneousReportsComponent : WOSwitchComponent {
+	WOComponentName = selectedReport;
+}
+
+MiscellaneousReportsNavigationPageKey : WOKeyValueConditional {
+	key = "navigationPageKey";
+	value = "MiscellaneousReports";
+}
+
+MiscellaneousReportsTab : WOGenericContainer {
+	class = miscellaneousReportsTabClassName;
+	elementName = "li";
+}
+
+PageWrapper : PageWrapper {
+	pageTitle = ^pageTitle;
+}
+
+RevenueReportsNavigationPageKey : WOKeyValueConditional {
+	key = "navigationPageKey";
+	value = "RevenueReports";
+}
+
+RevenueReportsTab : WOGenericContainer {
+	class = revenueReportsTabClassName;
+	elementName = "li";
+}
+
+RevenueReportComponent : WOSwitchComponent {
+	WOComponentName = selectedReport;
+}
+
+ResizeColumn : METSResizeColumn {
+	class = "prg-side-column";
+	id = "PRGLeftColumn";
+	otherColumn = "PRGMainColumn";
+}
+
+StaticColumn : METSStaticColumn {
+
+}

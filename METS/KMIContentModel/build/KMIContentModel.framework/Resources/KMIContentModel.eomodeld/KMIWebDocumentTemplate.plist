@@ -1,0 +1,46 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "create_date"; 
+            name = createDate; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = "last_modified"; 
+            name = lastModified; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = Y; columnName = name; name = name; prototypeName = varchar50; }, 
+        {allowsNull = N; columnName = "site_id"; name = siteID; prototypeName = id; }, 
+        {allowsNull = Y; columnName = type; name = type; prototypeName = intNumber; }
+    ); 
+    attributesUsedForLocking = (id, siteID); 
+    className = "km.content.eo.KMIWebDocumentTemplate"; 
+    classProperties = (createDate, lastModified, name, nodes, site, type); 
+    externalName = Document; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIWebDocumentTemplate; 
+    parent = KMIAbstractDocument; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = KMIHTMLNode; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = documentID; sourceAttribute = id; }); 
+            name = nodes; 
+        }, 
+        {
+            destination = KMIWebSite; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = siteID; }); 
+            name = site; 
+        }
+    ); 
+    restrictingQualifier = "type=1"; 
+}

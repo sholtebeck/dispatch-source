@@ -1,0 +1,34 @@
+package com.mauishuttle.components.interfaces;
+
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOComponent;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOEnterpriseObject;
+import com.webobjects.foundation.NSMutableArray;
+
+public interface MESPageNavigationControllerInterface {
+	
+	public EOEditingContext ec();
+
+	public EOEnterpriseObject selectedObject();
+	public void setSelectedObject(EOEnterpriseObject object);
+
+	public String editorPageKey();
+	public void setEditorPageKey(String editorPageKey);
+
+	public NSMutableArray<String> errors();
+	public void setErrors(NSMutableArray<String> errors);
+	public void addErrorMessage(String error);
+	public boolean hasError();
+	
+	public NSMutableArray<String> messages();
+	public void setMessages(NSMutableArray<String> messages);
+	public void addMessage(String message);
+	
+	public WOActionResults cancelChanges();
+	public WOActionResults saveChanges();
+	public void validationFailedWithException(Throwable t, Object value, String keyPath);
+	
+	public WOComponent nextPage();
+	
+}

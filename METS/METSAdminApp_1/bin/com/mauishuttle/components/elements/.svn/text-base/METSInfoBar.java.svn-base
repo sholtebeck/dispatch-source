@@ -1,0 +1,16 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class METSInfoBar extends METSUIElements {
+    
+	public METSInfoBar(WOContext context) {
+        super(context);
+    }
+
+	public String defaultClassName() {
+		return "prg-column-info-bar";
+	}
+
+}

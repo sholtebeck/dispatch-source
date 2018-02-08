@@ -1,0 +1,41 @@
+<wo:METSHorizontalForm action = "$saveChanges">
+	<webobject name = "ServiceTypeSelector"></webobject>
+	<wo:METSTextInput helpText = "Required Information" labelText = "Number of Passengers" value = "$object.numberPassengers"></wo:METSTextInput>
+	<webobject name = "ServiceDetailsUpdateContainer">
+		<webobject name = "IsServiceDefined">
+			<webobject name = "IsExclusiveService">
+				<wo:METSTextInput helpText = "Optional" labelText = "Number of Hours" value = "$object.numberOfHours"></wo:METSTextInput>
+			</webobject>
+		</webobject>
+	</webobject>
+	<webobject name = "ServiceTypeSelectorObserver"></webobject>
+	<webobject name = "PickUpLocationTypeAheadInput" />
+	<webobject name = "DropOffLocationTypeAheadInput" />
+	<webobject name = "PickUpDate"></webobject>
+	<div class="control-group">
+		<label class="control-label" for="mesStartDate">Pick Up Time</label>
+		<div class="controls">
+			<webobject name = "PickUpTimeHourSelector" />
+			<webobject name = "PickUpTimeMinuteSelector" />
+			<webobject name = "PickUpTimeMeridiemSelector" />
+		</div>
+	</div>
+	<webobject name = "FlightNumber"></webobject>
+	<webobject name = "DisplayFlightTimeInformationSelector" />
+	<webobject name = "FlightDateTimeUpdateContainer">
+		<webobject name = "DisplayFlightTimeInformation">
+			<webobject name = "FlightDate"></webobject>
+			<div class="control-group">
+				<label class="control-label" for="mesStartDate">Flight Time</label>
+				<div class="controls">
+					<webobject name = "FlightTimeHourSelector" />
+					<webobject name = "FlightTimeMinuteSelector" />
+					<webobject name = "FlightTimeMeridiemSelector" />
+				</div>
+			</div>
+		</webobject>
+	</webobject>
+	<webobject name = "DisplayFlightDateAndTimeObserver" />
+	<wo:METSTextArea helpText = "Optional" labelText = "Dispatch Notes" value = "$object.dispatchNotes"></wo:METSTextArea>
+	<wo:METSFormSubmissionBar isNewObject = "$object.isNewObject" submitButtonText = "Continue to miscellaneous information" submitAction = "$saveChanges"></wo:METSFormSubmissionBar>
+</wo:METSHorizontalForm>

@@ -1,0 +1,89 @@
+{
+    attributes = (
+        {allowsNull = Y; columnName = alt; name = alt; prototypeName = varchar255; }, 
+        {
+            allowsNull = N; 
+            columnName = "attachment_id"; 
+            name = attachmentID; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "create_date"; 
+            name = createDate; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = N; columnName = groupID; name = groupID; prototypeName = id; }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = "last_modified"; 
+            name = lastModified; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = Y; columnName = name; name = name; prototypeName = varchar50; }, 
+        {allowsNull = N; columnName = "site_id"; name = siteID; prototypeName = id; }, 
+        {allowsNull = Y; columnName = type; name = type; prototypeName = intNumber; }
+    ); 
+    attributesUsedForLocking = (attachmentID, groupID, id, siteID); 
+    className = "km.content.eo.KMIImageAsset"; 
+    classProperties = (
+        alt, 
+        attachment, 
+        createDate, 
+        galleries, 
+        group, 
+        lastModified, 
+        name, 
+        nodes, 
+        site, 
+        type
+    ); 
+    externalName = Asset; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIImageAsset; 
+    parent = KMIAbstractAsset; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERFileAttachment; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = attachmentID; }); 
+            name = attachment; 
+        }, 
+        {definition = "kmiAssetGalleryAssetses.kmiAssetGallery"; name = galleries; }, 
+        {
+            destination = KMIAssetGroup; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = groupID; }); 
+            name = group; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = KMIAssetGalleryAssets; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = kmiAbstractAssetId; sourceAttribute = id; }); 
+            name = kmiAssetGalleryAssetses; 
+            propagatesPrimaryKey = Y; 
+        }, 
+        {
+            destination = KMIHTMLImageNode; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = assetID; sourceAttribute = id; }); 
+            name = nodes; 
+        }, 
+        {
+            destination = KMIWebSite; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = siteID; }); 
+            name = site; 
+        }
+    ); 
+    restrictingQualifier = "type=0"; 
+}

@@ -1,0 +1,37 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+DriversName : WOString {
+	value = object|fullName(false);
+}
+
+Form : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	isNewObject = object.isNewObject;
+	deleteAction = removeDriver;
+	deleteButtonText = "Remove Driver";
+	submitAction = navigationController.saveChanges;
+	useModalForDelete = true;
+}
+
+InfoBar : METSInfoBar {
+	
+}
+
+IsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}

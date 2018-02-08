@@ -1,0 +1,32 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+
+import er.ajax.mootools.MTAjaxUtils;
+import er.extensions.components.ERXStatelessComponent;
+
+@SuppressWarnings("serial")
+public class METSPopover extends ERXStatelessComponent {
+	
+	public METSPopover(WOContext context) {
+        super(context);
+    }
+
+	public void appendToResponse(WOResponse response, WOContext context) {
+		super.appendToResponse(response, context);
+		
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", MTAjaxUtils.MOOTOOLS_CORE_JS);
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", MTAjaxUtils.MOOTOOLS_MORE_JS);
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/Element.Data.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/BehaviorAPI.js");
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", "scripts/plugins/bootstrap/behaviors/Behavior.js");
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", "scripts/plugins/bootstrap/ui/Bootstrap.js");
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", "scripts/plugins/bootstrap/ui/CSSEvents.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/Bootstrap.Tooltip.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", "scripts/plugins/bootstrap/behaviors/Behavior.BS.Popover.js");
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", "scripts/plugins/bootstrap/ui/Bootstrap.Popover.js");
+	
+	}
+
+}

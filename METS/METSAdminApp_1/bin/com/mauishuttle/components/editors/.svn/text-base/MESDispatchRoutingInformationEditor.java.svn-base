@@ -1,0 +1,170 @@
+package com.mauishuttle.components.editors;
+
+import java.util.GregorianCalendar;
+
+import com.mauishuttle.components.controllers.MESDispatchEditorPagesNavigationController;
+import com.mauishuttle.eo.MESAbstractService;
+import com.mauishuttle.eo.MESAbstractZone;
+import com.mauishuttle.eo.MESAdjustableZoneSharedService;
+import com.mauishuttle.eo.MESExclusiveService;
+import com.mauishuttle.eo.MESLocation;
+import com.mauishuttle.eo.MESSharedService;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSTimestamp;
+
+@SuppressWarnings("serial")
+public class MESDispatchRoutingInformationEditor extends MESDispatchEditorPagesNavigationController {
+
+	private GregorianCalendar _pickUpDateTime;
+	private NSTimestamp _pickUpDate;
+	public MESAbstractService _service;
+	public MESLocation _location;
+
+	public MESDispatchRoutingInformationEditor(WOContext context) {
+        super(context);
+    }
+	
+	public void sleep() {
+		super.sleep();
+		_pickUpDate = null;
+		_pickUpDateTime = null;
+	}
+	
+	public NSArray<MESLocation> dropOffLocations() {
+		return hubLocations(delegate().dropOffLocationUserInput());
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESLocation> hubLocations(String value) {
+		return MESLocation.fetchMESLocations(object().editingContext(), 
+				MESLocation.ZONE.dot(MESAbstractZone.HUB).eq(session().currentHub())
+				.and(MESLocation.NAME.likeInsensitive(value + "*")), 
+				MESLocation.NAME.ascs());
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAbstractService> hubServices() {
+		NSArray<MESAbstractService> hubServices = MESAbstractService.fetchMESAbstractServices(object().editingContext(), 
+				MESAbstractService.HUB.eq(session().currentHub()), 
+				MESAbstractService.TYPE.asc().then(MESAbstractService.NAME.asc()));
+		return hubServices;
+	}	
+	
+	public boolean isExclusiveService() {
+
+		boolean isExclusiveService = false;
+
+		if(object().service() != null) {
+			if(object().service() instanceof MESExclusiveService) {
+				isExclusiveService = true;
+			}
+		}
+		
+		return isExclusiveService;
+	
+	}	
+	
+	public boolean isSharedService() {
+
+		boolean isSharedService = false;
+		
+		if(object().service() != null) {
+			if(object().service() instanceof MESSharedService || 
+					object().service() instanceof MESAdjustableZoneSharedService) {
+				isSharedService = true;
+			}
+		}
+		
+		return isSharedService;
+	
+	}	
+	
+	public WOActionResults saveChanges() {
+		
+		saveStep();
+		
+		if(! hasError()) {
+			setEditorPageKey(MISCELLANEOUS_INFORMATION_PAGE_KEY);
+		}
+
+		return navigationController().nextPage();
+		
+	}	
+	
+	/**
+	 * @return the pickUpDate
+	 */
+	public NSTimestamp pickUpDate() {
+		if(_pickUpDate == null) {
+			_pickUpDate = object().reservationDate();
+		}
+		return _pickUpDate;
+	}
+	
+	public GregorianCalendar pickUpDateTime() {
+
+		if(_pickUpDateTime == null) {
+			_pickUpDateTime = new GregorianCalendar();
+			_pickUpDateTime.setTime(pickUpDate());
+		}
+
+		return _pickUpDateTime;
+
+	}
+
+	public void setPickUpDateTime(GregorianCalendar pickUpDateTime) {
+		this._pickUpDateTime = pickUpDateTime;
+	}	
+
+	/**
+	 * @param pickUpDate the pickUpDate to set
+	 */
+	public void setPickUpDate(NSTimestamp pickUpDate) {
+		this._pickUpDate = pickUpDate;
+		object().setReservationDate(_pickUpDate);
+	}		
+	
+	public NSArray<MESLocation> pickUpLocations() {
+		return hubLocations(delegate().pickUpLocationUserInput());
+	}
+	
+	public String pickUpTimeHour() {
+		return String.valueOf(pickUpDateTime().get(GregorianCalendar.HOUR));
+	}
+
+	public void setPickUpTimeHour(String value) {
+		int hour = Integer.valueOf(value);
+		pickUpDateTime().set(GregorianCalendar.HOUR, hour);
+		setPickUpDate(new NSTimestamp(pickUpDateTime().getTime()));
+	}
+
+	public String pickUpTimeMinute() {
+		return String.valueOf(pickUpDateTime().get(GregorianCalendar.MINUTE));
+	}
+
+	public void setPickUpTimeMinute(String value) {
+		int minute = Integer.valueOf(value);
+		pickUpDateTime().set(GregorianCalendar.MINUTE, minute);
+		setPickUpDate(new NSTimestamp(pickUpDateTime().getTime()));
+	}
+
+	public String pickUpTimeMeridiem() {
+		return meridiems.get(pickUpDateTime().get(GregorianCalendar.AM_PM));
+	}
+
+	public void setPickUpTimeMeridiem(String value) {
+
+		int index = meridiems.indexOf(value);
+
+		if(index == 0) {
+			pickUpDateTime().set(GregorianCalendar.AM_PM, GregorianCalendar.AM);
+		} else {
+			pickUpDateTime().set(GregorianCalendar.AM_PM, GregorianCalendar.PM);
+		}
+		setPickUpDate(new NSTimestamp(pickUpDateTime().getTime()));
+
+	}	
+	
+}

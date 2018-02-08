@@ -1,0 +1,32 @@
+Driver : WOString {
+	value = report.driver|fullName(true);
+}
+
+NumberOfDispatches : WOString {
+	numberformat = "0";
+	value = report.dispatchCount;
+}
+
+Revenue : WOString {
+	numberformat = "$#,##0.00";
+	value = report.revenue;
+}
+
+ReportsRepetition : WORepetition {
+	item = report;
+	list = reports;
+}
+
+TotalCount : WOString {
+	numberformat = "0";
+	value = totalDispatches;
+}
+
+TotalRevenue : WOString {
+	numberformat = "$#,##0.00";
+	value = totalRevenue;
+}
+
+ViewDispatchesLink : WOHyperlink {
+	action = viewDispatches;
+}

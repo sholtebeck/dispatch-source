@@ -1,0 +1,178 @@
+ActualFinishMeridiemSelector : WOPopUpButton {
+	class = "span2";
+	list = meridiems;
+	selection = actualFinishTimeMeridiem;	
+}
+
+ActualFinishMinuteSelector : WOPopUpButton {
+	class = "span2";
+	list = minutes;
+	selection = actualFinishTimeMinute;
+}
+
+ActualFinishTimeHourSelector : WOPopUpButton {
+	class = "span2";
+	displayString = hour.toString;
+	item = hour;
+	list = hours;
+	selection = actualFinishTimeHour;
+}
+
+AssignVehicleForm : METSHorizontalForm {
+	action = assignVehicle;
+}
+
+AssignVehicleToScheduleFormButton : WOSubmitButton {
+	action = assignVehicle;
+	class = "btn btn-primary";
+	value = "Assign Vehicle";
+}
+
+AssignVehicleToScheduleModalButton : MTAjaxModalContainer {
+	ajax = true;
+	autoWrapContent = false;
+	class = "btn btn-success prg-pad-right";
+	id = "MESScheduleVehicleAssignment";
+	label = "Assign Vehicle To Schedule";
+	showFooter = false;
+	showTitle = false;
+	useDefaultCSS = false;
+}
+
+EditInPlace : MTAjaxInPlace {
+	cancelAction = cancelEditInPlace;
+	cancelClass = "btn btn-inverse";
+	formClass = "well form-inline";
+	saveClass = "btn btn-primary";
+	saveAction = saveEditInPlace;
+}
+
+EditTemplate : ERXWOTemplate {
+	templateName = "edit";	
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = cancelChanges;
+	isNewObject = object.isNewObject;
+	submitAction = saveChanges;
+}
+
+GeneralInformationForm : METSHorizontalForm {
+	action = saveChanges;
+}
+
+InfoBar : METSInfoBar {
+	
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MileageEnd : WOString {
+	numberformat = "0.00";
+	value = scheduleVehicle.mileageEnd;
+}
+
+MileageEndDefined : ERXNonNullConditional {
+	condition = scheduleVehicle.mileageEnd;
+}
+
+MileageEndNotDefined : ERXNonNullConditional {
+	condition = scheduleVehicle.mileageEnd;
+	negate = true;
+}
+
+MileageEndTextEditor : WOTextField {
+	numberformat = "0.00";
+	value = scheduleVehicle.mileageEnd;
+}
+
+MileageStart : WOString {
+	numberformat = "0.00";
+	value = scheduleVehicle.mileageStart;
+}
+
+MileageStartDefined : ERXNonNullConditional {
+	condition = scheduleVehicle.mileageStart;
+}
+
+MileageStartNotDefined : ERXNonNullConditional {
+	condition = scheduleVehicle.mileageStart;
+	negate = true;
+}
+
+MileageStartTextEditor : WOTextField {
+	numberformat = "0.00";
+	value = scheduleVehicle.mileageStart;
+}
+
+PhoneSelector : METSPopUpButton {
+	displayString = phone.phoneNumber;
+	helpText = "Required Information";
+	id = "mesSchedulePhone";
+	item = phone;
+	labelText = "Phone";
+	list = phones;
+	noSelectionString = "Please select a phone";
+	selection = object.phone;
+}
+
+EndDateTimeHourSelector : WOPopUpButton {
+	class = "span2";
+	displayString = hour.toString;
+	item = hour;
+	list = hours;
+	selection = endDateTimeHour;	
+}
+
+EndDateTimeMeridiemSelector : WOPopUpButton {
+	class = "span2";
+	list = meridiems;
+	selection = endDateTimeMeridiem;	
+}
+
+EndDateTimeMinuteSelector : WOPopUpButton {
+	class = "span2";
+	list = minutes;
+	selection = endDateTimeMinute;	
+}
+
+ScheduleVehicleVehicleName : WOString {
+	value = scheduleVehicle.vehicle.name;
+}
+
+ScheduledVehiclesRepetition : WORepetition {
+	item = scheduleVehicle;
+	list = scheduleVehicles;
+}
+
+StartDateTimeHourSelector : WOPopUpButton {
+	class = "span2";
+	displayString = hour.toString;
+	item = hour;
+	list = hours;
+	selection = startDateTimeHour; 
+}
+
+StartDateTimeMeridiemSelector : WOPopUpButton {
+	class = "span2";
+	list = meridiems;
+	selection = startDateTimeMeridiem; 
+}
+
+StartDateTimeMinuteSelector : WOPopUpButton {
+	class = "span2";
+	list = minutes;
+	selection = startDateTimeMinute; 
+}
+
+UnassignVehicle : WOHyperlink {
+	action = unassignVehicle;
+	class = "btn btn-danger btn-mini";
+}
+
+ViewTemplate : ERXWOTemplate {
+	templateName = "view";
+}

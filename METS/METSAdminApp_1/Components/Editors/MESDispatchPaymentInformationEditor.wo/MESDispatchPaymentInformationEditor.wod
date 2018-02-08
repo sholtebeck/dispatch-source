@@ -1,0 +1,53 @@
+CreditCardPaymentIsNotPaid : WOConditional {
+	condition = delegate.paymentInfo.paid;
+	negate = true;
+}
+
+CreditCardPaymentCreditCardIsNotNull : ERXNonNullConditional {
+	condition = creditCardPayment.creditCard;
+}
+
+IsCreditCardPayment : WOConditional {
+	condition = delegate.paymentInfo.isCreditCardPayment;
+}
+
+DispatchProcessCreditCard : WOConditional {
+	condition = dispatchProcessCreditCard;
+}
+
+PaymentInformationEditor : WOSwitchComponent {
+	WOComponentName = paymentInformationEditorComponentName;
+	delegate = delegate;
+	object = delegate.paymentInfo;
+}
+
+PaymentInformationForm : METSHorizontalForm {
+	action = saveChanges;
+}
+
+PaymentInfoIsDefined : ERXNonNullConditional {
+	condition = delegate.paymentInfo;
+}
+
+ProcessCreditCardPaymentUpdateContainer : MTAjaxUpdateContainer {
+	elementName = "span";
+	id = "ProcessCreditCardPaymentUpdateContainer";
+}
+
+ProcessCreditCardPaymentSelectorObserver : MTAjaxObserveField {
+	observeFieldID = "ProcessCreditCardInformationSelector";
+	updateContainerID = "ProcessCreditCardPaymentUpdateContainer";
+}
+
+ProcessCreditCardPayment : WOSubmitButton {
+	action = processCreditCardPayment;
+	class = "btn btn-success";
+	onClick = "return confirm('Are you sure you want to process this credit card?')";
+	value = "Process Order";
+}
+
+SubmitButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary";
+	value = "Save Changes";
+}

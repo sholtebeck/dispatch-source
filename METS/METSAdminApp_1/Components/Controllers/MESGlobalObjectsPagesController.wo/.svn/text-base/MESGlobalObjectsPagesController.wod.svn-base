@@ -1,0 +1,142 @@
+AddNewHubLink : WOHyperlink {
+	action = createNewHub;
+}
+
+AddNewRoleLink : WOHyperlink {
+	action = createNewRole;
+}
+
+AddNewUserLink : WOHyperlink {
+	action = createNewUser;
+}
+
+AddNewVehicleType : WOHyperlink {
+	action = createNewVehicleType;
+}
+
+AlleyColumn : METSTableColumn {
+	class = "prg-alley";
+}
+
+ElementEditor : WOSwitchComponent {
+	navigationController = navigationController;
+	object = selectedObject;
+	WOComponentName = editorComponentName;
+}
+
+FooterContextMenu : METSContextMenuLink {
+	options = "{'display': 'above', 'left': '-6px'}";
+}
+
+FooterNavigationBar : METSTableColumnFooterBar {
+
+}
+
+HubsTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = session.isSuperUser;
+	displayKey = "name";
+	id = "MESHubsTreeNavigation";
+	items = globalHubs;
+	label = "Hubs";
+	navigationController = navigationController;
+}
+
+LeftNavigationUpdateContainer : MTAjaxUpdateContainer {
+	id = "METSLeftNavigationUpdateContainer";
+}
+
+MainTableColumn : METSTableColumn {
+	class = "prg-main-column";
+	id = "PRGMainColumn";
+}
+
+PageWrapper : PageWrapper {
+	pageTitle = ^pageTitle;
+}
+
+ResizeColumn : METSResizeColumn {
+	class = "prg-side-column";
+	id = "PRGLeftColumn";
+	otherColumn = "PRGMainColumn";
+}
+
+RolesTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = session.isSuperUser;
+	displayKey = "label";
+	id = "MESRolesTreeNavigation";
+	initiallyExpanded = true;
+	items = globalRoles;
+	label = "Roles";
+	navigationController = navigationController;
+}
+
+StaticColumn : METSStaticColumn {
+}
+
+UsersTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = true;
+	displayKey = "fullName";
+	id = "MESUsersTreeNavigation";	
+	initiallyExpanded = true;
+	items = globalUsers;
+	label = "Users";
+	navigationController = navigationController;
+} 
+
+VehicleTypesTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = true;
+	displayKey = "name";
+	id = "MESVehicleTypesTreeNavigation";	
+	initiallyExpanded = true;
+	items = globalVehicleTypes;
+	label = "Vehicle Types";
+	navigationController = navigationController;
+}
+
+ViewGlobalDispatchOptionsAction : MTAjaxUpdateLink {
+	action = viewGlobalDispatchOptions;
+	class = "icon";
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+}
+
+ViewGlobalDispatchOptionsNavigationListItem : WOGenericContainer {
+	class = viewGlobalDispatchOptionsListItemClassName;
+	elementName = "li";
+}
+
+ViewGlobalOptionsPageKey : WOKeyValueConditional {
+	key = "navigationPageKey";
+	value = "ViewGlobalDispatchOptions";
+} 
+
+ViewGroupsAction : MTAjaxUpdateLink {
+	action = viewGroups;
+	class = "icon";
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+}
+
+ViewGroupsPageKey : WOKeyValueConditional {
+	key = "navigationPageKey";
+	value = "ViewGroups";
+}
+
+ViewGroupsTabNavigationListItem : WOGenericContainer {
+	class = viewGroupsListItemClassName;
+	elementName = "li";
+}
+
+ViewUsersAction : MTAjaxUpdateLink {
+	action = viewUsers;
+	class = "icon";
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+}
+
+ViewUsersListItem : WOGenericContainer {
+	class = viewUsersListItemClassName;
+	elementName = "li";
+}
+
+ViewUsersPageKey : WOKeyValueConditional {
+	key = "navigationPageKey";
+	value = "ViewUsers";
+}

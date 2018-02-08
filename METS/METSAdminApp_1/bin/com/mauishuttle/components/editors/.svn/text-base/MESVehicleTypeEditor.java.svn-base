@@ -1,0 +1,32 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.interfaces.MESEditorInterface;
+import com.mauishuttle.eo.MESVehicleType;
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class MESVehicleTypeEditor extends MESNonSynchronizingEditor implements MESEditorInterface {
+	
+	private MESVehicleType _vehicleType;
+	
+	public MESVehicleTypeEditor(WOContext context) {
+        super(context);
+    }
+	
+	public MESVehicleType object() {
+		if(_vehicleType == null) {
+			_vehicleType = (MESVehicleType)valueForBinding("object");
+		}
+		return _vehicleType;
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+
+		try {
+			_vehicleType = (MESVehicleType)object;
+		} catch(ClassCastException e) {
+			throw new ClassCastException("Object must be of type MESVehicleType");
+		}
+			
+	}
+}

@@ -1,0 +1,48 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+DateSelector : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = reportDate;
+}
+
+DriverRevenueReportsDataTable : DriverRevenueReportDataTable {
+	reports = reports;
+}
+
+RevenueReportForm : WOForm {
+	action = saveChanges;
+}
+
+SearchForm : WOForm {
+	action = filter;
+	class = "form-inline";
+	name = "DriverRevenueReportForm";
+}
+
+SubmitButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary prg-pad-left";
+	value = "Update Payment Information";
+}
+
+HubSelector : WOPopUpButton {
+	class = "input-small";
+	displayString = aHub.name;
+	id = "HubSelector";
+	item = aHub;
+	list = hubs;
+	noSelectionString = "All Hubs";
+	selection = selectedHub;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+Wrapper : AccountingController {
+	
+}

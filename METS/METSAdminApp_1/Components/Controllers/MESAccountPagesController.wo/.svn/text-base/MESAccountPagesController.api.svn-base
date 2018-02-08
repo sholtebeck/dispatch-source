@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wodefinitions>
+        <wo class="MESAccountPagesController.java" wocomponentcontent="true">
+
+        <binding name="dataSource"/>
+    </wo>
+</wodefinitions>

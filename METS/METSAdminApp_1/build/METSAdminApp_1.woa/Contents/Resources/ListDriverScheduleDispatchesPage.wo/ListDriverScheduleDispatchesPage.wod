@@ -1,0 +1,256 @@
+BillingPaidCheckbox : WOCheckBox {
+	checked = paymentInfo.paid;
+}
+
+DispatchAccountName : WOString {
+	value = dispatch.account.name;
+}
+
+DispatchHasAccount : ERXNonNullConditional {
+	condition = dispatch.account;
+}
+
+DispatchConfirmationNumber : WOString {
+	value = dispatch.confirmationNumber;
+}
+
+DispatchCount : WOString {
+	numberformat = "0";
+	value = scheduleDispatches.@count;
+}
+
+DispatchPickupLocation : WOString {
+	value = dispatch.pickUpLocation.name;
+}
+
+DispatchStatus : WOString {
+	value = dispatch.statusKey;
+}
+
+DoesNotHavePaymentInformation : WOConditional {
+	condition = dispatch.hasPaymentInformation;
+	negate = true;
+}
+
+DriverCollect : WOConditional {
+	condition = paymentInfo.driverCollect;
+}
+
+DriverDoNotCollect : WOConditional {
+	condition = paymentInfo.driverCollect;
+	negate = true;
+}
+
+DriverNotes : WOString {
+	value = dispatch.driverNotes;
+}
+
+DriverTipAmount : WOString {
+	numberformat = "$#,##0.00";
+	value = dispatch.tipAmount;
+}
+
+DropOffLocation : WOString {
+	value = dispatch.dropOffLocation.name;
+}
+
+FooterTableDivider : WOGenericContainer {
+	class = "prg-text-align-right";
+	elementName = "td";
+}
+
+HasPaymentInformation : WOConditional {
+	condition = dispatch.hasPaymentInformation;
+}
+
+HasResults : WOConditional {
+	condition = hasResults;
+}
+
+IsOnlineReservation : WOConditional {
+	condition = dispatch.isOnlineReservation;
+}
+
+IsParentPaid : WOConditional {
+	condition = dispatch.isParentPaid;
+}
+
+IsPrintPage : WOConditional {
+	condition = isPrintPage;
+}
+
+IsNotPrintPage : WOConditional {
+	condition = isPrintPage;
+	negate = true;
+}
+
+IsSupervisor : WOConditional {
+	condition = session.isSupervisor;
+}
+
+InspectDispatch : WOHyperlink {
+	action = inspectDispatch;
+	disabled = isPrintPage;
+}
+
+IsSuperUser : WOConditional {
+	condition = session.isSuperUser;
+}
+
+IsNotVoucherOrServiceOrderPaymentType : WOConditional {
+	condition = isVoucherOrServiceOrderPaymentType;
+	negate = true;
+}
+
+IsVoucherOrServiceOrderPaymentType : WOConditional {
+	condition = isVoucherOrServiceOrderPaymentType;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+
+MiscellaneousFeesSummary : WOString {
+	value = dispatch.miscellaneousFeesToString;
+}
+
+NoResults : WOConditional {
+	condition = hasResults;
+	negate = true;
+}
+
+NumberOfPassengers : WOString {
+	numberformat = "0";
+	value = dispatch.numberPassengers;
+}
+
+PaidOutForm : ERXWOForm {
+	action = saveChanges;
+	id = "DriverScheduledDispatchesForm";
+}
+
+PassengerName : WOString {
+	value = dispatch.customerFullName;
+}
+
+PaymentInfoRepetition : WORepetition {
+	item = paymentInfo;
+	list = payments;	
+}
+
+PaymentInfoType : PaymentInfoQuickSummary {
+	paymentInformation = paymentInfo;
+}
+
+CreditCardTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = creditCardTotal;
+}
+
+PaymentTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = paymentInfoTotal;
+}
+
+PaymentsTotalPaid : WOString {
+	numberformat = "$#,##0.00";
+	value = paidPaymentInfoTotal;
+}
+
+PaymentsTotalUnPaid : WOString {
+	numberformat = "$#,##0.00";
+	value = unPaidPaymentInfoTotal;
+}
+
+ServiceOrderTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = serviceOrderTotal;
+}
+
+VouchersTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = vouchersTotal;
+}
+
+PickUpTime : WOString {
+	dateformat = "%I:%M %p";
+	value = dispatch.reservationDate;
+}
+
+PrintButton : WOHyperlink {
+	action = print;
+	class = "btn btn-success";
+	target = "_blank";
+}
+
+CashSubTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = cashSubTotal;
+}
+
+CashTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = cashTotal;
+}
+
+CashTotalContainer : WOGenericContainer {
+	class = cashTotalContainerCSS;	
+	elementName = "td";
+}
+
+CompTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = compTotal;
+}
+
+DispatchTransferAmount : WOString {
+	numberformat = "$#,##0.00";
+	value = dispatch.subTotal;
+}
+
+DispatchMiscFees : WOString {
+	numberformat = "$#,##0.00";
+	value = dispatch.miscellaneousFee;
+}
+
+DriverTip : WOString {
+	numberformat = "$#,##0.00";
+	value = dispatch.tipAmount;
+}
+
+ScheduleDispatchesRepetition : WORepetition {
+	item = dispatch;
+	list = scheduleDispatches;
+}
+
+ScheduleSummary : ScheduleSummary {
+	inspectSchedule = inspectSchedule;
+	isPrintPage = isPrintPage;
+	schedule = object;
+}
+
+ServiceName : WOString {
+	value = dispatch.service.name;
+}
+
+SendToBillingCheckbox : WOCheckBox {
+	checked = sendToBilling;
+}
+
+SubmitButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary";
+	onClick = "return confirm('Are you sure you wish to update the schedule?')";
+	value = "Update Information";
+}
+
+TipAmount : WOString {
+	numberformat = "$#,##0.00";
+	value = dispatch.tipAmount;
+}
+
+TipsOwed : WOString {
+	numberformat = "$#,##0.00";
+	value = tipsTotal;
+}

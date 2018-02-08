@@ -1,0 +1,87 @@
+package com.mauishuttle.components.tables;
+
+import com.mauishuttle.app.Session;
+import com.mauishuttle.components.interfaces.MESPageNavigationControllerInterface;
+import com.mauishuttle.eo.MESDispatch;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+
+import er.extensions.batching.ERXBatchingDisplayGroup;
+import er.extensions.components.ERXNonSynchronizingComponent;
+
+@SuppressWarnings("serial")
+public class ListDispatchesTable extends ERXNonSynchronizingComponent {
+
+	private ERXBatchingDisplayGroup<MESDispatch> _displayGroup;
+	public MESDispatch _dispatch;
+	public MESDispatch _childDispatch;
+	
+	public ListDispatchesTable(WOContext context) {
+        super(context);
+    }
+	
+	public void sleep() {
+		super.sleep();
+		_displayGroup = null;
+	}
+
+	public Session session() {
+		return (Session)super.session();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ERXBatchingDisplayGroup<MESDispatch> displayGroup() {
+
+		if(_displayGroup == null) {
+			_displayGroup = (ERXBatchingDisplayGroup<MESDispatch>)valueForBinding("displayGroup");
+		}
+		
+		return _displayGroup;
+	
+	}
+		
+	public boolean displayNotesInline() {
+		return valueForBooleanBinding("displayNotesInline", true);
+	}
+
+	public void setDisplayGroup(ERXBatchingDisplayGroup<MESDispatch> displayGroup) {
+		this._displayGroup = displayGroup;
+		setValueForBinding(displayGroup, "displayGroup");
+	}
+	
+	public boolean hasResults() {
+		return displayGroup() != null && displayGroup().allObjects().size() > 0;
+	}
+
+	public WOActionResults inspectChildDispatch() {
+		return inspectDispatch(_childDispatch);
+	}
+	
+	public WOActionResults inspectDispatch(MESDispatch dispatch) {
+		navigationController().setSelectedObject(dispatch);
+		navigationController().setEditorPageKey("1");
+		return navigationController().nextPage();
+	}
+	
+	public WOActionResults inspectDispatch() {
+		return inspectDispatch(_dispatch);
+	}
+
+	public WOActionResults inspectDriver() {
+		navigationController().setSelectedObject(_dispatch.driver());
+		return navigationController().nextPage();
+	}
+	
+	public MESPageNavigationControllerInterface navigationController() {
+		return (MESPageNavigationControllerInterface)valueForBinding("navigationController");
+	}
+	
+	public boolean navigationControllerIsDefined() {
+		return navigationController() != null;
+	}
+
+	public String tableRowClassName() {
+		return "mets_status_" + _dispatch.status();
+	}
+	
+}

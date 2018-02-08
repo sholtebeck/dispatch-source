@@ -1,0 +1,56 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "create_date"; 
+            name = createDate; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = Y; columnName = groupID; name = groupID; prototypeName = id; }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = "last_modified"; 
+            name = lastModified; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = Y; columnName = name; name = name; prototypeName = varchar50; }, 
+        {allowsNull = N; columnName = "site_id"; name = siteID; prototypeName = id; }, 
+        {allowsNull = Y; columnName = type; name = type; prototypeName = intNumber; }
+    ); 
+    attributesUsedForLocking = (groupID, id, siteID); 
+    className = "km.content.eo.KMIAbstractAsset"; 
+    classProperties = (createDate, galleries, group, lastModified, name, site, type); 
+    externalName = Asset; 
+    fetchSpecificationDictionary = {}; 
+    isAbstractEntity = Y; 
+    name = KMIAbstractAsset; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {definition = "kmiAssetGalleryAssetses.kmiAssetGallery"; name = galleries; }, 
+        {
+            destination = KMIAssetGroup; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = groupID; }); 
+            name = group; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = KMIAssetGalleryAssets; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = kmiAbstractAssetId; sourceAttribute = id; }); 
+            name = kmiAssetGalleryAssetses; 
+            propagatesPrimaryKey = Y; 
+        }, 
+        {
+            destination = KMIWebSite; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = siteID; }); 
+            name = site; 
+        }
+    ); 
+}

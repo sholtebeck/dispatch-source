@@ -1,0 +1,10 @@
+AddAdditionalRouteLink : WOHyperlink {
+	action = addAdditionalRoute;
+	class = "btn btn-primary prg-pad-right";
+}
+
+ListDispatchesTable : ListDispatchesTable {
+	displayGroup = displayGroup;
+	ec = ec;
+	navigationController = navigationController;
+}

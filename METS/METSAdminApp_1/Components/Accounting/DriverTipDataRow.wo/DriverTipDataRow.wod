@@ -1,0 +1,13 @@
+DispatchCount : WOString {
+	numberformat = "0";
+	value = count;
+}
+
+Driver : WOString {
+	value = driver.fullName;
+}
+
+TipTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = sum;
+}

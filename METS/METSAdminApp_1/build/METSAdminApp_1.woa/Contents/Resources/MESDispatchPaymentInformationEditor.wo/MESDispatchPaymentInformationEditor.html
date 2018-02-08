@@ -1,0 +1,20 @@
+<webobject name = "PaymentInformationForm">
+	<webobject name = "PaymentInfoIsDefined">
+		<webobject name = "PaymentInformationEditor"></webobject>	
+	</webobject>
+	<div class="form-actions" style="margin-bottom: 0px;">
+		<webobject name = "SubmitButton" />
+		<webobject name = "IsCreditCardPayment">
+			<webobject name = "CreditCardPaymentCreditCardIsNotNull">
+				<webobject name = "CreditCardPaymentIsNotPaid">
+					<webobject name = "ProcessCreditCardPaymentUpdateContainer">
+						<webobject name = "DispatchProcessCreditCard">
+							<webobject name = "ProcessCreditCardPayment" />
+						</webobject>
+					</webobject>
+					<webobject name = "ProcessCreditCardPaymentSelectorObserver"></webobject>
+				</webobject>
+			</webobject>
+		</webobject>
+	</div>
+</webobject>

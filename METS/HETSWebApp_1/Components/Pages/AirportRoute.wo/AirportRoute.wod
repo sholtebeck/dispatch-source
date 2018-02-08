@@ -1,0 +1,365 @@
+AirlineSelector : WOPopUpButton {
+	displayString = location.name;
+	item = location;
+	list = airlines;
+	noSelectionString = "Required -- Please pick an airline.";
+	selection = selectedAirline;
+}
+
+AirportName : WOTextField {
+	class = "text";
+	disabled = true;
+	value = airportName;
+}
+
+BicycleMiscellaneousFeeTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = bicycleMiscellaneousFeeTotal;
+}
+
+BicycleMiscellaneousFeeTotalUpdateContainer : MTAjaxUpdateContainer {
+	class = "caption";
+	elementName = "em";
+	id = bicycleMiscellaneousFeeTotalUpdateContainerId;
+}
+
+BicycleRate : WOString {
+	value = globalProperties.bicycleRate;
+}
+
+BoosterSeatFeeTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = boosterSeatFeeTotal;
+}
+
+InfantSeatsFeeTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = infantSeatsFeeTotal;
+}
+
+BoosterSeatsFeeTotalUpdateContainer : MTAjaxUpdateContainer {
+	class = "caption";
+	elementName = "em";
+	id = boosterSeatsFeeTotalUpdateContainerId;
+}
+
+InfantSeatsFeeTotalUpdateContainer : MTAjaxUpdateContainer {
+	class = "caption";
+	elementName = "em";
+	id = infantSeatsFeeTotalUpdateContainerId;
+}
+
+BoxesFeeTotalUpdateContainer : MTAjaxUpdateContainer {
+	class = "caption";
+	elementName = "em";
+	id = boxesFeeTotalUpdateContainerId;	
+}
+
+BoxesMiscellaneousFeeTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = boxesFeeTotal;
+}
+
+BoxRate : WOString {
+	value = globalProperties.boxRate
+}
+
+ChildSeatsRate : WOString {
+	value = globalProperties.childSeatRate;
+}
+
+ChildSeatsFeeTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = childSeatsFeeTotal;
+}
+
+ChildSeatsFeeTotalUpdateContainer : MTAjaxUpdateContainer {
+	class = "caption";
+	elementName = "em";
+	id = childSeatsFeeTotalUpdateContainerId;
+}
+
+FlightDateHeader : WOString {
+	value = flightDateHeader;
+}
+
+FlightDateLabel : WOString {
+	value = flightDateLabel;
+}
+
+FlightTimeLabel : WOString {
+	value = flightTimeLabel;
+}
+
+FlightNumber : WOTextField {
+	class = "text";
+	value = dispatch.flightNumber;
+}
+
+HubLocationsSelectorUpdateContainer : MTAjaxUpdateContainer {
+	id = hubLocationsSelectorUpdateContainerId;
+}
+
+HubLocationsWithOptionalZoneQualifier : WOPopUpButton {
+	displayString = location.name;
+	item = location;
+	list = hubLocations;
+	noSelectionString = locationNoSelectionString;
+	selection = selectedLocation;
+}
+
+HubZones : WOPopUpButton {
+	class = "hub-zone-selector";
+	displayString = zone.name;
+	id = hubZoneSelectorId;
+	item = zone;
+	list = hubZones;
+	noSelectionString = "Select an area to filter the location options.";
+	selection = selectedZone;
+}
+
+IsLeiGreet : WOConditional {
+	condition = greetWithLei;
+}
+
+LeiRate : WOString {
+	value = globalProperties.leiRate;
+}
+
+LeiSelector : WOPopUpButton {
+	id = leiSelectorId;
+	list = yesOrNoArray;
+	selection = leiRequest;
+}
+
+LeiSelectorObserver : MTAjaxObserveField {
+	observeFieldID = leiSelectorId;
+	updateContainerID = numberOfLeisUpdateContainerId;
+}
+
+LeisFeeTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = leiFeesTotal;
+}
+
+LeisFeeTotalUpdateContainer : MTAjaxUpdateContainer {
+	class = "caption";
+	elementName = "em";
+	id = leisFeeTotalUpdateContainerId;
+}
+
+LocationTypeHeader : WOString {
+	value = locationTypeHeader;
+}
+
+NumberOfBagsSelector : WOPopUpButton {
+	list = zeroThroughTwenty;
+	noSelectionString = "Allowed 2 per person and one carry on.";
+	selection = dispatch.numberOfBags;
+}
+
+NumberOfBicyclesSelectorObserver : MTAjaxObserveField {
+	observeFieldID = numberOfBicyclesSelectorId;
+	updateContainerID = bicycleMiscellaneousFeeTotalUpdateContainerId;
+	useSpinner = true;
+}
+
+NumberOfBicyclesSelector : WOPopUpButton {
+	id = numberOfBicyclesSelectorId;
+	list = zeroThroughTen;
+	noSelectionString = "Please select the number of bicycles.";
+	selection = dispatch.numberOfBicycles;
+}
+
+NumberOfBoosterSeatsSelector : WOPopUpButton {
+	id = numberOfBoosterSeatsSelectorId;
+	list = zeroThroughTen;
+	noSelectionString = "For older children less than 10 years old.";
+	selection = dispatch.booster;
+}
+
+NumberOfInfantSeatsSelector : WOPopUpButton {
+	id = numberOfInfantSeatsSelectorId;
+	list = zeroThroughTen;
+	noSelectionString = "For children less than 1 year old.";
+	selection = dispatch.infant;
+}
+
+NumberOfBoosterSeatsSelectorObserver : MTAjaxObserveField {
+	observeFieldID = numberOfBoosterSeatsSelectorId;
+	updateContainerID = boosterSeatsFeeTotalUpdateContainerId;
+	useSpinner = true;
+}
+
+NumberOfInfantSeatsSelectorObserver : MTAjaxObserveField {
+	observeFieldID = numberOfInfantSeatsSelectorId;
+	updateContainerID = infantSeatsFeeTotalUpdateContainerId;
+	useSpinner = true;
+}
+
+NumberOfBoxesSelector : WOPopUpButton {
+	id = numberOfBoxesSelectorId;
+	list = zeroThroughTen;
+	noSelectionString = "Please select the number of boxes.";
+	selection = dispatch.numberOfBoxes;
+}
+
+NumberOfBoxesSelectorObserver : MTAjaxObserveField {
+	observeFieldID = numberOfBoxesSelectorId;
+	updateContainerID = boxesFeeTotalUpdateContainerId;
+	useSpinner = true;
+}
+
+NumberOfChildSeatsSelector : WOPopUpButton {
+	id = numberOfChildSeatsSelectorId;
+	list = zeroThroughTen;
+	noSelectionString = "For younger children less than 4 years old.";
+	selection = dispatch.toddler;
+}
+
+NumberOfChildSeatsSelectorObserver : MTAjaxObserveField {
+	observeFieldID = numberOfChildSeatsSelectorId;
+	updateContainerID = childSeatsFeeTotalUpdateContainerId;
+	useSpinner = true;
+}
+
+NumberOfLeisSelector : WOPopUpButton {
+	id = numberOfLeisSelectorId;
+	list = zeroThroughTen;
+	noSelectionString = "Number of Leis";
+	selection = dispatch.numberOfLeis;
+}
+
+NumberOfLeisSelectorObserver : MTAjaxObserveField {
+	observeFieldID = numberOfLeisSelectorId;
+	updateContainerID = leisFeeTotalUpdateContainerId;
+}
+
+NumberOfLeisUpdateContainer : MTAjaxUpdateContainer {
+	id = numberOfLeisUpdateContainerId;
+}
+
+NumberOfPassengersSelector : WOPopUpButton {
+	list = passengerCount;
+	noSelectionString = "For more than 10 passengers please call for quote.";
+	selection = dispatch.numberPassengers;
+}
+
+NumberOfSurfboardsSelector : WOPopUpButton {
+	id = numberOfSufboardsSelectorId;
+	list = zeroThroughTen;
+	noSelectionString = "Short and Long Boards.";
+	selection = dispatch.numberOfSurfboards;
+}
+
+NumberOfSurfboardsSelectorObserver : MTAjaxObserveField {
+	observeFieldID = numberOfSufboardsSelectorId;
+	updateContainerID = surfboardsFeeTotalUpdateContainerId;
+	useSpinner = true;
+}
+
+NumberOfWindsurfsSelector : WOPopUpButton {
+	id = numberOfWindsurfsSelectorId;
+	list = zeroThroughTen;
+	noSelectionString = "SUPs/Paddlebaords/Windsurfs.";
+	selection = dispatch.numberOfWindsurfs;
+}
+
+PaddleboardsRate : WOString {
+	value = globalProperties.windsurfRate;
+}
+
+Panel : WOGenericContainer {
+	class = panelCss;
+	elementName = "div";
+}
+
+ReservationDateSelector : WOPopUpButton {
+	class = "span-one-third";
+	list = dates;
+	selection = selectedDate;
+}
+
+ReservationDateUpdateContainer : MTAjaxUpdateContainer {
+	elementName = "span";
+	id = reservationDateUpdateContainerId;
+}
+
+ReservationHourSelector : WOPopUpButton {
+	class = "span-one-third";
+	list = hours;
+	selection = selectedHour;
+}
+
+ReservationMeridiemSelector : WOPopUpButton {
+	class = "span-one-third";
+	list = meridiems;
+	selection = selectedMeridiem;
+}
+
+ReservationMinuteSelector : WOPopUpButton {
+	class = "span-one-third";
+	list = minutes;
+	selection = selectedMinute;
+}
+
+ReservationMonthSelectorObserver : MTAjaxObserveField {
+	observeFieldID = reservationMonthSelectorId;
+	updateContainerID = reservationDateUpdateContainerId;	
+}
+
+ReservationMonthSelector : WOPopUpButton {
+	class = "span-one-third";
+	id = reservationMonthSelectorId;
+	list = months;
+	selection = selectedMonth;
+}
+
+ReservationYearSelector : WOPopUpButton {
+	class = "span-one-third";
+	id = reservationYearSelectorId;
+	list = years;
+	selection = selectedYear;
+}
+
+ReservationYearSelectorObserver : MTAjaxObserveField {
+	observeFieldID = reservationYearSelectorId;
+	updateContainerID = reservationDateUpdateContainerId;
+}
+
+SurfboardsFeeTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = surfboardsFeeTotal;
+}
+
+SurfboardsFeeTotalUpdateContainer : MTAjaxUpdateContainer {
+	class = "caption";
+	elementName = "em";
+	id = surfboardsFeeTotalUpdateContainerId;
+}
+
+SurfboardsRate : WOString {
+	value = globalProperties.surfboardRate;
+}
+
+WindsurfsFeeTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = windsurfsFeeTotal;
+}
+
+WindsurfsFeeTotalUpdateContainer : MTAjaxUpdateContainer {
+	class = "caption";
+	elementName = "em";
+	id = windsurfsFeeTotalUpdateContainerId;	
+}
+
+NumberOfWindsurfsSelectorObserver : MTAjaxObserveField {
+	observeFieldID = numberOfWindsurfsSelectorId;
+	updateContainerID = windsurfsFeeTotalUpdateContainerId;
+	useSpinner = true;
+}
+
+ZoneSelectorObserver : MTAjaxObserveField {
+	observeFieldID = hubZoneSelectorId;
+	updateContainerID = hubLocationsSelectorUpdateContainerId;
+}

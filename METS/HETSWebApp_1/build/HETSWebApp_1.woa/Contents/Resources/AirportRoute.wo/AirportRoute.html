@@ -1,0 +1,175 @@
+<webobject name = "Panel">
+	<h3><webobject name = "FlightDateHeader"></webobject></h3>
+	<div class = "reservations-panel-content">
+		<label><webobject name = "FlightDateLabel"></webobject></label>
+		<webobject name = "ReservationYearSelector"></webobject>
+		<webobject name = "ReservationMonthSelector"></webobject>
+		<webobject name = "ReservationDateUpdateContainer">
+			<webobject name = "ReservationDateSelector"></webobject>
+		</webobject>
+		<webobject name = "ReservationYearSelectorObserver"></webobject>
+		<webobject name = "ReservationMonthSelectorObserver"></webobject>
+		<label><webobject name = "FlightTimeLabel"></webobject></label>
+		<webobject name = "ReservationHourSelector"></webobject>
+		<webobject name = "ReservationMinuteSelector"></webobject>
+		<webobject name = "ReservationMeridiemSelector"></webobject>
+	</div>
+</webobject>
+<webobject name = "Panel">
+	<h3><webobject name = "LocationTypeHeader"></webobject></h3>
+	<div class = "reservations-panel-content">
+		<label>Area:</label>
+		<webobject name = "HubZones"></webobject>
+		<webobject name = "HubLocationsSelectorUpdateContainer">
+			<label class = "prepend-top">Location:</label>
+			<webobject name = "HubLocationsWithOptionalZoneQualifier"></webobject>
+		</webobject>
+		<webobject name = "ZoneSelectorObserver"></webobject>
+		<em class = "caption">If you do not see your hotel or residence please set area to the default option.</em>
+	</div>
+</webobject>
+<webobject name = "Panel">
+	<h3>Airline Information</h3>
+	<div class = "reservations-panel-content">
+		<label>Airport</label>
+		<webobject name = "AirportName"></webobject>
+		<label>Airlines</label>
+		<webobject name = "AirlineSelector"></webobject>
+		<label>Flight Number</label>
+		<webobject name = "FlightNumber"></webobject>
+	</div>
+</webobject>
+<webobject name = "Panel">
+	<h3>Number of Passengers</h3>
+	<div class = "reservations-panel-content">
+		<label>Count:</label>
+		<webobject name = "NumberOfPassengersSelector"></webobject>
+	</div>
+</webobject>
+<webobject name = "Panel">
+	<h3>Luggage</h3>
+	<div class = "reservations-panel-content">
+		<label>Count:</label>
+		<webobject name = "NumberOfBagsSelector"></webobject>
+		<em class = "caption">2 per passenger and one carry on allowed.  Additional charge for extra luggage.</em>
+		<label>Boxes: <span class = "rate">($<webobject name = "BoxRate" /> per box)</span></label>
+		<webobject name = "NumberOfBoxesSelector"></webobject>
+		<webobject name = "BoxesFeeTotalUpdateContainer">
+			Additional Fee: <webobject name = "BoxesMiscellaneousFeeTotal" />
+		</webobject>
+		<webobject name = "NumberOfBoxesSelectorObserver"></webobject>
+
+	</div>
+</webobject>
+<webobject name = "Panel">
+	<h3>Special Options</h3>
+	<div class = "reservations-panel-content">
+		<table class = "miscellaneous-items">
+			<tr>
+				<td>
+					<wo:img src = "images/reservations/bicycle2.jpg" class = "thumbnail" />
+				</td>
+				<td>
+					<label>Bicycle: <span class = "rate">($<webobject name = "BicycleRate" /> per bicycle)</span></label>
+					<webobject name = "NumberOfBicyclesSelector" />
+					<webobject name = "BicycleMiscellaneousFeeTotalUpdateContainer">
+						Additional Fee: <webobject name = "BicycleMiscellaneousFeeTotal" />
+					</webobject>
+					<webobject name = "NumberOfBicyclesSelectorObserver"></webobject>
+				</td>
+			</tr>		
+			<tr>
+				<td>
+					<wo:img src = "images/reservations/car-seat.jpg" class = "thumbnail" />
+				</td>
+				<td>
+					<label>Infant Seats: <span class = "rate">($<webobject name = "ChildSeatsRate" /> per booster seat)</span></label>
+					<webobject name = "NumberOfInfantSeatsSelector" />
+					<webobject name = "InfantSeatsFeeTotalUpdateContainer">
+						Additional Fee: <webobject name = "InfantSeatsFeeTotal"></webobject>
+					</webobject>
+					<webobject name = "NumberOfInfantSeatsSelectorObserver"></webobject>
+				</td>
+			</tr>		
+			<tr>
+				<td>
+					<wo:img src = "images/reservations/car-seat.jpg" class = "thumbnail" />
+				</td>
+				<td>
+					<label>Toddler Seats: <span class = "rate">($<webobject name = "ChildSeatsRate" /> per child seat)</span></label>
+					<webobject name = "NumberOfChildSeatsSelector" />
+					<webobject name = "ChildSeatsFeeTotalUpdateContainer">
+						Additional Fee: <webobject name = "ChildSeatsFeeTotal"></webobject>
+					</webobject>
+					<webobject name = "NumberOfChildSeatsSelectorObserver"></webobject>
+				</td>
+			</tr>		
+			<tr>
+				<td>
+					<wo:img src = "images/reservations/booster-seat.jpg" class = "thumbnail" />
+				</td>
+				<td>
+					<label>Booster Seats: <span class = "rate">($<webobject name = "ChildSeatsRate" /> per booster seat)</span></label>
+					<webobject name = "NumberOfBoosterSeatsSelector" />
+					<webobject name = "BoosterSeatsFeeTotalUpdateContainer">
+						Additional Fee: <webobject name = "BoosterSeatFeeTotal"></webobject>
+					</webobject>
+					<webobject name = "NumberOfBoosterSeatsSelectorObserver"></webobject>
+				</td>
+			</tr>		
+			<tr>
+				<td>
+					<wo:img src = "images/reservations/surfboard.jpg" class = "thumbnail" />
+				</td>
+				<td>
+					<label>Surfboards: <span class = "rate">($<webobject name = "SurfboardsRate" /> per surfboard)</span></label>
+					<webobject name = "NumberOfSurfboardsSelector" />
+					<webobject name = "SurfboardsFeeTotalUpdateContainer">
+						Additional Fee: <webobject name = "SurfboardsFeeTotal"></webobject>
+					</webobject>
+					<webobject name = "NumberOfSurfboardsSelectorObserver"></webobject>
+				</td>
+			</tr>		
+			<tr>
+				<td>
+					<wo:img src = "images/reservations/sup.jpg" class = "thumbnail" />
+				</td>
+				<td>
+					<label>Paddleboards/Windsurfs: <span class = "rate">($<webobject name = "PaddleboardsRate" /> per SUP/windsurf)</span></label>
+					<webobject name = "NumberOfWindsurfsSelector" />
+					<webobject name = "WindsurfsFeeTotalUpdateContainer">
+						Additional Fee: <webobject name = "WindsurfsFeeTotal"></webobject>
+					</webobject>
+					<webobject name = "NumberOfWindsurfsSelectorObserver"></webobject>
+				</td>
+			</tr>		
+		</table>
+	</div>
+</webobject>
+<webobject name = "Panel">
+	<h3>Lei Greet</h3>
+	<div class = "reservations-panel-content">
+		<table class = "miscellaneous-items">
+			<tr>
+				<td>
+					<wo:img src = "images/reservations/lei.jpg" class = "thumbnail" />
+				</td>
+				<td>
+					<label>Would you like a flower lei? </label>
+					<webobject name = "LeiSelector"></webobject>
+					<webobject name = "NumberOfLeisUpdateContainer">
+						<webobject name = "IsLeiGreet">
+							<label class = "prepend-top">Number of Leis: <span class = "rate">($<webobject name = "LeiRate" /> per lei)</span></label>
+							<webobject name = "NumberOfLeisSelector" />
+							<webobject name = "LeisFeeTotalUpdateContainer">
+								Additional Fee: <webobject name = "LeisFeeTotal"></webobject>
+							</webobject>
+							<webobject name = "NumberOfLeisSelectorObserver"></webobject>
+						</webobject>
+					</webobject>
+					<webobject name = "LeiSelectorObserver"></webobject>
+				</td>
+			</tr>
+		</table>	
+	</div>
+</webobject>

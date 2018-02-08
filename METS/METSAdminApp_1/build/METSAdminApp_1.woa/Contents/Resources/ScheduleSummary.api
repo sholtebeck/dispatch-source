@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+        <wo class="ScheduleSummary.java" wocomponentcontent="true">
+
+        <binding name="deleteSchedule"/>
+        
+    <binding name="inspectSchedule"/>
+        <validation message="'inspectSchedule' is a required binding.">
+            <unbound name="inspectSchedule"/>
+        </validation>
+    <binding name="listPayouts"/>
+        
+    <binding name="schedule"/>
+        <validation message="'schedule' is a required binding.">
+            <unbound name="schedule"/>
+        </validation>
+    <binding name="isPrintPage"/>
+    </wo>
+</wodefinitions>

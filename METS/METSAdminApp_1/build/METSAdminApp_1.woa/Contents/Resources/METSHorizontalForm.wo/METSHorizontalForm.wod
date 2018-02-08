@@ -1,0 +1,12 @@
+ComponentContent : WOComponentContent {
+}
+
+Form : WOForm {
+	action = ^action;
+	class = "form-horizontal";
+	enctype = ^enctype;
+	id = ^id;
+	multipleSubmit = true;
+	name = ^name;
+	style = "margin-bottom: 0px;";	
+}

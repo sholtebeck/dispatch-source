@@ -1,0 +1,130 @@
+DisplayFlightTimeInformation : WOConditional {
+	condition = displayFlightTime;
+}
+
+DisplayFlightTimeInformationSelector : METSPopUpButton {
+	helpText = "Required only if dropping off at an airport.";
+	id = "DisplayFlightTimeInformationSelector";
+	labelText = "Departure Flight Info";
+	list = yesOrNoArray;
+	noSelectionString = "Do you want to view the flight time?";
+	selection = displayFlightTime;
+}
+
+DisplayFlightDateAndTimeObserver : MTAjaxObserveField {
+	observeFieldID = "DisplayFlightTimeInformationSelector";
+	updateContainerID = "FlightDateTimeUpdateContainer";
+}
+
+FlightNumber : METSTextInput {
+	labelText = "Flight Number";
+	value = object.flightNumber;
+}
+
+FlightDateTimeUpdateContainer : MTAjaxUpdateContainer {
+	id = "FlightDateTimeUpdateContainer";
+}
+
+DropOffLocationTypeAheadInput : METSTypeAheadInput {
+	displayString = location.nameWithZone;
+	helpText = "Begin typing to see suggestions";
+	id = "DropOffLocationTypeAheadInput";
+	item = location;
+	labelText = "Drop Off Location";
+	list = dropOffLocations;
+	value = delegate.dropOffLocationUserInput;	
+}
+
+
+IsExclusiveService : WOConditional {
+	condition = isExclusiveService;
+}
+
+IsServiceDefined : WOConditional {
+	condition = object.isServiceDefined;
+}
+
+IsSharedService : WOConditional {
+	condition = isSharedService;
+}
+
+FlightDate : METSDatePicker {
+	dateformat = "%m/%d/%Y";	
+	helpText = "Optional";
+	labelText = "Flight Date";
+	value = flightDate;
+}
+
+PickUpDate : METSDatePicker {
+	dateformat = "%m/%d/%Y";	
+	helpText = "Required Information";
+	labelText = "Pick Up Date";
+	value = pickUpDate;
+}
+
+PickUpLocationTypeAheadInput : METSTypeAheadInput {
+	displayString = location.nameWithZone;
+	helpText = "Begin typing to see suggestions";
+	id = "PickUpLocationSelector";
+	item = location;
+	labelText = "Pick Up Location";
+	list = pickUpLocations;
+	name = "PickUpLocation";
+	value = delegate.pickUpLocationUserInput;
+}
+
+FlightTimeHourSelector : WOPopUpButton {
+	class = "span2";
+	list = hours;
+	selection = flightTimeHour;
+}
+
+PickUpTimeHourSelector : WOPopUpButton {
+	class = "span2";
+	list = hours;
+	selection = pickUpTimeHour; 
+}
+
+PickUpTimeMeridiemSelector : WOPopUpButton {
+	class = "span2";
+	list = meridiems;
+	selection = pickUpTimeMeridiem;
+}
+
+FlightTimeMeridiemSelector : WOPopUpButton {
+	class = "span2";
+	list = meridiems;
+	selection = flightTimeMeridiem;
+}
+
+PickUpTimeMinuteSelector : WOPopUpButton {
+	class = "span2";
+	list = allMinutes;
+	selection = pickUpTimeMinute;
+}
+
+FlightTimeMinuteSelector : WOPopUpButton {
+	class = "span2";
+	list = allMinutes;
+	selection = flightTimeMinute;
+}
+
+ServiceDetailsUpdateContainer : MTAjaxUpdateContainer {
+	id = "METSDispatchServiceDetailsContainer";
+}
+
+ServiceTypeSelector : METSPopUpButton {
+	displayString = service|displayName;
+	helpText = "Required Information";
+	id = "METSDispatchServiceSelector";
+	item = service;
+	labelText = "Service Type";
+	list = hubServices;
+	noSelectionString = "Please pick a service type";
+	selection = object.service;
+}
+
+ServiceTypeSelectorObserver : MTAjaxObserveField {
+	observeFieldID = "METSDispatchServiceSelector";
+	updateContainerID = "METSDispatchServiceDetailsContainer";
+}

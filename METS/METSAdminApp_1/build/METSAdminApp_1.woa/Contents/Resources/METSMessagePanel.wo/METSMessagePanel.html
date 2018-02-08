@@ -1,0 +1,14 @@
+<wo:if condition = "$hasError">
+	<div class = "alert alert-error prg-message-panel" style = "border-radius: 0px;">
+		<webobject name = "ErrorRepetition">
+			<span><webobject name = "Message"></webobject></span>
+		</webobject>
+	</div>
+</wo:if>
+<wo:if condition = "$hasMessages">
+	<div class = "alert alert-success prg-message-panel" style = "border-radius: 0px;">
+		<webobject name = "MessagesRepetition">
+			<span><webobject name = "Message"></webobject></span>
+		</webobject>
+	</div>
+</wo:if>

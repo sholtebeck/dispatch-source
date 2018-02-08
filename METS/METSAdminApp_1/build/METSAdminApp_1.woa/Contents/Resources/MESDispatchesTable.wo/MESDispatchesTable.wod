@@ -1,0 +1,253 @@
+AccountSelectorPopUpButton : WOPopUpButton {
+	class = "span12";
+	displayString = account.name;
+	item = account;
+	list = accounts;
+	noSelectionString = "Filter by Account";
+	selection = dataSource.selectedAccount;
+}
+
+BookedBySelectorPopUpButton : WOPopUpButton {
+	class = "span12";
+	displayString = booker.name;
+	item = booker;
+	list = bookers;
+	noSelectionString = "Filter by Booker";
+	selection = dataSource.selectedBooker;
+}
+
+PaymentTypesPopUpButton : WOPopUpButton {
+	class = "span12";
+	displayString = paymentTypeDisplayName;
+	item = paymentType;
+	list = paymentTypes;
+	noSelectionString = "Filter by Payment Type";
+	selection = dataSource.selectedPaymentType;
+}
+
+PaymentTypeStatusPopUpButton : WOPopUpButton {
+	class = "span12";
+	list = paidUnpaidArray;
+	noSelectionString = "Filter by Payment Status";
+	selection = selectedPaymentStatus;
+}
+
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+ConfirmationNumber : WOTextField {
+	class = "input-small";
+	value = dataSource.confirmationNumber;
+}
+
+CreatedBySelector : WOPopUpButton {
+	class = "span12";
+	displayString = user.fullName;
+	item = user;
+	list = users;
+	noSelectionString = "Filter by User";
+	selection = dataSource.selectedUser;	
+}
+
+CreateNewDispatchButton : WOHyperlink {
+	class = "btn btn-success";
+	action = navigationController.createNewObject;
+}
+
+DropOffLocationSelector : WOPopUpButton {
+	class = "span12";
+	displayString = location.nameWithZone;
+	item = location;
+	list = locations;
+	noSelectionString = "Drop Off Location";
+	selection = dataSource.selectedLocation;
+}
+
+DropOffZoneSelector : WOPopUpButton {
+	class = "span12";
+	displayString = zone.name;
+	item = zone;
+	list = zones;
+	noSelectionString = "Drop Off Zone";
+	selection = dataSource.selectedDropOffZone;
+}
+
+DriverSelectorPopUpButton : WOPopUpButton {
+	class = "span12";
+	displayString = driver.firstName;
+	item = driver;
+	noSelectionString = "Filter by Driver";
+	list = drivers;
+	selection = dataSource.selectedDriver;
+}
+
+DispatchStaticColumn : METSStaticColumn {
+	id = "PRGDispatchPage";
+}
+
+DisplayNext : WOHyperlink {
+	action = dataSource.next;
+}
+
+DisplayPrevious : WOHyperlink {
+	action = dataSource.previous;
+}
+
+EnableDateFilterPopupButton : WOPopUpButton {
+	class = "span2 prg-pad-right";
+	list = yesOrNoArray;
+	noSelectionString = "Enable Date Filtering";
+	selection = dataSource.enableDateFiltering;
+}
+
+FilterButton : WOSubmitButton {
+	action = dataSource.filter;
+	class = "btn btn-primary";
+	value = "Filter Dispatches";
+}
+
+FilterResultsForm : WOForm {
+	action = dataSource.filter;
+	class = "form-inline";
+	name = "MESFilterDispatchesForm";
+}
+
+HasMultipleBatches : WOConditional {
+	condition = dataSource.hasResults;
+}
+
+HubName : WOString {
+	value = dataSource.currentHub.name;
+}
+
+HubSelectorPopUpButton : WOPopUpButton {
+	class = "span12";
+	displayString = hub.name;
+	item = hub;
+	noSelectionString = "All Hubs";
+	list = hubs;
+	selection = dataSource.currentHub;
+}
+
+ListDispatchesTable : ListDispatchesTable {
+	dataSource = dataSource;
+	displayGroup = dataSource.dispatchDisplayGroup;
+	isMultipleDates = isMultipleDates;
+	navigationController = navigationController;
+}
+
+PassengerLastName : WOTextField {
+	class = "input-small prg-pad-right";	
+	value = dataSource.passengerLastName;
+}
+
+PickUpLocationSelector : WOPopUpButton {
+	class = "span12";
+	displayString = location.nameWithZone;
+	item = location;
+	list = locations;
+	noSelectionString = "Pick Up Location";
+	selection = dataSource.selectedPickUpLocation;
+}
+
+PickUpZoneSelector : WOPopUpButton {
+	class = "span12";
+	displayString = zone.name;
+	item = zone;
+	list = zones;
+	noSelectionString = "Pick Up Zone";
+	selection = dataSource.selectedPickUpZone;
+}
+
+PrintDispatchesButton : WOHyperlink {
+	action = printDispatches;
+	class = "btn btn-success";
+	target = "_blank";
+}
+
+EmailManifestButton : WOSubmitButton {
+	action = emailDispatchesAsManifest;
+	class = "btn btn-primary";
+}
+
+EmailDispatchesAsManifestButton : MTAjaxModalContainer {
+	ajax = true;
+	autoWrapContent = false;
+	class = "btn btn-success";
+	id = "EmailDispatchesAsManifestButton";
+	label = "E-Mail as Manifest";
+	showFooter = false;
+	showTitle = false;
+	useDefaultCSS = false;
+}
+
+PrintDispatchesAsManifestButton : WOHyperlink {
+	action = printDispatchesAsManifest;
+	class = "btn btn-success";
+	target = "_blank";
+}
+
+RecipientEmail : WOTextField {
+	value = recipientEmail;
+}
+
+RecipientName : WOTextField {
+	value = recipientName;
+}
+
+ResetFiltersButton : WOHyperlink {
+	action = resetFilters;
+	class = "btn";
+}
+
+SearchEndDatePicker : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = dataSource.searchEndDate;
+}
+
+SearchMacroSelector : WOPopUpButton {
+	class = "input-medium";
+	displayString = searchMacro.key;
+	item = searchMacro;
+	list = searchMacros;
+	noSelectionString = "Search By Macro";
+	selection = selectedSearchMacro;
+}
+
+SearchByMacroButton : WOSubmitButton {
+	action = filterByMacro;
+	class = "btn btn-primary";
+	value = "Search By Macro";
+}
+
+SearchStartDatePicker : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = dataSource.searchStartDate;
+}
+
+ServiceTypeSelector : WOPopUpButton {
+	class = "span12";
+	displayString = service.name;
+	item = service;
+	list = services;
+	noSelectionString = "Filter by Service";
+	selection = dataSource.selectedService;
+}
+
+StatusCheckBox : WOCheckBox {
+	checked = statusChecked;
+}
+
+StatusKey : WOString {
+	value = status.key;
+}
+
+StatusRepetition : WORepetition {
+	item = status;
+	list = dataSource.statuses;
+}

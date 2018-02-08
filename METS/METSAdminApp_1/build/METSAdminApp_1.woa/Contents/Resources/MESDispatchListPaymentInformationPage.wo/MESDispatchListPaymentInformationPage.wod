@@ -1,0 +1,262 @@
+AccountSelectorPopUpButton : METSPopUpButton {
+	displayString = account.name;
+	helpText = "Optional Information";
+	id = "AccountSelector";
+	item = account;
+	labelText = "Account";
+	list = hubAccounts;
+	noSelectionString = "Please select an account";
+	selection = dispatchAccount;
+}
+
+AccountSelectorObserver : MTAjaxObserveField {
+	observeFieldID = "AccountSelector";
+	updateContainerID = "PaymentTypeSelectorUpdateContainer";
+}
+
+BookedBySelector : METSPopUpButton {
+	displayString = booker.name;
+	helpText = "Optional";
+	item = booker;
+	labelText = "Booked By";
+	list = hubBookers;
+	noSelectionString = "Please select if appropriate.";
+	selection = object.bookedBy;
+}
+
+CanEditPaymentInformation : WOConditional {
+	condition = canEditPaymentInformation;
+}
+
+DispatchTipType : METSPopUpButton {
+	displayString = dispatchTipType.displayName;
+	labelText = "Tip Type";
+	item = dispatchTipType;
+	list = dispatchTipTypes;
+	noSelectionString = "Please select the tip type";
+	selection = object.dispatchTipType;
+}
+
+HasParent : WOConditional {
+	condition = object.hasParent;
+}
+
+NoParent : WOConditional {
+	condition = object.hasParent;
+	negate = true;
+}
+
+AddPaymentInformationContextMenu : METSContextMenuLink {
+	class = "prg-pad-right";
+	options = "{'top': '-10px', 'display' : 'above'}";
+}
+
+CreditCardProcessingOptionsUpdateContainer : MTAjaxUpdateContainer {
+	elementName = "span";
+	id = "CreditCardProcessingOptionsUpdateContainer";
+}
+
+CreditCardProcessingOptionsUpdateContainerObserveField : MTAjaxObserveField {
+	updateContainerID = "CreditCardProcessingOptionsUpdateContainer";
+	observeFieldID = "PaymentTypeSelector";
+}
+
+DispatchAmount : METSTextInput {
+	helpText = "Required Information";
+	numberformat = "#,##0.00";
+	labelText = "Transfer Fee";
+	value = object.subTotal;
+}
+
+DispatchTipAmount : METSTextInput {
+	helpText = "Required Information";
+	numberformat = "#,##0.00";
+	labelText = "Tip Amount";
+	value = object.tipAmount;
+}
+
+DisplayRemovePaymentButton : WOConditional {
+	condition = displayRemovePaymentButton;
+}
+
+HasPaymentInformation : WOConditional {
+	condition = object.hasPaymentInformation;
+}
+
+IsCreditCardPayment : WOConditional {
+	condition = delegate.paymentInfo.isCreditCardPayment;
+}
+
+IsNewObject : WOConditional {
+	condition = delegate.paymentInfo.isNewObject;
+}
+
+IsNotPaid : WOConditional {
+	condition = delegate.paymentInfo.paid;
+	negate = true;
+}
+
+InspectPaymentInformationLink : WOHyperlink {
+	action = inspectPaymentInformation;
+	class = "btn btn-mini";
+}
+
+MiscFees : METSTextInput {
+	helpText = "Carried over from miscellaneous tab.";
+	labelText = "Miscellaneous Fees";
+	numberformat = "#,##0.00";
+	value = object.miscellaneousFee;
+}
+
+NoPaymentInformation : WOConditional {
+	condition = object.hasPaymentInformation;
+	negate = true;
+}
+
+PaymentAmount : WOString {
+	numberformat = "$#,##0.##";
+	value = paymentInformation.amount;
+}
+
+PaymentCreationDate : WOString {
+	dateformat = "%m/%d/%y";
+	value = paymentInformation.creationDate;
+}
+
+PaymentDriverCollect : WOString {
+	value = paymentDriverCollect;
+}
+
+PaymentIsPaid : WOString {
+	value = paymentInformation.paid;
+}
+
+PaymentInformationDoesNotHaveNotes : WOConditional {
+	condition = paymentInformation.hasNotes;
+	negate = true;
+}
+
+PaymentInformationEditor : WOSwitchComponent {
+	WOComponentName = paymentInformationEditorComponentName;
+	delegate = delegate;
+	object = delegate.paymentInfo;
+}
+
+PaymentInformationHasNotes : WOConditional {
+	condition = paymentInformation.hasNotes;	
+}
+
+PaymentInformationNotesPopover : METSPopover {
+	content = paymentInformation|escapedNotes;
+	options = "{'location' : 'above'}";
+	title = "Payment Information Notes";
+}
+
+PaymentInformationRepetition : WORepetition {
+	item = paymentInformation;
+	list = dispatchPayments;
+}
+
+PaymentInfoIsDefined : ERXNonNullConditional {
+	condition = delegate.paymentInfo;
+}
+
+PaymentInfoIsNotEqualToTotal : WOConditional {
+	condition = object.paymentInformationTotalIsNotEqualToTotal;
+}
+
+PaymentInfoIsEqualToTotal : WOConditional {
+	condition = object.paymentInformationTotalIsNotEqualToTotal;
+	negate = true;
+}
+
+PaymentInfosTotal : WOTextField {
+	class = "input-xlarge";
+	disabled = true;
+	value = object.allTransfersPaymentTotal;
+}
+
+PaymentInformationUpdateContainer : MTAjaxUpdateContainer {
+	id = "PaymentInformationUpdateContainer";
+}
+
+PaymentType : WOString {
+	value = paymentInformation.displayName;
+}
+
+PaymentTypeSelectorObserver : MTAjaxObserveField {
+	observeFieldID = "PaymentTypeSelector";
+	updateContainerID = "PaymentInformationUpdateContainer";
+}
+
+PaymentTypeSelector : METSPopUpButton {
+	displayString = paymentType.key;
+	helpText = "If you wish to create the payment information please select a payment type.  To create a service order or voucher payment you will need to select an account.";
+	id = "PaymentTypeSelector";
+	labelText = "Payment Type";
+	item = paymentType;
+	list = paymentTypes;
+	noSelectionString = "Select Payment Type";
+	selection = selectedPaymentType;
+}
+
+PaymentTypeSelectorUpdateContainer : MTAjaxUpdateContainer {
+	id = "PaymentTypeSelectorUpdateContainer";
+}
+
+PaymentTypesRepetition : WORepetition {
+	item = paymentType;
+	list = paymentTypes;
+}
+
+ProcessCreditCardButton : WOSubmitButton {
+	action = processCreditCardPayment;
+	class = "btn btn-success";
+	onClick = "return confirm('Are you sure you wish to process the credit card?')";
+	value = "Process Payment";
+}
+
+RemovePaymentInformationButton : WOHyperlink {
+	action = removePaymentInformation;
+	class = "btn btn-danger";
+}
+
+RemovePaymentInformationModalContainer : MTAjaxModalContainer {
+	ajax = true;
+	autoWrapContent = false;
+	class = "btn btn-danger btn-mini";
+	id = removePaymentInformationIdentifier;
+	label = "Remove";
+	showFooter = false;
+	showTitle = false;
+	useDefaultCSS = false;
+}
+
+SubmitButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary";
+	value = "Continue to dispatch summary";
+}
+
+AllTransfersTotal : WOTextField {
+	class = "input-xlarge";
+	disabled = true;
+	value = object.allTransfersTotalFee;
+}
+
+Total : WOTextField {
+	class = "input-xlarge";
+	disabled = true;
+	value = object.total;
+}
+
+TotalUpdateContainer : MTAjaxUpdateContainer {
+	elementName = "span";
+	id = "TotalUpdateContainer";
+}
+
+UpdateTotal : MTAjaxSubmitButton {
+	action = updateTotal;
+	updateContainerID = "TotalUpdateContainer";
+	value = "Update Total -- This Does Not Submit The Form!";
+}

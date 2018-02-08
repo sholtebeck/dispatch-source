@@ -1,0 +1,109 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = AccountActive; 
+            externalType = VARCHAR; 
+            name = accountactive; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = AccountAddress; 
+            name = accountaddress; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = AccountCity; 
+            name = accountcity; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = AccountContact1; 
+            name = accountcontact1; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = AccountContact2; 
+            name = accountcontact2; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = AccountContact3; 
+            name = accountcontact3; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = AccountFaxNumber; 
+            externalType = VARCHAR; 
+            name = accountfaxnumber; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 12; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = AccountID; 
+            externalType = INT; 
+            name = accountid; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = AccountName; 
+            name = accountname; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = AccountPhoneNumber; 
+            externalType = VARCHAR; 
+            name = accountphonenumber; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 12; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = AccountType; 
+            name = accounttype; 
+            prototypeName = shortString; 
+        }
+    ); 
+    attributesUsedForLocking = (accountid); 
+    className = "com.mauishuttle.legacy.eo.Accounts"; 
+    classProperties = (
+        accountactive, 
+        accountaddress, 
+        accountcity, 
+        accountcontact1, 
+        accountcontact2, 
+        accountcontact3, 
+        accountfaxnumber, 
+        accountname, 
+        accountphonenumber, 
+        accounttype, 
+        dispatches
+    ); 
+    externalName = accounts; 
+    fetchSpecificationDictionary = {}; 
+    name = Accounts; 
+    primaryKeyAttributes = (accountid); 
+    relationships = (
+        {
+            destination = DailyDispatch; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = accountId; sourceAttribute = accountid; }); 
+            name = dispatches; 
+        }
+    ); 
+}

@@ -1,0 +1,9 @@
+Main : PageWrapper {
+	metaDescription = metaDescription;
+	pageTitle = pageTitle;
+}
+
+PageCopy : WOString {
+	escapeHTML = false;
+	value = document.textContent;
+}

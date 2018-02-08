@@ -1,0 +1,50 @@
+BookerName : WOString {
+	value = object.name;
+}
+
+BookerNameInput : METSTextInput {
+	helpText = "Required";
+	labelText = "Name";
+	value = object.name;
+}
+
+BookerTypeSelector : METSPopUpButton {
+	helpText = "Required";
+	displayString = bookerType.key;
+	labelText = "Type";
+	item = bookerType;
+	list = bookerTypes;
+	noSelectionString = "Please select the greeter type.";
+	selection = object.bookerType;
+}
+
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+Form : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	deleteAction = deleteObject;
+	deleteButtonText = "Remove Booker?  This action cannot be undone.";
+	isNewObject = object.isNewObject;
+	submitAction = navigationController.saveChanges;
+	useModalForDelete = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = errors;
+	messages = messages;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}

@@ -1,0 +1,59 @@
+<webobject name = "TableRow">
+	<td>
+		<webobject name = "Confirmed" />
+	</td>
+	<td><webobject name = "Driver"></webobject></td>
+	<td><webobject name = "ScheduleStartTime" /> - <webobject name = "ScheduleEndTime" /></td>
+	<td>
+		<webobject name = "VehiclesReptition">
+			<webobject name = "Vehicle"></webobject>&nbsp;
+		</webobject>
+	</td>	
+	<td><webobject name = "Phone" /></td>
+	<webobject name = "IsNotPrintPage">
+		<td>
+			<webobject name = "HasNotes">
+				<webobject name = "ScheduleNotes">Roll Over For Notes</webobject>
+			</webobject>
+			<webobject name = "DoesNotHaveNotes">
+				NA
+			</webobject>
+		</td>
+	</webobject>
+	<td><webobject name = "CreditCardTerminal"></webobject></td>
+	<td><webobject name = "BreakMinutes"></webobject></td>
+	<td>
+		<webobject name = "ActualFinishTimeIsDefined">
+			<webobject name = "ActualFinishTime"></webobject>
+		</webobject>
+		<webobject name = "ActualFinishTimeIsNotDefined">
+			UNDEFINED
+		</webobject>
+	</td>
+	<td><webobject name = "LengthInHours"></webobject></td>
+	<webobject name = "IsNotPrintPage">
+		<td>
+			<webobject name = "HasPayoutsBinding"><webobject name = "ListPayOutsButton">Dispatches</webobject></webobject>
+			<webobject name = "InspectScheduleItem">Edit</webobject>
+			<webobject name = "IsSuperUser">
+				<webobject name = "HasDeleteScheduleBinding">
+					<webobject name = "RemoveScheduleItemModalContainer">
+						<div class="modal-header">
+							<a class="close" data-dismiss="modal">×</a>
+							<h3>CONFIRM</h3>
+						</div>
+						<div class="modal-body">	
+							<p class = "alert alert-error">
+								Are you absolutely sure you want to delete this shift?
+							</p>
+						</div>
+						<div class = "modal-footer">
+							<webobject name = "ConfirmRemovalButton">Remove Scheduled Shift</webobject>
+							<a href="#" class="dismiss btn">Cancel</a>
+						</div>
+					</webobject>
+				</webobject>
+			</webobject>
+		</td>
+	</webobject>	
+</webobject>

@@ -1,0 +1,34 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.controllers.MESDispatchEditorPagesNavigationController;
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class MESDispatchSummaryPage extends MESDispatchEditorPagesNavigationController {
+	
+	private Boolean _printPage;
+	
+	public MESDispatchSummaryPage(WOContext context) {
+        super(context);
+    }
+
+	public Boolean isPrintPage() {
+		if(_printPage == null) {
+			_printPage = false;
+		}
+		return _printPage;
+	}
+
+	public void setPrintPage(Boolean printPage) {
+		this._printPage = printPage;
+	}
+
+	public String tableClass() {
+		return isPrintPage() ? null : "table table-striped table-bordered";
+	}
+
+	public String tableStyle() {
+		return isPrintPage() ? "border: 1px solid black; width: 400px;" : null;
+	}
+	
+}

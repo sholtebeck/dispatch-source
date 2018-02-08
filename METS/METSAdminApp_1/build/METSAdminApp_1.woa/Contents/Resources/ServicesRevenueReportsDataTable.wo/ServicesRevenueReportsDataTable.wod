@@ -1,0 +1,36 @@
+NumberOfDispatches : WOString {
+	numberformat = "0";
+	value = report.dispatchCount;
+}
+
+Revenue : WOString {
+	numberformat = "$#,##0.00";
+	value = report.revenue;
+}
+
+Service : WOString {
+	value = report.service.name;
+}
+
+ServiceHub : WOString {
+	value = report.service.hub.name;
+}
+
+ServicesRepetition : WORepetition {
+	item = report;
+	list = reports;
+}
+
+TotalCount : WOString {
+	numberformat = "0";
+	value = totalDispatches;
+}
+
+TotalRevenue : WOString {
+	numberformat = "$#,##0.00";
+	value = totalRevenue;
+}
+
+ViewDispatchesLink : WOHyperlink {
+	action = viewDispatches;
+}

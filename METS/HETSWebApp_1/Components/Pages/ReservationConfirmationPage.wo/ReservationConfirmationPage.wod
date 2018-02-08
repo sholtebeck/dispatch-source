@@ -1,0 +1,52 @@
+CharterRunConfirmationNumber : WOString {
+	value = session.charterReservation.confirmationNumber;
+}
+
+FromAirportConfirmationNumber : WOString {
+	value = session.fromAirport.confirmationNumber;	
+}
+
+FromPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = fromPageKey;
+}
+
+HasMultipleRoutes : WOConditional {
+	condition = session.hasMultipleRoutes;
+}
+
+IsAirportRun : WOConditional {
+	condition = session.isAirportRun;
+}
+
+IsPointToPointReservation : WOConditional {
+	condition = session.isPointToPointRun;
+}
+
+IsCharterReservation : WOConditional {
+	condition = session.isCharterRun;
+}
+
+Main : PageWrapper {
+	mainNavigationIndex = -1;
+	metaDescription = metaDescription;
+	pageTitle = pageTitle;
+}
+
+PointToPointConfirmationNumber : WOString {
+	value = session.pointToPointReservation.confirmationNumber;
+}
+
+ToAirportConfirmationNumber : WOString {
+	value = session.toAirport.confirmationNumber;
+}
+
+SingleRoute : WOConditional {
+	condition = session.hasMultipleRoutes;
+	negate = true;
+}
+
+ToPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = toPageKey;
+}

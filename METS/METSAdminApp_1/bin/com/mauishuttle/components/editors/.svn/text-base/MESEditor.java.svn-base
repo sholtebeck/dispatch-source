@@ -1,0 +1,143 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.app.Session;
+import com.mauishuttle.components.Main;
+import com.mauishuttle.components.interfaces.MESEditorInterface;
+import com.mauishuttle.components.interfaces.MESPageNavigationControllerInterface;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSTimestamp;
+import com.webobjects.foundation.NSValidation;
+
+import er.extensions.eof.ERXEOControlUtilities;
+
+@SuppressWarnings("serial")
+public abstract class MESEditor extends Main implements MESEditorInterface {
+	
+	protected static final String LAST_YEAR_DATE_RANGE = "Last Year";
+	protected static final String LAST_MONTH_DATE_RANGE = "Last Month";
+	protected static final String LAST_WEEK_DATE_RANGE = "Last Week";
+	protected static final String YESTERDAY_DATE_RANGE_STRING = "Yesterday";
+	protected static final String THIS_MONTH_DATE_RANGE_STRING = "This Month";
+	protected static final String THIS_WEEK_DATE_RANGE_STRING = "This Week";
+	protected static final String TOMORROW_DATE_RANGE_STRING = "Tomorrow";
+	protected static final String TODAY_DATE_RANGE_STRING = "Today";
+	protected static final String RECORD_UPDATE_MESSAGE = "The record was successfully updated.";
+
+	public final NSArray<String> standardDateRanges = new NSArray<String>(new String[] {
+			TODAY_DATE_RANGE_STRING, 
+			TOMORROW_DATE_RANGE_STRING, 
+			THIS_WEEK_DATE_RANGE_STRING, 
+			THIS_MONTH_DATE_RANGE_STRING
+	});
+	
+	public final NSArray<String> pastStandardDateRanges = new NSArray<String>(new String[] {
+			YESTERDAY_DATE_RANGE_STRING, 
+			LAST_WEEK_DATE_RANGE, 
+			LAST_MONTH_DATE_RANGE, 
+			LAST_YEAR_DATE_RANGE
+	});
+	
+	private String _selectedStandardDateRange;
+	public String _standardDateRange;	
+	private NSTimestamp _startDate;
+	private NSTimestamp _endDate;
+	private EOEditingContext _ec;
+	
+	private MESPageNavigationControllerInterface _navigationController;
+
+	
+	public MESEditor(WOContext context) {
+        super(context);
+    }
+		
+	public WOActionResults cancelChanges() {
+		ec().revert();
+		addMessage("Changes cancelled");
+		return null;
+	}
+	
+	public void awake() {
+		super.awake();
+	}
+	
+	public EOEditingContext ec() {
+		return _ec;
+	}
+	
+	public void setEc(EOEditingContext ec) {
+		_ec = ec;
+	}
+	
+	public boolean isExistingObject() {
+		return ERXEOControlUtilities.isNewObject(object()) == false;
+	}
+
+	public MESPageNavigationControllerInterface navigationController() {
+		return _navigationController;
+	}
+
+	public void setNavigationController(MESPageNavigationControllerInterface navigationController) {
+		this._navigationController = navigationController;
+	}
+
+	protected void revertChanges() {
+		if(object().editingContext().hasChanges()) {
+			object().editingContext().revert();
+		}
+	}
+	
+	public WOActionResults saveChanges() {
+
+		if(! hasError()) {
+
+			try {
+				ec().saveChanges();
+				addMessage(RECORD_UPDATE_MESSAGE);
+			} catch (NSValidation.ValidationException e) {
+				validationFailedWithException(e, null, null);
+			}
+			
+		}
+	
+		return null;
+	
+	}
+
+	public Session session() {
+		return (Session)super.session();
+	}
+	
+	public void validationFailedWithException(Throwable t, Object value, String keyPath) {
+		addErrorMessage(t.getMessage());
+	}
+	
+	/* GETTERS AND SETTERS */
+	
+	public NSTimestamp endDate() {
+		return _endDate;
+	}
+
+	public void setEndDate(NSTimestamp endDate) {
+		this._endDate = endDate;
+	}
+
+	public String selectedStandardDateRange() {
+		return _selectedStandardDateRange;
+	}
+
+	public void setSelectedStandardDateRange(String selectedStandardDateRange) {
+		this._selectedStandardDateRange = selectedStandardDateRange;
+	}
+
+	public NSTimestamp startDate() {
+		return _startDate;
+	}
+
+	public void setStartDate(NSTimestamp startDate) {
+		this._startDate = startDate;
+	}
+	
+}

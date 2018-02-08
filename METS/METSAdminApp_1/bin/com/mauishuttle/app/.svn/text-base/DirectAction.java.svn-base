@@ -1,0 +1,70 @@
+package com.mauishuttle.app;
+
+import java.util.NoSuchElementException;
+
+import km.foundation.extensions.KMStringUtilities;
+
+import com.mauishuttle.components.pages.DashboardPage;
+import com.mauishuttle.eo.MESHubRole;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WORequest;
+import com.webobjects.eoaccess.EOObjectNotAvailableException;
+import com.webobjects.foundation.NSMutableArray;
+
+import er.extensions.appserver.ERXDirectAction;
+
+public class DirectAction extends ERXDirectAction {
+
+	public DirectAction(WORequest request) {
+		super(request);
+	}
+
+	@Override
+	public WOActionResults defaultAction() {
+		return pageWithName(DashboardPage.class.getName());
+	}
+	
+	public WOActionResults loginAction() {
+		
+		DashboardPage nextPage = pageWithName(DashboardPage.class);
+
+		NSMutableArray<String> errors = new NSMutableArray<String>();
+		
+		String userName = request().stringFormValueForKey("uuid");
+		String password = request().stringFormValueForKey("psswd");
+		
+		if(KMStringUtilities.stringIsNullorEmptyOrWONoSelectionString(userName) || 
+				KMStringUtilities.stringIsNullorEmptyOrWONoSelectionString(password)) {
+			
+			errors.addObject("The user name or password cannot be left blank.");
+			
+		}
+
+		if(errors.size() == 0) {
+			
+			try {
+				
+				Session session = (Session)session();
+				session.setAuthenticatedUser(userName, password);
+			
+				if(session.authenticatedUser().hasHubRoles()) {
+					session.setCurrentHub(((MESHubRole)session.authenticatedUser().hubRoles().get(0)).hub());
+				}
+
+			} catch (EOObjectNotAvailableException e) {
+				errors.addObject(e.getMessage());
+			} catch (NoSuchElementException e) {
+				errors.addObject(e.getMessage());
+			}
+			
+		}
+		
+		if(errors.size() > 0) {
+			nextPage.setErrors(errors);
+		}
+		
+		return nextPage;
+	
+	}
+	
+}

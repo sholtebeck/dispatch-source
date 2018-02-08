@@ -1,0 +1,36 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	deleteAction = removeAirportZone;
+	isNewObject = object.isNewObject;
+	submitAction = navigationController.saveChanges;
+	deleteButtonText = "Remove Zone";
+	useModalForDelete = true;
+	modalContainerText = "Are you sure you want to delete this zone?  All zone children and locations will also be removed!";
+	modalContainerTitle = "Remove Zone?";
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = errors;
+	messages = messages;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+ZoneForm : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+ZoneName : WOString {
+	value = object.name;
+}

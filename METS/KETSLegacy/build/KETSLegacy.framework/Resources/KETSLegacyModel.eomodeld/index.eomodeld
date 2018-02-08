@@ -1,0 +1,42 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    connectionDictionary = {
+        URL = "jdbc:mysql://localhost:3306/kets"; 
+        driver = "com.mysql.jdbc.Driver"; 
+        password = secret; 
+        username = root; 
+    }; 
+    entities = (
+        {className = "com.mauishuttle.legacy.eo.Accounts"; name = Accounts; }, 
+        {className = "com.mauishuttle.legacy.eo.DailyDispatch"; name = DailyDispatch; }, 
+        {
+            className = "com.mauishuttle.legacy.eo.DailyDispatchArchive"; 
+            name = DailyDispatchArchive; 
+        }, 
+        {
+            className = "com.mauishuttle.legacy.eo.DailyDispatchLog"; 
+            name = DailyDispatchLog; 
+        }, 
+        {className = "com.mauishuttle.legacy.eo.Driver"; name = Driver; }, 
+        {className = "com.mauishuttle.legacy.eo.User"; name = User; }
+    ); 
+    userInfo = {
+        "_EntityModeler" = {
+            activeDatabaseConfigName = Default; 
+            databaseConfigs = {
+                Default = {
+                    adaptorName = JDBC; 
+                    connectionDictionary = {
+                        URL = "jdbc:mysql://localhost:3306/kets"; 
+                        driver = "com.mysql.jdbc.Driver"; 
+                        password = secret; 
+                        username = root; 
+                    }; 
+                    prototypeEntityName = EOJDBCMySQLPrototypes; 
+                }; 
+            }; 
+            reverseEngineered = Y; 
+        }; 
+    }; 
+}

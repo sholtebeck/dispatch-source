@@ -1,0 +1,41 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.controllers.MESDispatchEditorPagesNavigationController;
+import com.mauishuttle.eo.MESDispatch;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eoaccess.EODatabaseDataSource;
+
+import er.extensions.batching.ERXBatchingDisplayGroup;
+
+@SuppressWarnings("serial")
+public class MESDispatchChildrenPage extends MESDispatchEditorPagesNavigationController {
+	
+	public MESDispatchChildrenPage(WOContext context) {
+        super(context);
+    }
+
+	public WOActionResults addAdditionalRoute() {
+
+		delegate().addAdditionalRoute(object().editingContext(), object());
+		setEditorPageKey(PASSENGER_INFORMATION_PAGE_KEY);
+		return navigationController().nextPage();
+
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ERXBatchingDisplayGroup displayGroup() {
+
+		ERXBatchingDisplayGroup<MESDispatch> displayGroup = new ERXBatchingDisplayGroup<MESDispatch>();
+		displayGroup.setDataSource(new EODatabaseDataSource(object().editingContext(), MESDispatch.ENTITY_NAME));
+		displayGroup.setFetchesOnLoad(true);
+		displayGroup.setNumberOfObjectsPerBatch(50);
+		displayGroup.setSortOrderings(MESDispatch.RESERVATION_DATE.ascs());
+		displayGroup.setQualifier(MESDispatch.PARENT.eq(object()));
+		displayGroup.fetch();
+		return displayGroup;
+		
+	}	
+	
+	
+}

@@ -1,0 +1,89 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+DateReportType : WOKeyValueConditional {
+	key = "reportType";
+	value = "Daily";
+}
+
+DateSelectionForm : WOForm {
+	action = filter;
+	class = "form-inline";
+	name = "DateRangeForm";
+}
+
+DateSelector : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = selectedDate;	
+}
+
+DriverScheduleReportsDataTable : DriverScheduleReportsDataTable {
+	reports = driverScheduleReports;
+}
+
+MonthlyReportType : WOKeyValueConditional {
+	key = "reportType";
+	value = "Monthly";
+}
+
+MonthSelector : WOPopUpButton {
+	displayString = month.toString;
+	id = "MonthSelector";
+	item = month;
+	list = months;
+	selection = selectedMonth;
+}
+
+MonthSelectorObserveField : MTAjaxObserveField {
+	observeFieldID = "MonthSelector";
+	updateContainerID = "WeekSelectorUpdateContainer";
+}
+
+PrintReportButton : WOHyperlink {
+	action = printReport;
+	class = "btn btn-success";
+	target = "_blank";
+}
+
+ReportType : WOString {
+	value = reportType;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+WeeklyReportType : WOKeyValueConditional {
+	key = "reportType";
+	value = "Weekly";
+}
+
+Weeks : WOString {
+	value = numberOfWeeksInMonth;
+}
+
+WeekSelector : WOPopUpButton {
+	displayString = week.toString;
+	item = week;
+	list = weeks;
+	selection = selectedWeek;
+}
+
+WeekSelectorUpdateContainer : MTAjaxUpdateContainer {
+	elementName = "span";
+	id = "WeekSelectorUpdateContainer";
+}
+
+YearSelector : WOPopUpButton {
+	id = "YearsSelector";
+	list = years;
+	selection = selectedYear;
+}
+
+YearSelectorObserveField : MTAjaxObserveField {
+	observeFieldID = "YearsSelector";
+	updateContainerID = "WeekSelectorUpdateContainer";
+}

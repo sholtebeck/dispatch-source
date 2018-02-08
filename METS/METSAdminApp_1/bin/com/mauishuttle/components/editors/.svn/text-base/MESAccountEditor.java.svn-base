@@ -1,0 +1,13 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.controllers.MESAccountPagesController;
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class MESAccountEditor extends MESAccountPagesController {
+	
+    public MESAccountEditor(WOContext context) {
+        super(context);
+    }
+
+}

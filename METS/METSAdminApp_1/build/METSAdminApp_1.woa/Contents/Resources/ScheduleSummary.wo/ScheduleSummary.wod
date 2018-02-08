@@ -1,0 +1,120 @@
+ActualFinishTime : WOString {
+	dateformat = "%b %e, %Y %I:%M %p";
+	value = schedule.actualFinishTime;	
+}
+
+ActualFinishTimeIsDefined : ERXNonNullConditional {
+	condition = schedule.actualFinishTime;
+}
+
+ActualFinishTimeIsNotDefined : ERXNonNullConditional {
+	condition = schedule.actualFinishTime;
+	negate = true;
+}
+
+BreakMinutes : WOString {
+	numberformat = "0";
+	value = schedule.breakMinutes;
+}
+
+Confirmed : WOString {
+	value = schedule.contacted;
+}
+
+ConfirmRemovalButton : WOHyperlink {
+	action = ^deleteSchedule;
+	class = "btn btn-danger";
+}
+
+CreditCardTerminal : WOString {
+	value = schedule.creditCardTerminal;
+}
+
+DoesNotHaveNotes : ERXNonNullConditional {
+	condition = schedule.notes;
+	negate = true;
+}
+
+Driver : WOString {
+	value = schedule.driver.firstName;
+}
+
+HasDeleteScheduleBinding : WOConditional {
+	condition = hasDeleteScheduleBinding;
+}
+
+HasNotes : ERXNonNullConditional {
+	condition = schedule.notes;
+}
+
+HasPayoutsBinding : WOConditional {
+	condition = hasPayoutsBinding;
+}
+
+InspectScheduleItem : WOHyperlink {
+	action = ^inspectSchedule;
+	class = "btn btn-mini";
+}
+
+IsNotPrintPage : WOConditional {
+	condition = isPrintPage;
+	negate = true;
+}
+
+IsSuperUser : WOConditional {
+	condition = session.isSuperUser;
+}
+
+LengthInHours : WOString {
+	value = schedule.lengthInHours;
+}
+
+ListPayOutsButton : WOHyperlink {
+	action = ^listPayouts;
+	class = "btn btn-mini";
+}
+
+Phone : WOString {
+	value = schedule.phone.phoneNumber;
+}
+
+RemoveScheduleItemModalContainer : MTAjaxModalContainer {
+	ajax = true;
+	autoWrapContent = false;
+	class = "btn btn-danger btn-mini";
+	id = scheduleRemoverModalContainerId;
+	label = "Delete";
+	showFooter = false;
+	showTitle = false;
+	useDefaultCSS = false;
+}
+
+ScheduleNotes : METSPopover {
+	content = schedule|escapedNotes;
+	options = "{'location' : 'above'}";
+	title = "Schedule Notes";
+}
+
+ScheduleEndTime : WOString {
+	dateformat = "%I:%M %p";
+	value = schedule.endTime;
+}
+
+ScheduleStartTime : WOString {
+	dateformat = "%b %e, %Y %I:%M %p";
+	value = schedule.startTime;
+}
+
+TableRow : WOGenericContainer {
+	elementName = "tr";
+	class = tableRowClass;
+}
+
+Vehicle : WOString {
+	value = vehicle.name;
+}
+
+VehiclesReptition : WORepetition {
+	item = vehicle;
+	list = scheduleVehicles;
+}

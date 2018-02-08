@@ -1,0 +1,18 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href = "#"><wo:str value = "$session.currentHub.name" /></a></li>
+	<li><a href="#">Zones</a></li>
+	<webobject name = "IsNotNewObject">
+		<li><webobject name = "ZoneName"></webobject></li>
+	</webobject>
+</webobject>
+<webobject name = "StaticColumn">
+	<wo:METSInfoBar>General Information</wo:METSInfoBar>
+	<div class = "row-fluid">
+		<webobject name = "MessagesPanel" />
+		<webobject name = "ZoneForm">
+			<wo:METSTextInput helpText = "Required Information" labelText = "Name" value = "$object.name"></wo:METSTextInput>
+			<webobject name = "HubZones"></webobject>
+			<webobject name = "FormSubmissionBar"></webobject>					
+		</webobject>
+	</div>
+</webobject>

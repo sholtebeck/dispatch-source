@@ -1,0 +1,6 @@
+TableColumn : WOGenericContainer {
+	class = classNameWithDefault;
+	elementName = elementNameWithDefault;
+	id = id;
+	style = ^style;
+}

@@ -1,0 +1,31 @@
+CurrentDateTime  : WOString {
+	dateformat = "%A, %B %d, %Y %I:%M:%S %p %Z";
+	value = now;
+}
+
+ErrorMessage : WOString {
+	value = message;
+}
+
+ErrorRepetition : WORepetition {
+	item = message;
+	list = errors;
+}
+
+LoginScreen : METSTableColumn {
+	id = "PRGLoginScreen";
+}
+
+PRGLoginTable : METSTable {
+	id = "PRGLoginPage";	
+}
+
+PRGTableRow : METSTableRow {
+	
+}
+
+UserNameInput : WOTextField {
+	id = "username";
+	name = "uuid"; 
+	value = userName;
+}

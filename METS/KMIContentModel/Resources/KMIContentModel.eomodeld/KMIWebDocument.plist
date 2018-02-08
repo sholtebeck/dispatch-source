@@ -1,0 +1,161 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = author; 
+            name = author; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "category_id"; 
+            name = categoryID; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "comments_enabled"; 
+            name = commentsEnabled; 
+            prototypeName = boolean; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "create_date"; 
+            name = createDate; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = "is_published"; 
+            name = isPublished; 
+            prototypeName = boolean; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "last_modified"; 
+            name = lastModified; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "meta_description"; 
+            name = metaDescription; 
+            prototypeName = varchar255; 
+        }, 
+        {allowsNull = Y; columnName = name; name = name; prototypeName = varchar50; }, 
+        {
+            allowsNull = Y; 
+            columnName = "page_title"; 
+            name = pageTitle; 
+            prototypeName = varchar100; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = "parent_id"; 
+            name = parentID; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = position; 
+            name = position; 
+            prototypeName = intNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "publish_date"; 
+            name = publishDate; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = N; columnName = "site_id"; name = siteID; prototypeName = id; }, 
+        {allowsNull = Y; columnName = slug; name = slug; prototypeName = varchar100; }, 
+        {allowsNull = Y; columnName = type; name = type; prototypeName = intNumber; }
+    ); 
+    attributesUsedForLocking = (id); 
+    className = "km.content.eo.KMIWebDocument"; 
+    classProperties = (
+        author, 
+        category, 
+        children, 
+        comments, 
+        commentsEnabled, 
+        createDate, 
+        isPublished, 
+        keyWords, 
+        lastModified, 
+        metaDescription, 
+        name, 
+        nodes, 
+        pageTitle, 
+        parent, 
+        position, 
+        publishDate, 
+        site, 
+        slug, 
+        type
+    ); 
+    externalName = Document; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIWebDocument; 
+    parent = KMIAbstractDocument; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = KMIWebDocumentCategory; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = categoryID; }); 
+            name = category; 
+        }, 
+        {
+            destination = KMIWebDocument; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = parentID; sourceAttribute = id; }); 
+            name = children; 
+        }, 
+        {
+            destination = KMIWebDocumentComment; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = documentID; sourceAttribute = id; }); 
+            name = comments; 
+            numberOfToManyFaultsToBatchFetch = 50; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = KMIWebDocumentsKeyWords; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = documentID; sourceAttribute = id; }); 
+            name = documentsKeyWords; 
+            propagatesPrimaryKey = Y; 
+        }, 
+        {definition = "documentsKeyWords.keyWord"; name = keyWords; }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = KMIHTMLNode; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = documentID; sourceAttribute = id; }); 
+            name = nodes; 
+        }, 
+        {
+            destination = KMIWebDocument; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = parentID; }); 
+            name = parent; 
+        }, 
+        {
+            destination = KMIWebSite; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = siteID; }); 
+            name = site; 
+        }
+    ); 
+    restrictingQualifier = "type=0"; 
+}

@@ -1,0 +1,109 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = Fname; 
+            externalType = VARCHAR; 
+            name = fname; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LastLog; 
+            externalType = TIMESTAMP; 
+            name = lastlog; 
+            valueClassName = NSCalendarDate; 
+            valueType = T; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = Level; 
+            externalType = VARCHAR; 
+            name = level; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = Lname; 
+            externalType = VARCHAR; 
+            name = lname; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = LoginCount; 
+            externalType = INT; 
+            name = logincount; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LoginID; 
+            externalType = VARCHAR; 
+            name = loginid; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 8; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = Password; 
+            externalType = VARCHAR; 
+            name = password; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 32; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = ReservationsMade; 
+            externalType = INT; 
+            name = reservationsmade; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = UID; 
+            externalType = INT; 
+            name = uid; 
+            precision = 10; 
+            valueType = l; 
+        }
+    ); 
+    attributesUsedForLocking = (uid); 
+    className = "com.mauishuttle.legacy.eo.User"; 
+    classProperties = (
+        dispatches, 
+        fname, 
+        lastlog, 
+        level, 
+        lname, 
+        logincount, 
+        loginid, 
+        password, 
+        reservationsmade
+    ); 
+    externalName = user; 
+    fetchSpecificationDictionary = {}; 
+    name = User; 
+    primaryKeyAttributes = (uid); 
+    relationships = (
+        {
+            destination = DailyDispatch; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = enteredBy; sourceAttribute = loginid; }); 
+            name = dispatches; 
+        }
+    ); 
+}

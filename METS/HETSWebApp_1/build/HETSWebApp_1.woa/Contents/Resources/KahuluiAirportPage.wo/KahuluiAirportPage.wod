@@ -1,0 +1,33 @@
+AirportNavigation : AirportNavigation {
+	index = 0;
+}
+
+FacebookButton : FacebookButton {
+	css = "span-6-5";
+}
+
+Main : PageWrapper {
+	pageTitle = document.pageTitle;
+	metaDescription = document.metaDescription;
+}
+
+PageContent : WOString {
+	escapeHTML = false;
+	value = document.textContent;
+}
+
+ReservationWidget : ReservationWidget {
+	selectedValue = "OGG";
+}
+
+TerminalMap : WOImage {
+	alt = "Map of the Kahului Airport Terminal";
+	filename = "images/airports/kahului-airport-terminal.gif";
+}
+
+TerminalMapZoom : MTMediaBox {
+	rel ="lightbox";
+	framework = "app";
+	filename = "images/airports/kahului-airport-terminal-large.gif";
+	title = "Kahului Airport Terminal Map";
+}

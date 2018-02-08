@@ -1,0 +1,70 @@
+AssignUsersButton : WOSubmitButton {
+	action = navigationController.saveChanges;
+	class = "btn btn-primary";
+	value = "Assign Users";
+}
+
+AssignUserCheckbox : WOCheckBox {
+	checked = assignUser;
+}
+
+AssignedUsersRepetition : WORepetition {
+	item = user;
+	list = assignedUsers;
+}
+
+AssignUsersToRoleModalContainer : MTAjaxModalContainer {
+	ajax = true;
+	autoWrapContent = false;
+	class = "btn btn-success prg-pad-right";
+	id = "MESUserRemove";
+	label = "Add Member";
+	showFooter = false;
+	showTitle = false;
+	useDefaultCSS = false;
+}
+
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+IsHubRole : WOConditional {
+	condition = isHubRole;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+
+RemoveUserLink : WOHyperlink {
+	action = unassignUser;
+	class = "btn btn-danger btn-mini";
+}
+
+RoleDetailsForm : METSHorizontalForm {
+}
+
+RoleName : WOString {
+	value = object.label;
+}
+
+SubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	isNewObject = object.isNewObject;
+	submitAction = navigationController.saveChanges;
+}
+
+UnassignedUsersRepetition : WORepetition {
+	item = user;
+	list = unassignedUsers;
+}
+
+UserFullName : WOString {
+	value = user.fullName;
+}

@@ -1,0 +1,13 @@
+<wo:METSHorizontalForm action = "$saveChanges">
+	<webobject name = "HasParent">
+		<wo:METSTextInput disabled = "true" labelText = "Account" value = "$object.account.name" />
+	</webobject>
+	<webobject name = "NoParent">
+		<webobject name = "AccountSelectorPopUpButton" />									
+	</webobject>
+	<wo:METSTextInput helpText = "Required Information" labelText = "Customer First Name" value = "$object.customerFirstName" />
+	<wo:METSTextInput helpText = "Required Information" labelText = "Customer Last Name" value = "$object.customerLastName" />
+	<wo:METSTextInput helpText = "Optional" labelText = "Phone Number" value = "$object.customerPhoneNumber" />
+	<wo:METSTextInput helpText = "Optional" labelText = "E-Mail Address" value = "$object.customerEmailAddress" />
+	<wo:METSFormSubmissionBar isNewObject = "$object.isNewObject" submitButtonText = "Save and Continue" submitAction = "$saveChanges"></wo:METSFormSubmissionBar>
+</wo:METSHorizontalForm>

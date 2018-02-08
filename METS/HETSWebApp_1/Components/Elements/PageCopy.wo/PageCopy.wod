@@ -1,0 +1,4 @@
+PageCopy : WOString {
+	escapeHTML = false;
+	value = pageCopy;
+}

@@ -1,0 +1,37 @@
+ContinueButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn";
+	value = "Continue";
+}
+
+FromAirportServiceSelector : ServiceSelector {
+	dispatch = session.fromAirport;
+	direction = pageKey;
+}
+
+FromPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = "From";
+}
+
+Main : PageWrapper {
+	metaDescription = metaDescription;
+	pageTitle = pageTitle;
+}
+
+MessagesPanel : MessagePanel {
+	hasErrors = hasErrors;
+	hasMessages = hasMessages;
+	errors = errors;
+	messages = messages;
+}
+
+ToAirportServiceSelector : ServiceSelector {
+	dispatch = session.toAirport;
+	direction = pageKey;
+}
+
+ToPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = "To";
+}

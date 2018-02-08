@@ -1,0 +1,46 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+
+import er.ajax.mootools.MTAjaxUtils;
+
+@SuppressWarnings("serial")
+public class METSContextMenuLink extends METSUIElements {
+
+	public METSContextMenuLink(WOContext context) {
+        super(context);
+    }
+	
+	public void appendToResponse(WOResponse response, WOContext context) {
+		
+		super.appendToResponse(response, context);
+
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", MTAjaxUtils.MOOTOOLS_CORE_JS); 
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", MTAjaxUtils.MOOTOOLS_MORE_JS);
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/Element.Data.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/BehaviorAPI.js");
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", "scripts/plugins/bootstrap/behaviors/Behavior.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/Delegator.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/Delegator.ContextMenu.js");
+    	
+	}
+
+	public String classNameWithDefault() {
+		return stringValueForBinding("class");
+	}
+	
+	public String elementNameWithDefault() {
+		return stringValueForBinding("elementName", "a");
+	}
+	
+	public String options() {
+		return stringValueForBinding("options");
+	}
+
+	@Override
+	public String defaultClassName() {
+		return null;
+	}	
+
+}

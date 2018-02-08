@@ -1,0 +1,41 @@
+<webobject name = "TableContainer">
+	<wo:METSTextOutput labelText = "Account" printPage = "$isPrintPage" value = "$object.account.name"></wo:METSTextOutput>
+	<wo:METSTextOutput labelText = "Confirmation Number" printPage = "$isPrintPage" value = "$object.confirmationNumber" />
+	<wo:METSTextOutput labelText = "Customer First Name" printPage = "$isPrintPage" value = "$object.customerFirstName" />
+	<wo:METSTextOutput labelText = "Customer Last Name" printPage = "$isPrintPage" value = "$object.customerLastName" />
+	<wo:METSTextOutput labelText = "Phone Number" printPage = "$isPrintPage" value = "$object.customerPhoneNumber" />
+	<wo:METSTextOutput labelText = "E-Mail Address" printPage = "$isPrintPage" value = "$object.customerEmailAddress" />
+	<webobject name = "IsServiceDefined">
+		<wo:METSTextOutput labelText = "Service" printPage = "$isPrintPage" value = "$object.service.name" />
+		<webobject name = "IsSharedService">
+			<wo:METSTextOutput labelText = "Number of Passengers" printPage = "$isPrintPage" value = "$object.numberPassengers" />
+		</webobject>
+		<webobject name = "IsExclusiveService">
+			<wo:METSTextOutput labelText = "Number of Hours" printPage = "$isPrintPage" value = "$object.numberPassengers" />
+		</webobject>
+	</webobject>
+	<wo:METSTextOutput labelText = "Pick Up Location" printPage = "$isPrintPage" value = "$object.pickUpLocation.name" />
+	<wo:METSTextOutput labelText = "Drop Off Location" printPage = "$isPrintPage" value = "$object.dropOffLocation.name" />
+	<webobject name = "PickUpDateTime"></webobject>
+	<webobject name = "IsDriverAssigned">
+		<wo:METSTextOutput labelText = "Driver" printPage = "$isPrintPage" value = "$object.driver|fullName(true)"></wo:METSTextOutput>
+	</webobject>
+	<webobject name = "IsNotPrintPage">
+		<wo:METSTextOutput labelText = "Status" value = "$object|statusKey"></wo:METSTextOutput>
+	</webobject>
+	<wo:METSTextOutput labelText = "Greet" printPage = "$isPrintPage" value = "$object|greetKey" />
+	<webobject name = "RequiresChildSeats">
+		<wo:METSTextOutput labelText = "Infants" printPage = "$isPrintPage" value = "$object.infant" />
+		<wo:METSTextOutput labelText = "Toddlers" printPage = "$isPrintPage" value = "$object.toddler" />
+		<wo:METSTextOutput labelText = "Child Seats" printPage = "$isPrintPage" value = "$object.childSeats" />
+		<wo:METSTextOutput labelText = "Boosters" printPage = "$isPrintPage" value = "$object.booster" />
+	</webobject>
+	<wo:METSTextOutput labelText = "Miscallaneous Fees" printPage = "$isPrintPage" numberformat = "#,##0.00" value = "$object.miscellaneousFee" />
+	<wo:METSTextOutput labelText = "Miscallaneous Fees Notes" printPage = "$isPrintPage" value = "$object.miscellaneousFeesNotes" />
+	<wo:METSTextOutput labelText = "Driver Tip" numberformat = "#,##0.00" printPage = "$isPrintPage" value = "$object.tipAmount"></wo:METSTextOutput>
+	<wo:METSTextOutput labelText = "Sub-Total" numberformat = "#,##0.00" printPage = "$isPrintPage" value = "$object.subTotal"></wo:METSTextOutput>
+	<webobject name = "IsNotPrintPage">
+		<wo:METSTextOutput labelText = "Driver Notes" value = "$object.driverNotes" />
+		<wo:METSTextOutput labelText = "Dispatch Notes" value = "$object.dispatchNotes" />
+	</webobject>
+</webobject>	

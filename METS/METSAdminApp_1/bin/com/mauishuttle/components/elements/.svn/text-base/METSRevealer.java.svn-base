@@ -1,0 +1,61 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+
+import er.ajax.AjaxUtils;
+import er.ajax.mootools.MTAjaxUtils;
+
+@SuppressWarnings("serial")
+public class METSRevealer extends METSUIElements {
+	
+	public METSRevealer(WOContext context) {
+        super(context);
+    }
+
+	public void appendToResponse(WOResponse response, WOContext context) {
+
+		super.appendToResponse(response, context);
+
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", MTAjaxUtils.MOOTOOLS_CORE_JS); 
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", MTAjaxUtils.MOOTOOLS_MORE_JS);
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/Element.Data.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/BehaviorAPI.js");
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", "scripts/plugins/bootstrap/behaviors/Behavior.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/Delegator.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/Delegator.Reveal.js");		
+	
+	}
+	
+	@Override
+	public String defaultClassName() {
+		return "";
+	}
+
+	public String options() {
+
+		String revealOptions = new String();
+
+		revealOptions += "{";
+		revealOptions += AjaxUtils.quote("openClassName");
+		revealOptions += ":";
+		revealOptions += AjaxUtils.quote(openClassName());
+		revealOptions += ", ";
+		revealOptions += AjaxUtils.quote("closedClassName");
+		revealOptions += ":";
+		revealOptions += AjaxUtils.quote(closedClassName());
+		revealOptions += "}";
+		
+		return revealOptions;
+
+	}
+
+	public String openClassName() {
+		return stringValueForBinding("openClassName");
+	}
+
+	public String closedClassName() {
+		return stringValueForBinding("closedClassName");
+	}
+
+}

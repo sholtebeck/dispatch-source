@@ -1,0 +1,69 @@
+AccountDataRow : AccountOutstandingPaymentReportDataRow {
+	account = account;
+	action = viewDispatches;
+	ec = ec;
+	endDate = endDate;
+	startDate = startDate;
+	displayInvoiced = displayInvoiced;
+}
+
+AccountsRepetition : WORepetition {
+	item = account;
+	list = accounts;
+}
+
+BreadCrumbs : METSBreadCrumbsBar {
+	
+}
+
+EndDateSelector : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = endDate;
+}
+
+HubSelector : WOPopUpButton {
+	class = "input-small";
+	displayString = aHub.name;
+	id = "HubSelector";
+	item = aHub;
+	list = hubs;
+	noSelectionString = "All Hubs";
+	selection = selectedHub;
+}
+
+SearchForm : WOForm {
+	action = filter;
+	class = "form-inline";
+	name = "OutstandingPaymentsForm";
+}
+
+PaidSelector : WOPopUpButton {
+	class = "input-small";
+	noSelectionString = "Please select a payment status";
+	list = yesOrNoArray;
+	selection = selectedPaymentStatus;
+}
+
+SentToBillingSelector : WOPopUpButton {
+	class = "input-small";
+	noSelectionString = "Please select the status";
+	list = yesOrNoArray;
+	selection = selectedSentToBillingStatus;
+}
+
+StartDateSelector : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = startDate;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+Wrapper : AccountingController {
+	
+}

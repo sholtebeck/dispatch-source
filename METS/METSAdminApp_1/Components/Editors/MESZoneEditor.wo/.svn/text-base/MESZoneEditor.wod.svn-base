@@ -1,0 +1,41 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	isNewObject = object.isNewObject;
+	submitAction = navigationController.saveChanges;
+}
+
+HubZones : METSPopUpButton {
+	displayString = zone.name;
+	helpText = "Optional";
+	item = zone;
+	labelText = "Parent";
+	list = hubZones;
+	noSelectionString = "Does this zone have a parent?";
+	selection = object.parent;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = errors;
+	messages = messages;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+ZoneForm : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+ZoneName : WOString {
+	value = object.name;
+}

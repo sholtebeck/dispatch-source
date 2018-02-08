@@ -1,0 +1,33 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href = "#">
+		<wo:str value = "$object.hub.name" />
+	</a></li>
+	<li><a href="#">Drivers</a></li>
+	<webobject name = "IsNewObject">
+		<li>New Driver</li>
+	</webobject>
+	<webobject name = "IsNotNewObject">
+		<li><webobject name = "DriversName"></webobject></li>
+	</webobject>
+</webobject>
+<webobject name = "StaticColumn">
+	<webobject name = "InfoBar">General Information</webobject>
+	<div class="row-fluid">
+		<wo:METSMessagePanel errors = "$navigationController.errors" messages = "$navigationController.messages"></wo:METSMessagePanel>
+		<webobject name = "Form">
+			<wo:METSTextInput helpText = "Required Information" labelText = "First Name" value = "$object.firstName"></wo:METSTextInput>
+			<wo:METSTextInput helpText = "Required Information" labelText = "Last Name" value = "$object.lastName"></wo:METSTextInput>
+			<wo:METSTextInput helpText = "Required Information" labelText = "E-Mail Address" value = "$object.emailAddress"></wo:METSTextInput>
+			<wo:METSPopUpButton helpText = "Required Inforamtion" labelText = "Status" list = "$statuses" displayString = "$status.key" item = "$status" selection = "$selectedStatus"></wo:METSPopUpButton>
+			<wo:METSCheckboxInput checked = "$object.active" labelText = "Active"></wo:METSCheckboxInput>
+			<wo:METSTextInput labelText = "Phone Number" value = "$object.phoneNumber"></wo:METSTextInput>	
+			<wo:METSDatePicker labelText = "Birth Date" value = "$object.birthDate"></wo:METSDatePicker>
+			<wo:METSDatePicker labelText = "Start Date" value = "$object.startDate"></wo:METSDatePicker>
+			<wo:METSTextInput labelText = "Driver's License #" value = "$object.driversLicenseNumber"></wo:METSTextInput>
+			<wo:METSDatePicker labelText = "Driver's License Exp. Date" value = "$object.driversLicenseExpirationDate"></wo:METSDatePicker>
+			<wo:METSTextInput labelText = "Greeter's Badge #" value = "$object.greetersBadgeNumber"></wo:METSTextInput>
+			<wo:METSDatePicker labelText = "Greeter's Exp. Date" value = "$object.greetersExpirationDate"></wo:METSDatePicker>
+			<webobject name = "FormSubmissionBar" />
+		</webobject>
+	</div>
+</webobject>

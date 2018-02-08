@@ -1,0 +1,59 @@
+PageTitle : WOString {
+	value = "Email Manifest";
+}
+
+DispatchesRepetition : WORepetition {
+	item = dispatch;
+	list = dispatches;
+}
+
+DropOffLocation : WOString {
+	value = dispatch.dropOffLocation.nameWithZone;
+}
+
+FlightNumber : WOString {
+	value = dispatch.flightNumber;
+}
+
+FlightNumberIsDefined : ERXNonNullConditional {
+	condition = dispatch.flightNumber;
+}
+
+Greet : WOString {
+	value = greet;
+}
+
+IsLeiGreet : WOConditional {
+	condition = dispatch.isLeiGreet;
+}
+
+MiscellaneousItems : WOString {
+	value = dispatch.miscellaneousFeesToString;
+}
+
+NumberOfLeis : WOString {
+	numberformat = "0";
+	value = dispatch.numberOfLeis;
+}
+
+NumberOfPassengers : WOString {
+	numberformat = "0";
+	value = dispatch.numberPassengers;
+}
+
+PassengerName : WOString {
+	value = dispatch.customerFullName;
+}
+
+PickUpLocation : WOString {
+	value = dispatch.pickUpLocation.nameWithZone;	
+}
+
+PickUpTime : WOString {
+	dateformat = "%I:%M:%S %p";
+	value = dispatch.reservationDate;
+}
+
+Service : WOString {
+	value = dispatch.service.name;
+}

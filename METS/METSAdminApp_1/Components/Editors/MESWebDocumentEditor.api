@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+        <wo class="MESWebDocumentEditor.java" wocomponentcontent="false">
+
+        <binding name="controller"/>
+    <binding name="object"/>
+        <validation message="'object' is a required binding.">
+            <unbound name="object"/>
+        </validation>
+        <validation message="'controller' is a required binding.">
+            <unbound name="controller"/>
+        </validation>
+    </wo>
+</wodefinitions>

@@ -1,0 +1,22 @@
+package com.mauishuttle.components.tables;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+import com.mauishuttle.components.editors.MESDriverEditor;
+import com.mauishuttle.eo.MESSchedule;
+
+@SuppressWarnings("serial")
+public class ListDriverPayrollTable extends MESDriverEditor {
+
+	public MESSchedule _payroll;
+	
+	public ListDriverPayrollTable(WOContext context) {
+        super(context);
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESSchedule> driverPayroll() {
+		return (NSArray<MESSchedule>)valueForBinding("driverPayroll");
+	}
+
+}

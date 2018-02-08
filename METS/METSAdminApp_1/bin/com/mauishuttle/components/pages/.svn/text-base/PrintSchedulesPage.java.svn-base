@@ -1,0 +1,35 @@
+package com.mauishuttle.components.pages;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WODisplayGroup;
+import com.webobjects.eocontrol.EOEditingContext;
+
+import er.extensions.components.ERXComponent;
+
+@SuppressWarnings("serial")
+public class PrintSchedulesPage extends ERXComponent {
+
+	private EOEditingContext _ec;
+	private WODisplayGroup _displayGroup;
+
+	public PrintSchedulesPage(WOContext context) {
+        super(context);
+    }
+	
+	public WODisplayGroup displayGroup() {
+		return _displayGroup;
+	}
+
+	public void setDisplayGroup(WODisplayGroup displayGroup) {
+		this._displayGroup = displayGroup;
+	}
+
+	public EOEditingContext ec() {
+		return _ec;
+	}
+
+	public void setEc(EOEditingContext ec) {
+		this._ec = ec;
+	}
+
+}

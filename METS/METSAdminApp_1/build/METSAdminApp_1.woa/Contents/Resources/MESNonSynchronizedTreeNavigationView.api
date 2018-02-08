@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+        <wo class="MESNonSynchronizedTreeNavigationView.java" wocomponentcontent="true">
+
+        
+        
+        <binding name="items"/>
+        <validation message="'items' is a required binding.">
+            <unbound name="items"/>
+        </validation>
+        <binding name="navigationController"/>
+        <validation message="'navigationController' is a required binding.">
+            <unbound name="navigationController"/>
+        </validation>
+        <binding name="display"/>
+    <binding name="id"/>
+        <binding name="label"/>
+        <binding name="displayKey"/>
+    <binding name="initiallyExpanded"/>
+    </wo>
+</wodefinitions>

@@ -1,0 +1,17 @@
+EditorWrapper : WOSwitchComponent {
+	hasHelpText = hasHelpText;
+	helpText = ^helpText;
+	id = id;
+	labelText = ^labelText;
+	WOComponentName = wrapperComponentName;
+}
+
+
+TextInput : WOTextField {
+	class = inputClassName;
+	disabled = ^disabled;
+	formatter = formatter;
+	id = id;
+	tabIndex = ^tabIndex;
+	value = ^value;
+}

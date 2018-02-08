@@ -1,0 +1,207 @@
+package com.mauishuttle.components.editors;
+
+import java.math.BigDecimal;
+
+import com.mauishuttle.components.interfaces.MESEditorInterface;
+import com.mauishuttle.eo.MESAbstractRate;
+import com.mauishuttle.eo.MESAbstractZone;
+import com.mauishuttle.eo.MESExclusiveService;
+import com.mauishuttle.eo.MESExclusiveServiceRate;
+import com.mauishuttle.eo.MESVehicleType;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSMutableArray;
+import com.webobjects.foundation.NSValidation;
+
+@SuppressWarnings("serial")
+public class MESExclusiveServiceEditor extends MESNonSynchronizingEditor implements MESEditorInterface {
+
+	private MESExclusiveService _service;
+	public MESVehicleType _vehicleType;
+	public MESAbstractZone _zone;
+	public MESExclusiveServiceRate _rate;
+	private MESExclusiveServiceRate _newRate;
+	private Double _adjustmentAmount;
+	private NSMutableArray<MESExclusiveServiceRate> _ratesToAdjust;
+	private NSArray<MESExclusiveServiceRate> _serviceRates;
+	
+	public MESExclusiveServiceEditor(WOContext context) {
+        super(context);
+    }
+
+	public void sleep() {
+		super.sleep();
+		_adjustmentAmount = null;
+		_newRate = null;
+		_ratesToAdjust = null;
+		_serviceRates = null;
+	}
+
+	public boolean adjustRate() {
+		return ratesToAdjust().containsObject(_rate);
+	}
+
+	public void setAdjustRate(boolean adjustRate) {
+		if(adjustRate) {
+			if(ratesToAdjust().containsObject(_rate) == false) {
+				ratesToAdjust().addObject(_rate);
+			}
+		} else {
+			if(ratesToAdjust().containsObject(_rate)) {
+				ratesToAdjust().removeObject(_rate);
+			}
+		}
+	}
+
+	public Double adjustmentAmount() {
+		if(_adjustmentAmount == null) {
+			_adjustmentAmount = 0.00D;
+		}
+		return _adjustmentAmount;
+	}
+
+	public void setAdjustmentAmount(Double adjustmentAmount) {
+		this._adjustmentAmount = adjustmentAmount;
+	}
+	
+	public WOActionResults adjustRates() {
+
+		BigDecimal percentageIncrease = new BigDecimal(adjustmentAmount());
+		BigDecimal divisor = new BigDecimal(100D).setScale(2);
+		percentageIncrease = percentageIncrease.divide(divisor);
+		percentageIncrease = percentageIncrease.add(new BigDecimal(1.00D).setScale(2));
+
+		for(MESAbstractRate rate : ratesToAdjust()) {
+			rate.setTransferRate(rate.transferRate().multiply(percentageIncrease).setScale(2, BigDecimal.ROUND_DOWN));
+		}
+		
+		try {
+			ec().saveChanges();
+			addMessage("The rates were successfully adjusted.");
+		} catch (NSValidation.ValidationException e) {
+			validationFailedWithException(e, null, null);
+		}
+		
+		return navigationController().nextPage();
+
+	}
+	
+	public WOActionResults cancelEditInPlace() {
+		ec().revert();
+		return null;
+	}
+	
+	public MESExclusiveService object() {
+		if(_service == null) {
+			_service = (MESExclusiveService)valueForBinding("object");
+		}
+		return _service;
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+		_service = (MESExclusiveService)object;
+	}
+	
+	public MESExclusiveServiceRate newRate() {
+	
+		if(_newRate == null) {
+			ec().revert();
+			_newRate = MESExclusiveServiceRate.createMESExclusiveServiceRate(ec(), object());
+		}
+
+		return _newRate;
+	
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAbstractZone> newRateZones() {
+	
+		NSMutableArray<MESAbstractZone> zones = MESAbstractZone.fetchMESAbstractZones(ec(), 
+				MESAbstractZone.HUB.eq(session().currentHub()), 
+				MESAbstractZone.NAME.ascs()).mutableClone();
+		
+		zones.removeObject(object().zone());
+
+		return zones;
+
+	}
+	
+	public void setNewRate(MESExclusiveServiceRate newRate) {
+		this._newRate = newRate;
+	}
+
+
+	public NSMutableArray<MESExclusiveServiceRate> ratesToAdjust() {
+		if(_ratesToAdjust == null) {
+			_ratesToAdjust = serviceRates().mutableClone();
+		}
+		return _ratesToAdjust;
+	}
+
+	public void setRatesToAdjust(NSMutableArray<MESExclusiveServiceRate> ratesToAdjust) {
+		this._ratesToAdjust = ratesToAdjust;
+	}
+
+	public WOActionResults removeRate() {
+	
+		try {
+			_rate.delete();
+			ec().saveChanges();
+			setServiceRates(null);
+		} catch (NSValidation.ValidationException e) {
+			validationFailedWithException(e, null, null);
+		}
+
+		return null;
+	
+	}
+
+	public WOActionResults saveChanges() {
+
+		if(! hasError()) {
+
+			try {
+				ec().saveChanges();
+				addMessage(RECORD_UPDATE_MESSAGE);
+				if(newRate() != null) {
+					setNewRate(null);
+					setServiceRates(null);
+				}
+			} catch (NSValidation.ValidationException e) {
+				validationFailedWithException(e, null, null);
+			}
+			
+		}
+	
+		return null;
+	
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESExclusiveServiceRate> serviceRates() {
+		if(_serviceRates == null) {
+			_serviceRates = object().rates(null, 
+					MESExclusiveServiceRate.SECONDARY_ZONE.dot(MESAbstractZone.NAME).ascs(), 
+					true);
+		}
+		return _serviceRates;
+	}
+	
+	public void setServiceRates(NSArray<MESExclusiveServiceRate> value) {
+		_serviceRates = value;
+	}
+		
+	public NSArray<MESVehicleType> vehicleTypes() {
+		return MESVehicleType.fetchAllMESVehicleTypes(ec(), 
+				MESVehicleType.NAME.ascs());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAbstractZone> zones() {
+		return MESAbstractZone.fetchMESAbstractZones(ec(), 
+				MESAbstractZone.HUB.eq(session().currentHub()), 
+				MESAbstractZone.NAME.ascs());
+	}
+
+}

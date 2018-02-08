@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><wodefinitions>
+        <wo class="PageCopy.java" wocomponentcontent="true">
+
+        <binding name="pageCopy"/>
+        <validation message="'pageCopy' is a required binding.">
+            <unbound name="pageCopy"/>
+        </validation>
+    </wo>
+</wodefinitions>

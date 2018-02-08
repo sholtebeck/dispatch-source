@@ -1,0 +1,48 @@
+package com.mauishuttle.components.elements;
+
+import java.text.Format;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSNumberFormatter;
+import com.webobjects.foundation.NSTimestampFormatter;
+
+import er.extensions.components.ERXStatelessComponent;
+
+@SuppressWarnings({ "serial", "deprecation" })
+public class METSTextOutput extends ERXStatelessComponent {
+	
+	public METSTextOutput(WOContext context) {
+        super(context);
+    }
+
+	public Format formatter() {
+
+		Format formatter = null;
+		
+		if(hasBinding("dateformat")) {
+			formatter = new NSTimestampFormatter((String)valueForBinding("dateformat"));
+		} else if(hasBinding("numberformat")) {
+			formatter = new NSNumberFormatter((String)valueForBinding("numberformat"));
+		}	
+
+		return formatter;
+
+	}
+	
+	public String style() {
+		
+		String style = null;
+		
+		if(hasBinding("printPage")) {
+			Boolean printPage = valueForBooleanBinding("printPage");
+			if(printPage != null && printPage) {
+				style = "border: 1px solid black; width: 50%; padding: 5px;";
+			}
+		}
+	
+		return style;
+
+	}
+	
+		
+}

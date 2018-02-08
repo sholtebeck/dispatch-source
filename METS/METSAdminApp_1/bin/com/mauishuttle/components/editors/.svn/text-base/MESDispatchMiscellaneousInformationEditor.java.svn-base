@@ -1,0 +1,47 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.controllers.MESDispatchEditorPagesNavigationController;
+import com.mauishuttle.eo.MESDispatch;
+import com.mauishuttle.eo.MESDispatch.Greet;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+
+@SuppressWarnings("serial")
+public class MESDispatchMiscellaneousInformationEditor extends MESDispatchEditorPagesNavigationController {
+
+	public MESDispatch.Greet _greet;
+
+	public MESDispatchMiscellaneousInformationEditor(WOContext context) {
+        super(context);
+    }
+
+	public NSArray<MESDispatch.Greet> greets() {
+		return MESDispatch.Greet.greets();
+	}
+	
+	public WOActionResults saveChanges() {
+		
+		saveStep();
+		
+		if(! hasError()) {
+			setEditorPageKey(DRIVER_INFORMATION_PAGE_KEY);
+		}
+
+		return navigationController().nextPage();
+		
+	}	
+
+	public Greet selectedGreet() {
+		return greets().get(object().greet());
+	}
+
+	public void setSelectedGreet(Greet selectedGreet) {
+		object().setGreet(selectedGreet.value());
+	}	
+	
+	public boolean willRequireChildSeats() {
+		return delegate().requiresChildSeats().equals(YES_KEY);
+	}
+
+}

@@ -1,0 +1,38 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+Form : METSHorizontalForm {
+}
+
+HubName : WOString {
+	value = object.name;
+}
+
+IsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+SubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	deleteAction = deleteHub;
+	isNewObject = object.isNewObject;
+	modalContainerTitle = "Delete Hub";
+	modalContainerText = "Are you absolutely sure you wish to do this?  All the hubs objects will be orphaned!";
+	submitAction = saveChanges;
+	useModalForDelete = true;
+}

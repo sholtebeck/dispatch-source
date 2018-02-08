@@ -1,0 +1,40 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = kmiAbstractAssetId; 
+            name = kmiAbstractAssetId; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = kmiAssetGalleryId; 
+            name = kmiAssetGalleryId; 
+            prototypeName = id; 
+        }
+    ); 
+    attributesUsedForLocking = (kmiAbstractAssetId, kmiAssetGalleryId); 
+    className = EOGenericRecord; 
+    externalName = AssetGalleryAssets; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIAssetGalleryAssets; 
+    primaryKeyAttributes = (kmiAbstractAssetId, kmiAssetGalleryId); 
+    relationships = (
+        {
+            destination = KMIAbstractAsset; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = kmiAbstractAssetId; }); 
+            name = kmiAbstractAsset; 
+        }, 
+        {
+            destination = KMIAssetGallery; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = kmiAssetGalleryId; }); 
+            name = kmiAssetGallery; 
+        }
+    ); 
+}

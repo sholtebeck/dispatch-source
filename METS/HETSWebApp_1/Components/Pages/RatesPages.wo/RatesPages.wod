@@ -1,0 +1,60 @@
+HubLink : WOHyperlink {
+	href = hubRatesPageLink;
+}
+
+HubListItem : WOGenericContainer {
+	class = hubListItemClassName;
+	elementName = "li";
+}
+
+HubName : WOString {
+	value = hub.name;
+}
+
+HubsRepetition : WORepetition {
+	item = hub;
+	list = hubs;
+}
+
+IsCurrentHub : WOConditional {
+	condition = isCurrentHub;
+}
+
+Main : PageWrapper {
+	canonical = canonical;
+	mainNavigationIndex = 1;
+	metaDescription = metaDescription;
+	pageTitle = pageTitle;
+}
+
+PageCopy : WOString {
+	escapeHTML = false;
+	value = document.textContent;
+}
+
+ServiceLink : WOHyperlink {
+	href = serviceLink;
+}
+
+ServiceListItem : WOGenericContainer {
+	class = serviceLinkClassName;
+	elementName = "li";
+}
+
+ServiceName : WOString {
+	value = service.name;
+}
+
+ServiceRatesView : WOSwitchComponent {
+	service = currentService;
+	WOComponentName = serviceRatesViewComponentName;
+}
+
+ServiceShortDescription : WOString {
+	value = service.name;
+} 
+
+ServicesRepetition : WORepetition {
+	item = _service;
+	list = services;
+}

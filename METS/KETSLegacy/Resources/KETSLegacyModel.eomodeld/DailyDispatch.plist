@@ -1,0 +1,455 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "Account_ID"; 
+            externalType = INT; 
+            name = accountId; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = BillType; 
+            name = billtype; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = Booster; 
+            externalType = INT; 
+            name = booster; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CarSeatFee; 
+            externalType = DECIMAL; 
+            name = carseatfee; 
+            precision = 13; 
+            scale = 2; 
+            valueClassName = NSDecimalNumber; 
+            valueType = B; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CashAmount; 
+            externalType = DECIMAL; 
+            name = cashamount; 
+            precision = 13; 
+            scale = 2; 
+            valueClassName = NSDecimalNumber; 
+            valueType = B; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CCAmount; 
+            externalType = DECIMAL; 
+            name = ccamount; 
+            precision = 13; 
+            scale = 2; 
+            valueClassName = NSDecimalNumber; 
+            valueType = B; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CCApp; 
+            name = ccapp; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CCExpDate; 
+            name = ccexpdate; 
+            prototypeName = varchar10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CCNumber; 
+            externalType = VARCHAR; 
+            name = ccnumber; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CCPhone; 
+            externalType = VARCHAR; 
+            name = ccphone; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 12; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CCType; 
+            externalType = VARCHAR; 
+            name = cctype; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 20; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = Childseat; 
+            externalType = INT; 
+            name = childseat; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = ConfNumber; 
+            externalType = VARCHAR; 
+            name = confnumber; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 20; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "Dest_ID"; 
+            name = destId; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "Driver_ID"; 
+            externalType = INT; 
+            name = driverId; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = DriverNotes; 
+            externalType = TEXT; 
+            name = drivernotes; 
+            valueClassName = NSString; 
+            valueType = C; 
+            width = 65535; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = DropOffPerson; 
+            name = dropoffperson; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = DropOffTime; 
+            name = dropofftime; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = EmailAddress; 
+            name = emailaddress; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = EnterDate; 
+            name = enterdate; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "Entered_By"; 
+            externalType = VARCHAR; 
+            name = enteredBy; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = FNameParty; 
+            externalType = VARCHAR; 
+            name = fnameparty; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = Greet; 
+            externalType = VARCHAR; 
+            name = greet; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = GroupName; 
+            name = groupname; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = Infant; 
+            externalType = INT; 
+            name = infant; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LNameParty; 
+            externalType = VARCHAR; 
+            name = lnameparty; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = MiscFee; 
+            externalType = INT; 
+            name = miscfee; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = MiscFeeChg; 
+            externalType = DECIMAL; 
+            name = miscfeechg; 
+            precision = 13; 
+            scale = 2; 
+            valueClassName = NSDecimalNumber; 
+            valueType = B; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = MiscFeeType; 
+            name = miscfeetype; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = Notes; 
+            externalType = TEXT; 
+            name = notes; 
+            valueClassName = NSString; 
+            valueType = C; 
+            width = 65535; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = NumPassengers; 
+            externalType = INT; 
+            name = numpassengers; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = OldBillingRemarks; 
+            name = oldbillingremarks; 
+            prototypeName = varchar100; 
+        }, 
+        {allowsNull = Y; columnName = PUDate; name = pudate; prototypeName = date; }, 
+        {
+            allowsNull = Y; 
+            columnName = PULocation; 
+            externalType = VARCHAR; 
+            name = pulocation; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = PUTime; 
+            externalType = TIME; 
+            name = putime; 
+            valueClassName = NSCalendarDate; 
+            valueType = t; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = ResDate; 
+            externalType = TIMESTAMP; 
+            name = resdate; 
+            valueClassName = NSCalendarDate; 
+            valueType = T; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ResID; 
+            externalType = INT; 
+            name = resid; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = RTrip; 
+            externalType = INT; 
+            name = rtrip; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = ServiceOrderAmount; 
+            externalType = DECIMAL; 
+            name = serviceorderamount; 
+            precision = 13; 
+            scale = 2; 
+            valueClassName = NSDecimalNumber; 
+            valueType = B; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "Service_Type"; 
+            name = serviceType; 
+            prototypeName = shortString; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = Status; 
+            externalType = INT; 
+            name = status; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = TipAmount; 
+            externalType = DECIMAL; 
+            name = tipamount; 
+            precision = 13; 
+            scale = 2; 
+            valueClassName = NSDecimalNumber; 
+            valueType = B; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = Toddler; 
+            externalType = INT; 
+            name = toddler; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "Updated_By"; 
+            externalType = VARCHAR; 
+            name = updatedBy; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = VoucherAmount; 
+            externalType = DECIMAL; 
+            name = voucheramount; 
+            precision = 13; 
+            scale = 2; 
+            valueClassName = NSDecimalNumber; 
+            valueType = B; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = VoucherNumber; 
+            name = vouchernumber; 
+            prototypeName = shortString; 
+        }
+    ); 
+    attributesUsedForLocking = (resid); 
+    className = "com.mauishuttle.legacy.eo.DailyDispatch"; 
+    classProperties = (
+        account, 
+        accountId, 
+        billtype, 
+        booster, 
+        carseatfee, 
+        cashamount, 
+        ccamount, 
+        ccapp, 
+        ccexpdate, 
+        ccnumber, 
+        ccphone, 
+        cctype, 
+        childseat, 
+        confnumber, 
+        destId, 
+        driver, 
+        driverId, 
+        drivernotes, 
+        dropoffperson, 
+        dropofftime, 
+        emailaddress, 
+        enterdate, 
+        enteredBy, 
+        fnameparty, 
+        greet, 
+        groupname, 
+        infant, 
+        lnameparty, 
+        miscfee, 
+        miscfeechg, 
+        miscfeetype, 
+        notes, 
+        numpassengers, 
+        oldbillingremarks, 
+        pudate, 
+        pulocation, 
+        putime, 
+        resdate, 
+        resid, 
+        rtrip, 
+        serviceorderamount, 
+        serviceType, 
+        status, 
+        tipamount, 
+        toddler, 
+        updatedBy, 
+        user, 
+        voucheramount, 
+        vouchernumber
+    ); 
+    externalName = "daily_dispatch"; 
+    fetchSpecificationDictionary = {}; 
+    name = DailyDispatch; 
+    primaryKeyAttributes = (resid); 
+    relationships = (
+        {
+            destination = Accounts; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = accountid; sourceAttribute = accountId; }); 
+            name = account; 
+        }, 
+        {
+            destination = Driver; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = driverid; sourceAttribute = driverId; }); 
+            name = driver; 
+        }, 
+        {
+            destination = User; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = loginid; sourceAttribute = enteredBy; }); 
+            name = user; 
+        }
+    ); 
+}

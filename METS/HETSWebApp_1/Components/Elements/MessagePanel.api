@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+        <wo class="MessagePanel.java" wocomponentcontent="true">
+
+        <binding name="hasErrors"/>
+        <validation message="'hasError' is a required binding.">
+            <unbound name="hasErrors"/>
+        </validation>
+        <binding name="hasMessages"/>
+        <validation message="'hasMessages' is a required binding.">
+            <unbound name="hasMessages"/>
+        </validation>
+        <binding name="errors"/>
+        <validation message="'errors' is a required binding.">
+            <unbound name="errors"/>
+        </validation>
+        <binding name="messages"/>
+        <validation message="'messages' is a required binding.">
+            <unbound name="messages"/>
+        </validation>
+    </wo>
+</wodefinitions>

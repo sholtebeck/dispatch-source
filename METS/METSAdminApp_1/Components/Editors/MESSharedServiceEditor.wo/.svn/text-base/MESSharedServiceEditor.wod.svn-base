@@ -1,0 +1,132 @@
+AdjustRateCheckbox : WOCheckBox {
+	checked = adjustRate;
+}
+
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+CreateNewRateButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary";
+	value = "Create Rate";	
+}
+
+CreateNewRateModalContainer : MTAjaxModalContainer {
+	ajax = true;
+	autoWrapContent = false;
+	class = "btn btn-success prg-pad-right";
+	id = "MESExclusiveServiceNewRate";
+	label = "Add Rate";
+	showFooter = false;
+	showTitle = false;
+	useDefaultCSS = false;
+}
+
+EditInPlace : MTAjaxInPlace {
+	cancelAction = cancelEditInPlace;
+	cancelClass = "btn btn-inverse";
+	formClass = "well form-inline";
+	saveClass = "btn btn-primary";
+	saveAction = saveChanges;
+}
+
+EditTemplate : ERXWOTemplate {
+	templateName = "edit";
+}
+
+Form : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges; 
+	isNewObject = object.isNewObject; 
+	submitAction = navigationController.saveChanges;
+}
+
+IsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = errors;
+	messages = messages;
+}
+
+NewRateZoneSelector : METSPopUpButton {
+	displayString = zone.name;
+	helpText = "Required Information";
+	item = zone;
+	labelText = "Zone";
+	list = newRateZones;
+	noSelectionString = "Please select a zone";
+	selection = newRate.secondaryZone;
+}
+
+NumberOfPassengers : WOString {
+	value = rate.numberOfPassengers;
+}
+
+RateAdjustmentButton : WOSubmitButton {
+	action = adjustRates;
+	class = "btn btn-primary";
+	value = "Adjust Rates";
+}
+
+RateAdjustmentForm : WOForm {
+	action = adjustRates;
+	class = "form-inline";
+	name = "MESRatesForm";
+}
+
+RateAdjustmentInput : WOTextField {
+	numberformat = "0.00";
+	value = adjustmentAmount;
+}
+
+RateSecondaryZoneName : WOString {
+	value = rate.secondaryZone.name;
+}
+
+RemoveRateLink : WOHyperlink {
+	action = removeRate;
+	class = "btn btn-danger btn-mini";
+}
+
+ServiceName : WOString {
+	value = object.name;
+}
+
+ServiceRatesRepetition : WORepetition {
+	item = rate;
+	list = serviceRates;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+TransferRate : WOString {
+	numberformat = "$#,##0.00";
+	value = rate.transferRate;
+}
+
+ViewTemplate : ERXWOTemplate {
+	templateName = "view";
+}
+
+ZoneSelector : METSPopUpButton {
+	displayString = zone.name;
+	helpText = "Required Information";
+	item = zone;
+	labelText = "Zone";
+	list = zones;
+	noSelectionString = "Please select a zone";
+	selection = object.zone;
+}

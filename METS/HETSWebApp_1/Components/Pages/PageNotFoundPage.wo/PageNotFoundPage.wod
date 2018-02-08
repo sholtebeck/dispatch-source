@@ -1,0 +1,4 @@
+Main : PageWrapper {
+	metaDescription = metaDescription;
+	pageTitle = "Sorry, the page your were looking for was not found.";
+}

@@ -1,0 +1,67 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href="#">Users</a></li>
+	<webobject name = "IsNotNewObject">
+		<li><webobject name = "UserFullName"></webobject></li>
+	</webobject>
+</webobject>
+<wo:METSStaticColumn>
+	<wo:METSInfoBar>General Information</wo:METSInfoBar>
+	<webobject name = "MessagesPanel"></webobject>
+	<webobject name = "ObjectDefined">
+		<webobject name = "UserDetailsForm">
+			<wo:METSTextInput disabled = "$isExistingObject" helpText = "Required Information" labelText = "User Name" value = "$object.userName"></wo:METSTextInput>
+			<wo:METSTextInput helpText = "Required Information" labelText = "First Name" value = "$object.firstName"></wo:METSTextInput>
+			<wo:METSTextInput helpText = "Required Information" labelText = "Last Name" value = "$object.lastName"></wo:METSTextInput>
+			<wo:METSTextInput helpText = "Optional" labelText = "E-Mail Address" value = "$object.emailAddress"></wo:METSTextInput>
+			<wo:METSTextInput labelText = "Phone Number" value = "$object.phoneNumber"></wo:METSTextInput>	
+			<wo:METSDatePicker labelText = "Birth Date" value = "$object.birthDate"></wo:METSDatePicker>
+			<wo:METSDatePicker labelText = "Start Date" value = "$object.startDate"></wo:METSDatePicker>
+			<wo:METSPasswordInput helpText = "Leave blank to not update" labelText = "Password" value = "$delegate.password"></wo:METSPasswordInput>
+			<wo:METSPasswordInput labelText = "Password (confirm)" value = "$delegate.passwordConfirm"></wo:METSPasswordInput>
+			<wo:METSTextInput dateformat = "%m/%d/%Y %I:%M:%S %p" labelText = "Last Login" disabled = "true" value = "$object.lastLogin"></wo:METSTextInput>
+			<wo:METSTextInput labelText = "Dispatch Count" disabled = "true" value = "$object.dispatches.@count"></wo:METSTextInput>
+			<wo:METSPopUpButton helpText = "Required Inforamtion" labelText = "Status" list = "$statuses" displayString = "$status.key" item = "$status" selection = "$selectedStatus"></wo:METSPopUpButton>
+			<wo:METSCheckboxInput labelText = "Active" checked = "$object.active"></wo:METSCheckboxInput>
+			<webobject name = "SubmissionBar"></webobject>
+		</webobject>
+		<webobject name = "IsNotNewObject">
+			<wo:METSInfoBar>Roles &amp; Permissions</wo:METSInfoBar>
+			<webobject name = "RolesForm">
+				<fieldset class="prg-prepend-top">
+					<div class="control-group">
+						<label class="control-label" for="optionsCheckboxList">Roles</label>
+						<div class="controls">
+							<webobject name = "RolesRepetition">
+								<label class="checkbox">
+									<webobject name = "RolesCheckbox" />
+									<webobject name = "RoleName"></webobject> - <webobject name = "RoleShortDescription" />
+								</label>
+							</webobject>	
+							<p class="help-block">
+								<strong>Note:</strong> Please specify the location(s) for standard users below.
+							</p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="optionsCheckboxList">Permissions</label>
+						<div class="controls">
+							<webobject name = "HubRolesRepetition">
+								<label class="checkbox">
+									<webobject name = "HubCheckbox" />
+									<webobject name = "HubRoleName" />
+								</label>
+							</webobject>
+						</div>
+					</div>
+					<div class="form-actions">
+						<wo:submitButton action = "$navigationController.saveChanges" class="btn btn-primary" value = "Save Changes" /> 
+						<wo:submitButton action = "$navigationController.cancelChanges" class="btn" value = "Cancel" />
+					</div>
+				</fieldset>
+			</webobject>
+		</webobject>
+	</webobject>
+	<webobject name = "ObjectNotDefined">
+		<h3>Please select or create a user object</h3>
+	</webobject>
+</wo:METSStaticColumn>

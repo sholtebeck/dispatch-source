@@ -1,0 +1,52 @@
+BootstrapCSS : ERXStyleSheet {
+	filename = "bootstrap/css/bootstrap.css";
+	framework = "app";
+}
+
+ComponentContent : WOComponentContent {
+	
+}
+
+HasMultipleHubRoles : WOConditional {
+	condition = session.authenticatedUser.hasMultipleHubRoles;
+}
+
+IFLTIE9Conditional : ERXIEConditionalComment {
+	isLessThan = true;
+	versionString = "9";
+}
+
+IsCurrentHubDefined : ERXNonNullConditional {
+	condition = session.currentHub;
+}
+
+IsProductionMode : WOConditional {
+	condition = application.isDevelopmentMode;
+	negate = true;
+}
+
+IsSuperUser : WOConditional {
+	condition = session.isSuperUser;
+}
+
+LoginPage : LoginPage {
+	errors = errors;
+}
+
+MESHubName : WOString {
+	value = role.hub.name;
+}
+
+PageTitle : WOString {
+	value = pageTitle;
+}
+
+SiteCSS : ERXStyleSheet {
+	filename = "stylesheets/styles.css";
+	framework = "app";
+}
+
+UserAuthorizedHubs : WORepetition {
+	item = role;
+	list = userAuthorizedHubs;
+}

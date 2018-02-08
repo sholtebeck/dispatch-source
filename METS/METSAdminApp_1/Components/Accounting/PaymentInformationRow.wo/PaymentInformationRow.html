@@ -1,0 +1,70 @@
+<tr>
+	<td>
+		<webobject name = "EditInPlace">
+			<webobject name = "ViewTemplate">
+				<webobject name = "AccountName" />
+			</webobject>
+			<webobject name = "EditTemplate">
+				<label>Switch</label>
+				<webobject name = "AccountSelector"></webobject>
+			</webobject>
+		</webobject>
+		<br/>
+		Conf #: <webobject name = "ConfirmationNumber" />
+	</td>
+	<td><webobject name = "CustomerName" /></td>
+	<td><webobject name = "ReservationDateTime" /></td>
+	<td><webobject name = "DropOffLocation" /></td>
+	<td><webobject name = "PickUpLocation" /></td>
+	<td><webobject name = "ServiceName" /></td>
+	<td><webobject name = "DispatchNotes" /></td>
+	<td>
+		<webobject name = "EditInPlace">
+			<webobject name = "ViewTemplate">
+				<ul class = "table-list">
+					<li>
+						<label>Transfer Amount: </label>
+						<webobject name = "TransferRate" />
+					</li>
+					<li>
+						<label>Miscellaneous Fee: </label>
+						<webobject name = "MiscellaneousFee" />
+					</li>
+					<li>
+						<label><webobject name = "TipType" />: </label>
+						<webobject name = "TipAmount" />
+					</li>
+				</ul>
+			</webobject>
+			<webobject name = "EditTemplate">
+				<ul class = "table-list">
+					<li>
+						<label>Transfer Amount: </label>
+						<webobject name = "TransferRateInput" />
+					</li>
+					<li>
+						<label>Miscellaneous Fee: </label>
+						<webobject name = "MiscellaneousFeeInput" />
+					</li>
+					<li>
+						<label><webobject name = "TipTypeSelector" />: </label>
+						<webobject name = "TipAmountInput" />
+					</li>
+				</ul>
+			</webobject>										
+		</webobject>
+	</td>
+	<td>
+		<webobject name = "EditInPlace">
+			<webobject name = "ViewTemplate">
+				<webobject name = "PaymentAmount" />
+			</webobject>
+			<webobject name = "EditTemplate">
+				<webobject name = "PaymentAmountInput" />
+			</webobject>
+		</webobject>
+	</td>
+	<td>
+		<webobject name = "Paid" />
+	</td>
+</tr>

@@ -1,0 +1,25 @@
+DatePicker : MTJSDatePicker {
+	class = inputClassName;
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	useDefaultCSS = false;
+	value = ^value;	
+}
+
+HasHelpText : WOConditional {
+	condition = hasHelpText;
+}
+
+HelpText : WOString {
+	value = ^helpText;
+}
+
+Label : WOGenericContainer {
+	class = "control-label";
+	elementName = "label";
+	for = id;
+}
+
+LabelText : WOString {
+	value = ^labelText;	
+}

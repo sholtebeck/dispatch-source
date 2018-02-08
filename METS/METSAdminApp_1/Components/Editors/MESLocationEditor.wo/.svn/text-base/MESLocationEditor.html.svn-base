@@ -1,0 +1,22 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href = "#"><wo:str value = "$session.currentHub.name" /></a></li>
+	<li><a href="#">Locations</a></li>
+	<webobject name = "IsNotNewObject">
+		<li><webobject name = "LocationName"></webobject></li>
+	</webobject>
+</webobject>
+<webobject name = "StaticColumn">
+	<wo:METSInfoBar>General Information</wo:METSInfoBar>
+	<div class="row-fluid">
+		<webobject name = "MessagesPanel" />
+		<webobject name = "LocationForm">
+			<wo:METSTextInput helpText = "Required Information" labelText = "Name" value = "$object.name"></wo:METSTextInput>
+			<webobject name = "ZoneSelector"></webobject>
+			<webobject name = "IsNotNewObject">
+				<wo:METSTextInput disabled = "true" labelText = "Drop Off Count" value = "$object.dropOffs.@count"></wo:METSTextInput>
+				<wo:METSTextInput disabled = "true" labelText = "Pick Up Count" value = "$object.pickUps.@count"></wo:METSTextInput>
+			</webobject>
+			<webobject name = "FormSubmissionBar" />
+		</webobject>
+	</div>
+</webobject>

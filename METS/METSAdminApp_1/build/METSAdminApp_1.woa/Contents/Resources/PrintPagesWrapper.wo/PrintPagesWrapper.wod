@@ -1,0 +1,12 @@
+ComponentContent : WOComponentContent {
+	
+}
+
+PageTitle : WOString {
+	value = pageTitle;
+}
+
+PrintPageCSS : ERXStyleSheet {
+	filename = "stylesheets/print.css";
+	media = "print";
+}

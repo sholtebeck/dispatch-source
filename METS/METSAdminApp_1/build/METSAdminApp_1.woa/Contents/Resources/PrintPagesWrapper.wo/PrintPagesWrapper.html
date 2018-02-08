@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta content="IE=9" http-equiv="X-UA-Compatible" />
+		<title><webobject name = "PageTitle"></webobject></title>
+		<meta name="robots" content = "noindex, nofollow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			table {margin-bottom:1.4em;width:100%; border-spacing: 1px;}
+			th {font-weight:bold;}
+			thead th {background:#c3d9ff;}
+			th, td, caption {padding:4px 10px 4px 5px; border: 1px solid black;}
+			tbody tr:nth-child(even) td, tbody tr.even td {background:#e5ecf9;}
+			tfoot {font-style:italic;}
+			
+			tr.print-notes td {
+				vertical-align: top;
+			}
+			
+			tr.print-notes td h6 {
+				font-size: 16px;
+				margin-bottom: 5px;
+				margin-top: 0px;
+			}
+			
+		</style>
+		<webobject name = "PrintPageCSS"></webobject>
+	</head>
+	<body>
+		<wo:if condition = "$session.isUserAuthenticated">
+			<webobject name = "ComponentContent"></webobject>
+			<script>
+				window.addEvent('domready', function() {
+					window.print();
+				});
+			</script>
+		</wo:if>
+		<wo:else>
+			<h1>Session has timed out!</h1>
+		</wo:else>
+	</body>
+</html>	
+		

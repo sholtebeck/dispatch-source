@@ -1,0 +1,63 @@
+#Header {
+    background: transparent url('../images/header-bg.png') repeat;
+    border-bottom: 1px solid #c7c7c7;
+}
+
+#Header .container ul li.consultation a {
+    background: url('../images/schedule2.png') no-repeat left center;
+    padding-top: 0px;
+}
+
+#Header .container ul li.consultation a:hover, #Header .container ul li.consultation a.active {
+    background-image: url('../images/schedule-hover.png');
+}
+
+#Footer video {
+    display: none;
+}
+
+#Copy .copy {
+    border: 1px solid #cac5bb;
+}
+
+#Copy .copy + .copy {
+    border-top: none;
+}
+
+#SPHero ~ #Copy .container > div {
+    border: 1px solid #cac5bb;
+    width: 296px;
+}
+
+#CSHero ~ #Copy .container > div:first-child, #CPHero ~ #Copy .container {
+    border: 1px solid #cac5bb;
+}
+
+#CPHero ~ #Copy .container > div form input[type=checkbox] {
+    display: block;
+    float: left;
+    margin-right: 0px;
+}
+
+#CPHero ~ #Copy .container > div form input[type=checkbox] + label {
+    background: none;
+    display: block;
+    height: 10px;
+    line-height: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+#QAHero ~ #Copy .container > div:first-child form > div > div > div input[type=radio] {
+    display: block;
+    float: left;
+    margin-right: 0px;
+}
+
+#QAHero ~ #Copy .container > div:first-child form > div > div > div input[type=radio] + label {
+    background: none;
+    display: block;
+    height: 12px;
+    line-height: 12px;
+    padding-left: 20px;
+}

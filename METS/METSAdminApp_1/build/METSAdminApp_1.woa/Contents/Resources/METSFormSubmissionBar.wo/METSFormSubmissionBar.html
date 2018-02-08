@@ -1,0 +1,29 @@
+<div class="form-actions" style="margin-top: auto; margin-bottom: 0px;">
+	<webobject name = "SubmitButton" />
+	<webobject name = "IsNotNewObject">
+		<webobject name = "CancelActionIsDefined">
+			<webobject name = "CancelButton"><webobject name = "CancelButtonText"></webobject></webobject>
+		</webobject>
+		<webobject name = "DeleteActionIsDefined">
+			<webobject name = "UseModalForDelete">
+				<webobject name = "DeleteModalContainer">
+					<div class="modal-header">
+						<a class="close" data-dismiss="modal">×</a>
+						<h3><webobject name = "ModalContainerTitle"></webobject></h3>
+					</div>
+					<div class="modal-body">	
+						<p class = "alert alert-error">
+							<webobject name = "ModalContainerText"></webobject>
+						</p>
+					</div>
+					<div class = "modal-footer">
+						<wo:ERXWOFormBarrier><wo:form class = "no-margin"><webobject name = "DeleteButton"/><a href="#" class="dismiss btn">Cancel</a></wo:form></wo:ERXWOFormBarrier>
+					</div>
+				</webobject>
+			</webobject>
+			<webobject name = "DoNotUseModalForDelete">
+				<webobject name = "DeleteButton" />		
+			</webobject>
+		</webobject>
+	</webobject>
+</div>

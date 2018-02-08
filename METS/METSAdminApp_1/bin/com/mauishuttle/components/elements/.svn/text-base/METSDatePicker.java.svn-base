@@ -1,0 +1,52 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+
+import er.ajax.mootools.MTAjaxUtils;
+import er.extensions.appserver.ERXWOContext;
+import er.extensions.components.ERXStatelessComponent;
+import er.extensions.foundation.ERXStringUtilities;
+
+@SuppressWarnings("serial")
+public class METSDatePicker extends ERXStatelessComponent {
+
+	public String _id;
+
+	public METSDatePicker(WOContext context) {
+        super(context);
+    }
+
+	public void appendToResponse(WOResponse response, WOContext context) {
+		super.appendToResponse(response, context);
+		MTAjaxUtils.addStylesheetResourceInHead(
+				context, 
+				response, 
+				"app", 
+				"stylesheets/datepicker_dashboard.css");
+	}		
+	
+	/**
+	 * @return the id
+	 */
+	public String id() {
+		if(_id == null) {
+			_id = stringValueForBinding("id", ERXWOContext.safeIdentifierName(context(), true)) + "METSDPI";
+		}
+		return _id;
+	}
+
+	public void reset() {
+		super.reset();
+		_id = null;
+	}
+
+	public boolean hasHelpText() {
+		return ERXStringUtilities.stringIsNullOrEmpty(valueForStringBinding("helpText", null)) == false;
+	}
+	
+	public String inputClassName() {
+		return stringValueForBinding("inputClassName", "input-xlarge");
+	}
+
+}

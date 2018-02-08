@@ -1,0 +1,19 @@
+IsDailyScheduleView : WOConditional {
+	condition = isDailyScheduleView;
+}
+
+IsWeeklyScheduleView : WOConditional {
+	condition = isDailyScheduleView;
+	negate = true;
+}
+
+SchedulesTableDataView : ListSchedulesTable {
+	dataSource = dataSource;
+	navigationController = navigationController;
+	isPrintPage = false;
+}
+
+WeeklySchedulesTableDataView : WeeklyDriverSchedulesTableView {
+	dataSource = dataSource;
+	navigationController = navigationController;
+}

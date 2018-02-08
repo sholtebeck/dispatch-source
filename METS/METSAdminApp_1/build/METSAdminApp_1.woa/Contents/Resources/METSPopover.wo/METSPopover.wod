@@ -1,0 +1,11 @@
+ComponentContent : WOComponentContent {
+	
+}
+
+PopoverLink : WOGenericContainer {
+	data-behavior = "BS.Popover";
+	data-bs-popover-content = ^content;
+	data-bs-popover-options = ^options;
+	elementName = "a";
+	title = ^title;
+}

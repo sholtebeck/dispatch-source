@@ -1,0 +1,5 @@
+TableColumnFooterBar : WOGenericContainer {
+	class = classNameWithDefault;
+	elementName = elementNameWithDefault;
+	id = id;
+}

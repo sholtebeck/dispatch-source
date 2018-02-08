@@ -1,0 +1,40 @@
+CancelEditLink : WOHyperlink {
+	action = cancelEdit;
+}
+
+Form : WOForm {
+	action = saveChanges;
+	class = "form-inline";
+}
+
+ImageName : WOString {
+	value = image.name;
+}
+
+ImageRepetition : WORepetition {
+	item = image;
+	list = images;
+}
+
+Option : WOGenericContainer {
+	elementName = "option";
+	value = imageSrc;
+}
+
+RemoveNodeLink : WOHyperlink {
+	action = removeNode;
+}
+
+SaveChangesButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary";
+	value = "Save Changes";
+}
+
+Textarea : WOText {
+	rows = "20";
+	class = "span12 wysihtml5-texarea"; 
+	id = "textarea";
+	placeholder = "Enter text ...";
+	value = object.textContent;
+}

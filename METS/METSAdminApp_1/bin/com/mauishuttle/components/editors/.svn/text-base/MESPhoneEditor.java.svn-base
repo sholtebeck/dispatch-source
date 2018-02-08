@@ -1,0 +1,35 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.interfaces.MESEditorInterface;
+import com.mauishuttle.eo.MESPhone;
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class MESPhoneEditor extends MESNonSynchronizingEditor implements MESEditorInterface {
+
+	private MESPhone _phone;
+	
+	public MESPhoneEditor(WOContext context) {
+        super(context);
+    }
+
+	public MESPhone object() {
+		if(_phone == null) {
+			_phone = (MESPhone)valueForBinding("object");
+		}
+		return _phone;
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+
+		try {
+			_phone = (MESPhone)object;
+		} catch (ClassCastException e) {
+			throw new ClassCastException("Object must be of type MESPhone");
+		}
+		
+	}
+	
+	
+	
+}

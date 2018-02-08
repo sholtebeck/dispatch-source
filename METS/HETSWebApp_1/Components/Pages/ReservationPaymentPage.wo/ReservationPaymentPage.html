@@ -1,0 +1,176 @@
+<webobject name = "Main">
+	<div class="billboard inner-billboard reservations-billboard">
+		<div class="container">
+			<div class="span-24">
+			</div>
+		</div>
+	</div>
+	<div id="HTContent">
+		<div class="container">
+			<div class="span-24">
+				<div class="span-16-5">
+					<div class = "page-copy append-bottom clearfix">
+						<webobject name = "DisplayNavigation">
+							<ul class = "reservation-wizard-navigation">
+								<li><wo:link action = "$reservationInformationPage">Reservation</wo:link></li>
+								<li><wo:link action = "$reservationServiceSelectionPage">Services</wo:link></li>
+								<li><span>Checkout</span></li>
+							</ul>
+						</webobject>
+						<wo:form>
+							<webobject name = "MessagesPanel" />
+							<webobject name = "IsAirportReservation">
+								<webobject name = "SingleRoute">
+									<webobject name = "ToAirportDefined">
+										<webobject name = "ToAirportSummary"></webobject>
+										<webobject name = "ToAirportIsExistingObject">
+											<webobject name = "ToAirportDescendentsRepetition">
+												<webobject name = "ChildRoute"></webobject>
+											</webobject>
+										</webobject>
+									</webobject>
+									<webobject name = "FromAirportDefined">
+										<webobject name = "FromAirportSummary"></webobject>
+										<webobject name = "FromAirportIsExistingObject">
+											<webobject name = "FromAirportDescendentsRepetition">
+												<webobject name = "ChildRoute"></webobject>
+											</webobject>											
+										</webobject>
+									</webobject>
+								</webobject>
+								<webobject name = "HasMultipleRoutes">
+									<webobject name = "ToAirportFirst">
+										<webobject name = "ToAirportSummary"></webobject>									
+										<webobject name = "FromAirportSummary"></webobject>
+									</webobject>	
+									<webobject name = "FromAirportFirst">
+										<webobject name = "FromAirportSummary"></webobject>
+										<webobject name = "ToAirportSummary"></webobject>									
+									</webobject>
+								</webobject>
+							</webobject>
+							<webobject name = "IsPointToPointReservation">
+								<webobject name = "PointToPointReservationSummary" />
+								<webobject name = "PointToPointDescendentsRepetition">
+									<webobject name = "ChildRoute" />
+								</webobject>
+							</webobject>
+							<webobject name = "IsCharterReservation">
+								<webobject name = "CharterReservationSummary" />
+								<webobject name = "CharterRunDescendentsRepetition">
+									<webobject name = "CharterReservationDescendentSummary"></webobject>
+								</webobject>
+							</webobject>
+							<div class="span-15-5 push-1-2 prepend-top last reservations-panel">
+								<h3>Passenger Information</h3>
+								<div class = "reservations-panel-content">
+									<label>First Name</label>
+									<webobject name = "FirstNameInput"></webobject>
+									<label>Last Name</label>
+									<webobject name = "LastNameInput"></webobject>
+								</div>
+							</div>
+							<div class="span-15-5 push-1-2 prepend-top last reservations-panel">
+								<h3>Contact Information</h3>
+								<div class = "reservations-panel-content">
+									<label>Cell Phone Number</label>
+									<webobject name = "CellPhoneInput"></webobject>	
+									<label>E-Mail Address</label>
+									<webobject name = "EmailInput"></webobject>
+								</div>
+							</div>
+							<div class="span-15-5 push-1-2 prepend-top last reservations-panel">
+								<h3>Billing Address</h3>
+								<div class = "reservations-panel-content">
+									<label>Street Address One</label>
+									<webobject name = "AddressOneInput"></webobject>	
+									<label>Street Address Two</label>
+									<webobject name = "AddressTwoInput"></webobject>
+									<label>City</label>
+									<webobject name = "CityInput"></webobject>	
+									<label>State / Province</label>
+									<webobject name = "StateInput"></webobject>
+									<label>Country</label>
+									<webobject name = "CountrySelect"></webobject>	
+									<label>Zip / Postal Code</label>
+									<webobject name = "ZipCodeInput"></webobject>
+								</div>
+							</div>
+							<div class="span-15-5 push-1-2 prepend-top last reservations-panel">
+								<webobject name = "IsPaid">
+									<h3>Cancel Reservation?</h3>											
+									<div class = "reservations-panel-content">
+										<webobject name = "CancelReservationButton">I WOULD LIKE TO CANCEL THIS RESERVATION</webobject>
+									</div>	
+								</webobject>
+								<webobject name = "IsNotPaid">
+									<h3>Credit Card Information</h3>
+									<div class = "reservations-panel-content">
+										<div class = "span-15 last"> 	
+											<div class = "span-7">
+												<label>Credit Card Number</label>
+												<webobject name = "CreditCardNumber"></webobject>
+											</div>
+											<div class = "span-7 push-1-2 last">
+												<label>Security ID</label>
+												<webobject name = "SecurityIdentifier"></webobject>
+											</div>
+										</div>
+										<div class = "span-15 last prepend-top"> 	
+											<div class = "span-7">
+												<label>Expiration Date</label>
+												<webobject name = "ExpirationMonthSelector"></webobject>
+												<webobject name = "ExpirationYearSelector"></webobject>
+											</div>
+											<div class = "span-7 push-1-2 last">
+												<label>Gratuity %</label>
+												<webobject name = "GratuitySelector" />
+												<webobject name = "GratuityAmountUpdateContainer">
+													<webobject name = "DisplayGratuityAmount">
+														Tip Amount: <webobject name = "TipAmount"></webobject>
+													</webobject>
+													<webobject name = "DisplayGratuityAppreciatedMessage">
+														Tips are appreciated!  
+													</webobject>
+												</webobject>
+												<webobject name = "GratuitySelectorObserver"></webobject>
+											</div>
+										</div>
+										<div class = "span-7 last prepend-top append-bottom">
+											<label>Amount</label>
+											<webobject name = "TotalAmountUpdateContainer">
+												<webobject name = "Total"></webobject>
+											</webobject>
+											<em class = "caption>">(includes tax and the <b>selected</b> gratuity amount)</em>
+											<webobject name = "GratuitySelectorTotalAmountObserver"></webobject>
+										</div>
+									</div>
+								</webobject>
+							</div>
+							<webobject name = "IsNotPaid">
+								<div class = "span-15-5 push-1-2 prepend-top last align-right">
+									<p>By clicking the button below I am agreeing to the <webobject name = "TermsAndConditions">terms and conditions</webobject> as defined by Hawaii Executive Transportation</p>
+									<webobject name = "ProcessPayment"></webobject>
+									 <!-- (c) 2005, 2013. Authorize.Net is a registered trademark of CyberSource Corporation --> 
+									 <div class="AuthorizeNetSeal">
+									 	<script type="text/javascript" language="javascript">var ANS_customer_id="d830564b-903b-43e8-a265-1ca0aefaf5d9";</script> 
+									 	<script type="text/javascript" language="javascript" src="//verify.authorize.net/anetseal/seal.js" ></script> 
+									 	<a href="http://www.authorize.net/" id="AuthorizeNetText" target="_blank">Online Credit Card Processing</a>
+									 </div>
+								</div>
+							</webobject>
+						</wo:form>
+					</div>
+				</div>
+				<div class="span-6-5 push-1 last">
+					<div class="span-6-5 info-panel last">
+						<h4>
+							Need assistance?
+							<span>Please call: 1-800-833-2303</span>
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</webobject>

@@ -1,0 +1,36 @@
+{
+    attributes = (
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {allowsNull = Y; columnName = name; name = name; prototypeName = varchar50; }, 
+        {allowsNull = N; columnName = "site_id"; name = siteID; prototypeName = id; }, 
+        {allowsNull = Y; columnName = slug; name = slug; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (id, siteID); 
+    className = "km.content.eo.KMIWebDocumentKeyWord"; 
+    classProperties = (documents, documentsKeyWords, name, site, slug); 
+    externalName = DocumentKeyWord; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIWebDocumentKeyWord; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {definition = "documentsKeyWords.document"; name = documents; }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = KMIWebDocumentsKeyWords; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = keyWordID; sourceAttribute = id; }); 
+            name = documentsKeyWords; 
+            numberOfToManyFaultsToBatchFetch = 50; 
+            propagatesPrimaryKey = Y; 
+        }, 
+        {
+            destination = KMIWebSite; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = siteID; }); 
+            name = site; 
+        }
+    ); 
+}

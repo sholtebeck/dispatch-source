@@ -1,0 +1,48 @@
+<webobject name = "CurrentPaymentIsNewObject">
+	<wo:METSTextInput helpText = "Required" labelText = "Amount" numberformat = "#,##0.00" value = "$object.amount" />
+	<wo:METSPopUpButton helpText = "Required" labelText = "Driver Collect" noSelectionString = "Does the driver collect this payment?" list = "$yesOrNoArray" selection = "$currentPaymentDriverCollect" />
+	<wo:METSTextInput helpText = "Required" labelText = "First Name" value = "$delegate.billingAddress.firstName" />
+	<wo:METSTextInput helpText = "Required" labelText = "Last Name" value = "$delegate.billingAddress.lastName" />
+	<wo:METSTextInput labelText = "Approval Code" value = "$object.approvalCode" />
+	<wo:METSTextInput labelText = "Card Number" value = "$delegate.creditCard.creditCardNumber" />
+	<wo:METSTextInput labelText = "Security ID" value = "$delegate.creditCard.securityID" />
+	<div class="control-group">
+		<label class="control-label" for="mesStartDate">Expiration Date</label>
+		<div class="controls">
+			<webobject name = "ExpirationMonthSelector"></webobject>
+			<webobject name = "ExpirationYearSelector"></webobject>
+		</div>
+	</div>	
+	<webobject name = "IsNotPaid">
+		<webobject name = "SaveCreditCardInformationSelector"></webobject>
+		<webobject name = "SecretKeyUpdateContainer">
+			<webobject name = "DisplaySecretKeyInputForCreditCardStorage">
+				<wo:METSTextInput helpText = "Required" labelText = "Pin" value = "$delegate.secretPin"></wo:METSTextInput>
+			</webobject>
+		</webobject>
+	</webobject>
+	<webobject name = "SaveCreditCardInformationSelectorObserver" />
+</webobject>
+<webobject name = "CurrentPaymentIsNotNewObject">
+	<wo:METSTextInput helpText = "Required" labelText = "Amount" numberformat = "#,##0.00" value = "$object.amount" />
+	<wo:METSPopUpButton helpText = "Required" labelText = "Paid" list = "$yesOrNoArray" selection = "$currentPaymentInformationPaid" />
+	<wo:METSPopUpButton helpText = "Required" labelText = "Driver Collect" list = "$yesOrNoArray" selection = "$currentPaymentDriverCollect" />
+	<wo:METSTextInput labelText = "Approval Code" value = "$object.approvalCode"></wo:METSTextInput>
+	<webobject name = "PaymentInformationCreditCardIsDefined">
+		<wo:METSTextInput disabled = "true" labelText = "Card Holder Name" value = "$object.creditCard.cardHolder"></wo:METSTextInput>			
+		<wo:METSTextInput disabled = "true" labelText = "Card Number" value = "$object.creditCard.cardNumber"></wo:METSTextInput>			
+		<wo:METSTextInput disabled = "true" labelText = "Card Exp. Date" value = "$object.creditCard.expirationDate"></wo:METSTextInput>			
+		<webobject name = "IsEncrypted">
+			<webobject name = "IsNotPaid">
+				<wo:METSPopUpButton id = "ProcessCreditCardInformationSelector" labelText = "Process Credit Card" list = "$yesOrNoArray" selection = "$delegate.processCreditCardInformation"></wo:METSPopUpButton>
+				<webobject name = "SecretPinEntryUpdateContainer">
+					<webobject name = "DisplaySecretKeyInputForCreditCardProcessing">
+						<wo:METSTextInput helpText = "Required" labelText = "Pin" value = "$delegate.secretPin"></wo:METSTextInput>
+					</webobject>
+				</webobject>
+				<webobject name = "ProcessCreditCardInformationSelectorObserver"></webobject>
+			</webobject>
+		</webobject>
+	</webobject>
+</webobject>
+<wo:METSTextArea labelText = "Notes" value = "$object.notes" />

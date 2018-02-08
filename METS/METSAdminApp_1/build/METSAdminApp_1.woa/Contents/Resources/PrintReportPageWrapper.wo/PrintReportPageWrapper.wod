@@ -1,0 +1,8 @@
+ReportName : WOString {
+	value = reportName;
+}
+
+SwitchComponent : WOSwitchComponent {
+	reports = reports;
+	WOComponentName = reportComponentName;
+}

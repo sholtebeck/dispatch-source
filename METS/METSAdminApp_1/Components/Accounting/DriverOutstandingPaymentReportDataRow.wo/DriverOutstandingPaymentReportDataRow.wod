@@ -1,0 +1,33 @@
+
+CashCount : WOString {
+	numberformat = "0";
+	value = cashCountWithAggregateFunction;
+}
+
+CreditCardCount : WOString {
+	numberformat = "0";
+	value = creditCardCountWithAggregateFunction;
+}
+
+DriverName : WOString {
+	value = driver.fullName;
+}
+
+ServiceOrderCount : WOString {
+	numberformat = "0";
+	value = serviceOrderCountWithAggregateFunction;
+}
+
+TotalCount : WOString {
+	numberformat = "0";
+	value = totalCountWithAggregateFunction;
+}
+
+ViewDispatches : WOHyperlink {
+	action = ^action;
+}
+
+VoucherCount : WOString {
+	numberformat = "0";
+	value = voucherCountWithAggregateFunction;
+}

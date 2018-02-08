@@ -1,0 +1,11 @@
+ -destination Sources \
+ -extension java \
+ -java \
+ -javaTemplate _WonderEntity.eotemplate \
+ -model Resources/KMIContentModel.eomodeld \
+ -packagedirs \
+ -subclassDestination Sources \
+ -subclassJavaTemplate WonderEntity.eotemplate \
+ -templatedir "/Developer/WebObjects/Library/Application Support/eogenerator/templates" \
+ -verbose \
+ -loadModelGroup

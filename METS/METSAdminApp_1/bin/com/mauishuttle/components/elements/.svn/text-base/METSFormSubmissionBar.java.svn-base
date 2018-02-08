@@ -1,0 +1,80 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+
+import er.extensions.appserver.ERXWOContext;
+import er.extensions.components.ERXNonSynchronizingComponent;
+
+@SuppressWarnings("serial")
+public class METSFormSubmissionBar extends ERXNonSynchronizingComponent {
+
+	public METSFormSubmissionBar(WOContext context) {
+        super(context);
+    }
+
+	public WOActionResults cancelAction() {
+		return (WOActionResults)valueForBinding("cancelAction");
+	}
+
+	public boolean cancelActionIsDefined() {
+		return hasBinding("cancelAction");
+	}
+
+	public String cancelButtonClassName() {
+		return valueForStringBinding("cancelButtonClassName", "btn");
+	}
+
+	public String cancelButtonText() {
+		return valueForStringBinding("cancelButtonText", "Cancel");
+	}
+	
+	public WOActionResults deleteAction() {
+		return (WOActionResults)valueForBinding("deleteAction");
+	}
+
+	public boolean deleteActionIsDefined() {
+		return hasBinding("deleteAction");
+	}
+
+	public String deleteButtonClassName() {
+		return valueForStringBinding("deleteButtonClassName", "btn btn-danger");
+	}
+
+	public String deleteButtonText() {
+		return valueForStringBinding("deleteButtonText", "Delete");
+	}
+
+	public boolean isNewObject() {
+		return booleanValueForBinding("isNewObject", false);
+	}
+
+	public String modalContainerId() {
+		return valueForStringBinding("modalContainerId", ERXWOContext.safeIdentifierName(context(), false));
+	}
+
+	public String modalContainerTitle() {
+		return valueForStringBinding("modalContainerTitle", "CONFIRM");
+	}
+
+	public String modalContainerText() {
+		return valueForStringBinding("modalContainerText", "Are you absolutely sure you want to delete this object?");
+	}
+	
+	public WOActionResults submitAction() {
+		return (WOActionResults)valueForBinding("submitAction");
+	}
+
+	public String submitButtonClassName() {
+		return valueForStringBinding("submitButtonClassName", "btn btn-primary");
+	}
+
+	public String submitButtonText() {
+		return valueForStringBinding("submitButtonText", "Save Changes");
+	}
+	
+	public boolean useModalForDelete() {
+		return booleanValueForBinding("useModalForDelete", false);
+	}
+	
+}

@@ -1,0 +1,37 @@
+IsDriverAssigned : ERXNonNullConditional {
+	condition = object.driver;
+}
+
+IsExclusiveService : WOConditional {
+	condition = object.service.exclusiveService;
+}
+
+IsNotPrintPage : WOConditional {
+	condition = isPrintPage;
+	negate = true;
+}
+
+IsServiceDefined : WOConditional {
+	condition = object.isServiceDefined;
+}
+
+IsSharedService : WOConditional {
+	condition = object.service.sharedService;
+}
+
+PickUpDateTime : METSTextOutput {
+	dateformat = "%m/%d/%Y %I:%M %p";
+	labelText = "Pick Up Date Time";
+	printPage = isPrintPage;
+	value = object.reservationDate;		
+}
+
+RequiresChildSeats : WOConditional {
+	condition = delegate.requiresChildSeats;
+}
+
+TableContainer : WOGenericContainer {
+	class = tableClass;
+	elementName = "table";
+	style = tableStyle;	
+}

@@ -1,0 +1,56 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+EditorWrapper : METSEditorWrapper {
+	id = "METSImageUploader";
+	labelText = "File";
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	isNewObject = object.isNewObject;
+	submitAction = navigationController.saveChanges;
+}
+
+HasPicture : WOConditional {
+	condition = object.hasPicture;
+}
+
+ImageFileUploader : ERAttachmentUpload {
+	attachment = object.picture;
+	configurationName = "MESVehicleType.picture";
+	editingContext = ec;
+}
+
+ImageViewWrapper : METSEditorWrapper {
+	hasHelpText = false;
+	labelText = "Current Image";
+}
+
+IsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+VehicleTypeForm : METSHorizontalForm {
+	action = navigationController.saveChanges;
+	enctype = "multipart/form-data";
+}
+
+VehicleTypeName : WOString {
+	value = object.name;
+}

@@ -1,0 +1,14 @@
+ErrorRepetition : WORepetition {
+	item = message;
+	list = errors;
+}
+
+Message : WOString {
+	escapeHTML = false;
+	value = message;
+}
+
+MessagesRepetition : WORepetition {
+	item = message;
+	list = messages;
+}

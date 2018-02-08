@@ -1,0 +1,23 @@
+ContinueButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn";
+	value = "Continue";
+}
+
+Main : PageWrapper {
+	mainNavigationIndex = -1;
+	metaDescription = metaDescription;
+	pageTitle = pageTitle;
+}
+
+MessagesPanel : MessagePanel {
+	hasErrors = hasErrors;
+	hasMessages = hasMessages;
+	errors = errors;
+	messages = messages;
+}
+
+PickUpTimeSelector : PickUpTimeSelector {
+	dispatch = session.toAirport;
+	selectedPickUpTime = selectedPickUpTime;
+}

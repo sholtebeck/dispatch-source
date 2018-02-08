@@ -1,0 +1,20 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class METSTableColumnFooterBar extends METSUIElements {
+    
+	public METSTableColumnFooterBar(WOContext context) {
+        super(context);
+    }
+
+	public String defaultClassName() {
+		return "prg-column-footer-bar";
+	}
+
+	public String elementNameWithDefault() {
+		return stringValueForBinding("elementName", "ul");
+	}
+
+}

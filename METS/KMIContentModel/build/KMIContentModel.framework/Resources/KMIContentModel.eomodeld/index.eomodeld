@@ -1,0 +1,74 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    connectionDictionary = {}; 
+    entities = (
+        {className = "km.content.eo.KMIAbstractAsset"; name = KMIAbstractAsset; }, 
+        {className = "km.content.eo.KMIAbstractDocument"; name = KMIAbstractDocument; }, 
+        {className = "km.content.eo.KMIAbstractNode"; name = KMIAbstractNode; }, 
+        {className = "km.content.eo.KMIAssetGallery"; name = KMIAssetGallery; }, 
+        {className = EOGenericRecord; name = KMIAssetGalleryAssets; }, 
+        {className = "km.content.eo.KMIAssetGroup"; name = KMIAssetGroup; }, 
+        {
+            className = "km.content.eo.KMIHTMLImageNode"; 
+            name = KMIHTMLImageNode; 
+            parent = KMIHTMLNode; 
+        }, 
+        {
+            className = "km.content.eo.KMIHTMLLayoutNode"; 
+            name = KMIHTMLLayoutNode; 
+            parent = KMIHTMLNode; 
+        }, 
+        {
+            className = "km.content.eo.KMIHTMLNode"; 
+            name = KMIHTMLNode; 
+            parent = KMIAbstractNode; 
+        }, 
+        {
+            className = "km.content.eo.KMIHTMLTextNode"; 
+            name = KMIHTMLTextNode; 
+            parent = KMIHTMLNode; 
+        }, 
+        {
+            className = "km.content.eo.KMIImageAsset"; 
+            name = KMIImageAsset; 
+            parent = KMIAbstractAsset; 
+        }, 
+        {
+            className = "km.content.eo.KMIWebDocument"; 
+            name = KMIWebDocument; 
+            parent = KMIAbstractDocument; 
+        }, 
+        {
+            className = "km.content.eo.KMIWebDocumentCategory"; 
+            name = KMIWebDocumentCategory; 
+        }, 
+        {
+            className = "km.content.eo.KMIWebDocumentComment"; 
+            name = KMIWebDocumentComment; 
+        }, 
+        {
+            className = "km.content.eo.KMIWebDocumentKeyWord"; 
+            name = KMIWebDocumentKeyWord; 
+        }, 
+        {className = EOGenericRecord; name = KMIWebDocumentsKeyWords; }, 
+        {
+            className = "km.content.eo.KMIWebDocumentTemplate"; 
+            name = KMIWebDocumentTemplate; 
+            parent = KMIAbstractDocument; 
+        }, 
+        {className = "km.content.eo.KMIWebSite"; name = KMIWebSite; }, 
+        {
+            className = "km.content.eo.KMIWebSiteTestimonial"; 
+            name = KMIWebSiteTestimonial; 
+        }
+    ); 
+    userInfo = {
+        "_EntityModeler" = {
+            activeDatabaseConfigName = Default; 
+            databaseConfigs = {
+                Default = {adaptorName = JDBC; prototypeEntityName = EOJDBCPostgresqlPrototypes; }; 
+            }; 
+        }; 
+    }; 
+}

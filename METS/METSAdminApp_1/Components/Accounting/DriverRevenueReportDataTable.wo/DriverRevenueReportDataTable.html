@@ -1,0 +1,44 @@
+<thead>
+	<tr>
+		<th>Confirmation Number</th>
+		<th>Cash</th>
+		<th>Credit Card</th>
+		<th>CC Paid Online</th>
+		<th>Service Order</th>
+		<th>Voucher</th>
+		<th>Mark Paid</th>
+	</tr>
+</thead>
+<tbody>
+	<webobject name = "DriverReportsRepetition">
+		<tr>
+			<td colspan = "6"><webobject name = "DriverName" /></td>
+		</tr>
+		<webobject name = "ReportRepetition">
+			<tr>
+				<td><webobject name = "DispatchConfirmationNumber" /></td>
+				<td><webobject name = "CashSubTotal" /></td>
+				<td><webobject name = "CreditCardSubTotal" /></td>
+				<td><webobject name = "CreditCardPaidOnlineSubTotal" /></td>
+				<td><webobject name = "ServiceOrderSubTotal" /></td>
+				<td><webobject name = "VoucherSubTotal"></webobject></td>	
+				<td>
+					<ul class = "table-list">
+						<webobject name = "PaymentInfosRepetition">
+							<li><label><webobject name = "PaymentInfoDisplayName" /> - <webobject name = "PaymentInfoAmount" /></label><webobject name = "PaymentInfoPaid" /></li>
+						</webobject>
+					</ul>
+				</td>
+			</tr>
+		</webobject>
+		<tr>
+			<td><b>Totals</b></td>
+			<td><webobject name = "CashTotal" /></td>
+			<td><webobject name = "CreditCardTotal" /></td>
+			<td><webobject name = "CreditCardPaidOnlineTotal" /></td>
+			<td><webobject name = "ServiceOrderTotal" /></td>
+			<td><webobject name = "VoucherTotal"></webobject></td>	
+			<td>&nbsp;</td>
+		</tr>
+	</webobject>
+</tbody>

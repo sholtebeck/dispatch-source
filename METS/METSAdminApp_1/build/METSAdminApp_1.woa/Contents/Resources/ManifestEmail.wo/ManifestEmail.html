@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta content="IE=9" http-equiv="X-UA-Compatible" />
+		<title><webobject name = "PageTitle"></webobject></title>
+		<meta name="robots" content = "noindex, nofollow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			table {margin-bottom:1.4em;width:100%; border-spacing: 1px;}
+			th {font-weight:bold;}
+			thead th {background:#c3d9ff;}
+			th, td, caption {padding:4px 10px 4px 5px; border: 1px solid black;}
+			tbody tr:nth-child(even) td, tbody tr.even td {background:#e5ecf9;}
+			tfoot {font-style:italic;}
+			
+			tr.print-notes td {
+				vertical-align: top;
+			}
+			
+			tr.print-notes td h6 {
+				font-size: 16px;
+				margin-bottom: 5px;
+				margin-top: 0px;
+			}
+			body {line-height:1.5;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;color:#000;background:none;font-size:10pt;}
+			.container {background:none;}
+			hr {background:#ccc;color:#ccc;width:100%;height:2px;margin:2em 0;padding:0;border:none;}
+			hr.space {background:#fff;color:#fff;visibility:hidden;}
+			h1, h2, h3, h4, h5, h6 {font-family:"Helvetica Neue", Arial, "Lucida Grande", sans-serif;}
+			code {font:.9em "Courier New", Monaco, Courier, monospace;}
+			a img {border:none;}
+			p img.top {margin-top:0;}
+			blockquote {margin:1.5em;padding:1em;font-style:italic;font-size:.9em;}
+			.small {font-size:.9em;}
+			.large {font-size:1.1em;}
+			.quiet {color:#999;}
+			.hide {display:none;}
+			a:link, a:visited {background:transparent;font-weight:700;text-decoration:underline;}
+			a:link:after, a:visited:after {content:" (" attr(href) ")";font-size:90%;}
+
+		</style>
+	</head>
+	<body>
+	<h1>Manifest</h1>
+	<table class="table table-striped table-bordered prg-square-table">
+		<thead>
+			<tr>
+				<th>Pick Up Time</th>
+				<th>Pick Up Location</th>
+				<th>Drop Off Location</th>
+				<th>Passenger Name</th>
+				<th>Number of Passengers</th>	
+				<th>Greet</th>
+				<th>Service</th>
+				<th>Miscellaneous</th>
+			</tr>
+		</thead>
+		<tbody>
+			<webobject name = "DispatchesRepetition">
+				<tr>
+					<td><webobject name = "PickUpTime"></webobject></td>
+					<td>
+						<webobject name = "PickUpLocation"></webobject>
+						<webobject name = "FlightNumberIsDefined">
+							<br/>Flight #: <webobject name = "FlightNumber" />
+						</webobject>
+					</td>
+					<td><webobject name = "DropOffLocation"></webobject></td>
+					<td><webobject name = "PassengerName"></webobject></td>
+					<td><webobject name = "NumberOfPassengers"></webobject></td>
+					<td>
+						<webobject name = "Greet"></webobject>
+						<webobject name = "IsLeiGreet">
+							<br/># Leis: <webobject name = "NumberOfLeis" />
+						</webobject>
+					</td>
+					<td><webobject name = "Service"></webobject></td>
+					<td><webobject name = "MiscellaneousItems"></webobject></td>
+				</tr>
+			</webobject>
+		</tbody>
+	</table>		
+	</body>
+</html>	
+		

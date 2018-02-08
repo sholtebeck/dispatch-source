@@ -1,0 +1,18 @@
+Label : WOGenericContainer {
+	elementName = "label";
+}
+
+LabelText : WOString {
+	value = ^labelText;	
+}
+
+TableDividerContainer : WOGenericContainer {
+	elementName = "td";
+	style = style;
+}
+
+TextOuput : WOString {
+	formatter = formatter;
+	value = ^value;
+}
+

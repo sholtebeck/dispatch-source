@@ -1,0 +1,89 @@
+AccountIsAssigned : ERXNonNullConditional {
+	condition = reservation.account;
+}
+
+BluePrintIE : ERXStyleSheet {
+	filename = "blueprint/ie.css";
+	framework = "app";
+	media = "screen, projection";
+}
+
+BluePrintScreen : ERXStyleSheet {
+	filename = "blueprint/screen.css";
+	framework = "app";
+	media = "screen, projection";
+}
+
+BluePrintPrint : ERXStyleSheet {
+	filename = "blueprint/print.css";
+	framework = "app";
+	media = "print";
+}
+
+CompanyName : WOString {
+	value = reservation.account.name;
+}
+
+ConfirmationNumber : WOString {
+	value = reservation.confirmationNumber;
+}
+
+CustomerName : WOString {
+	value = reservation.customerFullName;
+}
+
+DriverTip : WOString {
+	numberformat = "$#,##0.00";
+	value = reservation.tipAmount;
+}
+
+DropOffLocation : WOString {
+	value = reservation.dropOffLocation.nameWithZone;
+}
+
+Fare : WOString {
+	numberformat = "$#,##0.00";
+	value = reservation.subTotal;
+}
+
+MiscellaneousFees : WOString {
+	numberformat = "$#,##0.00";
+	value = reservation.miscellaneousFee;
+}
+
+IFIELT8 : ERXIEConditionalComment {
+	isLessThan = true;
+	versionString = "8";
+}
+
+NumberPassengers : WOString {
+	numberformat = "0";
+	value = reservation.numberPassengers;
+}
+
+PageTitle : WOString {
+	value = pageTitle;
+}
+
+PickUpDateTime : WOString {
+	dateformat = "%b %d, %Y %H:%M";
+	value = reservation.reservationDate;
+}
+
+PickUpLocation : WOString {
+	value = reservation.pickUpLocation.nameWithZone;
+}
+
+Service : WOString {
+	value = reservation.service.name;
+}
+
+Taxes : WOString {
+	numberformat = "$#,##0.00";
+	value = reservation.taxes;
+}
+
+TicketTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = reservation.totalIncludingTax;
+}

@@ -1,0 +1,88 @@
+package com.mauishuttle.components.pages.views;
+
+import com.mauishuttle.components.interfaces.MESPageNavigationControllerInterface;
+import com.mauishuttle.components.interfaces.MESTreeNavigationViewInterface;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eocontrol.EOEnterpriseObject;
+import com.webobjects.foundation.NSArray;
+
+import er.extensions.appserver.ERXWOContext;
+import er.extensions.components.ERXNonSynchronizingComponent;
+
+@SuppressWarnings("serial")
+public class MESNonSynchronizedTreeNavigationView extends ERXNonSynchronizingComponent implements MESTreeNavigationViewInterface {
+	
+	private EOEnterpriseObject _item;
+	
+	public MESNonSynchronizedTreeNavigationView(WOContext context) {
+        super(context);
+    }
+
+	public EOEnterpriseObject item() {
+		return _item;
+	}
+
+	public void setItem(EOEnterpriseObject item) {
+		this._item = item;
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<Object> items() {
+		return (NSArray<Object>)valueForBinding("items");
+	}
+
+	public MESPageNavigationControllerInterface navigationController() {
+		return (MESPageNavigationControllerInterface)valueForBinding("navigationController");
+	}
+
+	public void setNavigationController(
+			MESPageNavigationControllerInterface navigationController) {
+	}
+
+	public WOActionResults inspectItem() {
+		navigationController().setSelectedObject(item());
+		return navigationController().nextPage();
+	}
+
+	public boolean isInitiallyExpanded() {
+		return booleanValueForBinding("initiallyExpanded", false);
+	}
+
+	public void setInitiallyExpanded(boolean initiallyExpanded) {
+	}
+
+	public boolean display() {
+		return booleanValueForBinding("display", true);
+	}
+
+	public void setDisplay(boolean display) {		
+	}
+
+	public String id() {
+		return valueForStringBinding("id", ERXWOContext.safeIdentifierName(context(), true));
+	}
+
+	public void setId(String value) {
+	}
+
+	public String label() {
+		return "<span>" + stringValueForBinding("label") + "</span>";
+	}
+
+	public void setLabel(String value) {		
+	}
+
+	public String displayKeyValue() {
+		Object displayKeyValue = item().valueForKey(displayKey());
+		return null != displayKeyValue ? displayKeyValue.toString() : "";
+	}
+
+	public String displayKey() {
+		return stringValueForBinding("displayKey");
+	}
+
+	public void setDisplayKey(String displayKey) {
+	}
+
+}

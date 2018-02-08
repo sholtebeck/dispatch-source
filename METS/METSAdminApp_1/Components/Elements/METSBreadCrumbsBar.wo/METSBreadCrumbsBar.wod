@@ -1,0 +1,9 @@
+BreadCrumbsContainer : WOGenericContainer {
+	class = classNameWithDefault;
+	elementName = elementNameWithDefault;
+	id = id;	
+}
+
+ComponentContent : WOComponentContent {
+	
+}

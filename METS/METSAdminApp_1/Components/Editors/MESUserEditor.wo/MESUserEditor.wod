@@ -1,0 +1,76 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+HubCheckbox : WOCheckBox {
+	checked = hubRoleChecked;
+}
+
+HubRoleName : WOString {
+	value = hubRole.label;
+}
+
+HubRolesRepetition : WORepetition {
+	item = hubRole;
+	list = hubRolesList;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+
+ObjectDefined : ERXNonNullConditional {
+	condition = object;
+}
+
+ObjectNotDefined : ERXNonNullConditional {
+	condition = object;
+	negate = true;
+}
+
+RolesCheckbox : WOCheckBox {
+	checked = roleChecked;
+}
+
+RolesForm : WOForm {
+	action = navigationController.saveChanges;
+	class = "form-horizontal";
+	multipleSubmit = true;
+}
+
+RoleName : WOString {
+	value = role.label;
+}
+
+RolesRepetition : WORepetition {
+	item = role;
+	list = rolesList;
+}
+
+RoleShortDescription : WOString {
+	value = role.shortDescription;
+}
+
+SubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	deleteAction = deleteUser;
+	deleteButtonText = "Remove User";
+	isNewObject = object.isNewObject;
+	useModalForDelete = true;
+	submitAction = saveUserDetails;
+}
+
+UserDetailsForm : METSHorizontalForm {
+	action = saveUserDetails;
+}
+
+UserFullName : WOString {
+	value = object|fullName(false);
+}
+

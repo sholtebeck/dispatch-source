@@ -1,0 +1,183 @@
+package com.mauishuttle.components.editors;
+
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
+
+import km.foundation.extensions.KMSimpleJavaMail;
+import km.foundation.extensions.KMStringUtilities;
+
+import org.apache.log4j.Logger;
+
+import com.mauishuttle.components.PrintSummaryPage;
+import com.mauishuttle.components.controllers.MESDispatchEditorPagesNavigationController;
+import com.mauishuttle.eo.MESDispatch;
+import com.mauishuttle.eo.MESDispatchChangeLog;
+import com.mauishuttle.eo.MESSystemMessage;
+import com.mauishuttle.eo.MESSystemMessage.Level;
+import com.mauishuttle.eo.MESUser;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSDictionary;
+import com.webobjects.foundation.NSValidation;
+
+import er.extensions.eof.ERXEC;
+import er.extensions.foundation.ERXMutableDictionary;
+import er.extensions.validation.ERXValidationException;
+
+@SuppressWarnings("serial")
+public class MESDispatchSummaryPageWrapper extends MESDispatchEditorPagesNavigationController {
+    
+	public MESDispatch _child;
+	Logger log = Logger.getLogger(MESDispatchSummaryPageWrapper.class);
+	
+	public MESDispatchSummaryPageWrapper(WOContext context) {
+        super(context);
+    }
+
+	private void _recordChanges(NSDictionary<String, Object> newChanges, NSDictionary<String, Object> snapshot) throws ERXValidationException {
+		
+			EOEditingContext ec = ERXEC.newEditingContext();
+			
+			MESDispatchChangeLog changeLog = MESDispatchChangeLog.createMESDispatchChangeLog(ec, 
+					MESDispatch.localInstanceIn(ec, object()), 
+					MESUser.localInstanceIn(ec, session().authenticatedUser()));
+
+			ERXMutableDictionary<String, Object> changes = new ERXMutableDictionary<String, Object>();
+			
+			for(String key : newChanges.allKeys()) {
+				changes.takeValueForKey(snapshot.valueForKey(key), key);
+			}
+
+			changeLog.setChanges(new ERXMutableDictionary<String, Object>(changes));
+			ec.saveChanges();
+
+	}	
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESDispatch> children() {
+		return MESDispatch.fetchMESDispatchs(object().editingContext(), 
+				MESDispatch.PARENT.eq(object()), 
+				MESDispatch.RESERVATION_DATE.ascs());
+	}
+	
+	public String saveButtonLabel() {
+		return object().isNewObject() ? "Create New Dispatch" : "Update Dispatch";
+	}
+
+	@SuppressWarnings("unchecked")
+	public WOActionResults saveChanges() {
+
+		EOEditingContext parentEditingContext = (EOEditingContext)object().editingContext().parentObjectStore();
+		NSDictionary<String, Object> commitedSnapshot = delegate().dispatchSnapshot();
+		
+		if(! hasError()) {
+						
+			try {
+	
+				NSDictionary<String, Object> changes = null;
+				
+				if(! object().isNewObject()) {
+					changes = object().changesFromSnapshot(commitedSnapshot);
+				}
+
+				object().editingContext().saveChanges();
+				parentEditingContext.saveChanges();
+				
+				if(changes != null && changes.size() > 0) {
+					_recordChanges(changes, commitedSnapshot);
+				}
+				
+				delegate().setDispatchSnapshot(object().snapshot());
+				navigationController().addMessage(RECORD_UPDATE_MESSAGE);
+				
+			} catch (NSValidation.ValidationException e) {
+				validationFailedWithException(e, null, null);
+			}
+		
+		}
+		
+		return navigationController().nextPage();
+		
+	}
+	
+	public WOActionResults sendSummaryToCustomer() {
+
+		PrintSummaryPage mailer = new PrintSummaryPage(new WOContext(context().request()));
+		Runnable r = new SendSummary(mailer);
+		new Thread(r).start();
+		
+		navigationController().addMessage("Message was sent to customer");
+
+		return navigationController().nextPage();
+		
+	}
+	
+
+	public class SendSummary implements Runnable {
+		
+		private PrintSummaryPage _mailer;
+		private EOEditingContext _ec;
+
+		public SendSummary(PrintSummaryPage mailer) {
+		
+			_mailer = mailer;
+			_ec = ERXEC.newEditingContext();
+			_mailer.setObject(MESDispatch.localInstanceIn(_ec, object()));
+
+		}
+		
+		public void run() {
+
+			_ec.lock();
+
+			try {
+
+				KMSimpleJavaMail mail = new KMSimpleJavaMail();
+				mail.setSubject("Schedule Information from Hawaii Executive Shuttle");
+
+				if(object().customerEmailAddress() != null) {
+					mail.addRecipient(object().customerEmailAddress(), object().customerFullName());
+				}
+				
+				mail.addRecipient(session().authenticatedUser().emailAddress(), session().authenticatedUser().fullName());
+				mail.setContent("To view this message please use an HTML capable mail client.", _mailer);
+				mail.sendMessage();
+				
+			} catch (MessagingException e) {
+				
+				String errorTitle = "MessagingException: Unable to send payment coupon request to customer for app: " + application().name();
+				log.error(KMStringUtilities.ERROR_STRING_DIVIDER);
+				log.error(errorTitle);
+				log.error(KMStringUtilities.ERROR_STRING_DIVIDER);
+
+				MESSystemMessage.createSystemMessage("Unable to send dispatch summary with error: " + e.getMessage(), Level.ERROR.value(), KMStringUtilities.stackTraceToString(e));
+
+				
+			} catch (UnsupportedEncodingException e) {
+				
+				String errorTitle = "UnsupportedEncodingException: Unable to send payment coupon request to customer for app: " + application().name();
+				log.error(KMStringUtilities.ERROR_STRING_DIVIDER);
+				log.error(errorTitle);
+				log.error(KMStringUtilities.ERROR_STRING_DIVIDER);
+
+				MESSystemMessage.createSystemMessage("Unable to send dispatch summary with error: " + e.getMessage(), Level.ERROR.value(), KMStringUtilities.stackTraceToString(e));
+
+				
+			} finally {
+				
+				_ec.unlock();
+				_ec.dispose();
+				_ec = null;
+
+			}
+		
+		}
+		
+	}
+	
+	
+
+}

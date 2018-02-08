@@ -1,0 +1,23 @@
+ConfirmationInput : WOTextField {
+	class = "text";
+	value = confirmationNumber;
+}
+
+LookupButton : WOSubmitButton {
+	action = lookUp;
+	class = "btn";
+	value = "Look Up";
+}
+
+Main : PageWrapper {
+	mainNavigationIndex = -1;
+	metaDescription = metaDescription;
+	pageTitle = pageTitle;
+}
+
+MessagesPanel : MessagePanel {
+	hasErrors = hasErrors;
+	hasMessages = hasMessages;
+	errors = errors;
+	messages = messages;
+}

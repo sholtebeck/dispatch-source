@@ -1,0 +1,113 @@
+<webobject name = "PageWrapper">
+	<webobject name = "ResizeColumn">
+		<span class="prg-handle">&harr;</span>
+		<webobject name = "LeftNavigationUpdateContainer">
+			<ul class="prg-column-header-bar">
+				<webobject name = "ViewDispatchesListItem">
+					<webobject name = "ViewDispatches"><span><i class="icon-bullhorn">&nbsp;</i></span></webobject>
+				</webobject>
+				<webobject name = "ViewHubObjectsListItem">
+					<webobject name = "ViewHubObjectsAction"><span><i class="icon-road">&nbsp;</i></span></webobject>
+				</webobject>
+				<webobject name = "IsSuperAdministrator">
+					<webobject name = "ViewScheduleListItem">
+						<webobject name = "ViewSchedulesAction"><span><i class = "icon-calendar">&nbsp;</i></span></webobject>
+					</webobject>
+				</webobject>
+			</ul>
+			<webobject name = "StaticColumn">
+				<ul class="prg-tree nav">
+					<webobject name = "ViewDispatchesNavigationPageKey">
+						<li><a href = "#" class = "expanded">Search Macros</a>
+							<ul>
+								<li><wo:link class = "no-leaf" action = "$listAllDispatches"><span>All</span></wo:link>
+								<li><wo:link class = "no-leaf" action = "$listTodaysDispatches"><span>Today</span></wo:link>
+								<li><wo:link class = "no-leaf" action = "$listTomorrowsDispatches"><span>Tomorrow</span></wo:link>
+								<li><wo:link class = "no-leaf" action = "$listYesterdaysDispatches"><span>Yesterday</span></wo:link>
+							</ul>
+						</li>
+					</webobject>
+					<webobject name = "ViewHubObjectsNavigationPageKey">
+						<webobject name = "AccountTreeNavigation"></webobject>
+						<webobject name = "DriverTreeNavigation"></webobject>
+						<webobject name = "LocationsTreeNavigation"></webobject>
+						<webobject name = "PhonesTreeNavigation"></webobject>
+						<webobject name = "ServicesExclusiveTreeNavigation"></webobject>
+						<webobject name = "ServicesSharedTreeNavigation"></webobject>
+						<webobject name = "VehiclesTreeNavigation"></webobject>
+						<li>
+							<webobject name = "ZonesExpansion">
+								<ul>
+									<webobject name = "AirportZonesTreeNavigation"></webobject>
+									<webobject name = "StandardZoneTreeNavigation"></webobject>
+								</ul>
+							</webobject>
+						</li>	
+					</webobject>
+					<webobject name = "ViewSchedulesNavigationPageKey">
+						<li><a href = "#" class = "expanded">Schedule Search Macros</a>
+							<li><wo:link class = "no-leaf" action = "$listAllSchedules"><span>All</span></wo:link></li>
+							<li><wo:link class = "no-leaf" action = "$listTodaysSchedules"><span>Today</span></wo:link></li>
+							<li><wo:link class = "no-leaf" action = "$listTomorrowsSchedules"><span>Tomorrow</span></wo:link></li>
+							<li><wo:link class = "no-leaf" action = "$listThisWeekSchedules"><span>This Week</span></wo:link></li>
+							<li><wo:link class = "no-leaf" action = "$listNextWeekSchedules"><span>Next Week</span></wo:link></li>
+							<li><wo:link class = "no-leaf" action = "$listThisMonthSchedules"><span>This Month</span></wo:link></li>
+							<li><wo:link class = "no-leaf" action = "$listNextMonthSchedules"><span>Next Month</span></wo:link></li>
+						</li>
+					</webobject>
+				</ul>
+				<webobject name = "FooterBar">
+					<li>
+						<webobject name = "FooterContextMenu"><span><i class="icon-plus"></i></span></webobject>
+						<ul class="dropdown-menu">
+							<webobject name = "ViewDispatchesNavigationPageKey">
+								<li><webobject name = "AddNewDispatchLink">Create New Dispatch</webobject></li>
+							</webobject>
+							<webobject name = "ViewHubObjectsNavigationPageKey">
+								<webobject name = "IsSuperAdministrator">
+									<li><webobject name = "AddNewAccountLink">Create New Account</webobject></li>
+								</webobject>
+								<li><webobject name = "AddNewDriverLink">Create New Driver</webobject></li>
+								<li><webobject name = "AddNewLocationLink">Create New Location</webobject></li>
+								<li><webobject name = "AddNewPhoneLink">Create New Phone</webobject></li>
+								<webobject name = "IsSuperAdministrator">
+									<li><webobject name = "AddNewExclusiveServiceLink">Create New Service (exclusive)</webobject></li>
+									<li><webobject name = "AddNewSharedServiceLink">Create New Service (shared)</webobject></li>
+								</webobject>
+									<li><webobject name = "AddNewVehicleLink">Create New Vehicle</webobject></li>
+								<webobject name = "IsSuperAdministrator">
+									<li><webobject name = "AddNewAirportZoneLink">Create New Zone (airport)</webobject></li>
+									<li><webobject name = "AddNewZoneLink">Create New Zone (standard)</webobject></li>
+								</webobject>
+							</webobject>
+							<webobject name = "ViewSchedulesNavigationPageKey">
+								<li><webobject name = "AddNewScheduleLink">Create New Schedule</webobject></li>
+							</webobject>
+						</ul>
+					</li>	
+				</webobject>
+			</webobject>
+		</webobject>		
+	</webobject>
+	<webobject name = "AlleyColumn">&nbsp;</webobject>
+	<webobject name = "MainTableColumn">	
+		<div class = "row-fluid">
+			<webobject name = "ViewDispatchesPageKey">
+				<webobject name = "SelectedObjectIsDefined">
+					<webobject name = "DispatchEditor"></webobject>	
+				</webobject>
+				<webobject name = "SelectedObjectIsNotDefined">
+					<webobject name = "DispatchTable"></webobject>
+				</webobject>
+			</webobject>
+			<webobject name = "ViewHubObjectsPageKey">
+				<webobject name = "SelectedObjectIsDefined">
+					<webobject name = "HubObjectEditor"></webobject>
+				</webobject>
+			</webobject>
+			<webobject name = "ViewSchedulesPageKey">
+				<webobject name = "MESSchedulePagesController"></webobject>
+			</webobject>
+		</div>
+	</webobject>	
+</webobject>

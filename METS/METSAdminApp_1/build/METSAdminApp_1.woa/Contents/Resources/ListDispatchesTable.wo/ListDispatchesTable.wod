@@ -1,0 +1,362 @@
+AccountName : WOString {
+	value = dispatch.account.name;
+}
+
+AccountNameSortOrdering : WOSortOrder {
+	displayGroup = displayGroup;
+	key = "account.name";
+}
+
+AdditionalRoutesRepetition : WORepetition {
+	item = childDispatch;
+	list = dispatch.children;
+}
+
+Author : WOString {
+	value = dispatch.user|fullName(false);
+}
+
+BillingColumn : WOGenericContainer {
+	class = "billing-column";
+	elementName = "td";
+	style = billingColumnStyle;
+}
+
+BillingRepetition : WORepetition {
+	item = paymentInfo;
+	list = dispatch.payments;
+}
+
+Booker : WOString {
+	value = dispatch.bookedBy.name;
+}
+
+BookerIsDefined : ERXNonNullConditional {
+	condition = dispatch.bookedBy;
+}
+
+ChildConfirmationNumber : WOString {
+	value = childDispatch.confirmationNumber;
+}
+
+ChildSeatsToString : WOString {
+	value = dispatch.childSeatsToString;
+}
+
+ConfirmationNumber : WOString {
+	value = dispatch.confirmationNumber;
+}
+
+CustomerPhoneNumber : WOString {
+	value = dispatch.customerPhoneNumber;
+}
+
+CustomerPhoneNumberIsDefined : ERXNonNullConditional {
+	condition = dispatch.customerPhoneNumber;
+}
+
+CustomerName : WOString {
+	value = dispatch|customerFullName(true);
+}
+
+DispatchCount : WOString {
+	numberformat = "0";
+	value = displayGroup.displayedObjects.@count;
+}
+
+DispatchCountAll : WOString {
+	numberformat = "0";
+	value = displayGroup.allObjects.@count;
+}
+
+DispatchesRepetition : WORepetition {
+	item = dispatch;
+	list = displayGroup.selectedObjects;
+}
+
+DispatchStatus : WOString {
+	value = dispatch.statusKey;
+}
+
+DispatchNotesPopover : METSPopover {
+	content = dispatch.dispatchNotes;
+	options = "{'location' : 'above'}";
+	title = "Dispatcher Notes";
+}
+
+DispatcherSortOrdering : WOSortOrder {
+	displayGroup = displayGroup;
+	key = "user.lastName";
+}
+
+DisplayMiscellaneousFees : WOConditional {
+	condition = dispatch.hasMiscellaneousFees;
+}
+
+DispatchNotes : WOString {
+	value = dispatch.dispatchNotes;
+}
+
+DisplayNotesInline : WOConditional {
+	condition = displayNotesInline;
+}
+
+DisplaySortOrderings : WOConditional {
+	condition = displaySortOrderings;
+}
+
+DoNotDisplayNotesInline: WOConditional {
+	condition = displayNotesInline;
+	negate = true;
+}
+
+DriverIsAssigned : ERXNonNullConditional {
+	condition = dispatch.driver;
+}
+
+DriverIsNotAssigned : ERXNonNullConditional {
+	condition = dispatch.driver;
+	negate = true;
+}
+
+DriverName : WOString {
+	value = dispatch.driver.firstName;
+}
+
+DriverNameSortOrdering : WOSortOrder {
+	displayGroup = displayGroup;
+	key = "driver.lastName";
+}
+
+DriverNotes : WOString {
+	value = dispatch.driverNotes;
+}
+
+DriverNotesPopover : METSPopover {
+	content = dispatch|escapedDriverNotes;
+	options = "{'location' : 'above'}";
+	title = "Driver Notes";
+}
+
+DriverTip : WOString {
+	numberformat = "$#,##0.00";
+	value = dispatch.tipAmount;
+}
+
+DropOffLocation : WOString {
+	value = dispatch.dropOffLocation.nameWithZone;
+}
+
+DropOffLocationSortOrdering : WOSortOrder {
+	displayGroup = displayGroup;
+	key = "dropOffLocation.name";
+}
+
+FooterTableDivider : WOGenericContainer {
+	class = "prg-text-align-right";
+	elementName = "td";
+}
+
+FlightNumber : WOString {
+	value = dispatch.flightNumber;
+}
+
+FlightNumberIsNotNull : ERXNonNullConditional {
+	condition = dispatch.flightNumber;
+}
+
+FlightNumberIsNull : ERXNonNullConditional {
+	condition = dispatch.flightNumber;
+	negate = true;
+}
+
+FlightTime : WOString {
+	dateformat = "%I:%M %p";
+	value = dispatch.flightDateTime;
+}
+
+FlightTimeIsDefined : WOConditional {
+	condition = dispatch.displayFlightInformation;
+}
+
+Greet : WOString {
+	value = greet;
+}
+
+HasAdditionalRoutes : WOConditional {
+	condition = dispatch.hasChildren;
+}
+
+HasDispatchNotes : ERXNonNullConditional {
+	condition = dispatch.dispatchNotes;
+}
+
+HasDriverNotes : ERXNonNullConditional {
+	condition = dispatch.driverNotes;
+}
+
+HasMultipleBatches : WOConditional {
+	condition = displayGroup.hasMultipleBatches;
+}
+
+HasParentRoute : WOConditional {
+	condition = dispatch.hasParent;
+}
+
+HasResults : WOConditional {
+	condition = hasResults;
+}
+
+InspectChildDispatchLink : WOHyperlink {
+	action = inspectChildDispatch;
+}
+
+InspectDispatchLink : WOHyperlink {
+	action = inspectDispatch;
+}
+
+InspectParentDispatchLink : WOHyperlink {
+	action = inspectParentDispatch;
+}
+
+InspectDriverLink : WOHyperlink {
+	action = inspectDriver;
+}
+
+IsSuperUser : WOConditional {
+	condition = session.isSuperUser;
+}
+
+MiscellaneousFees : WOString {
+	numberformat = "$#,##0.00";
+	value = dispatch.miscellaneousFee;
+}
+
+MiscellaneousFeePopOverLink : METSPopover {
+	content = dispatch.miscellaneousFeesToString;
+	options = "{'location' : 'above'}";
+	title = "Misc. Fees";
+}
+
+NavigationControllerIsDefined : WOConditional {
+	condition = navigationControllerIsDefined;
+}
+
+HasPaymentInfos : ERXNonNullConditional {
+	condition = dispatch.payments;
+}
+
+NoPaymentInfos : WOConditional {
+	condition = dispatch.hasPaymentInformation;
+	negate = true;
+}
+
+NotHaveResults : WOConditional {
+	condition = hasResults;
+	negate = true;
+}
+
+NumberOfBags : WOString {
+	numberformat = "0";
+	value = dispatch.numberOfBags;
+}
+
+NumberOfPassengers : WOString {
+	numberformat = "0";
+	value = dispatch.numberPassengers;
+}
+
+ParentConfirmationNumber : WOString {
+	value = dispatch.parent.confirmationNumber;
+}
+
+PaymentsTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = paymentInfoTotal;
+}
+
+PaidPaymentsTotalAll : WOString {
+	numberformat = "$#,##0.00";
+	value = dataSource.paidPaymentInfoTotal;
+}
+
+UnpaidPaymentsTotalAll : WOString {
+	numberformat = "$#,##0.00";
+	value = dataSource.unpaidPaymentInfoTotal;
+}
+
+PaymentsTotalAll : WOString {
+	numberformat = "$#,##0.00";
+	value = dataSource.paymentInfoTotal;
+}
+
+PaymentsTotalPaid : WOString {
+	numberformat = "$#,##0.00";
+	value = paidPaymentInfoTotal;
+}
+
+PaymentsTotalUnPaid : WOString {
+	numberformat = "$#,##0.00";
+	value = unPaidPaymentInfoTotal;
+}
+
+PickUpLocation : WOString {
+	value = dispatch.pickUpLocation.nameWithZone;
+}
+
+PickUpLocationIsAnAirportZone : WOConditional {
+	condition = dispatch.pickUpLocation.zone.isAirportZone;
+}
+
+PickUpLocationSortOrdering : WOSortOrder {
+	displayGroup = displayGroup;
+	key = "pickUpLocation.name";
+}
+
+PickUpTime : WOString {
+	dateformat = pickUpTimeDateFormat;
+	value = dispatch.reservationDate;
+}
+
+PickUpTimeSortOrdering : WOSortOrder {
+	displayGroup = displayGroup;
+	key = "reservationDate";
+}
+
+RequiresChildSeats : WOConditional {
+	condition = dispatch.requiresChildSeats;
+}
+
+RevenueTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = totalRevenue;
+}
+
+RevenueTotalAll : WOString {
+	numberformat = "$#,##0.00";
+	value = dataSource.revenueTotal;
+}
+
+ServiceType : WOString {
+	value = dispatch.service.name;
+}
+
+TableRowContainer : WOGenericContainer {
+	class = tableRowClassName;
+	elementName = "tr";
+}
+
+Total : WOString {
+	numberformat = "$#,##0.00";
+	value = dispatch.total;
+}
+
+TimeCreated : WOString {
+	dateformat = "%m/%d/%y %I:%M %p";
+	value = dispatch.creationDate;
+}
+
+TransferFee : WOString {
+	numberformat = "$#,##0.00";
+	value = dispatch.subTotal;
+}

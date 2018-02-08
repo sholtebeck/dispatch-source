@@ -1,0 +1,52 @@
+CompsCount : WOString {
+	numberformat = "0";
+	value = refundsAndCompsCount;
+}
+
+CompRevenue : WOString {
+	numberformat = "$#,##0.00";
+	value = refundsAndComps;
+}
+
+NumberOfDispatches : WOString {
+	numberformat = "0";
+	value = report.dispatchCount;
+}
+
+PaymentType : WOString {
+	value = report.paymentType;
+}
+
+RevenueForPaymentType : WOString {
+	numberformat = "$#,##0.00";
+	value = report.revenue;
+}
+
+ReportsRepetition : WORepetition {
+	item = report;
+	list = reports;
+}
+
+SubTotalCount : WOString {
+	numberformat = "0";
+	value = totalDispatches;
+}
+
+SubTotalRevenue : WOString {
+	numberformat = "$#,##0.00";
+	value = totalRevenue;
+}
+
+TotalCount : WOString {
+	numberformat = "0";
+	value = dispatchCountMinusRefundsAndComps;
+}
+
+TotalRevenue : WOString {
+	numberformat = "$#,##0.00";
+	value = revenueMinusRefundsAndComps;
+}
+
+ViewDispatchesLink : WOHyperlink {
+	action = viewDispatches;
+}

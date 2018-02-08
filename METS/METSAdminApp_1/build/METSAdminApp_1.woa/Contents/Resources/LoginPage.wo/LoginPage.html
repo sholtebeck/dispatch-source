@@ -1,0 +1,42 @@
+<webobject name = "PRGLoginTable">
+	<webobject name = "PRGTableRow">
+		<webobject name = "LoginScreen">
+			<div class = "outer-wrapper">
+				<div class = "system-information">
+					<h2>Hawaii Executive Transportation Service</h2>
+					<h3>Administrative Portal</h3>
+					<p><webobject name = "CurrentDateTime" /></p>
+					<p>Please Login To Access System</p>
+					<wo:if condition = "$hasError">
+						<div class = "alert alert-error">
+							<webobject name = "ErrorRepetition">
+								<span><webobject name = "ErrorMessage"></webobject></span>
+							</webobject>
+						</div>
+					</wo:if>
+				</div>
+				<wo:form directActionName = "login" name = "LoginForm">
+					<div class="well form-horizontal">
+						<fieldset>
+							<div class="control-group">
+								<label class="control-label" for="username">Username:</label>
+								<div class="controls">
+									<webobject name = "UserNameInput" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="password">Password:</label>
+								<div class="controls">
+									<input type="password" name = "psswd" id="password">
+								</div>
+							</div>	
+						</fieldset>
+					</div>
+					<ul class = "prg-text-align-right">
+						<li><wo:submitButton class = "login-button" actionClass = "DirectAction" directActionName = "login"></wo:submitButton>Login</li>
+					</ul>	
+				</wo:form>	
+			</div>
+		</webobject>
+	</webobject>
+</webobject>

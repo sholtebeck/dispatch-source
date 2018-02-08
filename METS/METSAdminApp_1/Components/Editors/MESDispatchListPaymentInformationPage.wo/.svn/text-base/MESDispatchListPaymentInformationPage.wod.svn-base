@@ -1,0 +1,72 @@
+AddPaymentInformationContextMenu : METSContextMenuLink {
+	class = "prg-pad-right";
+	options = "{'top': '10px'}";
+}
+
+HasPaymentInformation : WOConditional {
+	condition = object.hasPaymentInformation;
+}
+
+InspectPaymentInformationLink : WOHyperlink {
+	action = inspectPaymentInformation;
+	class = "btn btn-mini";
+}
+
+NoPaymentInformation : WOConditional {
+	condition = object.hasPaymentInformation;
+	negate = true;
+}
+
+PaymentAmount : WOString {
+	numberformat = "$#,##0.##";
+	value = paymentInformation.amount;
+}
+
+PaymentCreationDate : WOString {
+	dateformat = "%m/%d/%y";
+	value = paymentInformation.creationDate;
+}
+
+PaymentDriverCollect : WOString {
+	value = paymentDriverCollect;
+}
+
+PaymentInformationDoesNotHaveNotes : WOConditional {
+	condition = paymentInformation.hasNotes;
+	negate = true;
+}
+
+PaymentInformationHasNotes : WOConditional {
+	condition = paymentInformation.hasNotes;	
+}
+
+PaymentInformationNotesPopover : METSPopover {
+	content = paymentInformation|escapedNotes;
+	options = "{'location' : 'above'}";
+	title = "Payment Information Notes";
+}
+
+PaymentInformationRepetition : WORepetition {
+	item = paymentInformation;
+	list = dispatchPayments;
+}
+
+PaymentType : WOString {
+	value = paymentInformation.displayName;
+}
+
+RemovePaymentInformationButton : WOHyperlink {
+	action = removePaymentInformation;
+	class = "btn btn-danger";
+}
+
+RemovePaymentInformationModalContainer : MTAjaxModalContainer {
+	ajax = true;
+	autoWrapContent = false;
+	class = "btn btn-danger btn-mini";
+	id = removePaymentInformationIdentifier;
+	label = "Remove";
+	showFooter = false;
+	showTitle = false;
+	useDefaultCSS = false;
+}

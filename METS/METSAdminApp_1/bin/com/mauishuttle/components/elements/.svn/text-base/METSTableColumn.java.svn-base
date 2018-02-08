@@ -1,0 +1,17 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class METSTableColumn extends METSUIElements {
+
+	public METSTableColumn(WOContext context) {
+        super(context);
+    }
+
+	@Override
+	public String defaultClassName() {
+		return "prg-table-column";
+	}
+
+}

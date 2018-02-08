@@ -1,0 +1,38 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+
+import er.extensions.components.ERXStatelessComponent;
+import er.extensions.foundation.ERXStringUtilities;
+
+public abstract class METSUIElements extends ERXStatelessComponent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public METSUIElements(WOContext context) {
+        super(context);
+    }
+
+	public abstract String defaultClassName();
+	
+	public String classNameWithDefault() {
+		String defaultClassName = defaultClassName();
+		if(ERXStringUtilities.stringIsNullOrEmpty(stringValueForBinding("class")) == false) {
+			defaultClassName += " ";
+			defaultClassName += stringValueForBinding("class");
+		}
+		return defaultClassName;
+	}
+ 
+	public String elementNameWithDefault() {
+		return stringValueForBinding("elementName", "div");
+	}
+	
+	public String id() {
+		return stringValueForBinding("id");
+	}
+	
+}

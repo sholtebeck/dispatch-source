@@ -1,0 +1,59 @@
+AssetGroupForm : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+AssetGroupName : WOString {
+	value = object.name;
+}
+
+AssetGroupAssetsRepetition : WORepetition {
+	item = asset;
+	list = assets;
+}
+
+AssetThumbnail : ERAttachmentImageViewer {
+	attachment = imageAsset.attachment;
+}
+
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	deleteAction = deleteObject;
+	isNewObject = object.isNewObject;
+	deleteButtonText = "Remove Asset Group";
+	modalContainerText = "Are you sure you want to remove this asset group?  All it's assets will also be removed!";
+	useModalForDelete = true;
+	submitAction = navigationController.saveChanges;
+}
+
+InspectAssetLink : WOHyperlink {
+	action = inspectAsset;
+	style = backgroundImageUrl;
+}
+
+IsImageAsset : WOConditional {
+	condition = isImageAsset;
+}
+
+IsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MainTableColumn : METSTableColumn {
+	class = "prg-main-column";
+	id = "PRGMainColumn";
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+

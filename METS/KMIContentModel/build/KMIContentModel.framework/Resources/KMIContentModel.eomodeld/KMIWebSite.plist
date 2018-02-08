@@ -1,0 +1,89 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "domain_name"; 
+            name = domainName; 
+            prototypeName = varchar255; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = properties; 
+            name = properties; 
+            prototypeName = stringDictionary; 
+        }, 
+        {allowsNull = Y; columnName = type; name = type; prototypeName = intNumber; }
+    ); 
+    attributesUsedForLocking = (id); 
+    className = "km.content.eo.KMIWebSite"; 
+    classProperties = (
+        assetGalleries, 
+        assetGroups, 
+        assets, 
+        categories, 
+        documents, 
+        domainName, 
+        keyWords, 
+        properties, 
+        testimonials, 
+        type
+    ); 
+    externalName = WebSite; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIWebSite; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = KMIAssetGallery; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = siteID; sourceAttribute = id; }); 
+            name = assetGalleries; 
+        }, 
+        {
+            destination = KMIAssetGroup; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = siteID; sourceAttribute = id; }); 
+            name = assetGroups; 
+        }, 
+        {
+            destination = KMIAbstractAsset; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = siteID; sourceAttribute = id; }); 
+            name = assets; 
+        }, 
+        {
+            destination = KMIWebDocumentCategory; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = siteID; sourceAttribute = id; }); 
+            name = categories; 
+        }, 
+        {
+            destination = KMIAbstractDocument; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = siteID; sourceAttribute = id; }); 
+            name = documents; 
+        }, 
+        {
+            destination = KMIWebDocumentKeyWord; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = siteID; sourceAttribute = id; }); 
+            name = keyWords; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = KMIWebSiteTestimonial; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = webSiteID; sourceAttribute = id; }); 
+            name = testimonials; 
+        }
+    ); 
+    restrictingQualifier = "type=0"; 
+}

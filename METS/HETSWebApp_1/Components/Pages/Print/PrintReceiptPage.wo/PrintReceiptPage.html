@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<meta content="IE=9" http-equiv="X-UA-Compatible" />
+		<meta name="viewport" content="width=1000, inital-scale=1.0" />	
+		<title><webobject name = "PageTitle"></webobject></title>	
+		<webobject name = "BluePrintScreen"></webobject>
+		<webobject name = "BluePrintPrint"></webobject>
+		<webobject name = "IFIELT8">
+			<webobject name = "BluePrintIE"></webobject>
+		</webobject>
+		<style>
+			table {
+				border-spacing: 1px;
+				width: 650px;
+			}
+
+			table td, table th {
+				border: 1px solid black;
+			}
+		
+		</style>
+	</head>
+	<body>
+		<h1>Itinerary</h1>
+		<table>
+			<tbody>
+				<tr>
+					<th>Date</th>
+					<td><webobject name = "PickUpDateTime" /></td>
+				</tr>
+				<tr>
+					<th>Pick Up Location</th>
+					<td><webobject name = "PickUpLocation" /></td>
+				</tr>
+				<tr>
+					<th>Drop Off Location</th>
+					<td><webobject name = "DropOffLocation" /></td>
+				</tr>
+				<tr>
+					<th>Service</th>
+					<td><webobject name = "Service" /></td>
+				</tr>
+				<webobject name = "AccountIsAssigned">
+					<tr>
+						<th>Company</th>
+						<td><webobject name = "CompanyName" /></td>
+					</tr>
+				</webobject>
+				<tr>
+					<th>Customer Name</th>
+					<td><webobject name = "CustomerName" /></td>
+				</tr>
+				<tr>
+					<th>Number Passengers</th>
+					<td><webobject name = "NumberPassengers" /></td>
+				</tr>
+			</tbody>
+		</table>	
+		<h1>Receipt</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Passenger</th>					
+					<th>Confirmation Number</th>
+					<th>Fare</th>
+					<th>Misc Fees</th>
+					<th>Tip</th>
+					<th>Taxes</th>
+					<th>Ticket Total</th>
+				</tr>		
+			</thead>
+			<tbody>
+				<tr>
+					<td><webobject name = "CustomerName"></webobject></td>
+					<td><webobject name = "ConfirmationNumber"></webobject></td>
+					<td><webobject name = "Fare"></webobject></td>
+					<td><webobject name = "MiscellaneousFees"></webobject></td>
+					<td><webobject name = "DriverTip"></webobject></td>
+					<td><webobject name = "Taxes"></webobject></td>
+					<td><webobject name = "TicketTotal"></webobject></td>		
+				</tr>
+			</tbody>
+		</table>				
+		<script>
+			window.addEvent('domready', function() {
+				window.print();
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+AlleyColumn : METSTableColumn {
+	class = "prg-alley";
+}
+
+ComponentContent : WOComponentContent {
+	
+}
+
+DriverRevenueReportsLink : WOHyperlink {
+	action = viewDriverRevenueReports;
+}
+
+DriverTipsReportLink : WOHyperlink {
+	action = viewDriverTips;
+}
+
+MainTableColumn : METSTableColumn {
+	class = "prg-main-column";
+	id = "PRGMainColumn";
+}
+
+OutstandingAccountPaymentsReportLink : WOHyperlink {
+	action = viewOutstandingAccountPayments;
+}
+
+OutstandingDriverPaymentsReportLink : WOHyperlink {
+	action = viewOutstandingDriverPayments;
+}
+
+PageWrapper : PageWrapper {
+	pageTitle = ^pageTitle;
+}
+
+ResizeColumn : METSResizeColumn {
+	class = "prg-side-column";
+	id = "PRGLeftColumn";
+	otherColumn = "PRGMainColumn";
+}
+
+OutstandingServiceOrdersLink : WOHyperlink {
+	action = serviceOrderReportLink;
+}
+
+OutstandingVouchersLink : WOHyperlink {
+	action = vouchersReportLink;
+}
+
+StaticColumn : METSStaticColumn {
+
+}

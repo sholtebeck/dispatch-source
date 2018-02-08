@@ -1,0 +1,34 @@
+ReportsRepetition : WORepetition {
+	item = report;
+	list = reports;
+}
+
+TotalMileage : WOString {
+	numberformat = "0.00";
+	value = reports.@sum.mileage;
+}
+
+VehicleLicensePlateNumber : WOString {
+	value = report.licensePlateNumber;
+}
+
+VehicleMake : WOString {
+	value = report.make;
+}
+
+VehicleMileage : WOString {
+	numberformat = "0.00";
+	value = report.mileage;
+}
+
+VehicleModel : WOString {
+	value = report.model;
+}
+
+VehicleName : WOString {
+	value = report.name;
+}
+
+VehicleType : WOString {
+	value = report.vehicleType.name;
+}

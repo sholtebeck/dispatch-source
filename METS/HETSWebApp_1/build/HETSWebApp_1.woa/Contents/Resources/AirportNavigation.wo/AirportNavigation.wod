@@ -1,0 +1,20 @@
+ListItem : WOGenericContainer {
+	class = listItemClassAttributeNames;
+	elementName = "li";
+}
+
+KahuluiAirportPageLink : WOHyperlink {
+	href = kahuluiAirportPageLink;
+}
+
+KapaluaAirportPageLink : WOHyperlink {
+	href = kapaluaAirportPageLink;
+}
+
+KonaAirportPageLink : WOHyperlink {
+	href = konaAirportPageLink;
+}
+
+LihueAirportPageLink : WOHyperlink {
+	href = lihueAirportPageLink;
+}

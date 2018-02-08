@@ -1,0 +1,38 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.controllers.MESDispatchEditorPagesNavigationController;
+import com.mauishuttle.eo.MESAccount;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+
+@SuppressWarnings("serial")
+public class MESDispatchPassengerInformationEditor extends MESDispatchEditorPagesNavigationController {
+	
+	public MESAccount _account;	
+
+	public MESDispatchPassengerInformationEditor(WOContext context) {
+        super(context);
+    }
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAccount> hubAccounts() {
+		return MESAccount.fetchMESAccounts(
+				object().editingContext(), 
+				MESAccount.HUB.eq(session().currentHub()), 
+				MESAccount.NAME.ascs());
+	}    
+	
+	public WOActionResults saveChanges() {
+	
+		saveStep();
+		
+		if(! hasError()) {
+			setEditorPageKey(ROUTING_INFORMATION_PAGE_KEY);
+		}
+
+		return navigationController().nextPage();
+		
+	}
+	
+}

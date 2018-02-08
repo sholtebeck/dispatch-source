@@ -1,0 +1,8 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+MainTableColumn : METSTableColumn {
+	class = "prg-main-column";
+	id = "METSBlankPage";
+}

@@ -1,0 +1,158 @@
+AllDispatchesCount : WOString {
+	numberformat = "0";
+	value = object.dispatches.@count;
+}
+
+BillingTotal : WOString {
+	numberformat = "$#,##0.##";
+	value = dispatch.paymentInfosTotal;
+}
+
+ConfirmationNumber : WOString {
+	value = dispatch.confirmationNumber;
+}
+
+CustomerLastName : WOString {
+	value = dispatch.customerLastName;
+}
+
+DispatchesRepetition : WORepetition {
+	item = dispatch;
+	list = dataSource.dispatchDisplayGroup.displayedObjects;
+}
+
+DispatchStatus : WOString {
+	value = dispatch.statusKey;
+}
+
+DispatchesTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = calculatedTotal;
+}
+
+DispatchesTotalAll : WOString {
+	numberformat = "$#,##0.00";
+	value = dataSource.revenueTotal;
+}
+
+DisplayedDispatchCount : WOString {
+	numberformat = "0";
+	value = dataSource.dispatchDisplayGroup.displayedObjects.@count;
+}
+
+DisplayNext : WOHyperlink {
+	action = dataSource.dispatchDisplayGroup.displayNextBatch;
+}
+
+DisplayPrevious : WOHyperlink {
+	action = dataSource.dispatchDisplayGroup.displayPreviousBatch;
+}
+
+Driver : WOString {
+	value = dispatch.driver|fullName(false);
+}
+
+DropOffLocation : WOString {
+	value = dispatch.dropOffLocation.name;
+}
+
+EnableDateFilterPopupButton : WOPopUpButton {
+	class = "span1 prg-pad-right";
+	list = yesOrNoArray;
+	noSelectionString = "Enable Date Filtering";
+	selection = dataSource.enableDateFiltering;
+}
+
+EndDatePicker : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = dataSource.searchEndDate;
+}
+
+FilterButton : WOSubmitButton {
+	action = filter;
+	class = "btn btn-primary";
+	value = "Filter Dispatches";
+}
+
+FilterResultsForm : WOForm {
+	action = filter; 
+	class = "form-inline";
+	name = "MESFilterDispatchesForm";
+}
+
+HasMultipleBatches : WOConditional {
+	condition = dataSource.dispatchDisplayGroup.hasMultipleBatches;
+}
+
+HasResults : WOConditional {
+	condition = dataSource.hasResults;
+}
+
+InspectDispatchLink : WOHyperlink {
+	action = viewDispatch;
+}
+
+NoResults : WOConditional {
+	condition = dataSource.hasResults;
+	negate = true;
+}
+
+ParentConfirmationNumber : WOString {
+	value = dispatch.parent.confirmationNumber;
+}
+
+PaymentInfo : WOString {	
+	escapeHTML = false;
+	value = paymentInfo;
+}
+
+PaymentInfoAll : WOString {
+	numberformat = "$#,##0.00";
+	value = dataSource.paymentInfoTotal;
+}
+
+PaymentInfoDisplayed : WOString {
+	numberformat = "$#,##0.00";
+	value = dataSource.dispatchDisplayGroup.displayedObjects.@sum.paymentInfoTotal;
+}
+
+PaymentInformationRepetition : WORepetition {
+	item = paymentInformation;
+	list = dispatch.payments;
+}
+
+PaymentPaidCheckbox : WOCheckBox {
+	checked = paymentInformation.paid;
+}
+
+PaymentType : WOString {
+	value = paymentInformation.displayName;
+}
+
+PickUpLocation : WOString {
+	value = dispatch.pickUpLocation.name;
+}
+
+ReservationDate : WOString {
+	dateformat = "%B %d, %y %H:%M %p";
+	value = dispatch.reservationDate;
+}
+
+Service : WOString {
+	value = dispatch.service.name;
+}
+
+StartDatePicker : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = dataSource.searchStartDate;
+}
+
+SubmitButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary";
+	
+}

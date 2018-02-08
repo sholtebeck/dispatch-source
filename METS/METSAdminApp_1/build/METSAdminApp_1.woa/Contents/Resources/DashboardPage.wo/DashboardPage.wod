@@ -1,0 +1,204 @@
+CurrentMessageBody : WOString {
+	escapeHTML = false;
+	value = currentMessage.messageBody;
+}
+
+CurrentMessageDate : WOString {
+	dateformat = "%B %d, %Y %H:%M";
+	value = currentMessage.creationDate;
+}
+
+CurrentMessageIsNotNull : ERXNonNullConditional {
+	condition = currentMessage;
+}
+
+CurrentMessageIsNull : ERXNonNullConditional {
+	condition = currentMessage;
+	negate = true;
+}
+
+CurrentMessageSubject : WOString {
+	value = currentMessage.subject;
+}
+
+CurrentMessageStatus : WOString {
+	value = currentMessage.level;
+}
+
+CurrentMessageUpdateContainer : MTAjaxUpdateContainer {
+	id = "METSCurrentMessageAjaxUpdateContainer";
+}
+
+DashboardPageWrapper : WOGenericContainer {
+	elementName = "div";
+	id = "DashboardPageWrapper";
+}
+
+DisplayMoreResults : MTAjaxUpdateLink {
+	action = displayMoreResults;
+	updateContainerID = "METSMessageListUpdateContainer";
+}
+
+Form : WOForm {
+	action = saveChanges;
+	class = "form-inline";
+	multipleSubmit = true;
+}
+
+From : WOString {
+	value = currentMessage|from;
+}
+
+HasMessages : WOConditional {
+	condition = messageListIsNotNullOrEmpty;
+}
+
+HasMoreResultsToShow : WOConditional {
+	condition = hasMoreResults;
+}
+
+IsNotSender : WOConditional {
+	condition = isNotSender;
+}
+
+IsSuperUser : WOConditional {
+	condition = session.isSuperUser;
+}
+
+IsTechnicalAdministrator : WOConditional {
+	condition = session.isTechnicalAdministrator;
+}
+
+IsUserMessage : WOConditional {
+	condition = currentMessage.isUserMessage;
+}
+
+LeftColumnFooterBar : METSTableColumnFooterBar {
+	
+}
+
+LeftTableColumn : METSTableColumn {
+	class = "prg-side-column";
+}
+
+ListItemDate : WOString {
+	value = aMessage|creationDate;
+}
+
+ListSentMessages : WOHyperlink {
+	action = listSentMessages;
+}
+
+ListItemShortenedMessageString : WOString {
+	value = aMessage|shortenedMessageBody;
+}
+
+ListItemSubject : WOString {
+	value = aMessage.subject;
+}
+
+ListReceivedMessages : WOHyperlink {
+	action = listReceivedMessages;
+}
+
+ListSystemMessages : WOHyperlink {
+	action = listSystemMessages;
+}
+
+MessageBody : WOText {
+	class = "input-xlarge";
+	value = newMessage.messageBody;
+}
+
+MessageBodyEditor : WOText {
+	rows = "20";
+	class = "span12 wysihtml5-texarea"; 
+	id = "textarea";
+	placeholder = "Enter text ...";
+	value = currentMessage.messageBody;
+}
+
+MessageDetailTableColumn : METSTableColumn {
+	class = "prg-table-column prg-main-column";
+}
+
+MessageIsEditable : WOConditional {
+	condition = canEditMessage;
+}
+
+MessageIsNotEditable : WOConditional {
+	condition = canEditMessage;
+	negate = true;
+}
+
+MessageListItemContainer : WOGenericContainer {
+	class = listItemContainerClassName;
+	elementName = "li";
+}
+
+MessageListRepetition : WORepetition {
+	item = aMessage;
+	list = messageList;
+}
+
+MessageListSortBar : METSSortBar {
+	
+}
+
+MessageListTableColumn : METSTableColumn {
+	class = "prg-table-column mailbox";
+}
+
+MessageListUpdateContainer : MTAjaxUpdateContainer {
+	class = "prg-static-column";
+	id = "METSMessageListUpdateContainer";
+}
+
+NewMessageModalContainer : MTAjaxModalContainer {
+	ajax = true;
+	autoWrapContent = false;
+	class = "icon-pencil";
+	id = "MESExclusiveServiceNewRate";
+	label = " ";
+	showFooter = false;
+	showTitle = false;
+	useDefaultCSS = false;
+}
+
+NotHaveMessages : WOConditional {
+	condition = messageListIsNotNullOrEmpty;
+	negate = true;
+}
+
+PageWrapper : PageWrapper {
+	errors = errors;
+	pageTitle = "Dashboard Page : View Messages and Alerts";
+}
+
+SendMessage : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary";
+	value = "Send Message";	
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+SubjectBar : METSInfoBar {
+	
+}
+
+UserBrowser : WOBrowser {
+	class = "input-xlarge";
+	displayString = user|fullName(true);
+	item = user;
+	list = systemUsers;
+	multiple = true;
+	selections = newMessage.recipients;
+}
+
+ViewMessageUpdateLink : WOHyperlink {
+	action = viewMessage;
+	updateContainerID = "METSCurrentMessageAjaxUpdateContainer";
+}

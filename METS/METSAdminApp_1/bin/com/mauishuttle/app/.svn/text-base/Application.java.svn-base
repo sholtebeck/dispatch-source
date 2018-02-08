@@ -1,0 +1,172 @@
+package com.mauishuttle.app;
+
+import java.util.NoSuchElementException;
+
+import com.mauishuttle.components.pages.DashboardPage;
+import com.mauishuttle.eo.MESRole;
+import com.mauishuttle.eo.MESSystemMessage;
+import com.mauishuttle.eo.MESSystemMessage.Level;
+import com.webobjects.appserver.WOAction;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WORequest;
+import com.webobjects.appserver.WORequestHandler;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.eocontrol.EOSharedEditingContext;
+import com.webobjects.foundation.NSMutableDictionary;
+
+import er.ajax.AjaxUtils;
+import er.extensions.appserver.ERXApplication;
+import er.extensions.appserver.ERXWOContext;
+import er.extensions.foundation.ERXStringUtilities;
+
+public class Application extends ERXApplication {
+	
+	private static final String COM_MAUISHUTTLE_MES_ROLE_SUPER_USER_PROPERTY_KEY = "com.mauishuttle.MESRole.SuperUser";
+	private static final String COM_MAUISHUTTLE_MES_ROLE_TECHNICAL_ADMINISTRATOR_PROPERTY_KEY = "com.mauishuttle.MESRole.TechnicalAdministrator";
+	private MESRole _technicalAdministratorRole;
+	private MESRole _superUserRole;
+	
+	public static void main(String[] argv) {
+		ERXApplication.main(argv, Application.class);
+	}
+
+	public Application() {
+		ERXApplication.log.info("Welcome to " + name() + " !");
+		/* ** put your initialization code in here ** */
+		setAllowsConcurrentRequestHandling(true);		
+		setDefaultRequestHandler(requestHandlerForKey(directActionRequestHandlerKey()));
+	}
+
+	
+	public WOResponse handleSessionRestorationErrorInContext(WOContext context) {
+		
+		WOResponse response = null;
+
+		try {
+
+			if(context != null) {
+			
+				if(AjaxUtils.isAjaxRequest(context.request())) {
+					
+					response = createResponseInContext(context);
+					response.appendContentString("<h1>Your session has timed out.</h1>");
+					response.appendContentString("<p>You will now be redirected to the login screen.</p>");
+					
+					NSMutableDictionary<String, Object> queryParams = new NSMutableDictionary<String, Object>();
+					queryParams.put("wosid", Boolean.FALSE);
+					queryParams.put("timeout", Boolean.TRUE);
+					
+					AjaxUtils.appendScriptHeader(response);
+					
+					String url = ERXWOContext._directActionURL(context, "default", queryParams, true);
+					
+					response.appendContentString("setTimeout(function() { document.location.href = ");
+					response.appendContentString(AjaxUtils.quote(url));
+					response.appendContentString("}, 1000);");
+
+					AjaxUtils.appendScriptFooter(response);
+					
+				} else {
+
+					DashboardPage nextPage = pageWithName(DashboardPage.class);
+					nextPage.addErrorMessage("Your session has timed out.");
+					response = nextPage.generateResponse();
+
+				}
+		
+			} else {
+				 response = super.handleSessionRestorationErrorInContext(context);
+			}
+
+		} catch (Throwable t) {
+            log.fatal(t.getMessage(), t);
+            response = super.handleSessionRestorationErrorInContext(context);
+		}
+
+		return response;
+	
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public WOResponse handleActionRequestError( WORequest request, 
+			Exception anException, 
+			String reason, 
+			WORequestHandler rh,
+			String actionClassName, 
+			String actionName,
+			Class actionClass,
+			WOAction actionInstance) {
+
+		WOContext aContext = createContextForRequest(request);
+
+		return handleException(anException, aContext);
+
+	}
+	
+	@Override
+	public WOResponse handlePageRestorationErrorInContext(WOContext context) {
+		return pageWithName(DashboardPage.class).generateResponse();
+	}
+
+	@SuppressWarnings("unchecked")
+	public MESRole technicalAdministratorRole() {
+		
+		if(_technicalAdministratorRole == null) {
+		
+			String codeName = System.getProperty(COM_MAUISHUTTLE_MES_ROLE_TECHNICAL_ADMINISTRATOR_PROPERTY_KEY);
+			
+			if(ERXStringUtilities.stringIsNullOrEmpty(codeName) == false) {
+
+				try {
+					_technicalAdministratorRole = MESRole.fetchRequiredMESRole(EOSharedEditingContext.defaultSharedEditingContext(), MESRole.CODE_NAME.eq(codeName));
+				} catch (NoSuchElementException e) {
+					MESSystemMessage.createSystemMessage("Unable to locate technical administrator role with code name: "  + codeName, Level.FATAL.value(), "");
+				}
+
+			} else {
+
+				MESSystemMessage.createSystemMessage("Technical administrator codename is not defined in properties file", Level.FATAL.value(), 
+						"Please define " + COM_MAUISHUTTLE_MES_ROLE_TECHNICAL_ADMINISTRATOR_PROPERTY_KEY + " and restart the application.");
+			
+			}
+
+		}
+	
+		return _technicalAdministratorRole;
+
+	}
+
+	public void setTechnicalAdministratorRole(MESRole technicalAdministratorRole) {
+		this._technicalAdministratorRole = technicalAdministratorRole;
+	}
+
+	@SuppressWarnings("unchecked")
+	public MESRole superUserRole() {
+		
+		if(_superUserRole == null) {
+			String codeName = System.getProperty(COM_MAUISHUTTLE_MES_ROLE_SUPER_USER_PROPERTY_KEY);
+			if(ERXStringUtilities.stringIsNullOrEmpty(codeName) == false) {
+				try {
+					_superUserRole = MESRole.fetchRequiredMESRole(EOSharedEditingContext.defaultSharedEditingContext(), MESRole.CODE_NAME.eq(codeName));
+				} catch (NoSuchElementException e) {
+					MESSystemMessage.createSystemMessage("Unable to locate super user role with code name: "  + codeName, Level.FATAL.value(), "");
+				}
+			} else {
+
+				MESSystemMessage.createSystemMessage("The super user codename is not defined in properties file", Level.FATAL.value(), 
+						"Please define " + COM_MAUISHUTTLE_MES_ROLE_SUPER_USER_PROPERTY_KEY + " and restart the application.");
+			}
+		}
+		
+		return _superUserRole;
+	}
+
+	public void setSuperUserRole(MESRole superUserRole) {
+		this._superUserRole = superUserRole;
+	}
+	
+	
+	
+	
+}

@@ -1,0 +1,61 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+CurrentHubName : WOString {
+	value = session.currentHub.name;
+}
+
+DriverName : WOString {
+	value = object.driver.fullName;
+}
+
+EditPageKey : WOKeyValueConditional {
+	key = "editorPageKey";
+	value = "EditSchedule";	
+}
+
+IsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+ListPageKey : WOKeyValueConditional {
+	key = "editorPageKey";
+	value = "List";
+}
+
+ListPayoutsPageKey : WOKeyValueConditional {
+	key = "editorPageKey";
+	value = "ListPayoutsForSchedule";
+}
+
+ScheduleDate : WOString {
+	dateformat = "%m/%d/%y";
+	value = object.startTime;
+}
+
+ScheduleEndDateTime : WOString {
+	dateformat = "%m/%d/%y %H:%M";
+	value = object.endTime;
+}
+
+ScheduleStartDateTime : WOString {
+	dateformat = "%m/%d/%y %H:%M";
+	value = object.startTime;
+}
+
+StaticColumn : METSStaticColumn {
+	id = staticColumnId;	
+}
+
+SwitchComponent : WOSwitchComponent {
+	dataSource = dataSource;
+	navigationController = navigationController;
+	object = object;
+	WOComponentName = switchComponentName;
+}

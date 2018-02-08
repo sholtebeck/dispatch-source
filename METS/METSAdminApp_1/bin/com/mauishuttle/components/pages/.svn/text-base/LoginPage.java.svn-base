@@ -1,0 +1,71 @@
+package com.mauishuttle.components.pages;
+
+import com.mauishuttle.components.Main;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSTimestamp;
+
+import er.extensions.foundation.ERXStringUtilities;
+
+@SuppressWarnings("serial")
+public class LoginPage extends Main {
+
+	private NSTimestamp _now;
+	private String _userName;
+	
+    public LoginPage(WOContext context) {
+    
+    	super(context);
+
+        String sessionTimedout = context.request().stringFormValueForKey("timeout");
+        
+        if(Boolean.valueOf(sessionTimedout)) {
+        	errors().addObject("Your session has expired please log back in.");
+        }
+     
+    }
+
+    public void awake() {
+    	_now = null;
+    }
+    
+	public NSTimestamp now() {
+
+		if(_now == null) {
+			_now = new NSTimestamp();
+		}
+		
+		return _now;
+	
+	}
+
+	public void setNow(NSTimestamp now) {
+		this._now = now;
+	}
+
+	/**
+	 * @return the userName
+	 */
+	public String userName() {
+		
+		if(ERXStringUtilities.stringIsNullOrEmpty(_userName)) {
+		
+			String requestValue = context().request().stringFormValueForKey("uuid");
+			
+			if(ERXStringUtilities.stringIsNullOrEmpty(requestValue) == false) {
+				_userName = requestValue;
+			}
+		
+		}
+	
+		return _userName;
+
+	}
+
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this._userName = userName;
+	}
+
+}

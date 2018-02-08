@@ -1,0 +1,25 @@
+HasHelpText : WOConditional {
+	condition = hasHelpText;
+}
+
+HelpText : WOString {
+	value = ^helpText;
+}
+
+Label : WOGenericContainer {
+	class = "control-label";
+	elementName = "label";
+	for = id;
+}
+
+LabelText : WOString {
+	value = ^labelText;	
+}
+
+TextArea : WOText {
+	class = inputClassName;
+	disabled = ^disabled;
+	id = id;
+	rows = rows;
+	value = ^value;	
+}

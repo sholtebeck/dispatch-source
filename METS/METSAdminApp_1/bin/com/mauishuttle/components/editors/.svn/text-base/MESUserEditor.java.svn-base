@@ -1,0 +1,136 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.interfaces.MESEditorInterface;
+import com.mauishuttle.eo.MESHubRole;
+import com.mauishuttle.eo.MESRole;
+import com.mauishuttle.eo.MESUser;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eoaccess.EOUtilities;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSValidation;
+
+import er.extensions.foundation.ERXStringUtilities;
+
+@SuppressWarnings("serial")
+public class MESUserEditor extends MESNonSynchronizingEditor implements MESEditorInterface {
+
+	private MESUser _user;
+	public MESRole _role;
+	public MESHubRole _hubRole;
+	public String _password, _passwordConfirm;
+	
+	public MESUserEditor(WOContext context) {
+        super(context);
+	}
+	
+	public void sleep() {
+		super.sleep();
+		_password = null;
+		_passwordConfirm = null;
+	}
+	
+	public WOActionResults deleteUser() {
+	
+		try {
+			ec().deleteObject(object());
+			ec().saveChanges();
+			navigationController().setSelectedObject(null);
+		} catch (NSValidation.ValidationException e) {
+			validationFailedWithException(e, null, null);
+		}
+		
+		return navigationController().nextPage();
+
+	}
+	
+	public WOActionResults saveUserDetails() {
+		
+		boolean isNew = object().isNewObject();
+		EOEditingContext parentEditingContext = null;
+		if(isNew) {
+			parentEditingContext = (EOEditingContext)ec().parentObjectStore();
+		}
+		
+		if(! hasError()) {
+
+			try {
+				
+				if(isNew || ERXStringUtilities.stringIsNullOrEmpty(_password) == false) {
+					object().validateAndSetPassword(_password, _passwordConfirm);
+				}
+				
+				ec().saveChanges();
+				
+				if(isNew) {
+					parentEditingContext.saveChanges();
+					navigationController().setSelectedObject(EOUtilities.localInstanceOfObject(parentEditingContext, object()));
+				}
+
+				addMessage(RECORD_UPDATE_MESSAGE);
+
+			} catch (NSValidation.ValidationException e) {
+				validationFailedWithException(e, null, null);
+			}
+			
+		}
+		
+		_password = _passwordConfirm = new String();
+		return navigationController().nextPage();
+	
+	}
+	
+	public MESUser object() {
+		if(_user == null) {
+			_user = (MESUser)valueForBinding("object");
+		}
+		return _user;
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+		_user = (MESUser)object;
+	}
+	
+	public NSArray<MESHubRole> hubRolesList() {
+		return MESHubRole.fetchAllMESHubRoles(ec(), MESHubRole.LABEL.ascs());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESRole> rolesList() {
+		return MESRole.fetchMESRoles(ec(), MESRole.TYPE.eq(MESRole.MES_ROLE_QUALIFIER_KEY), MESRole.LABEL.ascs());
+	}
+
+	public boolean roleChecked() {
+		return object().roles().containsObject(_role);
+	}
+
+	public void setRoleChecked(boolean checked) {
+		if(checked) {
+			if(object().roles().containsObject(_role) == false) {
+				object().addToRolesRelationship(_role);
+			}
+		} else {
+			if(object().roles().containsObject(_role)) {
+				object().removeFromRolesRelationship(_role);
+			}
+		}
+	}
+
+	public boolean hubRoleChecked() {
+		return object().roles().containsObject(_hubRole);
+	}
+
+	public void setHubRoleChecked(boolean checked) {
+		if(checked) {
+			if(object().roles().containsObject(_hubRole) == false) {
+				object().addToRolesRelationship(_hubRole);
+			}
+		} else {
+			if(object().roles().containsObject(_hubRole)) {
+				object().removeFromRolesRelationship(_hubRole);
+			}
+		}
+	}
+
+}

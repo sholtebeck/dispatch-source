@@ -1,0 +1,32 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+Form : METSHorizontalForm {
+
+}
+
+MainTableColumn : METSTableColumn {
+	class = "prg-main-column";
+	id = "PRGMainColumn";
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+
+ServiceName : WOString {
+	value = object.name;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+SubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	isNewObject = false;
+	modalContainerText = "Are you absolutely sure you wish to do this?  All the hubs objects will be orphaned!";
+	submitAction = navigationController.saveChanges;
+}

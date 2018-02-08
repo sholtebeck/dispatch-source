@@ -1,0 +1,57 @@
+DriverScheduleRepetition : WORepetition {
+	item = schedule;
+	list = displayGroup.displayedObjects;
+}
+
+DriverNameSortOrdering : WOSortOrder {
+	displayGroup = displayGroup;
+	key = "driver.lastName";
+}
+
+HasResults : WOConditional {
+	condition = hasResults;
+}
+
+NoResults : WOConditional {
+	condition = hasResults;
+	negate = true;
+}
+
+IsNotPrintPage : WOConditional {
+	condition = isPrintPage;
+	negate = true;
+}
+
+IsPrintPage : WOConditional {
+	condition = isPrintPage;
+}
+
+ScheduleSummary : ScheduleSummary {
+	deleteSchedule = deleteSchedule;
+	inspectSchedule = inspectSchedule;
+	isPrintPage = isPrintPage;
+	listPayouts = listPayouts;
+	schedule = schedule;
+}
+
+ScheduleTotalHours : WOString {
+	numberformat = "0.##";
+	value = displayGroup.displayedObjects.lengthInHours.@sum;
+}
+
+StartTime : WOString {
+	dateformat = "%B %d, %Y";
+	value = dataSource.searchStartDate;
+}
+
+PrintAllSchedulesButton : WOHyperlink {
+	action = printAllSchedules;
+	class = "btn btn-success";
+	target = "_blank";
+}
+
+PrintSchedulesButton : WOHyperlink {
+	action = printSchedules;
+	class = "btn btn-success";
+	target = "_blank";
+}

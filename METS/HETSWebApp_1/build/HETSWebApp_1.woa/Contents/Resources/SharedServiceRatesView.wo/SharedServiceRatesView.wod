@@ -1,0 +1,27 @@
+RateAmount : WOString {
+	numberformat = "$#,##0";
+	value = rate.transferRate;
+}
+
+RatesRepetition : WORepetition {
+	item = rate;
+	list = rates;
+}
+
+ServiceShortDescription : WOString {
+	value = service.shortDescription;
+}
+
+TableRow : WOGenericContainer {
+	class = tableRowClassName;
+	elementName = "tr";
+}
+
+ZoneName : WOString {
+	value = zone.name;
+}
+
+ZonesRepetition : WORepetition {
+	item = zone;
+	list = zones;
+}

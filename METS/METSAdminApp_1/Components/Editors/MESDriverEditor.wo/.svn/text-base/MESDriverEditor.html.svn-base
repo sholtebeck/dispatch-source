@@ -1,0 +1,25 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href = "#">
+		<wo:str value = "$object.hub.name" />
+	</a></li>
+	<li><a href="#">Drivers</a></li>
+	<webobject name = "IsNewObject">
+		<li>New Driver</li>
+	</webobject>
+	<webobject name = "IsNotNewObject">
+		<li><webobject name = "DriversName"></webobject></li>
+	</webobject>
+</webobject>
+<webobject name = "StaticColumn">
+	<webobject name = "InfoBar">General Information</webobject>
+	<div class="row-fluid">
+		<wo:METSMessagePanel errors = "$navigationController.errors" messages = "$navigationController.messages"></wo:METSMessagePanel>
+		<webobject name = "Form">
+			<wo:METSTextInput helpText = "Required Information" labelText = "First Name" value = "$object.firstName"></wo:METSTextInput>
+			<wo:METSTextInput helpText = "Required Information" labelText = "Last Name" value = "$object.lastName"></wo:METSTextInput>
+			<wo:METSTextInput helpText = "Required Information" labelText = "E-Mail Address" value = "$object.emailAddress"></wo:METSTextInput>
+			<wo:METSCheckboxInput checked = "$object.active" labelText = "Active"></wo:METSCheckboxInput>
+			<webobject name = "FormSubmissionBar" />
+		</webobject>
+	</div>
+</webobject>

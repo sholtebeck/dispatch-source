@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+    <wo class="METSResizeColumn" wocomponentcontent="true">    <binding name="class"/>
+        <binding name="id"/>
+        <binding name="otherColumn"/>
+        <validation message="'otherColumn' is a required binding.">
+            <unbound name="otherColumn"/>
+        </validation>
+        <binding name="elementName"/>
+    </wo>
+</wodefinitions>

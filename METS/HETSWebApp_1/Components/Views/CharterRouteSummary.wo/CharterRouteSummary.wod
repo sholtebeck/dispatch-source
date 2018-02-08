@@ -1,0 +1,46 @@
+NumberOfHours : WOTextField {
+	class = "text";
+	disabled = true;
+	numberformat = "0.00";
+	value = dispatch.numberOfHours;
+}
+
+PassengerCount : WOTextField {
+	class = "text";
+	disabled = true;
+	numberformat = "0";
+	value = dispatch.numberPassengers;
+}
+
+PickUpLocation : WOTextField {
+	class = "text";
+	disabled = true;
+	value = dispatch.pickUpLocation.nameWithZone;
+}
+
+ReservationDate : WOTextField {
+	class = "text";
+	disabled = true;
+	dateformat = "%b %d, %Y";
+	value = dispatch.reservationDate;
+}
+
+ReservationTime : WOTextField {
+	class = "text";
+	disabled = true;
+	dateformat = "%I:%M %p";
+	value = dispatch.reservationDate;
+}
+
+RouteTotal : WOTextField {
+	class = "text";
+	disabled = true;
+	numberformat = "$#,##0.00";
+	value = dispatch.calculateOnlineTotal;
+}
+
+ServiceName : WOTextField {
+	class = "text";
+	disabled = true;
+	value = dispatch.service.name;
+}

@@ -1,0 +1,9 @@
+ComponentContent : WOComponentContent {
+	
+}
+
+RowContainer : WOGenericContainer {
+	class = classNameWithDefault;
+	elementName = elementNameWithDefault;
+	id = id;
+}

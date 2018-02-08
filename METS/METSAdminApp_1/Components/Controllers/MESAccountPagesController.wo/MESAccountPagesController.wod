@@ -1,0 +1,57 @@
+AccountName : WOString {
+	value = object.name;
+}
+
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+CurrentHub : WOString {
+	value = session.currentHub.name;
+}
+
+GeneralInformationLink : WOHyperlink {
+	action = generalInformationView;
+}
+
+GeneralInformationPageKey : WOKeyValueConditional {
+	key = "editorPageKey";
+	value = "1";
+}
+
+IsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+ListDispatchesPageKey : WOKeyValueConditional {
+	key = "editorPageKey";
+	value = "2";
+}
+
+MESAccountNavigation : MESAccountNavigationController {
+	dispatchesView = dispatchesView;
+	generalInformationLink = generalInformationView;
+	isNewObject = object.isNewObject;
+	tabIndex = editorPageKey;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+SwitchComponent : WOSwitchComponent {
+	dataSource = dataSource;
+	navigationController = navigationController;
+	object = object;
+	WOComponentName = switchComponentName;
+}

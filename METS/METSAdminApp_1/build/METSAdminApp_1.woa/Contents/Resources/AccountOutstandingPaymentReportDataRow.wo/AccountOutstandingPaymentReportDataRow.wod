@@ -1,0 +1,22 @@
+AccountName : WOString {
+	value = account.name;
+}
+
+ServiceOrderCount : WOString {
+	numberformat = "0";
+	value = serviceOrderPaymentCount;
+}
+
+TotalCount : WOString {
+	numberformat = "0";
+	value = totalCount;
+}
+
+ViewDispatches : WOHyperlink {
+	action = ^action;
+}
+
+VoucherCount : WOString {
+	numberformat = "0";
+	value = voucherCount;
+}

@@ -1,0 +1,38 @@
+<div class="form-panel">
+	<h3>Book a Ride Online</h3>
+	<webobject name = "Form">
+		<div class="span-11 last bordered">
+			<div class="span-5">
+				<label>Select Your Airport</label>
+			</div>
+			<div class="span-6 last">
+				<webobject name = "AirportSelector"></webobject>
+			</div>		
+		</div>
+		<div class="span-11 last bordered">
+			<div class="span-5">
+				<label>Arriving or Departing?</label>
+			</div>
+			<div class="span-3 radio">
+				<input checked="true" id="direction-arriving" type="radio" name="direction" value = "From" /> <label for="direction-arriving">Arriving</label>
+			</div>
+			<div class="span-3 last radio">	
+				<input type="radio" id="direction-leaving" name="direction" value = "To" /> <label for="direction-leaving">Departing</label>
+			</div>		
+		</div>
+		<div class="span-11 last bordered">
+			<div class="span-5">
+				<label>Round Trip or One Way?</label>
+			</div>
+			<div class="span-3 radio">
+				<input checked="true" id="round-trip-yes-radio" type="radio" name="routes" value = "2" /> <label for="round-trip-yes-radio">Round-Trip</label>
+			</div>
+			<div class="span-3 last radio">	
+				<input type="radio" id="round-trip-no-radio" name="routes" value = "1" /> <label for="round-trip-no-radio">1 Way</label>
+			</div>		
+		</div>
+		<div class="span-11 last btn-row">
+			<input type="submit" class="btn" value="Book your Ride" />
+		</div>
+	</webobject>
+</div>

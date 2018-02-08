@@ -1,0 +1,81 @@
+BluePrintIE : ERXStyleSheet {
+	filename = "blueprint/ie.css";
+	framework = "app";
+	media = "screen, projection";
+}
+
+BluePrintScreen : ERXStyleSheet {
+	filename = "blueprint/screen.css";
+	framework = "app";
+	media = "screen, projection";
+}
+
+BluePrintPrint : ERXStyleSheet {
+	filename = "blueprint/print.css";
+	framework = "app";
+	media = "print";
+}
+
+CanonicalUrl : WOGenericElement {
+	elementName = "link";
+	rel = "canonical";
+	href = canonical;
+}
+
+ComponentContent : WOComponentContent {
+	
+}
+
+HasCanonicalUrl : ERXNonNullConditional {
+	condition = canonical;
+}
+
+IFNotIE7 : ERXIEConditionalComment {
+	negate = true;
+	versionString = "7";
+}
+
+IFIE9 : ERXIEConditionalComment {
+	versionString = "9";
+}
+
+IFIE7 : ERXIEConditionalComment {
+	versionString = "7";
+}
+
+IFIELT8 : ERXIEConditionalComment {
+	isLessThan = true;
+	versionString = "8";
+}
+
+IFIELT9 : ERXIEConditionalComment {
+	isLessThan = true;
+	versionString = "9";
+}
+
+IsDeployed : WOConditional {
+	condition = application.isDevelopmentMode;
+	negate = true;
+}
+
+MetaDescription : WOGenericElement {
+	content = metaDescription;
+	elementName = "meta";
+	name = "description";
+}
+
+PageTitle : WOString {
+	value = pageTitle;
+}
+
+Robots : WOGenericElement {
+	content = robots;
+	elementName = "meta";
+	name = "robots";
+}
+
+SiteStyleSheet : ERXStyleSheet {
+	filename = "css/stylesheet.css";
+	framework = "app";
+	startTime = application.startTime.getTime;
+}

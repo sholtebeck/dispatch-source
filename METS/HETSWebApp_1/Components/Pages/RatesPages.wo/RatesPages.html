@@ -1,0 +1,52 @@
+<webobject name = "Main">
+	<div class="billboard inner-billboard rates-billboard">
+		<div class="container">
+			<div class="span-24">
+			</div>
+		</div>
+	</div>
+	<div id="HTContent">
+		<div class="container">
+			<div class="span-24">
+				<div class="span-16-5">
+					<div class="page-copy clearfix rates-information">
+						<webobject name = "ServiceRatesView"></webobject>
+						<webobject name = "PageCopy"></webobject>
+					</div>
+				</div>
+				<div class="span-6-5 push-1 last">
+					<div class = "span-6-5 info-panel last">
+						<wo:link href = "$reservationsPageLink" class = "red-button">
+							Book a Ride Online
+							<span>We accept AMEX, Visa <br>& MasterCard</span>	
+						</wo:link>
+					</div>
+					<div class="span-6-5 info-panel last prepend-top">
+						<h4>
+							Make a Reservation Today!
+							<span>1-800-833-2303</span>
+						</h4>
+					</div>
+					<wo:FacebookButton css = "span-6-5" />
+					<div class="span-6-5 side-navigation last prepend-top">
+						<h3>Services We Provide</h3>
+						<ul>
+							<webobject name = "HubsRepetition">
+								<webobject name = "HubListItem">
+									<webobject name = "HubLink"><span><webobject name = "HubName"/></span></webobject>
+									<webobject name = "IsCurrentHub">
+										<ul>
+											<webobject name = "ServicesRepetition">
+												<webobject name = "ServiceListItem"><webobject name = "ServiceLink"><span><webobject name = "ServiceName" /></span></webobject></webobject>
+											</webobject>
+										</ul>										
+									</webobject>
+								</webobject>
+							</webobject>
+						</ul>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</webobject>

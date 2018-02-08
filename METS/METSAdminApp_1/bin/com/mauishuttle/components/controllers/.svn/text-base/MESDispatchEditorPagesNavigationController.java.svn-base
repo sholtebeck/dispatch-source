@@ -1,0 +1,219 @@
+package com.mauishuttle.components.controllers;
+
+import com.mauishuttle.components.editors.MESDispatchChangesLog;
+import com.mauishuttle.components.editors.MESDispatchChildrenPage;
+import com.mauishuttle.components.editors.MESDispatchDriverInformationEditor;
+import com.mauishuttle.components.editors.MESDispatchListPaymentInformationPage;
+import com.mauishuttle.components.editors.MESDispatchMiscellaneousInformationEditor;
+import com.mauishuttle.components.editors.MESDispatchPassengerInformationEditor;
+import com.mauishuttle.components.editors.MESDispatchPaymentInformationEditor;
+import com.mauishuttle.components.editors.MESDispatchRoutingInformationEditor;
+import com.mauishuttle.components.editors.MESDispatchSummaryPageWrapper;
+import com.mauishuttle.components.editors.MESNonSynchronizingEditor;
+import com.mauishuttle.components.interfaces.MESDispatchPagesEditorDelegateInterface;
+import com.mauishuttle.eo.MESDispatch;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSValidation;
+
+@SuppressWarnings("serial")
+public class MESDispatchEditorPagesNavigationController extends MESNonSynchronizingEditor {
+
+	public MESDispatch _dispatch;
+	public static final String ADD_UPDATE_PAYMENT_INFORMATION_PAGE_KEY = "AddUpdate";
+	public static final String LIST_PAYMENT_INFORMATION_PAGE_KEY = "List";
+	protected static final int VIEW_CHILDREN_PAGE_KEY = 6;
+	protected static final int PASSENGER_INFORMATION_PAGE_KEY = 1;
+	protected static final int ROUTING_INFORMATION_PAGE_KEY = 2;
+	protected static final int BILLING_INFORMATION_PAGE_KEY = 7;
+	protected static final int DRIVER_INFORMATION_PAGE_KEY = 4;
+	protected static final int MISCELLANEOUS_INFORMATION_PAGE_KEY = 3;
+	protected static final int SUMMARY_PAGE_KEY = 5;
+	protected static final int VIEW_CHANGE_LOGS_PAGE_KEY = 8;	
+	
+	private int _tabIndex = 1;
+	
+	public MESDispatchEditorPagesNavigationController(WOContext context) {
+        super(context);
+    }
+
+	public void awake() {
+		super.awake();
+	}
+
+	public void sleep() {
+		super.sleep();
+		_tabIndex = 1;
+	}
+	
+	public void addMessage(String message) {
+		navigationController().addMessage(message);
+	}
+	
+	public MESDispatchPagesEditorDelegateInterface delegate() {
+		return (MESDispatchPagesEditorDelegateInterface)valueForBinding("delegate");
+	}
+
+	public void setDelegate(MESDispatchPagesEditorDelegateInterface object) {
+	//	setValueForBinding(object, "delegate");
+	}
+	
+	protected Integer editorPageKey() {
+		return Integer.valueOf(navigationController().editorPageKey());
+	}
+
+	protected void setEditorPageKey(int editorPageKey) {
+		navigationController().setEditorPageKey(String.valueOf(editorPageKey));
+	}
+	
+	public MESDispatch object() {
+		if(_dispatch == null) {
+			_dispatch = (MESDispatch)valueForBinding("object");
+		}
+		return _dispatch;
+	}
+	
+	public void setObject(Object object) {
+		_dispatch = (MESDispatch)object;
+	}
+	
+	public boolean hasError() {
+		return navigationController().hasError();
+	}
+	
+	public WOActionResults returnToDispatches() {
+		navigationController().setSelectedObject(null);
+		return navigationController().nextPage();
+	}
+
+	public WOActionResults returnToParentDispatch() {
+		navigationController().setSelectedObject(object());
+		navigationController().setEditorPageKey("1");
+		return navigationController().nextPage();
+	}
+	
+	protected void saveStep() {
+
+		if(! hasError()) {
+			try {
+				object().editingContext().saveChanges();
+				navigationController().addMessage(RECORD_UPDATE_MESSAGE);
+			} catch (NSValidation.ValidationException e) {
+				validationFailedWithException(e, null, null);
+			}
+		}
+
+	}
+	
+	/**
+	 * @return the switchComponentName
+	 */
+	public String switchComponentName() {
+
+		String switchComponentName = null;
+		
+		switch (editorPageKey()) {
+		
+			case PASSENGER_INFORMATION_PAGE_KEY:
+				switchComponentName = MESDispatchPassengerInformationEditor.class.getName();
+				break;
+			case ROUTING_INFORMATION_PAGE_KEY:
+				switchComponentName = MESDispatchRoutingInformationEditor.class.getName();
+				break;
+			case MISCELLANEOUS_INFORMATION_PAGE_KEY:
+				switchComponentName = MESDispatchMiscellaneousInformationEditor.class.getName();
+				break;
+			case DRIVER_INFORMATION_PAGE_KEY:
+				switchComponentName = MESDispatchDriverInformationEditor.class.getName();
+				break;
+			case SUMMARY_PAGE_KEY:
+				switchComponentName = MESDispatchSummaryPageWrapper.class.getName();
+				break;
+			case VIEW_CHILDREN_PAGE_KEY:
+				switchComponentName = MESDispatchChildrenPage.class.getName();
+				break;
+			case BILLING_INFORMATION_PAGE_KEY:
+				if(delegate().billingPageKey().equals(LIST_PAYMENT_INFORMATION_PAGE_KEY)) {
+					switchComponentName = MESDispatchListPaymentInformationPage.class.getName();
+				} else if(delegate().billingPageKey().equals(ADD_UPDATE_PAYMENT_INFORMATION_PAGE_KEY)) {
+					switchComponentName = MESDispatchPaymentInformationEditor.class.getName();
+				}
+				break;
+			case VIEW_CHANGE_LOGS_PAGE_KEY:
+				switchComponentName = MESDispatchChangesLog.class.getName();
+				break;
+			default:
+				switchComponentName = MESDispatchPassengerInformationEditor.class.getName();
+				break;
+
+		}
+		
+		return switchComponentName;
+
+	}
+
+	public String tabClassName() {
+
+		String tabClassName = null;
+
+		if(_tabIndex == editorPageKey()) {
+			tabClassName = "active";
+		}
+		
+		if(_tabIndex == SUMMARY_PAGE_KEY) {
+			if(object().isNewObject()) {
+				_tabIndex++;
+			}
+		}
+		
+		if(_tabIndex == VIEW_CHILDREN_PAGE_KEY) {
+			if(object().parent() != null) {
+				_tabIndex++;
+			}
+		}
+		
+		_tabIndex++;
+
+		return tabClassName;				
+		
+	}
+
+	public WOActionResults viewPassengerInformation() {
+		return _switchTab(PASSENGER_INFORMATION_PAGE_KEY);
+	}
+
+	public WOActionResults viewBillingInformation() {
+		delegate().setBillingPageKey(LIST_PAYMENT_INFORMATION_PAGE_KEY);
+		return _switchTab(BILLING_INFORMATION_PAGE_KEY);
+	}
+
+	public WOActionResults viewChangeLogs() {
+		return _switchTab(VIEW_CHANGE_LOGS_PAGE_KEY);
+	}
+
+	public WOActionResults viewChildrenLink() {
+		return _switchTab(VIEW_CHILDREN_PAGE_KEY);
+	}
+
+	public WOActionResults viewDriverInformation() {
+		return _switchTab(DRIVER_INFORMATION_PAGE_KEY);
+	}
+
+	public WOActionResults viewMiscellaneousInformation() {
+		return _switchTab(MISCELLANEOUS_INFORMATION_PAGE_KEY);
+	}
+
+	public WOActionResults viewRoutingInformation() {
+		return _switchTab(ROUTING_INFORMATION_PAGE_KEY);
+	}
+
+	public WOActionResults viewSummary() {
+		return _switchTab(SUMMARY_PAGE_KEY);
+	}
+	
+	private WOActionResults _switchTab(int editorPageKey) {
+		setEditorPageKey(editorPageKey);
+		return navigationController().nextPage();
+	}	
+	
+}

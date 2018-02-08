@@ -1,0 +1,258 @@
+package com.mauishuttle.components.controllers;
+
+import com.mauishuttle.components.Main;
+import com.mauishuttle.components.editors.MESHubEditor;
+import com.mauishuttle.components.editors.MESRoleEditor;
+import com.mauishuttle.components.editors.MESUserEditor;
+import com.mauishuttle.components.editors.MESVehicleTypeEditor;
+import com.mauishuttle.components.interfaces.MESPageNavigationControllerInterface;
+import com.mauishuttle.eo.MESHub;
+import com.mauishuttle.eo.MESRole;
+import com.mauishuttle.eo.MESUser;
+import com.mauishuttle.eo.MESVehicleType;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eoaccess.EOUtilities;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOEnterpriseObject;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSValidation;
+
+import er.extensions.eof.ERXEC;
+import er.extensions.eof.ERXEOControlUtilities;
+import er.extensions.foundation.ERXStringUtilities;
+
+@SuppressWarnings("serial")
+public class MESGlobalObjectsPagesController extends Main implements MESPageNavigationControllerInterface {
+	
+	private static final String ACTIVE_CSS_CLASS_NAME = "active";
+	private static final String VIEW_GLOBAL_DISPATCH_OPTIONS_PAGE_KEY = "ViewGlobalDispatchOptions";
+	private static final String VIEW_GROUPS_PAGE_KEY = "ViewGroups";
+	private static final String VIEW_USERS_PAGE_KEY = "ViewUsers";
+	
+	private String _editorPageKey;
+	private String _navigationPageKey;
+	private EOEnterpriseObject _selectedObject;
+	
+	public MESGlobalObjectsPagesController(WOContext context) {
+        super(context);
+    }
+
+	public WOActionResults createNewHub() {
+
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+		setSelectedObject(MESHub.createMESHub(childEc));
+
+		return nextPage();
+	
+	}
+	
+	public WOActionResults createNewRole() {
+
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+		setSelectedObject(MESRole.createMESRole(childEc));
+	
+		return nextPage();
+
+	}
+
+	public WOActionResults createNewUser() {
+
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+		setSelectedObject(MESUser.createMESUser(childEc));
+
+		return nextPage();
+
+	}
+	
+	public WOActionResults createNewVehicleType() {
+
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext();
+		setSelectedObject(MESVehicleType.createMESVehicleType(childEc));
+
+		return nextPage();
+
+	}	
+	
+	protected void revertChanges() {
+		if(ec().hasChanges()) {
+			ec().revert();
+		}
+	}
+
+	public EOEnterpriseObject selectedObject() {
+
+		if(_selectedObject == null) {
+			if(navigationPageKey().equals(VIEW_USERS_PAGE_KEY)) {
+				if(globalUsers().size() > 0) {
+					setSelectedObject(globalUsers().get(0));
+				}
+			} else if(navigationPageKey().equals(VIEW_GROUPS_PAGE_KEY)) {
+				if(globalRoles().size() > 0) {
+					setSelectedObject(globalRoles().get(0));
+				}
+			}
+		}
+	
+		return _selectedObject;
+	
+	}
+
+	public void setSelectedObject(EOEnterpriseObject object) {
+		_selectedObject = object;
+	}
+
+	public String editorPageKey() {
+		return _editorPageKey;
+	}
+
+	public void setEditorPageKey(String editorPageKey) {
+		_editorPageKey = editorPageKey;
+	}
+
+	public WOActionResults cancelChanges() {
+	
+		if(ec().hasChanges()) {
+			ec().revert();
+		}
+		
+		addMessage("The changes were successfully cancelled");
+
+		return context().page();
+
+	}
+
+	public String editorComponentName() {
+		
+		String editorComponentName = null;
+		
+		if(selectedObject() instanceof MESUser) {
+			editorComponentName = MESUserEditor.class.getName();
+		} else if(selectedObject() instanceof MESRole) {
+			editorComponentName = MESRoleEditor.class.getName();
+		} else if(selectedObject() instanceof MESHub) {
+			editorComponentName = MESHubEditor.class.getName();
+		} else if(selectedObject() instanceof MESVehicleType) {
+			editorComponentName = MESVehicleTypeEditor.class.getName();
+		}
+		
+		return editorComponentName;
+
+	}	
+	
+	public NSArray<MESHub> globalHubs() {
+		return MESHub.fetchAllMESHubs(ec(), MESHub.NAME.ascs());
+	}
+	
+	public NSArray<MESRole> globalRoles() {
+		return MESRole.fetchAllMESRoles(ec(), MESRole.TYPE.asc().then(MESRole.LABEL.asc()));
+	}
+	
+	public NSArray<MESUser> globalUsers() {
+		return MESUser.fetchMESUsers(ec(), null, MESUser.LAST_NAME.asc().then(MESUser.FIRST_NAME.asc()));
+	}	
+	
+	public MESPageNavigationControllerInterface navigationController() {
+		return this;
+	}
+	
+	public String navigationPageKey() {
+		if(ERXStringUtilities.stringIsNullOrEmpty(_navigationPageKey)) {
+			_navigationPageKey = VIEW_USERS_PAGE_KEY;
+		}
+		return _navigationPageKey;
+	}
+
+	public void setNavigationPageKey(String navigationPageKey) {
+		this._navigationPageKey = navigationPageKey;
+	}
+
+	public WOComponent nextPage() {
+		return context().page();
+	}
+	
+	public WOActionResults saveChanges() {
+		
+		boolean isNew = ERXEOControlUtilities.isNewObject(selectedObject());
+		
+		if(! hasError()) {
+		
+			try {
+				selectedObject().editingContext().saveChanges();
+				if(isNew) {
+					ec().saveChanges();
+					// promote to top level editing context.
+					_selectedObject = EOUtilities.localInstanceOfObject(ec(), selectedObject());
+				}
+				addMessage(RECORD_UPDATE_MESSAGE);
+			} catch (NSValidation.ValidationException e) {
+				validationFailedWithException(e, null, null);
+			}
+
+		}
+	
+		return context().page();
+
+	}
+
+	public NSArray<MESVehicleType> globalVehicleTypes() {
+		return MESVehicleType.fetchMESVehicleTypes(ec(), null, MESVehicleType.NAME.ascs());
+	}	
+	
+	public WOActionResults viewGlobalDispatchOptions() {
+		setNavigationPageKey(VIEW_GLOBAL_DISPATCH_OPTIONS_PAGE_KEY);
+		return null;
+	}
+	
+	public String viewGlobalDispatchOptionsListItemClassName() {
+		
+		String className = null;
+		
+		if(navigationPageKey().equals(VIEW_GLOBAL_DISPATCH_OPTIONS_PAGE_KEY)) {
+			className = ACTIVE_CSS_CLASS_NAME;
+		}
+		
+		return className;
+		
+	}
+	
+	public WOActionResults viewGroups() {
+		setNavigationPageKey(VIEW_GROUPS_PAGE_KEY);
+		return null;
+	}
+
+	public String viewGroupsListItemClassName() {
+		
+		String className = null;
+		
+		if(navigationPageKey().equals(VIEW_GROUPS_PAGE_KEY)) {
+			className = ACTIVE_CSS_CLASS_NAME;
+		}
+		
+		return className;
+
+	}
+	
+	public WOActionResults viewUsers() {
+		setNavigationPageKey(VIEW_USERS_PAGE_KEY);
+		return null;
+	}
+	
+	public String viewUsersListItemClassName() {
+		
+		String className = null;
+		
+		if(navigationPageKey().equals(VIEW_USERS_PAGE_KEY)) {		
+			className = ACTIVE_CSS_CLASS_NAME;
+		}
+
+		return className;
+
+	}
+	
+}

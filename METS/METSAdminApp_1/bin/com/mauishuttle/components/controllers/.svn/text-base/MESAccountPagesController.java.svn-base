@@ -1,0 +1,130 @@
+package com.mauishuttle.components.controllers;
+
+import com.mauishuttle.components.editors.MESAccountDispatchesView;
+import com.mauishuttle.components.editors.MESAccountEditor;
+import com.mauishuttle.components.editors.MESNonSynchronizingEditor;
+import com.mauishuttle.components.interfaces.MESDispatchTableControllerInterface;
+import com.mauishuttle.components.interfaces.MESTableControllerInterface;
+import com.mauishuttle.eo.MESAccount;
+import com.mauishuttle.eo.MESDispatch;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eocontrol.EOAndQualifier;
+import com.webobjects.eocontrol.EOQualifier;
+import com.webobjects.foundation.NSMutableArray;
+
+@SuppressWarnings("serial")
+public class MESAccountPagesController extends MESNonSynchronizingEditor implements MESTableControllerInterface {
+    
+	public static final int VIEW_DISPATCHES_PAGE_KEY = 2;
+	public static final int GENERAL_INFORMATION_VIEW_PAGE_KEY = 1;
+	private MESAccount _account;
+	private MESDispatchTableControllerInterface _dataSource;
+	
+	public MESAccountPagesController(WOContext context) {
+        super(context);
+    }
+	
+	public void sleep() {
+		super.sleep();
+		_dataSource = null;
+	}
+
+	@SuppressWarnings("unchecked")
+	private EOAndQualifier _qualifier() {
+	
+		NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+		qualifiers.addObject(MESDispatch.ACCOUNT.eq(object()));
+		
+		if(dataSource().enableDateFiltering().equals(YES_KEY)) {
+
+			if(dataSource().searchStartDate() != null) {
+				qualifiers.addObject(MESDispatch.RESERVATION_DATE.greaterThanOrEqualTo(dataSource().searchStartDate()));
+			}
+			
+			if(dataSource().searchEndDate() != null) {
+				qualifiers.addObject(MESDispatch.RESERVATION_DATE.lessThan(dataSource().searchEndDate()));
+			}
+			
+		}
+		
+		return new EOAndQualifier(qualifiers);
+
+	}
+
+	
+	
+	public MESAccount object() {
+		if(_account == null) {
+			_account = (MESAccount)valueForBinding("object");
+		}
+		return _account;
+	}
+	
+	public void setObject(Object object) throws ClassCastException {
+		_account = (MESAccount)object;
+	}
+	
+	public WOActionResults filter() {
+		dataSource().dispatchDisplayGroup().setQualifier(_qualifier());
+		dataSource().dispatchDisplayGroup().fetch();
+		return navigationController().nextPage();
+
+	}
+	
+	public WOActionResults generalInformationView() {
+		setEditorPageKey(GENERAL_INFORMATION_VIEW_PAGE_KEY);
+		return navigationController().nextPage();
+	}
+	
+	public WOActionResults dispatchesView() {
+		setEditorPageKey(VIEW_DISPATCHES_PAGE_KEY);
+		filter();
+		return navigationController().nextPage();
+	}
+
+	/**
+	 * @return the switchComponentName
+	 */
+	public String switchComponentName() {
+		
+		String switchComponentName = null;
+
+		switch (Integer.valueOf(editorPageKey())) {
+			case GENERAL_INFORMATION_VIEW_PAGE_KEY:
+				switchComponentName = MESAccountEditor.class.getName();
+				break;
+			case VIEW_DISPATCHES_PAGE_KEY:
+				switchComponentName = MESAccountDispatchesView.class.getName();
+				break;
+			default:
+				switchComponentName = MESAccountEditor.class.getName();
+				break;
+		}
+		
+		return switchComponentName;
+	}
+
+	public MESDispatchTableControllerInterface dataSource() {
+		if(_dataSource == null) {
+			_dataSource = (MESDispatchTableControllerInterface)objectValueForBinding("dataSource");
+		}
+		return _dataSource;
+	}
+	
+	public String editorPageKey() {
+		return navigationController().editorPageKey();
+	}
+	
+	public void setEditorPageKey(String value) {
+		navigationController().setEditorPageKey(value);
+	}
+
+	public void setEditorPageKey(int value) {
+		navigationController().setEditorPageKey(String.valueOf(value));
+	}
+	
+	public void setDataSource(Object dataSource) {
+	}
+	
+}

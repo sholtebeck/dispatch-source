@@ -1,0 +1,106 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = attributes; 
+            name = attributes; 
+            prototypeName = stringDictionary; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "create_date"; 
+            name = createDate; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "document_id"; 
+            name = documentID; 
+            prototypeName = id; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = identifier; 
+            name = identifier; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "last_modified"; 
+            name = lastModified; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = Y; columnName = name; name = name; prototypeName = varchar50; }, 
+        {
+            allowsNull = N; 
+            columnName = "parent_node_id"; 
+            name = parentNodeID; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = position; 
+            name = position; 
+            prototypeName = intNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "tag_name"; 
+            name = tagName; 
+            prototypeName = varchar16; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "text_content"; 
+            name = textContent; 
+            prototypeName = longText; 
+        }, 
+        {allowsNull = Y; columnName = type; name = type; prototypeName = intNumber; }
+    ); 
+    attributesUsedForLocking = (documentID, id, parentNodeID); 
+    className = "km.content.eo.KMIHTMLTextNode"; 
+    classProperties = (
+        attributes, 
+        childNodes, 
+        createDate, 
+        document, 
+        identifier, 
+        lastModified, 
+        name, 
+        parentNode, 
+        position, 
+        tagName, 
+        textContent, 
+        type
+    ); 
+    externalName = Node; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIHTMLTextNode; 
+    parent = KMIHTMLNode; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = KMIHTMLNode; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = parentNodeID; sourceAttribute = id; }); 
+            name = childNodes; 
+        }, 
+        {
+            destination = KMIWebDocument; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = documentID; }); 
+            name = document; 
+        }, 
+        {
+            destination = KMIHTMLNode; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = parentNodeID; }); 
+            name = parentNode; 
+        }
+    ); 
+    restrictingQualifier = "type=0"; 
+}

@@ -1,0 +1,11 @@
+ComoponentContent : WOComponentContent {
+	
+}
+
+ResizeColumn : WOGenericContainer {
+	class = classNameWithDefault;
+	data-behavior = "ResizeColumn";
+	data-resizecolumn-options = resizeOptions;
+	elementName = elementNameWithDefault;
+	id = id;
+}

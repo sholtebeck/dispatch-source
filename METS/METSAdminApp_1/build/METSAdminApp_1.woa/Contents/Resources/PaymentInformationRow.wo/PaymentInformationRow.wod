@@ -1,0 +1,112 @@
+AccountName : WOString {
+	value = payment.dispatch.account.name;
+}
+
+AccountSelector : WOPopUpButton {
+	displayString = account.name;
+	item = account;
+	list = ^accounts;
+	selection = payment.dispatch.account;
+}
+
+ConfirmationNumber : WOString {
+	value = payment.dispatch.confirmationNumber;
+}
+
+CustomerName : WOString {
+	value = payment.dispatch.customerFullName;
+}
+
+DispatchNotes : METSPopover {
+	content = payment.dispatch.dispatchNotes;
+	options = "{'location' : 'above'}";
+	title = "Dispatcher Notes";
+}
+
+DropOffLocation : WOString {
+	value = payment.dispatch.dropOffLocation.nameWithZone;	
+}
+
+EditInPlace : MTAjaxInPlace {
+	cancelAction = ^cancelEditInPlace;
+	cancelClass = "btn btn-inverse";
+	formClass = "well form-inline";
+	saveClass = "btn btn-primary";
+	saveAction = ^saveEditInPlace;
+}
+
+EditTemplate : ERXWOTemplate {
+	templateName = "edit";
+}
+
+MiscellaneousFee : WOString {
+	numberformat =  "$#,##0.00";
+	value = payment.dispatch.miscellaneousFee;
+}
+
+MiscellaneousFeeInput : WOTextField {
+	numberformat = "#,##0.00";
+	value = payment.dispatch.miscellaneousFee;
+}
+
+Paid : WOCheckBox {
+	checked = payment.paid;
+}
+
+PaymentAmount : WOString {
+	numberformat = "$#,##0.00";
+	value = payment.amount;
+}
+
+PaymentAmountInput : WOTextField {
+	numberformat = "#,##0.00";
+	value = payment.amount;
+}
+
+PickUpLocation : WOString {
+	value = payment.dispatch.pickUpLocation.nameWithZone;
+}
+
+ReservationDateTime : WOString {
+	dateformat = "%m/%d/%y %H:%M";
+	value = payment.dispatch.reservationDate;
+}
+
+ServiceName : WOString {
+	value = payment.dispatch.service.name;
+}
+
+TransferRate : WOString {
+	numberformat = "$#,##0.00";
+	value = payment.dispatch.subTotal;
+}
+
+TipAmount : WOString {
+	numberformat = "$#,##0.00";
+	value = payment.dispatch.tipAmount;
+}
+
+TipAmountInput : WOTextField {
+	numberformat = "#,##0.00";
+	value = payment.dispatch.tipAmount;
+}
+
+TipTypeSelector : WOPopUpButton {
+	displayString = aTipType.displayName;
+	item = aTipType;
+	list = tipTypes;
+	selection = payment.dispatch.dispatchTipType;	
+}
+
+TipType : WOString {
+	value = tipType;
+}
+
+TransferRateInput : WOTextField {
+	numberformat = "#,##0.00";
+	value = payment.dispatch.subTotal;
+}
+
+ViewTemplate : ERXWOTemplate {
+	templateName = "view";
+}

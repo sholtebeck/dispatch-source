@@ -1,0 +1,12 @@
+ComponentContent : WOComponentContent {
+	
+}
+
+ContextMenuLink : WOGenericContainer {
+	class = classNameWithDefault;
+	data-trigger="contextMenu";
+	data-contextmenu-options = options;
+	elementName = elementNameWithDefault;
+	href = "#";
+	id = id;
+}

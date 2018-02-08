@@ -1,0 +1,207 @@
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-striped table-bordered" id = "PRGDispatchTable">
+			<thead>
+				<tr>
+					<webobject name = "NavigationControllerIsDefined">
+						<th>Update</th>
+					</webobject>
+					<th>
+						Driver&nbsp;<webobject name = "DisplaySortOrderings"><webobject name = "DriverNameSortOrdering" /></webobject>
+					</th>
+					<th>Pick Up Time <webobject name = "DisplaySortOrderings"><webobject name = "PickUpTimeSortOrdering" /></webobject></th>
+					<th>Pick Up <webobject name = "DisplaySortOrderings"><webobject name = "PickUpLocationSortOrdering" /></webobject></th>
+					<th>Drop Off <webobject name = "DisplaySortOrderings"><webobject name = "DropOffLocationSortOrdering" /></webobject></th>
+					<th>Name</th>
+					<th># of Pax</th>
+					<th>Service</th>
+					<th>Billing</th>
+					<th>Account <webobject name = "DisplaySortOrderings"><webobject name = "AccountNameSortOrdering" /></webobject></th>
+					<webobject name = "DisplayNotesInline">
+						<th>Notes</th>
+					</webobject>	
+					<th>Created By <webobject name = "DisplaySortOrderings"><webobject name = "DispatcherSortOrdering" /></webobject></th>
+				</tr>
+			</thead>
+			<tbody>
+				
+					<webobject name = "DispatchesRepetition">
+						<webobject name = "TableRowContainer">
+							<webobject name = "NavigationControllerIsDefined">
+								<td>
+									<webobject name = "InspectDispatchLink"><webobject name = "ConfirmationNumber" /></webobject>
+									<wo:if condition = "$displayStatus">
+										<br/><webobject name = "DispatchStatus"></webobject>
+									</wo:if>
+								</td>
+							</webobject>
+							<td>
+								<webobject name = "DriverIsAssigned">
+									<wo:if condition = "$displaySortOrderings">
+										<wo:if condition = "$session.isSuperUser">
+											<webobject name = "InspectDriverLink"><webobject name = "DriverName" /></webobject>
+										</wo:if>
+										<wo:else>
+											<webobject name = "DriverName" />									
+										</wo:else>
+									</wo:if>
+									<wo:else>
+										<webobject name = "DriverName" />									
+									</wo:else>
+								</webobject>
+								<webobject name = "DriverIsNotAssigned">
+									Unassigned
+								</webobject>
+							</td>
+							<td><wo:str value="$displayGroup.currentBatchIndex" /></td>
+							<td>
+								<webobject name = "PickUpLocation"></webobject>
+								<webobject name = "PickUpLocationIsAnAirportZone">
+									<br/>Flight # - 
+									<webobject name = "FlightNumberIsNull">
+										Unknown
+									</webobject>
+									<webobject name = "FlightNumberIsNotNull">
+										<webobject name = "FlightNumber" />
+									</webobject>
+								</webobject>
+							</td>
+							<td>
+								<webobject name = "DropOffLocation"></webobject>
+								<webobject name = "FlightTimeIsDefined">
+									DT: <webobject name = "FlightTime" />
+								</webobject>
+							</td>
+							<td><webobject name = "CustomerName"></webobject><webobject name = "CustomerPhoneNumberIsDefined"><br/>PH: <webobject name = "CustomerPhoneNumber"></webobject></webobject></td>
+							<td><webobject name = "NumberOfPassengers"></webobject></td>
+							<td>
+								<webobject name = "ServiceType"></webobject>
+								<br/><webobject name = "Greet"></webobject>
+								<webobject name = "RequiresChildSeats">
+									<webobject name = "ChildSeatsToString" />								
+								</webobject>
+							</td>
+							<webobject name = "BillingColumn">
+								<webobject name = "HasPaymentInfos">
+									<wo:if condition = "$dispatch.isOnlineReservation">
+										<b>DNC - PAID ONLINE</b>
+									</wo:if>
+								</webobject>
+								<webobject name = "NoPaymentInfos">
+									<wo:if condition = "$dispatch.isParentPaid">
+										<b>DNC- PAID IN PARENT</b>
+									</wo:if>
+								</webobject>
+								<webobject name = "BillingRepetition">
+									<wo:PaymentInfoQuickSummary paymentInformation = "$paymentInfo" />
+								</webobject>
+								<span>Transfer Fee: <webobject name = "TransferFee"></webobject></span>
+								<webobject name = "DisplayMiscellaneousFees">
+									<span><webobject name = "MiscellaneousFeePopOverLink">Misc Fees: <webobject name = "MiscellaneousFees" /></webobject></span>
+								</webobject>
+								<span>DT: <webobject name = "DriverTip" /></span>
+								<span>Total: <webobject name = "Total"></webobject></span>
+							</webobject>
+							<td>
+								<webobject name = "AccountName"></webobject>
+								<webobject name = "BookerIsDefined">
+									<br/><webobject name = "Booker"></webobject>
+								</webobject>	
+							</td>
+							<webobject name = "DisplayNotesInline">
+								<td>
+									Bag Count: <webobject name = "NumberOfBags" /><br/>								
+									<webobject name = "HasDriverNotes">
+										<webobject name = "DriverNotesPopover">Roll Over For Driver Notes</webobject><br/>
+									</webobject>
+									<webobject name = "HasDispatchNotes">
+										<webobject name = "DispatchNotesPopover">Roll Over For Dispatch Notes</webobject><br/>
+									</webobject>
+									<webobject name = "HasParentRoute">
+										<webobject name = "InspectParentDispatchLink">P: <webobject name = "ParentConfirmationNumber"></webobject></webobject>
+									</webobject>
+									<webobject name = "HasAdditionalRoutes">
+										<webobject name = "AdditionalRoutesRepetition">
+											<webobject name = "InspectChildDispatchLink">C: <webobject name = "ChildConfirmationNumber" /></webobject><br/>
+										</webobject>
+									</webobject>
+								</td>
+							</webobject>
+							<td><webobject name = "Author"></webobject> <webobject name = "TimeCreated"></webobject></td>
+						</webobject>
+						<webobject name = "DoNotDisplayNotesInline">
+							<webobject name = "HasDriverNotes">
+								<webobject name = "TableRowContainer">
+									<td colspan = "13">Driver Notes: <webobject name = "DriverNotes"></webobject></td>
+								</webobject>
+							</webobject>
+							<webobject name = "HasDispatchNotes">
+								<webobject name = "TableRowContainer">
+									<td colspan = "13">Dispatch Notes: <webobject name = "DispatchNotes"></webobject></td>
+								</webobject>
+							</webobject>
+						</webobject>
+					</webobject>
+				
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class = "row-fluid">
+	<div class = "span4 offset8">
+		<table class="table table-striped table-bordered">
+			<webobject name = "HasMultipleBatches">
+				<tr>
+					<webobject name = "FooterTableDivider">Dispatch Count (All)</webobject>
+					<td><webobject name = "DispatchCountAll"></webobject></td>
+				</tr>
+			</webobject>
+			<tr>
+				<webobject name = "FooterTableDivider">Dispatch Count</webobject>
+				<td><webobject name = "DispatchCount"></webobject></td>
+			</tr>
+			<webobject name = "IsSuperUser">
+				<webobject name = "HasMultipleBatches">
+					<tr>
+						<webobject name = "FooterTableDivider">Revenue Total (All)</webobject>
+						<td><webobject name = "RevenueTotalAll"></webobject></td>
+					</tr>
+				</webobject>
+				<tr>
+					<webobject name = "FooterTableDivider">Revenue Total</webobject>
+					<td><webobject name = "RevenueTotal"></webobject></td>
+				</tr>
+				<webobject name = "HasMultipleBatches">
+					<tr>
+						<webobject name = "FooterTableDivider">Payment Info Total (All)</webobject>
+						<td><webobject name = "PaymentsTotalAll"></webobject></td>		
+					</tr>
+				</webobject>
+				<tr>
+					<webobject name = "FooterTableDivider">Payment Info Total</webobject>
+					<td><webobject name = "PaymentsTotal"></webobject></td>		
+				</tr>
+				<webobject name = "HasMultipleBatches">
+					<tr>
+						<webobject name = "FooterTableDivider">Payment Info Total (All - Paid)</webobject>
+						<td><webobject name = "PaidPaymentsTotalAll"></webobject></td>		
+					</tr>
+				</webobject>
+				<tr>
+					<webobject name = "FooterTableDivider">Payment Info Total (Paid)</webobject>
+					<td><webobject name = "PaymentsTotalPaid"></webobject></td>		
+				</tr>
+				<webobject name = "HasMultipleBatches">
+					<tr>
+						<webobject name = "FooterTableDivider">Payment Info Total (All - Unpaid)</webobject>
+						<td><webobject name = "UnpaidPaymentsTotalAll"></webobject></td>		
+					</tr>
+				</webobject>
+				<tr>
+					<webobject name = "FooterTableDivider">Payment Info Total (Unpaid)</webobject>
+					<td><webobject name = "PaymentsTotalUnPaid"></webobject></td>		
+				</tr>
+			</webobject>
+		</table>
+	</div>
+</div>

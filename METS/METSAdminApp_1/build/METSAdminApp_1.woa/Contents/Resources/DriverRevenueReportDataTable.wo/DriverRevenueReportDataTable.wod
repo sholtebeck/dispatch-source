@@ -1,0 +1,86 @@
+CashSubTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = aRevenueReport.cash;
+}
+
+CashTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = aReport.reports.@sum.cash;
+}
+
+CreditCardSubTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = aRevenueReport.creditCard;
+}
+
+CreditCardPaidOnlineSubTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = aRevenueReport.creditCardPaidOnline;
+}
+
+CreditCardTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = aReport.reports.@sum.creditCard;
+}
+
+CreditCardPaidOnlineTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = aReport.reports.@sum.creditCardPaidOnline;
+}
+
+DriverReportsRepetition : WORepetition {
+	item = aReport;
+	list = reports;	
+}
+
+DispatchConfirmationNumber : WOString {
+	value = aRevenueReport.dispatch.confirmationNumber;
+}
+
+DriverName : WOString {
+	value = aReport.driver.fullName;
+}
+
+PaymentInfoDisplayName : WOString {
+	value = aPaymentInfo.displayName;
+}
+
+PaymentInfoAmount : WOString {
+	numberformat = "$#,##0.00";
+	value = aPaymentInfo.amount;
+}
+
+PaymentInfoPaid : WOCheckBox {
+	checked = aPaymentInfo.paid;
+}
+
+PaymentInfosRepetition : WORepetition {
+	item = aPaymentInfo;
+	list = aRevenueReport.dispatch.payments;
+}
+
+ReportRepetition : WORepetition {
+	item = aRevenueReport;
+	list = aReport.reports;
+}
+
+ServiceOrderSubTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = aRevenueReport.serviceOrder;
+}
+
+ServiceOrderTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = aReport.reports.@sum.serviceOrder;
+}
+
+VoucherSubTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = aRevenueReport.voucher;
+}
+
+VoucherTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = aReport.reports.@sum.voucher;
+}
+

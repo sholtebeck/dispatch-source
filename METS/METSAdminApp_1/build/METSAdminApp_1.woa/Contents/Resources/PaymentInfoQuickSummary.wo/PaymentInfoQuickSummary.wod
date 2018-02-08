@@ -1,0 +1,38 @@
+AccountDefined : ERXNonNullConditional {
+	condition = paymentInformation.dispatch.account;
+}
+
+AccountName : WOString {
+	value = paymentInformation.dispatch.account.name;
+}
+
+ApprovalCode : WOString {
+	value = aCreditCardPayment.approvalCode;
+}
+
+DriverCollect : WOConditional {
+	condition = paymentInformation.driverCollect;
+}
+
+DriverDoNotCollect : WOConditional {
+	condition = paymentInformation.driverCollect;
+	negate = true;
+}
+
+HasGroupName : ERXNonNullConditional {
+	condition = aServiceOrderPayment.groupName;
+}
+
+IsNotPaid : WOConditional {
+	condition = paymentInformation.paid;
+	negate = true;
+}
+
+IsPaid : WOConditional {
+	condition = paymentInformation.paid;
+}
+
+Total : WOString {
+	numberformat = "$#,##0.00";
+	value = paymentInformation.amount;
+}

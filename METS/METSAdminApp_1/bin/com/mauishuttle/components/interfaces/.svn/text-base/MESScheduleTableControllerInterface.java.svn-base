@@ -1,0 +1,31 @@
+package com.mauishuttle.components.interfaces;
+
+import com.mauishuttle.eo.MESDriver;
+import com.mauishuttle.eo.MESHub;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WODisplayGroup;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSTimestamp;
+
+public interface MESScheduleTableControllerInterface {
+
+	public static final String EDIT_SCHEDULE_PAGE_KEY = "EditSchedule";
+	public static final String LIST_PAYOUTS_FOR_SCHEDULE_OBJECT_PAGE_KEY = "ListPayoutsForSchedule";
+
+	public WODisplayGroup schedulesDisplayGroup();
+	public EOEditingContext ec();
+	public String enableDateFiltering();
+	public void setEnableDateFiltering(String enableDateFiltering);
+
+	public WOActionResults filter();
+	
+	public MESHub currentHub();
+	public MESDriver selectedDriver();
+	public void setSelectedDriver(MESDriver driver);
+
+	public NSTimestamp searchStartDate();
+	public void setSearchStartDate(NSTimestamp searchStartDate);
+	public NSTimestamp searchEndDate();
+	public void setSearchEndDate(NSTimestamp searchEndDate);
+	
+}

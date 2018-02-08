@@ -1,0 +1,7 @@
+RevealContentWrapper : WOGenericContainer {
+	class = classNameWithDefault;
+	data-trigger = "reveal"; 
+	data-reveal-options = options;
+	elementName = elementNameWithDefault;
+	id = id;	
+}

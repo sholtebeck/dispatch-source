@@ -1,0 +1,41 @@
+package com.mauishuttle.components.controllers;
+
+import com.webobjects.appserver.WOContext;
+
+import er.extensions.components.ERXStatelessComponent;
+
+@SuppressWarnings("serial")
+public class MESAccountNavigationController extends ERXStatelessComponent {
+	
+	private int _tabCounter = 1;
+	private Integer _tabIndex; 
+
+	public MESAccountNavigationController(WOContext context) {
+        super(context);
+    }
+	
+	public boolean synchronizesVariablesWithBindings() { return false; }
+
+	public void reset() {
+		super.reset();
+		_tabCounter = 1;
+		_tabIndex = null;
+	}
+	
+	public int tabIndex() {
+		if(_tabIndex == null) {
+			_tabIndex = intValueForBinding("tabIndex", 1); 
+		}
+		return _tabIndex;
+	}
+	
+	public String tabClassName() {
+		String tabClassName = null;
+		if(_tabCounter == tabIndex()) {
+			tabClassName = "active";
+		}	
+		_tabCounter++;
+		return tabClassName;
+	}
+
+}

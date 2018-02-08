@@ -1,0 +1,48 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href = "#"><wo:str value = "$session.currentHub.name" /></a></li>
+	<li><a href="#">Driver Schedule Reports</a></li>
+	<li><webobject name = "ReportType"></webobject></li>
+</webobject>
+<wo:METSInfoBar>Date</wo:METSInfoBar>
+<webobject name = "DateSelectionForm">
+	<div class = "row-fluid prg-prepend-top">
+		<div class = "offset1">
+			<webobject name = "DateReportType">
+				<label>Date:</label>
+				<webobject name = "DateSelector"></webobject>
+			</webobject>
+			<webobject name = "WeeklyReportType">
+				<label>Year:</label>
+				<webobject name = "YearSelector"></webobject>
+				<label class="prg-pad-left">Month:</label>
+				<webobject name = "MonthSelector"></webobject>
+				<webobject name = "WeekSelectorUpdateContainer">
+					<label class="prg-pad-left">Dates:</label>
+					<webobject name = "WeekSelector"></webobject>
+				</webobject>
+				<webobject name = "YearSelectorObserveField"></webobject>
+				<webobject name = "MonthSelectorObserveField"></webobject>
+			</webobject>
+			<webobject name = "MonthlyReportType">
+				<label>Year:</label>
+				<webobject name = "YearSelector"></webobject>
+				<label class="prg-pad-left">Month:</label>
+				<webobject name = "MonthSelector"></webobject>
+			</webobject>
+			<a href="#" class="btn btn-primary prg-pad-left" onclick = "document.DateRangeForm.submit();">Search <i class="icon-search icon-white">&nbsp;</i></a>
+			<webobject name = "PrintReportButton">
+				Print <i class="icon-print icon-white">&nbsp;</i>
+			</webobject>
+		</div>
+	</div>
+</webobject>
+<wo:METSInfoBar>Data</wo:METSInfoBar>
+<webobject name = "StaticColumn">
+	<div class = "row-fluid">
+		<div class="span12">
+			<table class="table table-striped table-bordered">
+				<webobject name = "DriverScheduleReportsDataTable"></webobject>
+			</table>
+		</div>
+	</div>
+</webobject>

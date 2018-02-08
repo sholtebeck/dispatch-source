@@ -1,0 +1,42 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "create_date"; 
+            name = createDate; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "document_id"; 
+            name = documentID; 
+            prototypeName = id; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = "last_modified"; 
+            name = lastModified; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = Y; columnName = name; name = name; prototypeName = varchar50; }, 
+        {allowsNull = Y; columnName = type; name = type; prototypeName = intNumber; }
+    ); 
+    attributesUsedForLocking = (documentID, id); 
+    className = "km.content.eo.KMIAbstractNode"; 
+    classProperties = (createDate, document, lastModified, name, type); 
+    externalName = Node; 
+    fetchSpecificationDictionary = {}; 
+    isAbstractEntity = Y; 
+    name = KMIAbstractNode; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = KMIAbstractDocument; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = documentID; }); 
+            name = document; 
+        }
+    ); 
+}

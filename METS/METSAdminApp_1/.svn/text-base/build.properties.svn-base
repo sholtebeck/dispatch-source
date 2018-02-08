@@ -1,0 +1,13 @@
+classes.dir=bin
+project.name=METSAdminApp_1
+project.name.lowercase=metsadminapp_1
+project.type=application
+principalClass=com.mauishuttle.app.Application
+customInfoPListContent=
+embed.Local=true
+embed.System=true
+webXML=false
+webXML_CustomContent=
+component.wellFormedTemplateRequired=false
+component.inlineBindingPrefix=$
+component.inlineBindingSuffix=

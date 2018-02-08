@@ -1,0 +1,27 @@
+DispatchEditor : MESDispatchEditorPagesNavigationController {
+	delegate = dispatchEditorDelegate;
+	navigationController = navigationController;
+	object = selectedObject;
+}
+
+DispatchTable : MESDispatchesTable {
+	dataSource = dataSource;
+	navigationController = navigationController;
+}
+
+MainTableColumn : METSTableColumn {
+	class = "prg-main-column";
+}
+
+PageWrapper : PageWrapper {
+	pageTitle = ^pageTitle;
+}
+
+SelectedObjectIsDefined : ERXNonNullConditional {
+	condition = selectedObject;
+}
+
+SelectedObjectIsNotDefined : ERXNonNullConditional {
+	condition = selectedObject;
+	negate = true;
+}

@@ -1,0 +1,45 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	deleteAction = deleteLocation;
+	deleteButtonText = "Remove Location";
+	isNewObject = object.isNewObject;
+	useModalForDelete = true;
+	submitAction = navigationController.saveChanges;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+LocationForm : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+LocationName : WOString {
+	value = object.name;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = errors;
+	messages = messages;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+ZoneSelector : METSPopUpButton {
+	displayString = zone.name;
+	helpText = "Required Information";
+	id = "mesLocationZone";
+	item = zone;
+	labelText = "Zone";
+	list = hubZones;
+	noSelectionString = "Please select a zone";
+	selection = selectedZone;
+}

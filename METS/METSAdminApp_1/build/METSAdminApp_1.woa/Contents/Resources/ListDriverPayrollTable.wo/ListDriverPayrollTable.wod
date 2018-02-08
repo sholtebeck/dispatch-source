@@ -1,0 +1,37 @@
+PayrollSearchHasResults : WOConditional {
+	condition = driverPayroll;
+}
+
+PayrollSearchNotHaveResults : WOConditional {
+	condition = driverPayroll;
+	negate = true;
+}
+
+PayRollEndTime : WOString {
+	dateformat = "%I:%M %p";
+	value = payroll.endTime;
+}
+
+
+PayrollRepetition : WORepetition {
+	item = payroll;
+	list = driverPayroll;
+}
+
+PayRollShiftLengthInHour : WOString {
+	value = payroll.lengthInHours;
+}
+
+PayRollStartDate : WOString {
+	dateformat = "%b %e, %Y";
+	value = payroll.startTime;
+}
+
+PayRollStartTime : WOString {
+	dateformat = "%I:%M %p";
+	value = payroll.startTime;
+}
+
+TotalHours : WOString {
+	value = driverPayroll.lengthInHours.@sum;
+}

@@ -1,0 +1,23 @@
+ErrorRepetition : WORepetition {
+	item = message;
+	list = ^errors;
+}
+
+HasError : WOConditional {
+	condition = ^hasErrors;
+}
+
+HasMessages : WOConditional {
+	condition = ^hasMessages;
+}
+
+Message : WOString {
+	escapeHTML = false;
+	value = message;
+}
+
+MessageRepetition : WORepetition {
+	item = message;
+	list = ^messages;
+}
+

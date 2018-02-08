@@ -1,0 +1,50 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+
+import er.ajax.AjaxUtils;
+import er.ajax.mootools.MTAjaxUtils;
+
+@SuppressWarnings("serial")
+public class METSResizeColumn extends METSUIElements {
+	
+	public METSResizeColumn(WOContext context) {
+        super(context);
+    }
+	
+	public void appendToResponse(WOResponse response, WOContext context) {
+		super.appendToResponse(response, context);
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", MTAjaxUtils.MOOTOOLS_CORE_JS); 
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", MTAjaxUtils.MOOTOOLS_MORE_JS);
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/Element.Data.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/BehaviorAPI.js");
+		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", "scripts/plugins/bootstrap/behaviors/Behavior.js");
+    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/Behavior.ResizeColumn.js");
+
+	}
+
+	@Override
+	public String defaultClassName() {
+		return "prg-table-column";
+	}
+
+	/**
+	 * @return the resizeOptions
+	 */
+	public String resizeOptions() {
+		String resizeOptions = new String();
+		resizeOptions += "{";
+		resizeOptions += AjaxUtils.quote("otherColumn");
+		resizeOptions += ":";
+		resizeOptions += AjaxUtils.quote(otherColumn());
+		resizeOptions += "}";
+		return resizeOptions;
+	}
+
+	public String otherColumn() {
+		return stringValueForBinding("otherColumn");
+	}
+
+
+}

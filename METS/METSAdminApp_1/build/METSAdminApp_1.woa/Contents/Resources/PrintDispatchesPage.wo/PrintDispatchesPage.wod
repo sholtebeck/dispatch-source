@@ -1,0 +1,10 @@
+ListDispatchesTable : ListDispatchesTable {
+	displayGroup = displayGroup;
+	ec = ec;
+	displayNotesInline = false;
+	displaySortOrderings = false;
+}
+
+PrintPagesWrapper : PrintPagesWrapper {
+	pageTitle = "Dispatches";
+}

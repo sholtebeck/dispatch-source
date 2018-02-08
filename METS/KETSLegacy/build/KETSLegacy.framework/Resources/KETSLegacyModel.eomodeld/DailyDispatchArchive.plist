@@ -1,0 +1,211 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "Account_ID"; 
+            externalType = INT; 
+            name = accountId; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "archive_id"; 
+            externalType = INT; 
+            name = archiveId; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {columnName = BillType; name = billtype; prototypeName = shortString; }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = Childseat; 
+            externalType = INT; 
+            name = childseat; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = ConfNumber; 
+            externalType = VARCHAR; 
+            name = confnumber; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 20; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "Dest_ID"; 
+            externalType = VARCHAR; 
+            name = destId; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "Driver_ID"; 
+            externalType = INT; 
+            name = driverId; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {columnName = EmailAddress; name = emailaddress; prototypeName = shortString; }, 
+        {columnName = Enterdate; name = enterdate; prototypeName = shortString; }, 
+        {
+            columnName = "Entered_By"; 
+            externalType = VARCHAR; 
+            name = enteredBy; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            columnName = FNameParty; 
+            externalType = VARCHAR; 
+            name = fnameparty; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = Greet; 
+            externalType = VARCHAR; 
+            name = greet; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            columnName = LNameParty; 
+            externalType = VARCHAR; 
+            name = lnameparty; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = Notes; 
+            externalType = TEXT; 
+            name = notes; 
+            valueClassName = NSString; 
+            valueType = C; 
+            width = 65535; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = NumPassengers; 
+            externalType = INT; 
+            name = numpassengers; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {columnName = PUDate; name = pudate; prototypeName = date; }, 
+        {
+            columnName = PULocation; 
+            externalType = VARCHAR; 
+            name = pulocation; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            columnName = PUTime; 
+            externalType = TIME; 
+            name = putime; 
+            valueClassName = NSCalendarDate; 
+            valueType = t; 
+        }, 
+        {
+            columnName = ResDate; 
+            externalType = TIMESTAMP; 
+            name = resdate; 
+            valueClassName = NSCalendarDate; 
+            valueType = T; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ResID; 
+            externalType = INT; 
+            name = resid; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {columnName = "Service_Type"; name = serviceType; prototypeName = varchar10; }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = Status; 
+            externalType = INT; 
+            name = status; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "Updated_By"; 
+            externalType = VARCHAR; 
+            name = updatedBy; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        archiveId, 
+        billtype, 
+        childseat, 
+        confnumber, 
+        destId, 
+        driverId, 
+        emailaddress, 
+        enterdate, 
+        enteredBy, 
+        fnameparty, 
+        greet, 
+        lnameparty, 
+        notes, 
+        numpassengers, 
+        pudate, 
+        pulocation, 
+        putime, 
+        resdate, 
+        resid, 
+        serviceType, 
+        status, 
+        updatedBy
+    ); 
+    className = "com.mauishuttle.legacy.eo.DailyDispatchArchive"; 
+    classProperties = (
+        accountId, 
+        billtype, 
+        childseat, 
+        confnumber, 
+        destId, 
+        driverId, 
+        emailaddress, 
+        enterdate, 
+        enteredBy, 
+        fnameparty, 
+        greet, 
+        lnameparty, 
+        notes, 
+        numpassengers, 
+        pudate, 
+        pulocation, 
+        putime, 
+        resdate, 
+        resid, 
+        serviceType, 
+        status, 
+        updatedBy
+    ); 
+    externalName = "daily_dispatch_archive"; 
+    fetchSpecificationDictionary = {}; 
+    name = DailyDispatchArchive; 
+    primaryKeyAttributes = (archiveId); 
+}

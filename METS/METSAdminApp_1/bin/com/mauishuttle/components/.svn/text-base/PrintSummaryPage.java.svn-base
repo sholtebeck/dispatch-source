@@ -1,0 +1,13 @@
+package com.mauishuttle.components;
+
+import com.mauishuttle.components.editors.MESDispatchSummaryPageWrapper;
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class PrintSummaryPage extends MESDispatchSummaryPageWrapper {
+
+	public PrintSummaryPage(WOContext context) {
+        super(context);
+    }
+	
+}

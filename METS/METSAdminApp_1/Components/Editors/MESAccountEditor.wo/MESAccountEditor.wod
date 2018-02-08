@@ -1,0 +1,12 @@
+Form : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	deleteAction = deleteAccount;
+	deleteButtonText = "Remove Account";
+	isNewObject = object.isNewObject;
+	useModalForDelete = true;
+	submitAction = navigationController.saveChanges;
+}

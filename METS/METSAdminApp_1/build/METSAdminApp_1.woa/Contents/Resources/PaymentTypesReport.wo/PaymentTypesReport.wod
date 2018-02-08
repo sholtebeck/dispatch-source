@@ -1,0 +1,27 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+		
+}
+
+DateRangeSelectorForm : ReportDateRangeSelector {
+	aHub = aHub;
+	hubs = hubs;
+	selectedHub = selectedHub;
+	endDate = endDate;
+	filter = filter;
+	paidEnum = paidEnum;
+	paidEnums = paidEnums;
+	printReport = printReport;
+	selectedPaidEnum = selectedPaidEnum;
+	selectedStandardDateRange = selectedStandardDateRange;
+	standardDateRange = standardDateRange;
+	standardDateRanges = standardDateRanges;
+	startDate = startDate;
+}
+
+PaymentTypesReportDataTable : PaymentTypesReportDataTable {
+	reports = reports;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}

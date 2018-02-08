@@ -1,0 +1,65 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href = "#">
+		<wo:str value = "$object.hub.name" />
+	</a></li>
+	<li><webobject name = "ReturnToDispatchesLink">Dispatches</webobject></li>
+	<webobject name = "IsNewObject">
+		<li>New Dispatch Wizard</li>
+	</webobject>
+	<webobject name = "IsNotNewObject">
+		<li><webobject name = "ConfirmationNumber"></webobject></li>
+	</webobject>
+</webobject>
+<webobject name = "StaticColumn">
+	<wo:METSMessagePanel errors = "$navigationController.errors" messages = "$navigationController.messages"></wo:METSMessagePanel>
+	<div class = "row-fluid">
+		<div class = "span12">
+			<div class="tabbable prg-prepend-top">
+				<ul class="nav nav-tabs prg-padding-left">
+					<webobject name = "Tab">
+						<webobject name = "ViewPassengerInformationLink">Passenger Information</webobject>
+					</webobject>	
+					<webobject name = "Tab">
+						<webobject name = "ViewRoutingInformationLink">Routing Information</webobject>
+					</webobject>	
+					<webobject name = "Tab">
+						<webobject name = "ViewMiscellaneousInformationLink">Miscellaneous</webobject>
+					</webobject>	
+					<webobject name = "Tab">
+						<webobject name = "ViewDriverInformationLink">Driver Information</webobject>
+					</webobject>	
+					<webobject name = "Tab">
+						<webobject name = "ViewBillingInformationLink">Billing Information</webobject>
+					</webobject>	
+					<webobject name = "IsSummaryLinkVisible">
+						<webobject name = "Tab">
+							<webobject name = "ViewSummaryLink">Summary</webobject>
+						</webobject>	
+					</webobject>
+					<webobject name = "IsNotNewObject">
+						<webobject name = "Tab">
+							<webobject name = "ViewChildrenLink">Additional Routes</webobject>
+						</webobject>
+					</webobject>
+					<webobject name = "HasChangeLog">
+						<webobject name = "Tab">
+							<webobject name = "ViewChangeLogsLink">Change Log</webobject>
+						</webobject>	
+					</webobject>
+					<webobject name = "HasParent">
+						<webobject name = "IsNotNewObject">
+							<webobject name = "Tab">
+								<webobject name = "ReturnToParentLink">Return to Parent</webobject>
+							</webobject>	
+						</webobject>
+					</webobject>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active">
+						<webobject name = "SwitchComponent"></webobject>
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>	
+</webobject>

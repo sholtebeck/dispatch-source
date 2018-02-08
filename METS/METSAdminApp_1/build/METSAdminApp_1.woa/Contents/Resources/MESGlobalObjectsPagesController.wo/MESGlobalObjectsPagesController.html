@@ -1,0 +1,65 @@
+<webobject name = "PageWrapper">
+	<webobject name = "ResizeColumn">
+		<span class="prg-handle">&harr;</span>
+		<webobject name = "LeftNavigationUpdateContainer">
+			<ul class="prg-column-header-bar">
+				<webobject name = "ViewUsersListItem">
+					<webobject name = "ViewUsersAction"><span><i class="icon-user">&nbsp;</i></span></webobject>
+				</webobject>
+				<webobject name = "ViewGroupsTabNavigationListItem">
+					<webobject name = "ViewGroupsAction"><span><i class="icon-home">&nbsp;</i></span></webobject>
+				</webobject>
+				<webobject name = "ViewGlobalDispatchOptionsNavigationListItem">
+					<webobject name = "ViewGlobalDispatchOptionsAction"><span><i class="icon-road">&nbsp;</i></span></webobject>
+				</webobject>
+			</ul>
+			<webobject name = "StaticColumn">
+				<ul class="prg-tree nav">
+					<webobject name = "ViewUsersPageKey">
+						<webobject name = "UsersTreeNavigation"></webobject>
+					</webobject>
+					<webobject name = "ViewGroupsPageKey">
+						<webobject name = "RolesTreeNavigation"></webobject>
+						<webobject name = "HubsTreeNavigation"></webobject>
+					</webobject>
+					<webobject name = "ViewGlobalOptionsPageKey">
+						<webobject name = "VehicleTypesTreeNavigation"></webobject>
+						<li><wo:link action = "$editGlobalDispatchRates">Misc. Dispatch Rates</wo:link></li>
+					</webobject>
+				</ul>
+				<webobject name = "FooterNavigationBar">
+					<li>
+						<webobject name = "FooterContextMenu"><span><i class="icon-plus"></i></span></webobject>
+						<ul class="dropdown-menu">
+							<webobject name = "ViewUsersPageKey">
+								<li><webobject name = "AddNewUserLink">Add New User</webobject></li>
+							</webobject>
+							<webobject name = "ViewGroupsPageKey">
+								<li><webobject name = "AddNewRoleLink">Add New Role</webobject>							
+								<li><webobject name = "AddNewHubLink">Add New Hub</webobject>							
+							</webobject>
+							<webobject name = "ViewGlobalOptionsPageKey">
+								<li><webobject name = "AddNewVehicleType">Add New Vehicle Type</webobject></li>
+							</webobject>
+						</ul>
+					</li>
+				</webobject>
+			</webobject>
+		</webobject>
+	</webobject>
+	<webobject name = "AlleyColumn">&nbsp;</webobject>
+	<webobject name = "MainTableColumn">	
+		<webobject name = "EditEOPageKey">
+			<webobject name = "SelectedObjectIsMESUser">
+				<webobject name = "UserEditor"></webobject>
+			</webobject>
+			<webobject name = "SelectedObjectIsNotMESUser">
+				<webobject name = "ElementEditor"></webobject>
+			</webobject>
+
+		</webobject>
+		<webobject name = "GlobalDispatchRatesPageKey">
+			<webobject name = "GlobalDispatchRatesEditor"></webobject>
+		</webobject>
+	</webobject>
+</webobject>

@@ -1,0 +1,67 @@
+<webobject name = "PageWrapper">
+	<webobject name = "ResizeColumn">
+		<span class="prg-handle">&harr;</span>
+		<webobject name = "LeftNavigationUpdateContainer">
+			<ul class="prg-column-header-bar">
+				<webobject name = "RevenueReportsTab">
+					<webobject name = "ListRevenueReportsLink"><span><i class = "icon-signal">&nbsp;</i></span></webobject>
+				</webobject>
+				<webobject name = "DriverReportsTab">
+					<webobject name = "ListDriverReportsLink"><span><i class = "icon-calendar">&nbsp;</i></span></webobject>
+				</webobject>
+				<webobject name = "MiscellaneousReportsTab">
+					<webobject name = "ListMiscellaneousReportsLink"><span><i class = "icon-road">&nbsp;</i></span></webobject>
+				</webobject>
+			</ul>
+			<webobject name = "StaticColumn">
+				<ul class="prg-tree nav">
+					<webobject name = "RevenueReportsNavigationPageKey">
+						<li><a href = "#" class = "expanded">Revenue Reports</a>
+							<ul>
+								<li><wo:link action = "$accountReport" class = "no-leaf">By Account</wo:link></li>
+								<li><wo:link action = "$bookedByRevenueReports" class = "no-leaf">By Booker</wo:link></li>
+								<li><wo:link action = "$dailyRevenueReports" class = "no-leaf">By Date</wo:link></li>
+								<li><wo:link action = "$driverReport" class = "no-leaf">By Driver</wo:link></li>
+								<li><wo:link action = "$paymentTypesReport" class = "no-leaf">By Payment Type</wo:link></li>
+								<li><wo:link action = "$servicesRevenueReports" class = "no-leaf">By Service</wo:link>
+								<li><wo:link action = "$userRevenueReports" class = "no-leaf">By User</wo:link></li>
+								<li><wo:link action = "$zoneRevenueReports" class = "no-leaf">By Zone</wo:link></li>
+							</ul>
+						</li>
+					</webobject>
+					<webobject name = "DriverReportsNavigationPageKey">
+						<li><a href = "#" class = "expanded">Driver Reports</a>
+							<ul>
+								<li><wo:link action = "$driverDailyHoursReport">Daily</wo:link></li>
+								<li><wo:link action = "$driverWeeklyHoursReport">Weekly</wo:link></li>
+								<li><wo:link action = "$driverMonthlyHoursReport">Monthly</wo:link></li>
+							</ul>
+					</webobject>
+					<webobject name = "MiscellaneousReportsNavigationPageKey">
+						<li><a href = "#" class = "expanded">Vehicle Reports</a>
+							<ul>
+								<li><wo:link action = "$vehicleMileageReport">Mileage Reports</wo:link></li>
+								<li><wo:link action = "$vehicleSafetyInspectionExpirationReport">Safety Inspection</wo:link></li>
+								<li><wo:link action = "$vehicleRegisrationExpirationMileageReport">Registration Expiration</wo:link></li>
+							</ul>
+						</li>
+					</webobject>
+				</ul>
+			</webobject>
+		</webobject>		
+	</webobject>
+	<webobject name = "AlleyColumn">&nbsp;</webobject>
+	<webobject name = "MainTableColumn">
+		<div class = "row-fluid">
+			<webobject name = "RevenueReportsNavigationPageKey">
+				<webobject name = "RevenueReportComponent"></webobject>			
+			</webobject>
+			<webobject name = "DriverReportsNavigationPageKey">
+				<webobject name = "DriverScheduleReportComponent"></webobject>
+			</webobject>
+			<webobject name = "MiscellaneousReportsNavigationPageKey">
+				<webobject name = "MiscellaneousReportsComponent"></webobject>
+			</webobject>
+		</div>
+	</webobject>
+</webobject>

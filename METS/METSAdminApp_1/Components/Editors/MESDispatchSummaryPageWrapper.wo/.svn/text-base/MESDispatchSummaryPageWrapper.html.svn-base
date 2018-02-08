@@ -1,0 +1,18 @@
+<wo:METSHorizontalForm action = "$saveChanges">
+	<webobject name = "SummaryPage"></webobject>
+	<div class="form-actions" style="margin-bottom: 0px;">
+		<webobject name = "SubmitButton"></webobject>
+		<webobject name = "IsNotNewObject">
+			<webobject name = "SendSummaryButton">
+				Send Summary To Customer <i class = "icon-envelope icon-white">&nbsp;</i>
+			</webobject>
+		</webobject>
+	</div>
+</wo:METSHorizontalForm>
+<wo:if condition = "$object.hasChildren">
+	<webobject name = "InfoBar">Child Routes</webobject>
+	<webobject name = "ChildRoutesRepetition">
+		<webobject name = "ChildSummaryPage"></webobject>
+	</webobject>
+</wo:if>
+

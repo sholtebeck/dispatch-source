@@ -1,0 +1,27 @@
+<webobject name = "PaymentInformationForm">
+	<wo:METSTextInput helpText = "Required" labelText = "Amount" numberformat = "#,##0.00" value = "$delegate.paymentInfo.amount" />
+	<wo:METSPopUpButton helpText = "Required" labelText = "Paid" list = "$yesOrNoArray" selection = "$currentPaymentInformationPaid" />
+	<wo:METSPopUpButton helpText = "Required" labelText = "Driver Collect" list = "$yesOrNoArray" selection = "$currentPaymentDriverCollect" />
+	<webobject name = "IsCreditCardPayment">
+		<webobject name = "CurrentPaymentIsNewObject">
+			<wo:METSTextInput helpText = "Required" labelText = "CardHolderName" value = "$creditCard.creditCardHolder" />
+			<wo:METSTextInput helpText = "Required" labelText = "Card Number" value = "$creditCard.creditCardNumber" />
+			<wo:METSTextInput helpText = "Required" labelText = "Security ID" value = "$creditCard.securityID" />
+			<div class="control-group">
+				<label class="control-label" for="mesStartDate">Expiration Date</label>
+				<div class="controls">
+					<webobject name = "ExpirationMonthSelector"></webobject>
+					<webobject name = "ExpirationYearSelector"></webobject>
+				</div>
+			</div>	
+		</webobject>
+	</webobject>
+	<webobject name = "IsServiceOrderPayment">
+		<wo:METSTextInput helpText = "Required" labelText = "Group Name" value = "$serviceOrderPayment.groupName" />
+	</webobject>
+	<webobject name = "IsVoucherPayment">
+		<wo:METSTextInput helpText = "Required" labelText = "Voucher Number" value = "$voucherPayment.voucherNumber"></wo:METSTextInput>
+	</webobject>
+	<wo:METSTextArea labelText = "Notes" value = "$delegate.paymentInfo.notes" />
+	<wo:METSFormSubmissionBar isNewObject = "$delegate.paymentInfo.isNewObject" submitAction = "$saveChanges"></wo:METSFormSubmissionBar>
+</webobject>

@@ -1,0 +1,48 @@
+package com.mauishuttle.components.editors;
+
+import java.math.BigDecimal;
+
+import com.mauishuttle.components.controllers.MESAccountPagesController;
+import com.mauishuttle.components.interfaces.MESDispatchTableControllerInterface;
+import com.mauishuttle.eo.MESDispatch;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+
+import er.ajax.mootools.MTAjaxUtils;
+
+@SuppressWarnings("serial")
+public class MESAccountDispatchesView extends MESAccountPagesController {
+
+	public MESDispatchTableControllerInterface dataSource;
+	public MESDispatch _dispatch;
+	
+	public MESAccountDispatchesView(WOContext context) {
+        super(context);
+    }
+
+	public void appendToResponse(WOResponse response, WOContext context) {
+		super.appendToResponse(response, context);
+		MTAjaxUtils.addStylesheetResourceInHead(
+				context, 
+				response, 
+				"app", 
+				"stylesheets/datepicker_dashboard.css");
+	}
+
+	public WOActionResults inspectDispatch() {
+		setEditorPageKey(MESAccountPagesController.GENERAL_INFORMATION_VIEW_PAGE_KEY);
+		navigationController().setSelectedObject(_dispatch);
+		return navigationController().nextPage();
+	}	
+
+	public BigDecimal calculatedTotal() {
+		BigDecimal calculatedTotal = new BigDecimal(0.0d).setScale(2);
+		for(Object object : dataSource().dispatchDisplayGroup().displayedObjects()) {
+			MESDispatch dispatch = (MESDispatch)object;
+			calculatedTotal = calculatedTotal.add(dispatch.calculatedTotal());
+		}
+		return calculatedTotal;
+	}
+	
+}

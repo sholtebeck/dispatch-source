@@ -1,0 +1,9 @@
+ComponentContent : WOComponentContent {
+	
+}
+
+InfoBarContainer : WOGenericContainer {
+	class = classNameWithDefault;
+	elementName = elementNameWithDefault;
+	id = id;
+}

@@ -1,0 +1,18 @@
+DriverSelector : METSPopUpButton {
+	displayString = driver.firstName;
+	helpText = "Optional";
+	item = driver;
+	labelText = "Driver";
+	list = hubDrivers;
+	noSelectionString = "Please select a driver";
+	selection = object.driver;
+}
+
+StatusSelector : METSPopUpButton {
+	displayString = status.key;
+	helpText = "Optional";
+	item = status;
+	labelText = "Status";
+	list = statuses;
+	selection = selectedStatus;
+}

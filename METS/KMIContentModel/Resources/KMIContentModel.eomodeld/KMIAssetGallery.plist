@@ -1,0 +1,46 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "create_date"; 
+            name = createDate; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = "last_modified"; 
+            name = lastModified; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = Y; columnName = name; name = name; prototypeName = varchar50; }, 
+        {allowsNull = N; columnName = "site_id"; name = siteID; prototypeName = id; }
+    ); 
+    attributesUsedForLocking = (id, siteID); 
+    className = "km.content.eo.KMIAssetGallery"; 
+    classProperties = (assets, createDate, lastModified, name, site); 
+    externalName = AssetGallery; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIAssetGallery; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {definition = "kmiAssetGalleryAssetses.kmiAbstractAsset"; name = assets; }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = KMIAssetGalleryAssets; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = kmiAssetGalleryId; sourceAttribute = id; }); 
+            name = kmiAssetGalleryAssetses; 
+            propagatesPrimaryKey = Y; 
+        }, 
+        {
+            destination = KMIWebSite; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = siteID; }); 
+            name = site; 
+        }
+    ); 
+}

@@ -1,0 +1,50 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	deleteAction = removeObject;
+	deleteButtonText = "Remove Vehicle";
+	useModalForDelete = true;
+	isNewObject = object.isNewObject;
+	submitAction = navigationController.saveChanges;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = errors;
+	messages = messages;
+}
+
+MileageTextInput : METSTextInput {
+	labelText = "Mileage";
+	numberformat = "0,000.00";
+	value = object.mileage;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+VehicleForm : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+VehicleMake : WOString {
+	value = object.make;
+}
+
+VehicleTypePopUpButton : METSPopUpButton {
+	displayString = vehicleType.name;
+	helpText = "Required Information";
+	labelText = "Vehicle Type";
+	item = vehicleType;
+	list = vehicleTypesList;
+	noSelectionString = "Please select a vehicle type";
+	selection = object.vehicleType;
+}

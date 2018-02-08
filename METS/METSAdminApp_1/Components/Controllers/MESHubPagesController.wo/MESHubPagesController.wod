@@ -1,0 +1,237 @@
+ActiveAccountTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	displayKey = "name";
+	id = "MESAccountExpansion";	
+	items = hubAccounts;
+	label = "Accounts (Active)";
+	navigationController = navigationController;
+}
+
+AddNewBookerLink : WOHyperlink {
+	action = createNewBooker;
+}
+
+InactiveAccountTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	displayKey = "name";
+	id = "MESInactiveAccountExpansion";	
+	items = inactiveHubAccounts;
+	label = "Accounts (Inactive)";
+	navigationController = navigationController;
+}
+
+BookerTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	displayKey = "name";
+	id = "MESBookersExpansion";
+	items = hubBookers;
+	label = "Bookers";
+	navigationController = navigationController;
+}
+
+AddNewAccountLink : WOHyperlink {
+	action = createNewAccount;
+}
+
+AddNewAirportZoneLink : WOHyperlink {
+	action = createNewAirportZone;
+}
+
+AddNewDriverLink : WOHyperlink {
+	action = createNewDriver;
+}
+
+AddNewExclusiveServiceLink : WOHyperlink {
+	action = createNewExclusiveService;
+}
+
+AddNewLocationLink : WOHyperlink {
+	action = createNewLocation;
+}
+
+AddNewPhoneLink : WOHyperlink {
+	action = createNewPhone;
+}
+
+AddNewSharedServiceLink : WOHyperlink {
+	action = createNewSharedService;
+}
+
+AddNewVehicleLink : WOHyperlink {
+	action = createNewVehicle;
+}
+
+AddNewZoneLink : WOHyperlink {
+	action = createNewZone;
+}
+
+AirportZonesTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = session.isSuperUser;
+	displayKey = "name";
+	id = "MESAirportZoneExpansion";	
+	items = hubAirports;
+	label = "Airport Zones";
+	navigationController = navigationController;
+}
+
+AlleyColumn : METSTableColumn {
+	class = "prg-alley";
+}
+
+BlankPage : MESBlankPage {
+	
+}
+
+DriverTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = true;
+	displayKey = "firstName";
+	id = "MESDriverExpansion";	
+	initiallyExpanded = false;
+	items = hubDrivers;
+	label = "Drivers";
+	navigationController = navigationController;
+}
+
+FooterBar : METSTableColumnFooterBar {
+	
+}
+
+FooterContextMenu : METSContextMenu {
+	display = "above";
+	left = "-6px";
+} 
+
+HubObjectEditor : WOSwitchComponent {
+	navigationController = navigationController;
+	object = selectedObject;
+	WOComponentName = hubObjectEditorComponentName;
+}
+
+IsSuperAdministrator : WOConditional {
+	condition = session.isSuperUser;
+}
+
+LeftNavigationUpdateContainer : MTAjaxUpdateContainer {
+	id = "METSLeftNavigationUpdateContainer";
+}
+
+LocationsTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = true;
+	displayKey = "name";
+	id = "MESLocationExpansion";	
+	items = hubLocations;
+	label = "Locations";
+	navigationController = navigationController;
+}
+
+MainTableColumn : METSTableColumn {
+	class = "prg-main-column";
+	id = "PRGMainColumn";
+}
+
+MESAccountPageController : MESAccountPagesController {
+	navigationController = navigationController;
+	object = selectedObject;
+}
+
+PageWrapper : PageWrapper {
+	pageTitle = ^pageTitle;
+}
+
+PhonesTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = true;
+	displayKey = "phoneNumber";
+	id = "MESPhoneExpansion";	
+	items = hubPhones;
+	label = "Phones";
+	navigationController = navigationController;
+}
+
+ResizeColumn : METSResizeColumn {
+	class = "prg-side-column";
+	id = "PRGLeftColumn";
+	otherColumn = "PRGMainColumn";
+}
+
+SelectedObjectIsAccount : WOConditional {
+	condition = selectedObjectIsAccount;
+}
+
+SelectedObjectIsNotAnAccount : WOConditional {
+	condition = selectedObjectIsAccount;
+	negate = true;
+}
+
+SelectedObjectIsDefined : ERXNonNullConditional {
+	condition = selectedObject;
+}
+
+SelectedObjectIsNotDefined : ERXNonNullConditional {
+	condition = selectedObject;
+	negate = true;
+}
+
+ServicesExclusiveTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = session.isSuperUser;
+	displayKey = "name";
+	id = "MESExclusiveServicesExpansion";	
+	items = hubExclusiveServices;
+	label = "Services, Exclusive";
+	navigationController = navigationController;
+}
+
+ServicesSharedTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = session.isSuperUser;
+	displayKey = "name";
+	id = "MESSharedServicesExpansion";	
+	items = hubSharedServices;
+	label = "Services, Shared";
+	navigationController = navigationController;
+}
+
+StandardZoneTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = session.isSuperUser;
+	displayKey = "name";
+	id = "MESStandardZoneExpansion";	
+	items = hubZones;
+	label = "Standard Zones";
+	navigationController = navigationController;
+}
+
+StaticColumn : METSStaticColumn {
+
+}
+
+VehiclesTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = true;
+	displayKey = "displayName";
+	id = "MESVehiclesExpansion";	
+	items = hubVehicles;
+	label = "Vehicles";
+	navigationController = navigationController;
+}
+
+ViewHubObjectsAction : MTAjaxUpdateLink {
+	action = viewHubObjects;
+	class = "icon";
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+	onComplete = "PRGPortalUtilities.setColumnHeights()";
+}
+
+ViewHubObjectsListItem : WOGenericContainer {
+	class = viewHubObjectsListItemClassName;
+	elementName = "li";
+}
+
+ViewHubObjectsNavigationPageKey : WOKeyValueConditional {
+	key = "navigationPageKey";
+	value = "ViewHubObjects";
+}
+
+ViewHubObjectsPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = "ViewHubObjects";
+}
+
+ZonesExpansion : MTAjaxExpansion {
+	initiallyExpanded = false;
+	id = "MESZonesExpansion";
+	string = "<span>Zones</span>";
+}

@@ -1,0 +1,4 @@
+Main : PageWrapper {
+	metaDescription = metaDescription;
+	pageTitle = pageTitle;
+}

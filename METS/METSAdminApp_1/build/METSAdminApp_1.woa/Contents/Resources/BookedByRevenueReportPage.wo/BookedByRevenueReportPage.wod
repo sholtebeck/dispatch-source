@@ -1,0 +1,29 @@
+BookerReportsDataTable : BookedByRevenueReportDataTable {
+	endDate = endDate;
+	reports = reports;
+	startDate = startDate;
+}
+
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+DateRangeSelector : ReportDateRangeSelector {
+	aHub = aHub;
+	hubs = hubs;
+	selectedHub = selectedHub;
+	endDate = endDate;
+	filter = filter;
+	paidEnum = paidEnum;
+	paidEnums = paidEnums;
+	printReport = printReport;
+	selectedPaidEnum = selectedPaidEnum;
+	selectedStandardDateRange = selectedStandardDateRange;
+	standardDateRange = standardDateRange;
+	standardDateRanges = standardDateRanges;
+	startDate = startDate;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}

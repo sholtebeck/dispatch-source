@@ -1,0 +1,79 @@
+DropOffLocation : WOTextField {
+	disabled = true;
+	class = "text";
+	value = dispatch.dropOffLocation.nameWithZone;
+}
+
+FromDirectionPageKey : WOKeyValueConditional {
+	key = "direction";
+	value = "From";
+}
+
+HasAvailableServices : WOConditional {
+	condition = hasAvailableServices;
+}
+
+MiscellaneousFee : WOString {
+	numberformat = "$#,##0.##";
+	value = miscellaneousFee;
+}
+
+PickUpLocation : WOTextField {
+	disabled = true;
+	class = "text";
+	value = dispatch.pickUpLocation.name;
+}
+
+RadioButton : WORadioButton {
+	checked = selectedService;
+	name = "METSServiceSelector";
+}
+
+ReservationDate : WOTextField {
+	disabled = true;
+	class = "text";
+	dateformat = "%b %d, %Y %I:%M %p";
+	value = dispatch.reservationDate;
+}
+
+FlightDate : WOTextField {
+	disabled = true;
+	class = "text";
+	dateformat = "%b %d, %Y %I:%M %p";
+	value = dispatch.flightDateTime;
+}
+
+RouteInformationHeader : WOString {
+	escapeHTML = false;
+	value = routeInformationHeader;
+}
+
+ServiceBaseRate : WOString {
+	numberformat = "$#,##0.00";
+	value = serviceBaseRate;
+}
+
+ServicesList : WORepetition {
+	item = service;
+	list = services;
+}
+
+ServiceTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = serviceTotal;
+}
+
+TableRow : WOGenericContainer {
+	class = tableRowClassName;
+	elementName = "tr";
+}
+
+ToDirectionPageKey : WOKeyValueConditional {
+	key = "direction";
+	value = "To";
+}
+
+VehiclePhoto : WOImage {
+	class = "thumbnail";
+	src = exclusiveServiceVehicleThumbnailSrc;
+}

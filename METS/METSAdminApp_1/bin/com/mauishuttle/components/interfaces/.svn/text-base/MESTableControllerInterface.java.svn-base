@@ -1,0 +1,8 @@
+package com.mauishuttle.components.interfaces;
+
+public interface MESTableControllerInterface {
+
+	public Object dataSource();
+	public void setDataSource(Object dataSource);
+	
+}

@@ -1,0 +1,29 @@
+ReportsRepetition : WORepetition {
+	item = report;
+	list = reports;
+}
+
+VehicleLicensePlateNumber : WOString {
+	value = report.licensePlateNumber;
+}
+
+VehicleMake : WOString {
+	value = report.make;
+}
+
+VehicleModel : WOString {
+	value = report.model;
+}
+
+VehicleName : WOString {
+	value = report.name;
+}
+
+VehicleSafetyInspectionExpirationDate : WOString {
+	dateformat = "%B - %Y";
+	value = report.safetyExpiration;
+}
+
+VehicleType : WOString {
+	value = report.vehicleType.name;
+}

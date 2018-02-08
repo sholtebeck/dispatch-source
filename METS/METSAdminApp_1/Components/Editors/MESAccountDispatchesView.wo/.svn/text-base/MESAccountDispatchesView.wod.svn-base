@@ -1,0 +1,123 @@
+AllDispatchesCount : WOString {
+	numberformat = "0";
+	value = dataSource.dispatchDisplayGroup.allObjects.@count;
+}
+
+BillingTotal : WOString {
+	numberformat = "$#,##0.##";
+	value = dispatch.calculatedTotal;
+}
+
+ConfirmationNumber : WOString {
+	value = dispatch.confirmationNumber;
+}
+
+DispatchesRepetition : WORepetition {
+	item = dispatch;
+	list = dataSource.dispatchDisplayGroup.displayedObjects;
+}
+
+DispatchesTotal : WOString {
+	numberformat = "$#,##0.00";
+	value = calculatedTotal;
+}
+
+DisplayedDispatchCount : WOString {
+	numberformat = "0";
+	value = dataSource.dispatchDisplayGroup.displayedObjects.@count;
+}
+
+DisplayNext : WOHyperlink {
+	action = dataSource.dispatchDisplayGroup.displayNextBatch;
+}
+
+DisplayPrevious : WOHyperlink {
+	action = dataSource.dispatchDisplayGroup.displayPreviousBatch;
+}
+
+Driver : WOString {
+	value = dispatch.driver|fullName(false);
+}
+
+EnableDateFilterPopupButton : WOPopUpButton {
+	class = "span1 prg-pad-right";
+	list = yesOrNoArray;
+	noSelectionString = "Enable Date Filtering";
+	selection = dataSource.enableDateFiltering;
+}
+
+EndDatePicker : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = dataSource.searchEndDate;
+}
+
+FilterButton : WOSubmitButton {
+	action = filter;
+	class = "btn btn-primary";
+	value = "Filter Dispatches";
+}
+
+FilterResultsForm : WOForm {
+	action = filter; 
+	class = "form-inline";
+	name = "MESFilterDispatchesForm";
+}
+
+HasMultipleBatches : WOConditional {
+	condition = dataSource.dispatchDisplayGroup.hasMultipleBatches;
+}
+
+HasResults : WOConditional {
+	condition = dataSource.hasResults;
+}
+
+InspectDispatchLink : WOHyperlink {
+	action = inspectDispatch;
+}
+
+MESAccountNavigation : MESAccountNavigationController {
+	dispatchesView = dispatchesView;
+	generalInformationLink = generalInformationView;
+	isNewObject = object.isNewObject;
+	tabIndex = 1;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = errors;
+	messages = messages;
+}
+
+NoResults : WOConditional {
+	condition = dataSource.hasResults;
+	negate = true;
+}
+
+ParentConfirmationNumber : WOString {
+	value = dispatch.parent.confirmationNumber;
+}
+
+PickUpLocation : WOString {
+	value = dispatch.pickUpLocation.name;
+}
+
+ReservationDate : WOString {
+	dateformat = "%B %d, %y %H:%M %p";
+	value = dispatch.reservationDate;
+}
+
+Service : WOString {
+	value = dispatch.service.name;
+}
+
+StartDatePicker : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = dataSource.searchStartDate;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}

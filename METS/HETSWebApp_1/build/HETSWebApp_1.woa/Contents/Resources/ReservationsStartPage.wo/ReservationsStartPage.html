@@ -1,0 +1,72 @@
+<webobject name = "Main">
+	<div class="billboard inner-billboard reservations-billboard">
+		<div class="container">
+			<div class="span-24">
+			</div>
+		</div>
+	</div>
+	<div id="HTContent">
+		<div class="container">
+			<div class="span-24">
+				<div class="span-16-5">
+					<div class="page-copy clearfix reservations">
+						<noscript>
+							<div class = "error">
+								<h1>NOTICE:</h1>
+								<p>Javascript is required to complete the registration process.  Please enable JavaScript or call: 1-800-833-2303 to complete your reservation.</p>
+							</div>
+						</noscript>
+						<h1>Reservation System</h1>
+						<h2>Online booking must be booked 48 hours in advance.</h2>
+						<em>
+							Please use the form below to book your reservation.  If you have any questions or would like to book a reservation within the next 48 hours please call: 1-800-833-2303							
+						</em>
+						<div class="span-15-5 push-1-2 last form-panel prepend-top">
+							<h3><blink>ARRIVALS</blink> Transportation <b>from</b> an airport.</h3>
+							<div class="span-11 last btn-row">
+								<wo:link class="btn" actionClass = "DirectAction" directActionName = "startReservation" ?direction = "From" ?routes="1" rel = "nofollow">One Way</wo:link>
+								<wo:link class="btn" actionClass = "DirectAction" directActionName = "startReservation" ?direction = "From" ?routes="2" rel = "nofollow">Round Trip</wo:link>
+							</div>
+						</div>
+						<div class="span-15-5 push-1-2 last form-panel prepend-top">
+							<h3><blink>DEPARTURES</blink> Transportation <b>to</b> an airport.</h3>
+							<div class="span-11 last btn-row">
+								<wo:link class="btn" actionClass = "DirectAction" directActionName = "startReservation" ?direction = "To" ?routes="1" rel = "nofollow">One Way</wo:link>
+								<wo:link class="btn" actionClass = "DirectAction" directActionName = "startReservation" ?direction = "To" ?routes="2" rel = "nofollow">Round Trip</wo:link>
+							</div>
+						</div>
+						<div class="span-15-5 push-1-2 last form-panel prepend-top">
+							<h3>PRINT RECEIPTS AND BOARDING PASSES</h3>
+							<div class="span-11 last btn-row">
+								<wo:link class = "btn" actionClass = "DirectAction" directActionName = "reservationLookup">Look up Reservation *</wo:link>
+								<p class="caption"><sup>*</sup> You will need your confirmation number</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span-6-5 push-1 last">
+					<div class="span-6-5 info-panel last">
+						<h4>
+							Need assistance?
+							<span>Please call: 1-800-833-2303</span>
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>				
+	<script type="text/javascript">
+
+		window.addEvent('domready', function() {
+			var elements = $$('blink');
+			var doBlink = function() {
+				this.each(function(el) {
+					el.setStyle('visibility', 
+						el.getStyle('visibility') == "visible" ? "hidden" : "visible");
+				});
+			}.bind(elements);
+			setInterval(doBlink, 500);
+		});
+
+	</script>
+</webobject>

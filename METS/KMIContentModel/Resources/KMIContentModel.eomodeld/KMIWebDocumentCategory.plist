@@ -1,0 +1,58 @@
+{
+    attributes = (
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {allowsNull = Y; columnName = name; name = name; prototypeName = varchar50; }, 
+        {
+            allowsNull = Y; 
+            columnName = "parent_id"; 
+            name = parentID; 
+            prototypeName = id; 
+        }, 
+        {allowsNull = N; columnName = "site_id"; name = siteID; prototypeName = id; }, 
+        {allowsNull = Y; columnName = slug; name = slug; prototypeName = varchar50; }, 
+        {
+            allowsNull = Y; 
+            columnName = "unique_identifier"; 
+            name = uniqueIdentifier; 
+            prototypeName = varchar50; 
+        }
+    ); 
+    attributesUsedForLocking = (id, parentID, siteID); 
+    className = "km.content.eo.KMIWebDocumentCategory"; 
+    classProperties = (children, documents, name, parent, site, slug, uniqueIdentifier); 
+    externalName = DocumentCategory; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIWebDocumentCategory; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = KMIWebDocumentCategory; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = parentID; sourceAttribute = id; }); 
+            name = children; 
+        }, 
+        {
+            destination = KMIWebDocument; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = categoryID; sourceAttribute = id; }); 
+            name = documents; 
+        }, 
+        {
+            destination = KMIWebDocumentCategory; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = parentID; }); 
+            name = parent; 
+        }, 
+        {
+            destination = KMIWebSite; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = siteID; }); 
+            name = site; 
+        }
+    ); 
+}

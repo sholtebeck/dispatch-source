@@ -1,0 +1,14 @@
+AirportSelector : WOPopUpButton {
+	displayString = airport.displayString;
+	item = airport;
+	list = airportZones;
+	name = "airport";
+	noSelectionString = "Please Choose";
+	selectedValue = ^selectedValue;
+	value = airport.airportCode;
+}
+
+
+Form : WOForm {
+	href = startReservationLink;
+}

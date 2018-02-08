@@ -1,0 +1,58 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = comment; 
+            name = comment; 
+            prototypeName = varchar1000; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "commenter_email"; 
+            name = commenterEmail; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = commenterName; 
+            name = commenterName; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "creation_date"; 
+            name = creationDate; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = "document_id"; 
+            name = documentID; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = flagged; 
+            name = flagged; 
+            prototypeName = boolean; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }
+    ); 
+    attributesUsedForLocking = (documentID, id); 
+    className = "km.content.eo.KMIWebDocumentComment"; 
+    classProperties = (comment, commenterEmail, commenterName, creationDate, document, flagged); 
+    externalName = DocumentComment; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIWebDocumentComment; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = KMIWebDocument; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = documentID; }); 
+            name = document; 
+        }
+    ); 
+}

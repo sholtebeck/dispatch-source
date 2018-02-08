@@ -1,0 +1,21 @@
+<wo:METSHorizontalForm action = "$saveChanges">
+	<webobject name = "RequiresChildSeatsSelector"></webobject>
+	<webobject name = "ChildSeatsUpdateContainer">
+		<webobject name = "RequiresChildSeats">
+			<wo:METSTextInput labelText = "Infants" value = "$object.infant"></wo:METSTextInput>
+			<wo:METSTextInput labelText = "Toddlers" value = "$object.toddler"></wo:METSTextInput>
+			<wo:METSTextInput labelText = "Boosters" value = "$object.booster"></wo:METSTextInput>
+		</webobject>
+	</webobject>
+	<webobject name = "RequiresChildSeatsSelectorObserveField"></webobject>
+	<wo:METSTextInput labelText = "Baggage" value = "$object.numberOfBags" helpText = "$baggageHelpText"></wo:METSTextInput>
+	<wo:METSTextInput labelText = "Bicycles" value = "$object.numberOfBicycles"></wo:METSTextInput>
+	<wo:METSTextInput labelText = "Boxes" value = "$object.numberOfBoxes"></wo:METSTextInput>
+	<wo:METSTextInput labelText = "Surfboards" value = "$object.numberOfSurfboards"></wo:METSTextInput>
+	<wo:METSTextInput labelText = "Windsurfs" helpText = "Windsurfs, SUPs and Paddleboards" value = "$object.numberOfWindsurfs"></wo:METSTextInput>
+	<webobject name = "GreetRadioButtonSelector"></webobject>
+	<wo:METSTextInput labelText = "NumberOfLeis" value = "$object.numberOfLeis"></wo:METSTextInput>	
+	<webobject name = "MiscFees"></webobject>
+	<webobject name = "MiscFeesNotes"></webobject>
+	<wo:METSFormSubmissionBar isNewObject = "$object.isNewObject" submitButtonText = "Continue to driver information" submitAction = "$saveChanges" />
+</wo:METSHorizontalForm>

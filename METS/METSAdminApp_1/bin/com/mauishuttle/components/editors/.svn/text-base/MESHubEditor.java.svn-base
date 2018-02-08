@@ -1,0 +1,80 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.eo.MESHub;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eoaccess.EOUtilities;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSValidation;
+
+@SuppressWarnings("serial")
+public class MESHubEditor extends MESNonSynchronizingEditor {
+	
+	private MESHub _hub;
+	
+    public MESHubEditor(WOContext context) {
+        super(context);
+    }
+
+	public WOActionResults deleteHub() {
+		
+		try {
+			ec().deleteObject(object());
+			ec().saveChanges();
+			navigationController().setSelectedObject(null);
+		} catch (NSValidation.ValidationException e) {
+			validationFailedWithException(e, null, null);
+		}
+		
+		return navigationController().nextPage();
+
+	}
+
+    public WOActionResults saveChanges() {
+    	
+    	boolean isNew = object().isNewObject();
+    	EOEditingContext parentEditingContext = (EOEditingContext)ec().parentObjectStore();
+
+    	if(! hasError()) {
+
+    		try {
+
+    			if(isNew) {
+    				object().role().setLabel(object().name() + " Admins");
+    			}
+
+    			ec().saveChanges();
+    			
+    			if(isNew) {
+        			parentEditingContext.saveChanges();
+        			navigationController().setSelectedObject(EOUtilities.localInstanceOfObject(parentEditingContext, object()));
+    			}
+        		
+    			addMessage(RECORD_UPDATE_MESSAGE);
+    		
+    		} catch (NSValidation.ValidationException e) {
+    			validationFailedWithException(e, null, null);
+    		}
+    	
+    	}
+    	
+    	return navigationController().nextPage();
+    
+    }
+    
+	public MESHub object() {
+		if(_hub == null) {
+			_hub = (MESHub)valueForBinding("object");
+		}
+		return _hub;
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+		try {
+			this._hub = (MESHub)object;
+		} catch (ClassCastException e) {
+			throw new ClassCastException("Object must be of type MESHub");
+		}
+	}
+
+}

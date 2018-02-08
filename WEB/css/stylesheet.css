@@ -1,0 +1,1110 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+html, body {
+  background: transparent url("../images/background.jpg") repeat;
+  height: 100%;
+  margin: 0px;
+  padding: 0px; }
+
+body {
+  font: 14px Helvetica, Arial, sans-serif; }
+
+/*Opera Fix*/
+body:before {
+  /* thanks to Maleika (Kohoutec)*/
+  content: "";
+  height: 100%;
+  float: left;
+  width: 0;
+  margin-top: -32767px;
+  /* thank you Erik J - negate effect of float*/ }
+
+#HTWrap {
+  min-height: 100%;
+  padding-bottom: 25px; }
+
+#HTMain {
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 101px; }
+
+/* must be same height as the footer */
+#HTHeader {
+  background: black url("../images/header.jpg") repeat-x left center;
+  display: table;
+  height: 158px;
+  position: relative;
+  width: 100%; }
+  #HTHeader .shadow {
+    background: transparent url("../images/header-shadow.png") repeat-x;
+    height: 6px;
+    left: 0px;
+    top: 158px;
+    position: absolute;
+    width: 100%;
+    z-index: 1001; }
+  #HTHeader nav {
+    margin: 0px;
+    padding: 0px; }
+  #HTHeader ul {
+    display: table-row;
+    height: 158px;
+    text-align: right;
+    width: 100%; }
+    #HTHeader ul li {
+      display: table-cell;
+      vertical-align: middle; }
+      #HTHeader ul li a.nav {
+        background: transparent url("../images/navigation-sprite.png") no-repeat;
+        background-position: 0px 0px;
+        display: block;
+        height: 0px;
+        overflow: hidden;
+        padding-top: 25px;
+        padding-right: 25px;
+        width: 90px; }
+      #HTHeader ul li a.rates {
+        background-position: 0px -30px;
+        width: 96px; }
+      #HTHeader ul li a.reservations {
+        background-position: 0px -61px;
+        width: 129px; }
+      #HTHeader ul li a.contact {
+        background-position: 0px -92px;
+        padding-right: 0px;
+        width: 106px; }
+	  #HTHeader ul li a.tours {
+        background-position: 0px -30px;
+        width: 50px; }
+    #HTHeader ul li:first-child {
+      padding-right: 170px; }
+
+*:first-child + html #HTHeader ul li {
+  display: inline-block;
+  float: left; }
+
+*:first-child + html #HTHeader ul li a.nav {
+  margin-top: 70px; }
+
+*:first-child + html #HTLogo {
+  margin-top: 10px; }
+
+*:first-child + html #HTHeader ul li:first-child {
+  padding-right: 43px; }
+
+.billboard, .inner-billboard, .airport-billboard {
+  background: url("../images/billboard3.jpg") no-repeat center center;
+  box-shadow: inset 0 8px 8px -8px black;
+  box-shadow: inset 0 -8px 5px -5px rgba(0, 0, 0, 0.3);
+  background-size: cover;
+  height: 403px;
+  position: relative;
+  width: 100%; }
+  .billboard .form-panel, .inner-billboard .form-panel, .airport-billboard .form-panel {
+    margin-top: 90px; }
+  .billboard .container, .inner-billboard .container, .airport-billboard .container {
+    height: 403px;
+    position: relative; }
+    .billboard .container .sprinter-van, .inner-billboard .container .sprinter-van, .airport-billboard .container .sprinter-van {
+      bottom: -17px;
+      left: 0px;
+      position: absolute;
+      z-index: 10001; }
+  .billboard .stitch, .inner-billboard .stitch, .airport-billboard .stitch {
+    background: transparent url("../images/stitch.png") repeat-x center;
+    height: 8px;
+    left: 0px;
+    bottom: -10px;
+    width: 100%;
+    position: absolute;
+    z-index: 1001; }
+  .billboard .shadow, .inner-billboard .shadow, .airport-billboard .shadow {
+    background: transparent url("../images/billboard-shadow.png") repeat-x;
+    bottom: 0px;
+    height: 5px;
+    left: 0px;
+    position: absolute;
+    width: 100%;
+    z-index: 1001; }
+
+.inner-billboard {
+  height: 203px; }
+  .inner-billboard .container {
+    height: 203px; }
+
+.airport-billboard {
+  background-image: url("../images/airports/kahului-billboard.jpg");
+  height: 293px; }
+  .airport-billboard .container .span-24 {
+    height: 293px; }
+    .airport-billboard .container .span-24 > div {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0; }
+    .airport-billboard .container .span-24 > div:first-child {
+      text-align: right;
+      width: 518px; }
+      .airport-billboard .container .span-24 > div:first-child h1 {
+        background: url("../images/airports/h1-bg.png") repeat-y;
+        color: #0162b4;
+        font-size: 2.0em;
+        margin-top: 105px;
+        padding: 20px 10px;
+        text-shadow: 1px 1px 1px white; }
+    .airport-billboard .container .span-24 > div:last-child {
+      width: 432px; }
+      .airport-billboard .container .span-24 > div:last-child .form-panel {
+        margin-top: 15px; }
+
+.kapalua-billboard {
+  background-image: url("../images/airports/kapalua-airport-billboard.jpg"); }
+
+.kona-airport {
+  background-image: url("../images/airports/kona-airport-billboard.jpg"); }
+
+.lihue-airport {
+  background-image: url("../images/airports/lihue-airport-billboard.jpg"); }
+
+#AirportPage + #HTContent .span-16-5 .caption {
+  color: gray;
+  display: block;
+  font-size: 0.9em;
+  margin-bottom: 1.0em; }
+#AirportPage + #HTContent .span-6-5 .side-navigation {
+  margin-top: 0; }
+#AirportPage + #HTContent .span-6-5 .greeter {
+  background: white url("../images/airports/greeter.jpg") no-repeat center right;
+  height: 119px; }
+  #AirportPage + #HTContent .span-6-5 .greeter span {
+    color: #0162b4;
+    display: block;
+    font-size: 1.1em;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin-left: 10px;
+    margin-top: 10px;
+    padding-right: 100px;
+    text-align: left; }
+#AirportPage + #HTContent .span-6-5 .courtesy-phone {
+  background: white url("../images/airports/phone.jpg") no-repeat center left;
+  padding: 20px 0px; }
+  #AirportPage + #HTContent .span-6-5 .courtesy-phone span {
+    color: #0162b4;
+    display: block;
+    font-size: 1.1em;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin-left: 88px;
+    padding-right: 20px;
+    text-align: right; }
+
+.rates-billboard {
+  background-image: url("../images/rates/billboard.jpg"); }
+
+.about-us-billboard {
+  background-image: url("../images/about/billboard.jpg"); }
+
+.limousine-billboard, .reservation-request-billboard, .volcano-billboard, .charter-bus-billboard, .ironman-billboard {
+  background-image: url("../images/limousines/inside-limousine-billboard.jpg");
+  height: 294px; }
+
+.ironman-billboard {
+  background-image: url("../images/ironman/billboard.jpg"); }
+
+.charter-bus-billboard {
+  background-image: url("../images/charter-buses/charter-buses-billboard2.jpg"); }
+
+.reservation-request-billboard {
+  background-image: url("../images/limousines/reservations-billboard.jpg"); }
+
+.volcano-billboard {
+  background-image: url("../images/volcano/volcano-tours-billboard.jpg"); }
+
+.contact-billboard {
+  background-image: url("../images/contact/billboard.jpg"); }
+
+.reservations-billboard {
+  background-image: url("../images/reservations/billboard3.jpg"); }
+
+#ReservationRequestForm > div {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  *vertical-align: top;
+  zoom: 1;
+  *display: inline;
+  padding: 0;
+  margin: 0;
+  width: 49%; }
+  #ReservationRequestForm > div label {
+    display: block;
+    color: #606060;
+    font-family: Tahoma, verdana, sans-serif;
+    margin: 0;
+    padding: 0; }
+  #ReservationRequestForm > div input[type="text"], #ReservationRequestForm > div input[type="email"] {
+    -webkit-transition-property: border-color,box-shadow;
+    -moz-transition-property: border-color,box-shadow;
+    -o-transition-property: border-color,box-shadow;
+    transition-property: border-color,box-shadow;
+    -webkit-transition-duration: 0.2s,0.2s;
+    -moz-transition-duration: 0.2s,0.2s;
+    -o-transition-duration: 0.2s,0.2s;
+    transition-duration: 0.2s,0.2s;
+    -webkit-transition-timing-function: linear,linear;
+    -moz-transition-timing-function: linear,linear;
+    -o-transition-timing-function: linear,linear;
+    transition-timing-function: linear,linear;
+    -webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
+    -moz-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    margin-top: 0;
+    margin-bottom: 24px;
+    padding: 10px;
+    outline: none;
+    width: 235px; }
+    #ReservationRequestForm > div input[type="text"] + label, #ReservationRequestForm > div input[type="email"] + label {
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      border-radius: 4px;
+      margin-top: -12px;
+      margin-top: -0.75rem;
+      margin-bottom: 24px;
+      margin-bottom: 1.5rem;
+      padding: 5px 10px;
+      width: 235px; }
+  #ReservationRequestForm > div input[type="text"]:focus, #ReservationRequestForm > div input[type="email"]:focus {
+    border-color: #4586c1;
+    -webkit-box-shadow: 0 0 8px rgba(118, 166, 212, 0.6);
+    -moz-box-shadow: 0 0 8px rgba(118, 166, 212, 0.6);
+    box-shadow: 0 0 8px rgba(118, 166, 212, 0.6); }
+  #ReservationRequestForm > div input[type="text"].error, #ReservationRequestForm > div input[type="text"].error:focus, #ReservationRequestForm > div input[type="email"].error, #ReservationRequestForm > div input[type="email"].error:focus {
+    border-color: #ef7676;
+    -webkit-box-shadow: 0 0 8px rgba(255, 100, 100, 0.6);
+    -moz-box-shadow: 0 0 8px rgba(255, 100, 100, 0.6);
+    box-shadow: 0 0 8px rgba(255, 100, 100, 0.6); }
+  #ReservationRequestForm > div input[type="radio"] {
+    display: none; }
+  #ReservationRequestForm > div input[type="radio"] + label {
+    background: transparent url("../images/reservations/radio-button.png") no-repeat;
+    background-position: 0px 5px;
+    display: block;
+    height: 24px;
+    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
+    padding-left: 20px; }
+  #ReservationRequestForm > div input[type="radio"]:checked + label {
+    background-position: 0px -181px; }
+  #ReservationRequestForm > div input[type="submit"] {
+    background: #1a76bb;
+    /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFhNzZiYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwZjVlYWEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #1a76bb 0%, #0f5eaa 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1a76bb), color-stop(100%, #0f5eaa));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #1a76bb 0%, #0f5eaa 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #1a76bb 0%, #0f5eaa 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #1a76bb 0%, #0f5eaa 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #1a76bb 0%, #0f5eaa 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1a76bb', endColorstr='#0f5eaa',GradientType=0 );
+    /* IE6-8 */
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border: none;
+    color: #ffffff;
+    font-family: Tahoma, verdana, sans-serif;
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    outline: none;
+    padding: 20px 40px; }
+  #ReservationRequestForm > div input[type="submit"]:active {
+    background: #2f88cd;
+    /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJmODhjZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZDcxYzAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #2f88cd 0%, #1d71c0 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2f88cd), color-stop(100%, #1d71c0));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #2f88cd 0%, #1d71c0 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #2f88cd 0%, #1d71c0 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #2f88cd 0%, #1d71c0 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #2f88cd 0%, #1d71c0 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2f88cd', endColorstr='#1d71c0',GradientType=0 );
+    /* IE6-8 */ }
+#ReservationRequestForm > div.fullwidth {
+  display: block;
+  width: 100%; }
+#ReservationRequestForm > div.fullwidth.last {
+  margin-bottom: 36px;
+  margin-bottom: 2.0rem; }
+
+#HTFooter {
+  background: black url("../images/footer.jpg") repeat-x left center;
+  position: relative;
+  margin-top: -50px;
+  /* negative value of footer height */
+  height: 101px;
+  clear: both; }
+  #HTFooter .container {
+    position: relative; }
+    #HTFooter .container .cars {
+      top: -99px;
+      right: 0px;
+      position: absolute;
+      z-index: 10001; }
+    #HTFooter .container .navigation {
+      list-style-type: none;
+      margin: 20px 0px 0px 0px;
+      padding: 0px; }
+      #HTFooter .container .navigation li {
+        display: inline;
+        margin-right: 10px; }
+        #HTFooter .container .navigation li a {
+          color: #419cf7;
+          font-size: 12px;
+          text-decoration: none; }
+        #HTFooter .container .navigation li a:hover {
+          text-decoration: underline; }
+    #HTFooter .container strong {
+      color: #b2b1b1;
+      font-size: 12px;
+      font-weight: normal;
+      line-height: 24px; }
+      #HTFooter .container strong a {
+        color: #B2B1B1;
+        text-decoration: none; }
+    #HTFooter .container .motto {
+      font-size: 14px;
+      margin: 40px auto 0px;
+      text-align: right; }
+      #HTFooter .container .motto em {
+        color: #b2b1b1; }
+    #HTFooter .container img.logo {
+      margin: 25px auto 0px; }
+
+.fb-like {
+  margin-bottom: 10px; }
+
+#HTContent {
+  background: transparent url("../images/stitch.png") repeat-x left top;
+  margin-bottom: 50px;
+  margin-top: 4px; }
+  #HTContent .container {
+    padding-top: 34px;
+    position: relative; }
+  #HTContent .raised-copy {
+    min-height: 200px;
+    margin-top: -100px; }
+    #HTContent .raised-copy > div {
+      display: block;
+      margin-bottom: 36px;
+      width: 100%; }
+      #HTContent .raised-copy > div h2 {
+        margin-bottom: 8px; }
+      #HTContent .raised-copy > div h2 + img {
+        margin-bottom: 16px; }
+  #HTContent .limo-footer {
+    background: white url("../images/limousines/limo-footer.jpg") no-repeat bottom right;
+    background-repeat: no-repeat; }
+  #HTContent .reservations .caption {
+    color: #7a7979;
+    font-size: 12px;
+    font-style: italic;
+    margin: 20px 0px 0px 30px; }
+  #HTContent .ad-wrap {
+    text-align: center;
+    margin-top: 1.5em;
+    width: 100%; }
+  #HTContent .page-copy {
+    -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.Shadow(Direction=135, Strength=5, Color='gray');
+    background: #FFF;
+    border-radius: 4px;
+    color: #2b2a2a;
+    line-height: 24px;
+    padding: 30px; }
+    #HTContent .page-copy h1 {
+      color: #0162b4;
+      font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 8px; }
+    #HTContent .page-copy h2 {
+      color: #7a7979;
+      font-size: 19px;
+      font-weight: lighter;
+      margin-bottom: 24px; }
+    #HTContent .page-copy p {
+      font-size: 14px;
+      -ms-word-break: break-all;
+      word-break: break-all;
+      /* Non standard for webkit */
+      word-break: break-word;
+      -webkit-hyphens: auto;
+      -moz-hyphens: auto;
+      hyphens: auto; }
+    #HTContent .page-copy .float-right {
+      float: right;
+      padding-left: 20px;
+      padding-bottom: 24px;
+      text-align: center; }
+      #HTContent .page-copy .float-right img {
+        display: block; }
+    #HTContent .page-copy .caption {
+      color: #909090;
+      font-size: 13px;
+      font-size: 0.75rem;
+      font-style: italic;
+      margin-bottom: 16px;
+      margin-bottom: 1.0rem;
+      text-align: center; }
+    #HTContent .page-copy .reservations-panel .caption {
+      text-align: left; }
+    #HTContent .page-copy ul {
+      display: block;
+      list-style-type: none;
+      margin: 0px auto;
+      padding: 0px;
+      width: 100%; }
+      #HTContent .page-copy ul li {
+        display: inline;
+        padding: 0px 20px;
+        width: 195px;
+        text-align: center; }
+        #HTContent .page-copy ul li a {
+          text-decoration: none; }
+    #HTContent .page-copy .journey-list {
+      color: #909090;
+      list-style-type: square; }
+      #HTContent .page-copy .journey-list li {
+        display: block;
+        list-style-type: circle;
+        text-align: left;
+        width: auto; }
+    #HTContent .page-copy .hotels-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0; }
+      #HTContent .page-copy .hotels-list li {
+        display: inline-block;
+        zoom: 0;
+        padding: 10px 0px; }
+    #HTContent .page-copy .reservation-wizard-navigation {
+      background: transparent;
+      list-style-type: none;
+      padding: 0px;
+      margin-bottom: 0.5em; }
+      #HTContent .page-copy .reservation-wizard-navigation li {
+        color: gray;
+        display: block;
+        float: left;
+        text-align: center;
+        width: 25%; }
+        #HTContent .page-copy .reservation-wizard-navigation li span {
+          color: #0b6cbe;
+          font-weight: bold; }
+        #HTContent .page-copy .reservation-wizard-navigation li a {
+          color: #0b6cbe; }
+    #HTContent .page-copy em {
+      color: #aaaaaa;
+      font-style: italic; }
+    #HTContent .page-copy .error h1 {
+      color: #8a1f11; }
+  #HTContent .page-copy.limo-footer {
+    background: white url("../images/limousines/limo-footer.jpg") no-repeat bottom right;
+    padding-bottom: 125px; }
+  #HTContent .page-copy.charter-bus-footer {
+    background: white url("../images/charter-buses/charter-bus-footer.jpg") no-repeat bottom right;
+    background-repeat: no-repeat;
+    padding-bottom: 260px; }
+  #HTContent .rates-information table {
+    -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.Shadow(Direction=135, Strength=5, Color='gray');
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    margin-top: 20px;
+    overflow: hidden; }
+    #HTContent .rates-information table thead {
+      background: transparent url("../images/rates/table-header-background.jpg") repeat left top; }
+      #HTContent .rates-information table thead th {
+        background: transparent;
+        border-left: 1px solid #3e3d3c;
+        border-right: 1px solid black;
+        color: white;
+        font-size: 14px;
+        height: 45px;
+        margin: 0px;
+        padding: 0px 10px;
+        text-align: center;
+        text-shadow: -1px -1px 1px black; }
+      #HTContent .rates-information table thead th:first-child {
+        border-left: none;
+        text-align: left; }
+      #HTContent .rates-information table thead th:last-child {
+        border-right: none; }
+    #HTContent .rates-information table tbody {
+      background-color: #eef4fa; }
+      #HTContent .rates-information table tbody td {
+        background-color: #eef4fa;
+        border-bottom: 1px solid #ccd9e7;
+        border-right: 1px solid #e0e4e8;
+        color: #757575;
+        font-size: 14px;
+        padding: 10px;
+        text-align: center; }
+      #HTContent .rates-information table tbody td:first-child {
+        color: #373737;
+        text-align: left; }
+      #HTContent .rates-information table tbody td:last-child {
+        border-right: none; }
+      #HTContent .rates-information table tbody tr.even td {
+        background-color: white; }
+      #HTContent .rates-information table tbody tr:last-child td {
+        border-bottom: none; }
+  #HTContent .assistant {
+    height: 164px;
+    position: relative; }
+    #HTContent .assistant span {
+      color: #0162b4;
+      display: block;
+      font-size: 1.1em;
+      font-weight: bold;
+      line-height: 1.5em;
+      padding-right: 150px;
+      left: 20px;
+      top: 30px;
+      position: absolute;
+      text-align: left;
+      z-index: 2; }
+    #HTContent .assistant img {
+      right: 0;
+      top: 0;
+      position: absolute;
+      z-index: 1; }
+  #HTContent .assistant.limo span {
+    color: #0162b4;
+    display: block;
+    font-size: 1.0em;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding-right: 130px;
+    left: 20px;
+    top: 10px;
+    position: absolute;
+    text-align: left;
+    z-index: 2; }
+  #HTContent .side-navigation {
+    -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.Shadow(Direction=135, Strength=5, Color='gray');
+    background: transparent url("../images/rates/navigation-background.jpg") repeat;
+    border: 1px solid black;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%; }
+    #HTContent .side-navigation h3 {
+      color: white;
+      font-size: 24px;
+      line-height: 50px;
+      margin: 0px;
+      text-align: center;
+      text-shadow: 0px 1px 3px 3px black; }
+    #HTContent .side-navigation ul {
+      background: white;
+      border-radius: 4px;
+      box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.25);
+      list-style-type: none;
+      margin: 0px auto 20px;
+      padding: 0px;
+      width: 90%; }
+      #HTContent .side-navigation ul li {
+        padding: 0px;
+        margin: 0px; }
+        #HTContent .side-navigation ul li a {
+          background-position: 0px 0px;
+          border-bottom: 1px solid #d5d5d5;
+          color: #3a3a39;
+          display: block;
+          padding: 10px 0px 10px 0px;
+          text-decoration: none;
+          width: 100%; }
+          #HTContent .side-navigation ul li a span {
+            background: transparent url("../images/rates/side-navigation-links-background-sprite.png") no-repeat left center;
+            background-position: 0px 0px;
+            padding-left: 20px;
+            margin-left: 10px; }
+        #HTContent .side-navigation ul li ul {
+          background: #efefef;
+          border-radius: 0px;
+          display: none;
+          font-size: 12px;
+          margin: 0px;
+          padding: 0px;
+          width: 100%; }
+          #HTContent .side-navigation ul li ul li {
+            border-bottom: none;
+            margin: 0px; }
+            #HTContent .side-navigation ul li ul li a {
+              background: none;
+              border-bottom: none;
+              border-top: 1px solid #e0e0e0;
+              color: #818181;
+              display: block;
+              padding: 10px 0px 10px 0px;
+              text-decoration: none;
+              width: 100%; }
+              #HTContent .side-navigation ul li ul li a span {
+                background: none;
+                padding-left: 0px;
+                margin: 15px; }
+            #HTContent .side-navigation ul li ul li a:hover {
+              color: #0d64ae; }
+          #HTContent .side-navigation ul li ul li.selected a {
+            color: #0d64ae; }
+            #HTContent .side-navigation ul li ul li.selected a span {
+              background: transparent url("../images/rates/side-navigation-selected-arrow.png") no-repeat left center;
+              padding-left: 10px;
+              padding-top: 2px; }
+          #HTContent .side-navigation ul li ul li:last-child a {
+            border-bottom: 1px solid #e0e0e0; }
+      #HTContent .side-navigation ul li.active ul, #HTContent .side-navigation ul li:hover ul {
+        display: block; }
+      #HTContent .side-navigation ul li.active a span, #HTContent .side-navigation ul li:hover a span {
+        background-position: 0px -44px; }
+      #HTContent .side-navigation ul li:last-child a {
+        border-bottom: none; }
+
+.form-panel, .info-panel, .reservations-panel {
+  -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.Shadow(Direction=135, Strength=5, Color='gray');
+  background: #ffffff;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, white 0%, #f7f2ee 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #f7f2ee));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, white 0%, #f7f2ee 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, white 0%, #f7f2ee 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, white 0%, #f7f2ee 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, white 0%, #f7f2ee 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Direction=135, Strength=5, Color='gray'), progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f7f2ee',GradientType=0 );
+  /* IE6-9 */
+  border-radius: 4px;
+  overflow: hidden; }
+  .form-panel h3, .form-panel h4, .info-panel h3, .info-panel h4, .reservations-panel h3, .reservations-panel h4 {
+    background: #1a7bcd;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #1a7bcd 0%, #0061b4 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1a7bcd), color-stop(100%, #0061b4));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #1a7bcd 0%, #0061b4 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #1a7bcd 0%, #0061b4 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #1a7bcd 0%, #0061b4 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #1a7bcd 0%, #0061b4 100%);
+    /* W3C */
+    box-shadow: 0px -1px 1px #025599, inset -2px 5px 2px -4px rgba(0, 0, 0, 0.25);
+    color: white;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1a7bcd', endColorstr='#0061b4',GradientType=0 );
+    /* IE6-9 */
+    margin-bottom: 0px;
+    padding: 10px 0px;
+    text-indent: 15px;
+    text-shadow: 0px 1px 2px black;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.45); }
+    .form-panel h3 a.link, .form-panel h4 a.link, .info-panel h3 a.link, .info-panel h4 a.link, .reservations-panel h3 a.link, .reservations-panel h4 a.link {
+      color: #fff;
+      float: right;
+      font-weight: normal;
+      margin-right: 20px;
+      text-decoration: none;
+      text-shadow: none; }
+    .form-panel h3 a.link:hover, .form-panel h4 a.link:hover, .info-panel h3 a.link:hover, .info-panel h4 a.link:hover, .reservations-panel h3 a.link:hover, .reservations-panel h4 a.link:hover {
+      text-decoration: underline; }
+    .form-panel h3 span, .form-panel h4 span, .info-panel h3 span, .info-panel h4 span, .reservations-panel h3 span, .reservations-panel h4 span {
+      color: #95ceff;
+      display: block;
+      font-size: 0.95em; }
+    .form-panel h3 em, .form-panel h4 em, .info-panel h3 em, .info-panel h4 em, .reservations-panel h3 em, .reservations-panel h4 em {
+      color: white; }
+  .form-panel h4, .info-panel h4, .reservations-panel h4 {
+    font-size: 17px; }
+  .form-panel .bordered, .info-panel .bordered, .reservations-panel .bordered {
+    border-bottom: 1px solid #e2e1e0;
+    padding: 15px 0px; }
+  .form-panel .btn-row, .info-panel .btn-row, .reservations-panel .btn-row {
+    padding: 20px 0px;
+    text-align: center; }
+  .form-panel label, .info-panel label, .reservations-panel label {
+    color: #2a2a2a;
+    padding-left: 15px;
+    width: 225px; }
+  .form-panel .radio label, .info-panel .radio label, .reservations-panel .radio label {
+    font-weight: normal;
+    padding-left: 5px;
+    width: auto; }
+  .form-panel select, .info-panel select, .reservations-panel select {
+    margin: 0px;
+    width: 175px; }
+  .form-panel .pad-left, .info-panel .pad-left, .reservations-panel .pad-left {
+    margin-left: 10px; }
+
+.info-panel.align-center h4 {
+  text-indent: 0px; }
+
+.info-panel.ironman {
+  background: white url("../images/ironman/logo.png") no-repeat 175px center;
+  display: block;
+  padding-bottom: 10px; }
+  .info-panel.ironman span {
+    color: #0162b4;
+    display: block;
+    font-size: 1.0em;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin-left: 10px;
+    margin-top: 10px;
+    padding-right: 100px;
+    text-align: left; }
+
+a.reservation-request-button {
+  -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.Shadow(Direction=135, Strength=5, Color='gray');
+  background: #257dc7;
+  /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI1N2RjNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYzYzYWUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top, #257dc7 0%, #0c63ae 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #257dc7), color-stop(100%, #0c63ae));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #257dc7 0%, #0c63ae 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #257dc7 0%, #0c63ae 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #257dc7 0%, #0c63ae 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #257dc7 0%, #0c63ae 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#257dc7', endColorstr='#0c63ae',GradientType=0 );
+  border: 1px solid #206aa9;
+  color: white;
+  border-radius: 4px;
+  height: 63px;
+  margin-top: 15px;
+  padding: 0px;
+  position: relative;
+  text-decoration: none;
+  vertical-align: middle; }
+  a.reservation-request-button span {
+    background: transparent url("../images/limousines/link.png") no-repeat;
+    display: block;
+    height: 63px;
+    right: 0;
+    position: absolute;
+    top: 0;
+    width: 39px;
+    z-index: 10; }
+  a.reservation-request-button p {
+    color: white;
+    font-size: 16px;
+    left: 20px;
+    position: absolute;
+    top: 15px;
+    text-shadow: 0px 1px 2px black;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.45); }
+
+a.reservation-request-button:hover {
+  background: #4997d9;
+  /* Old browsers */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ5OTdkOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzMDdkYmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top, #4997d9 0%, #307dbf 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4997d9), color-stop(100%, #307dbf));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #4997d9 0%, #307dbf 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #4997d9 0%, #307dbf 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #4997d9 0%, #307dbf 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #4997d9 0%, #307dbf 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4997d9', endColorstr='#307dbf',GradientType=0 );
+  /* IE6-8 */ }
+
+.reservations-panel label {
+  display: block;
+  padding-left: 0px; }
+.reservations-panel .reservations-panel-content, .reservations-panel .reservations-table-panel-content {
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 20px; }
+.reservations-panel .no-prepend-top {
+  padding-bottom: 0px;
+  padding-top: 0px; }
+.reservations-panel .reservations-table-panel-content {
+  padding-left: 0px; }
+  .reservations-panel .reservations-table-panel-content .thumbnail {
+    border: 4px #fff solid; }
+  .reservations-panel .reservations-table-panel-content table {
+    margin-bottom: 0px; }
+    .reservations-panel .reservations-table-panel-content table thead {
+      background: transparent url("../images/rates/table-header-background.jpg") repeat left top; }
+      .reservations-panel .reservations-table-panel-content table thead th {
+        background: transparent;
+        border-left: 1px solid #3e3d3c;
+        border-right: 1px solid black;
+        color: white;
+        font-size: 14px;
+        height: 45px;
+        margin: 0px;
+        padding: 0px 10px;
+        text-align: center;
+        text-shadow: -1px -1px 1px black; }
+      .reservations-panel .reservations-table-panel-content table thead th:first-child {
+        border-left: none;
+        text-align: left; }
+      .reservations-panel .reservations-table-panel-content table thead th:last-child {
+        border-right: none; }
+    .reservations-panel .reservations-table-panel-content table tr th:first-child {
+      text-align: center; }
+    .reservations-panel .reservations-table-panel-content table tr td:first-child {
+      text-align: center; }
+    .reservations-panel .reservations-table-panel-content table tr th, .reservations-panel .reservations-table-panel-content table tr td {
+      vertical-align: middle; }
+    .reservations-panel .reservations-table-panel-content table tr td {
+      border-bottom: 1px solid #ccd9e7;
+      padding: 20px 0px; }
+      .reservations-panel .reservations-table-panel-content table tr td .radio-button-wrapper {
+        display: block; }
+    .reservations-panel .reservations-table-panel-content table tr:last-child td {
+      border-bottom: none; }
+    .reservations-panel .reservations-table-panel-content table tr.even td {
+      background-color: white; }
+    .reservations-panel .reservations-table-panel-content table tbody {
+      background-color: #eef4fa; }
+.reservations-panel select, .reservations-panel .text {
+  width: 90%; }
+.reservations-panel label {
+  padding-top: 1.5em; }
+  .reservations-panel label span.rate {
+    color: gray;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 0.9em; }
+.reservations-panel label:first-child {
+  padding-top: 0px; }
+.reservations-panel em.caption {
+  display: block; }
+.reservations-panel .span-one-third {
+  width: 30%; }
+.reservations-panel .span-one-half {
+  width: 45%; }
+.reservations-panel .confirmation-number {
+  background: white;
+  border: 1px dashed #ddd;
+  color: #7a7979;
+  font-size: 24px;
+  font-weight: lighter;
+  padding: 10px;
+  width: auto; }
+.reservations-panel .miscellaneous-items .thumbnail {
+  border: 4px #fff solid; }
+.reservations-panel .miscellaneous-items tr td {
+  background: transparent;
+  padding: 20px 5px; }
+  .reservations-panel .miscellaneous-items tr td select, .reservations-panel .miscellaneous-items tr td label {
+    width: 80%; }
+.reservations-panel .miscellaneous-items tr td:first-child {
+  width: 100px; }
+
+.red-button {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d82f2f), color-stop(1, #b42121));
+  background: -moz-linear-gradient(center top, #d82f2f 5%, #b42121 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d82f2f', endColorstr='#b42121');
+  background-color: #d82f2f;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #aa0000;
+  display: inline-block;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 19px;
+  padding: 10px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 2px black;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.55);
+  width: 100%; }
+  .red-button span {
+    color: #ff9595;
+    display: block;
+    font-size: 14px; }
+
+.red-button:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b42121), color-stop(1, #d82f2f));
+  background: -moz-linear-gradient(center top, #b42121 5%, #d82f2f 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b42121', endColorstr='#d82f2f');
+  background-color: #b42121;
+  color: white; }
+
+.btn {
+  -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+  box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.75);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #faba39), color-stop(1, #f7a521));
+  background: -moz-linear-gradient(center top, #faba39 5%, #f7a521 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#faba39', endColorstr='#f7a521');
+  background-color: #faba39;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #c98d14;
+  color: #5a3105;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 14px;
+  padding: 12px 24px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0px #ffffff;
+  text-transform: uppercase; }
+
+.btn:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f7a521), color-stop(1, #faba39));
+  background: -moz-linear-gradient(center top, #f7a521 5%, #faba39 100%);
+  color: #5a3105;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7a521', endColorstr='#faba39');
+  background-color: #f7a521; }
+
+.btn:active {
+  position: relative;
+  top: 1px; }
+
+.btn-small {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 4px 12px;
+  margin-top: 10px;
+  text-align: center;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none; }
+
+.info-panel {
+  filter: progid:DXImageTransform.Microsoft.Shadow(Direction=135, Strength=5, Color='gray'), progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 );
+  /* IE6-9 */
+  background: white; }
+
+.align-left {
+  text-align: left; }
+
+.align-center {
+  text-align: center; }
+
+span.align-center {
+  display: block;
+  margin-bottom: 16px;
+  margin-bottom: 1.0rem;
+  text-align: center; }
+
+.align-right {
+  text-align: right; }
+
+.append-bottom {
+  margin-bottom: 16px;
+  margin-bottom: 1.0rem; }
+
+.no-append-bottom {
+  margin-bottom: 0px; }
+
+.error span {
+  display: block; }
+
+.hula-girl {
+  margin: 0px auto -5px; }
+
+.page-header {
+  background: white;
+  background: rgba(255, 255, 255, 0.6);
+  color: #0061b2;
+  display: block;
+  font-size: 16px;
+  height: 72px;
+  line-height: 72px;
+  position: absolute;
+  left: 0px;
+  text-align: center;
+  text-shadow: 0px 1px 1px white;
+  top: 0px;
+  width: 100%; }
+
+.facebook {
+  -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.Shadow(Direction=135, Strength=5, Color='gray');
+  background: white url("../images/facebook-bg.png") left center no-repeat;
+  border-radius: 4px;
+  height: 19px;
+  margin-top: 1.5em;
+  padding: 15px 0px;
+  text-align: center; }
+
+.facebook.nomargin {
+  margin-top: 0; }
+
+.cj-ad img {
+  margin-top: 1.5em; }
+
+.thumbnail {
+  -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.Shadow(Direction=135, Strength=5, Color='gray');
+  border: 8px #eee solid;
+  border-radius: 4px; }

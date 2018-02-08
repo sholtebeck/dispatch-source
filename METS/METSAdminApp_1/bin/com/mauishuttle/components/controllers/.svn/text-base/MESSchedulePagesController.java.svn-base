@@ -1,0 +1,96 @@
+package com.mauishuttle.components.controllers;
+
+import com.mauishuttle.components.editors.MESDriverScheduleEditor;
+import com.mauishuttle.components.editors.MESNonSynchronizingEditor;
+import com.mauishuttle.components.interfaces.MESPageNavigationControllerInterface;
+import com.mauishuttle.components.interfaces.MESScheduleTableControllerInterface;
+import com.mauishuttle.components.interfaces.MESTableControllerInterface;
+import com.mauishuttle.components.tables.ListDriverScheduleDispatchesPage;
+import com.mauishuttle.components.tables.MESSchedulesTableView;
+import com.mauishuttle.eo.MESSchedule;
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class MESSchedulePagesController extends MESNonSynchronizingEditor implements MESTableControllerInterface {
+
+	/*
+	 * @binding dataSource must conform to MESScheduleTableControllerInterface
+	 * @binding navigationController must conform to MESPageNavigationControllerInterface
+	*/
+	
+	public static final String LIST_PAGE_KEY = "List";
+	public MESScheduleTableControllerInterface _dataSource;
+	private MESPageNavigationControllerInterface _navigationController;
+	private MESSchedule _schedule;
+	
+	public MESSchedulePagesController(WOContext context) {
+        super(context);
+    }
+	
+	public void sleep() {
+		super.sleep();
+		_dataSource = null;
+		_navigationController = null;
+	}
+	
+	public String editorPageKey() {
+		return navigationController().editorPageKey();
+	}
+
+	public MESPageNavigationControllerInterface navigationController() {
+		if(_navigationController == null) {
+			_navigationController = (MESPageNavigationControllerInterface)valueForBinding("navigationController");
+		}
+		return _navigationController;
+	}
+
+	public void setNavigationController(MESPageNavigationControllerInterface navigationController) {
+		this._navigationController = navigationController;
+	}
+
+	public MESSchedule object() {
+
+		if(_schedule == null) {
+			_schedule = (MESSchedule)valueForBinding("object");
+		}
+	
+		return _schedule;
+
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+		_schedule = (MESSchedule)object;
+	}
+
+	public String switchComponentName() {
+
+		String switchComponentName = null;
+		
+		if(navigationController().editorPageKey().equals(LIST_PAGE_KEY)) {
+			switchComponentName = MESSchedulesTableView.class.getName();
+		} else if(navigationController().editorPageKey().equals(MESScheduleTableControllerInterface.LIST_PAYOUTS_FOR_SCHEDULE_OBJECT_PAGE_KEY)) {
+			switchComponentName = ListDriverScheduleDispatchesPage.class.getName();
+		} else if(navigationController().editorPageKey().equals(MESScheduleTableControllerInterface.EDIT_SCHEDULE_PAGE_KEY)) {
+			switchComponentName = MESDriverScheduleEditor.class.getName();
+		}
+		
+		return switchComponentName;
+	
+	}
+
+	public MESScheduleTableControllerInterface dataSource() {
+		if(_dataSource == null) {
+			_dataSource = (MESScheduleTableControllerInterface)valueForBinding("dataSource");
+		}
+		return _dataSource;
+	}
+
+	public void setDataSource(Object dataSource) {
+		_dataSource = (MESScheduleTableControllerInterface)dataSource;
+	}
+
+	public String staticColumnId() {
+		return editorPageKey().equals(LIST_PAGE_KEY) ? "PRGDispatchPage" : null;
+	}
+
+}

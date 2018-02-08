@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+    <wo class="METSFormSubmissionBar" wocomponentcontent="true">    <binding name="cancelAction"/>
+    <binding name="submitAction"/>
+        <validation message="'submitAction' is a required binding.">
+            <unbound name="submitAction"/>
+        </validation>
+    <binding name="isNewObject"/>
+    <validation message="'isNewObject' is a required binding.">
+            <unbound name="isNewObject"/>
+        </validation>
+    <binding name="deleteAction"/>
+    <binding name="cancelButtonClassName"/>
+    <binding name="cancelButtonText"/>
+    <binding name="deleteButtonClassName"/>
+    <binding name="deleteButtonText"/>
+    <binding name="modalContainerId"/>
+    <binding name="modalContainerTitle"/>
+        <binding name="modalContainerText"/>
+    <binding name="submitButtonClassName"/>
+    <binding name="submitButtonText"/>
+        <binding name="useModalForDelete"/>
+    </wo>
+</wodefinitions>

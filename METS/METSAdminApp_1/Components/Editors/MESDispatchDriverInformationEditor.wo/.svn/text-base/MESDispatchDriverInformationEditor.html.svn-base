@@ -1,0 +1,6 @@
+<wo:METSHorizontalForm action = "$saveChanges">
+	<webobject name = "DriverSelector"></webobject>
+	<webobject name = "StatusSelector"></webobject>
+	<wo:METSTextArea helpText = "Optional" labelText = "Driver Notes" value = "$object.driverNotes"></wo:METSTextArea>
+	<wo:METSFormSubmissionBar isNewObject = "$object.isNewObject" submitButtonText = "Save and Continues" submitAction = "$saveChanges"></wo:METSFormSubmissionBar>
+</wo:METSHorizontalForm>

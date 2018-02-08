@@ -1,0 +1,111 @@
+AddNewScheduleLink : WOHyperlink {
+	action = createNewObject;
+}
+
+AlleyColumn : METSTableColumn {
+	class = "prg-alley";
+}
+
+DateSelector : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = searchStartDate;
+}
+
+FooterBar : METSTableColumnFooterBar {
+	
+}
+
+FooterContextMenu : METSContextMenu {
+	display = "above";
+	left = "-6px";
+} 
+
+IsSuperAdministrator : WOConditional {
+	condition = session.isSuperUser;
+}
+
+LeftNavigationUpdateContainer : MTAjaxUpdateContainer {
+	id = "METSLeftNavigationUpdateContainer";
+}
+
+MainTableColumn : METSTableColumn {
+	class = "prg-main-column";
+	id = "PRGMainColumn";
+}
+
+MESSchedulePagesController : MESScheduleEditorPagesNavigationController {
+	dataSource = dataSource;
+	navigationController = navigationController;
+	object = selectedObject;	
+}
+
+MonthSelector : WOPopUpButton {
+	class = "input-small";
+	displayString = month.toString;
+	id = "MonthSelector";
+	item = month;
+	list = months;
+	selection = selectedMonth;	
+}
+
+MonthSelectorObserveField : MTAjaxObserveField {
+	observeFieldID = "MonthSelector";
+	updateContainerID = "WeekSelectorUpdateContainer";
+}
+
+PageWrapper : PageWrapper {
+	pageTitle = ^pageTitle;
+}
+
+ResizeColumn : METSResizeColumn {
+	class = "prg-side-column";
+	id = "PRGLeftColumn";
+	otherColumn = "PRGMainColumn";
+}
+
+SearchForm : WOForm {
+	multipleSubmit = true;
+}
+
+StaticColumn : METSStaticColumn {
+
+}
+
+ViewSchedulesAction : MTAjaxUpdateLink {
+	action = viewSchedules;
+	class = "icon";
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+	onComplete = "PRGPortalUtilities.setColumnHeights()";
+}
+
+ViewSchedulesPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = "ViewSchedules";
+}
+
+WeekSelector : WOPopUpButton {
+	class = "input-small";
+	displayString = week.toString;
+	item = week;
+	list = weeks;
+	selection = selectedWeek;
+}
+
+WeekSelectorUpdateContainer : MTAjaxUpdateContainer {
+	elementName = "li";
+	id = "WeekSelectorUpdateContainer";
+}
+	
+YearSelector : WOPopUpButton {
+	class = "input-small";
+	id = "YearsSelector";
+	list = years;
+	selection = selectedYear;
+}
+
+YearSelectorObserveField : MTAjaxObserveField {
+	observeFieldID = "YearsSelector";
+	updateContainerID = "WeekSelectorUpdateContainer";
+}

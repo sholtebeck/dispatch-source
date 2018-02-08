@@ -1,0 +1,162 @@
+# OGNL
+ognl.helperFunctions=true
+ognl.inlineBindings=true
+
+# Misc
+er.extensions.stackTrace.cleanup=true
+
+# EOF
+er.extensions.ERXEC.safeLocking=true
+er.extensions.ERXEC.useSharedEditingContext=false
+er.extensions.ERXEnterpriseObject.applyRestrictingQualifierOnInsert=true
+er.extensions.ERXEnterpriseObject.updateInverseRelationships=true
+er.extensions.ERXApplication.DefaultEncoding=UTF-8
+
+#dbConnectURLGLOBAL=jdbc:postgresql://localhost:5432/METS
+#dbConnectUserGLOBAL=METSUser
+#dbConnectPasswordGLOBAL=friend
+
+# Migrations
+er.migration.migrateAtStartup=true
+er.migration.createTablesIfNecessary=true
+er.migration.modelNames=ERAttachment,METSModel,KMIContentModel
+
+dbEOPrototypesEntityGLOBAL=EOJDBCPostgresqlPrototypes
+
+ERAttachment.URL=jdbc:postgresql://localhost:5432/METS
+ERAttachment.DBUser=METSUser
+ERAttachment.DBPassword=friend
+ERAttachment.DBDriver=org.postgresql.Driver
+ERAttachment.removeJdbc2Info=true
+
+METSModel.URL=jdbc:postgresql://localhost:5432/METS
+METSModel.DBUser=METSUser
+METSModel.DBPassword=friend
+METSModel.DBDriver=org.postgresql.Driver
+METSModel.removeJdbc2Info=true
+
+KMIContentModel.URL=jdbc:postgresql://localhost:5432/METS
+KMIContentModel.DBUser=METSUser
+KMIContentModel.DBPassword=friend
+KMIContentModel.DBDriver=org.postgresql.Driver
+KMIContentModel.removeJdbc2Info=true
+
+# Misc Components
+#er.extensions.ERXWOForm.multipleSubmitDefault=true
+#er.extensions.ERXWORepetition.checkHashCodes=true
+#er.extensions.ERXWORepetition.raiseOnUnmatchedObject=true
+#er.extensions.ERXWORepetition.eoSupport=true
+#er.component.clickToOpen=true
+#wolips.password=wo
+
+# ERJavaMail
+er.javamail.centralize=true
+er.javamail.adminEmail=admin@yourhost.com
+er.javamail.debugEnabled=false
+er.javamail.smtpHost=your.smtpserver.com
+er.javamail.smtpAuth=false
+er.javamail.smtpUser=
+er.javamail.smtpPassword=
+
+# Log4j Configuration
+log4j.loggerFactory=er.extensions.logging.ERXLogger$Factory
+log4j.rootCategory=INFO,A1
+log4j.appender.A1=er.extensions.logging.ERXConsoleAppender
+log4j.appender.A1.layout=er.extensions.logging.ERXPatternLayout
+log4j.appender.A1.layout.ConversionPattern=%d{MMM dd HH:mm:ss} %$[%#] %-5p %c %x - %m%n
+
+# Log4j Categories
+# Here are a few log4j sub-categories that are interesting.
+# Don't forget that in developement mode this file will get reloaded
+# everytime it changes, so if you say want to turn adaptor debugging
+# on in the middle of the app simply set the below category to debug.
+# Very handy.
+# Base Category
+log4j.logger.er=INFO
+
+# ERExtensions
+# Transaction - Switching this to debug will start the sql ouputting.
+log4j.logger.er.transaction.adaptor.EOAdaptorDebugEnabled=DEBUG
+
+# Fixes - Turning this on will show all the models that are loaded
+log4j.logger.er.extensions.fixes.ERSharedEOLoader=INFO
+
+er.extensions.ERXNSLogLog4jBridge=INFO
+#log4j.logger.er.eo.ERXGenericRecord=DEBUG
+#log4j.logger.er.validation.ERXEntityClassDescription=DEBUG
+#log4j.logger.er.default.ERXEntityClassDescription=DEBUG
+log4j.logger.er.extensions.ERXDatabaseContextDelegate=WARN
+log4j.logger.er.extensions.ERXConfigurationManager=INFO
+#log4j.logger.er.extensions.ERXApplication.RequestHandling=DEBUG
+
+com.mauishuttle.MESRole.TechnicalAdministrator=77153061
+com.mauishuttle.MESRole.SuperUser=817847133
+
+er.attachment.storageType=file
+er.attachment.file.proxy=false
+er.attachment.file.filesystempath=/Library/WebServer/Documents/www.hawaiiexecutivetransportation.com/images/assets
+er.attachment.file.webpath=/www.hawaiiexecutivetransportation.com/images/assets
+
+er.attachment.KMIImageAsset.attachment.file.filesystemPath=/Library/WebServer/Documents/www.hawaiiexecutivetransportation.com/images/assets/${hash}/${pk}${ext}
+er.attachment.KMIImageAsset.attachment.file.webPath=/www.hawaiiexecutivetransportation.com/images/assets/${hash}/${pk}${ext}
+er.attachment.KMIImageAsset.attachment.storageType=file
+
+er.attachment.MESVehicleType.picture.file.filesystemPath=/Library/WebServer/Documents/www.hawaiiexecutivetransportation.com/images/assets/${hash}/${pk}${ext}
+er.attachment.MESVehicleType.picture.file.webPath=/www.hawaiiexecutivetransportation.com/images/assets/${hash}/${pk}${ext}
+er.attachment.MESVehicleType.picture.storageType=file
+
+er.extensions.MooTools.compatibility=true
+kmi.content.website=http://localhost
+
+SMTP_HOST=mail.hawaiiexecutivetransportation.com
+SMTP_USER=res+hawaiiexecutivetransportation.com
+SMTP_PASS=sUcp?w&*)[Gn
+SMTP_PORT=25
+SMTP_AUTH=false
+SMTP_SSL=false
+SMTP_DEFAULT_EMAIL=res@hawaiiexecutivetransportation.com
+SMTP_DEFAULT_PERSONAL=Hawaii Executive Transportation
+MAIL_DEBUG=true
+
+# Authorize dot net info
+net.authorize.login=8NE26cYe3X
+net.authorize.transactionKey=65Jwf96n7D66K9r3
+net.authorize.password=65Jwf96n7D66K9r3
+net.authorize.version=3.1
+net.authorize.testRequest=false
+net.authorize.paymentGateway=https://secure.authorize.net/gateway/transact.dll
+
+er.extensions.ERXBlowfishCipherKey=DefaultBlowfishCipherKey
+
+### Basic setup:
+
+#########################################################################
+# ERX Remote Synchronizer
+#########################################################################
+## To use remote EOF synchronization, you must turn on the 
+## ERXObjectStoreCoordinatorPool.  Just setting it to 1 is enough to
+## allow things to work.
+er.extensions.ERXObjectStoreCoordinatorPool.maxCoordinators=1
+
+## Enables remote synchronization (required in addition to ERXObjectStoreCoordinatorPool).
+er.extensions.remoteSynchronizer.enabled=true
+
+#########################################################################
+# ERJGroupsSynchronizer
+# This synchronizer is based on the JGroups clustering framework, which
+# is the clustering framework used inside of JBoss (among many other
+# applications).  You must include the ERJGroupsSynchronizer framework
+# in your application for this to work properly.
+#########################################################################
+er.extensions.remoteSynchronizer=er.jgroups.ERJGroupsSynchronizer
+
+## (Optional) the multicast address to use (defaults to 230.0.0.1, and only necessary if you are using multicast)
+er.extensions.jgroupsSynchronizer.multicastAddress=230.0.0.1
+
+## (Optional) the multicast port to use (defaults to 9753, and only necessary if you are using multicast)
+er.extensions.jgroupsSynchronizer.multicastPort=9753
+
+### Set this if you have differently named apps that use the same Model&DB (e.g. MyFrontend.woa and MyBackend.woa)
+## (Optional) the JGroups group name to use (defaults to WOApplication.application.name)
+er.extensions.jgroupsSynchronizer.groupName=HETSWeb
+

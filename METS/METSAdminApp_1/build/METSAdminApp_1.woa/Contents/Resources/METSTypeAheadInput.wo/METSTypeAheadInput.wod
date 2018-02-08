@@ -1,0 +1,27 @@
+AutoCompleter : MTAjaxAutoComplete {
+	class = inputClassName;
+	displayString = ^displayString;
+	id = ^id;
+	item = ^item;
+	list = ^list;
+	selection = ^selection;
+	value = ^value;
+}
+
+HasHelpText : WOConditional {
+	condition = hasHelpText;
+}
+
+HelpText : WOString {
+	value = ^helpText;
+}
+
+Label : WOGenericContainer {
+	class = "control-label";
+	elementName = "label";
+	for = id;
+}
+
+LabelText : WOString {
+	value = ^labelText;	
+}

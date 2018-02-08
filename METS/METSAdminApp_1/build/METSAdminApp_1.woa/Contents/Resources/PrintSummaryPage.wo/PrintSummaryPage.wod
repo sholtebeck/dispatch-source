@@ -1,0 +1,19 @@
+ChildRoutesRepetition : WORepetition {
+	item = child;
+	list = children;
+}
+
+ChildSummaryPage : MESDispatchSummaryPage {
+	ec = object.editingContext;
+	object = child;
+	printPage = true;
+}
+
+CustomerName : WOString {
+	value = object.customerFullName;
+}
+
+SummaryPage : MESDispatchSummaryPage {
+	object = object;
+	printPage = true;
+}

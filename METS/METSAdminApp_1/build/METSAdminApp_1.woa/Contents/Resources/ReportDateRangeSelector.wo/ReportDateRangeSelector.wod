@@ -1,0 +1,57 @@
+ComponentContent : WOComponentContent {
+	
+}
+
+CustomDateRangeEndDate : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = ^endDate;
+}
+
+CustomDateRangeStartDate : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = ^startDate;	
+}
+
+DateRangeForm : WOForm {
+	action = ^filter;
+	class = "form-inline";
+	name = "DateRangeForm";
+}
+
+DateSelector : WOPopUpButton {
+	class = "input-small";
+	displayString = ^standardDateRange.toString;
+	id = "DateSelector";
+	item = ^standardDateRange;
+	list = ^standardDateRanges;
+	noSelectionString = "Custom Date Range";
+	selection = ^selectedStandardDateRange;
+}
+
+HubSelector : WOPopUpButton {
+	class = "input-small";
+	displayString = ^aHub.name;
+	id = "HubSelector";
+	item = ^aHub;
+	list = ^hubs;
+	noSelectionString = "All Hubs";
+	selection = ^selectedHub;
+}
+
+PaidUnpaid : WOPopUpButton {
+	class = "input-small";
+	displayString = ^paidEnum.toString;
+	item = ^paidEnum;
+	list = ^paidEnums;
+	selection = ^selectedPaidEnum;
+}
+
+PrintReportButton : WOHyperlink {
+	action = ^printReport;
+	class = "btn btn-success";
+	target = "_blank";
+}

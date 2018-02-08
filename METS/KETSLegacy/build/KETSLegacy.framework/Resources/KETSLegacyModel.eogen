@@ -1,0 +1,1 @@
+ -destination Sources -extension java -java -javaTemplate _WonderEntity.eotemplate -model Resources/KETSLegacyModel.eomodeld -packagedirs -subclassDestination Sources -subclassJavaTemplate WonderEntity.eotemplate -templatedir "/WebObjects/Versions/WebObjects543/Library/Application Support/eogenerator/templates" -verbose -loadModelGroup

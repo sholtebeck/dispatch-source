@@ -1,0 +1,57 @@
+<webobject name = "PageWrapper">
+	<webobject name = "ResizeColumn">
+		<span class="prg-handle">&harr;</span>
+		<webobject name = "LeftNavigationUpdateContainer">
+			<ul class="prg-column-header-bar">
+				<webobject name = "ViewAssetsListItem">
+					<webobject name = "ViewAssetsLink"><span><i class = "icon-picture">&nbsp;</i></span></webobject>
+				</webobject>
+				<webobject name = "ViewWebPagesListItem">
+					<webobject name = "ViewWebPagesLink"><span><i class = "icon-file">&nbsp;</i></span></webobject>
+				</webobject>
+				<webobject name = "ViewServicesListItem">
+					<webobject name = "ViewServicesPageLink"><span><i class = "icon-bullhorn">&nbsp;</i></span></webobject>				
+				</webobject>
+			</ul>		
+			<webobject name = "StaticColumn">
+				<ul class="prg-tree nav">
+					<webobject name = "ViewAssetsNavigationPageKey">
+						<webobject name = "AssetGroupsTreeNavigation"></webobject>
+					</webobject>
+					<webobject name = "ViewWebContentNavigationPageKey">
+						<webobject name = "WebDocumentsTreeNavigation"></webobject>					
+					</webobject>
+					<webobject name = "ViewServicesNavigationPageKey">
+						<webobject name = "ServicesTreeNavigation"></webobject>	
+					</webobject>
+				</ul>	
+				<webobject name = "FooterBar">
+					<li>
+						<webobject name = "FooterContextMenu"><span><i class="icon-plus"></i></span></webobject>
+						<ul class = "dropdown-menu">
+							<webobject name = "ViewAssetsNavigationPageKey">
+								<li><webobject name = "AddNewAssetGroupLink">Create New Album</webobject></li>
+							</webobject>
+							<webobject name = "ViewWebContentNavigationPageKey">
+								<li><webobject name = "AddNewWebDocumentLink">Create New Web Page</webobject></li>
+							</webobject>
+						</ul>
+					</li>
+				</webobject>
+			</webobject>
+		</webobject>				
+	</webobject>
+	<webobject name = "AlleyColumn">&nbsp;</webobject>
+	<webobject name = "ViewAssetsPageKey">
+		<webobject name = "AssetsEditorSwitchComponent"></webobject>
+	</webobject>
+	<webobject name = "ViewWebContentPageKey">
+		<webobject name = "WebContentEditorSwitchComponent"></webobject>
+	</webobject>
+	<webobject name = "ViewServicesPageKey">
+		<webobject name = "ServicesEditor" />
+	</webobject>
+	<webobject name = "BlankPagePageKey">
+		<wo:MESBlankPage></wo:MESBlankPage>
+	</webobject>
+</webobject>

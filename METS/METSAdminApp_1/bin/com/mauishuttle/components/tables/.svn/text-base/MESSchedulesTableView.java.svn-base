@@ -1,0 +1,46 @@
+package com.mauishuttle.components.tables;
+
+import com.mauishuttle.components.controllers.MESSchedulePagesController;
+import com.mauishuttle.components.pages.PrintSchedulesPage;
+import com.mauishuttle.eo.MESDriver;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.foundation.NSArray;
+
+import er.ajax.mootools.MTAjaxUtils;
+
+@SuppressWarnings("serial")
+public class MESSchedulesTableView extends MESSchedulePagesController {
+
+	public MESDriver _driver;
+	
+	public MESSchedulesTableView(WOContext context) {
+        super(context);
+    }
+
+	public void appendToResponse(WOResponse response, WOContext context) {
+		super.appendToResponse(response, context);
+		MTAjaxUtils.addStylesheetResourceInHead(
+				context, 
+				response, 
+				"app", 
+				"stylesheets/datepicker_dashboard.css");
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESDriver> drivers() {
+		return MESDriver.fetchMESDrivers(dataSource().ec(), 
+				MESDriver.HUB.eq(dataSource().currentHub()), 
+				MESDriver.LAST_NAME.asc().then(MESDriver.FIRST_NAME.asc()));
+	}
+
+	public WOActionResults printSchedules() {
+		PrintSchedulesPage nextPage = pageWithName(PrintSchedulesPage.class);
+		nextPage.setEc(dataSource().ec());
+		nextPage.setDisplayGroup(dataSource().schedulesDisplayGroup());
+		return nextPage;
+	}
+	
+	
+}

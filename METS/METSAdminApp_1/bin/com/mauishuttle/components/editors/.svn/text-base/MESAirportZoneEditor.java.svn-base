@@ -1,0 +1,35 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.interfaces.MESEditorInterface;
+import com.mauishuttle.eo.MESAirportZone;
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class MESAirportZoneEditor extends MESNonSynchronizingEditor implements MESEditorInterface {
+	
+	private MESAirportZone _object;
+	
+    public MESAirportZoneEditor(WOContext context) {
+        super(context);
+    }
+    
+	public MESAirportZone object() {
+	
+		if(_object == null) {
+			_object = (MESAirportZone)valueForBinding("object");
+		}
+		
+		return _object;
+
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+		try {
+			_object = (MESAirportZone)object;
+		} catch (ClassCastException e) {
+			throw new ClassCastException("Object must be of type: MESAirportZone");
+		}
+
+	}
+
+}

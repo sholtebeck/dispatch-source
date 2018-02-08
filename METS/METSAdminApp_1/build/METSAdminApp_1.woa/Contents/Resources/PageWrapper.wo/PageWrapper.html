@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<webobject name = "IsProductionMode"><meta content="IE=9" http-equiv="X-UA-Compatible" /></webobject>
+		<title><webobject name = "PageTitle" /></title>
+		<meta name="robots" content = "noindex, nofollow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<webobject name = "BootstrapCSS"></webobject>
+		<webobject name = "SiteCSS"></webobject>
+		<webobject name = "IFLTIE9Conditional">
+			<style type = "text/css">
+				.reservation-panel h3, .form-panel h3 {
+					text-shadow: none;
+				}
+			</style>
+		</webobject>
+		<link rel="shortcut icon" href="/favicon.ico" />
+	</head>
+	<body id = "BodyPageWrapper">
+		<wo:if condition = "$session.isUserAuthenticated">
+			<div class="prg-table">
+				<div class="prg-table-row">
+					<div class="prg-table-column" id="PRGHeader">
+					<div class="row-fluid">
+				      <div class="span8">
+							<ul id = "PRGMainNavigation">
+								<li><wo:link action = "$viewDashboard"><span class="dashboard-icon">Dashboard</span></wo:link>Dashboard</li>
+								<webobject name = "IsSuperUser"><li><wo:link action = "$viewUsers"><span class="contact-manager-icon">Global</span></wo:link>Global</li></webobject>
+								<webobject name = "IsCurrentHubDefined"><li class = "divider"><wo:link action = "$viewDispatches"><span class="dispatch-icon">Dispatches</span></wo:link>Dispatches</li></webobject>						
+								<webobject name = "IsCurrentHubDefined"><li><wo:link action = "$viewHubObjects"><span class="book-icon">Hub Info</span></wo:link>Hub Info</li></webobject>						
+								<webobject name = "IsCurrentHubDefined"><li><wo:link action = "$viewHubSchedule"><span class="schedule-icon">Schedule</span></wo:link>Schedule</li></webobject>						
+								<webobject name = "IsSuperUser"><li><wo:link action = "$viewAccounting"><span class="accouting-icon">Accounting</span></wo:link>Accounting</li></webobject>
+								<webobject name = "IsSuperUser"><webobject name = "IsCurrentHubDefined"><li><wo:link action = "$viewHubReports"><span class="reports-icon">Reports</span></wo:link>Reports</li></webobject></webobject>						
+								<webobject name = "IsSuperUser"><li><wo:link action = "$viewContent"><span class="content-manager-icon">Content Manager</span></wo:link>Content</li></webobject>						
+								<!--
+									<li><a href="#"><span class="shop-manager-icon">Online Store</span></a>Online Store</li>
+								-->					
+							</ul>
+				      </div>
+				      <div class="span4">
+						<ul id = "PRGSecondaryNavigation">
+							<!-- 
+								<li><a href="#"><span class="my-profile-icon">My Profile</span></a>My Profile</li>						
+							 -->
+							<webobject name = "HasMultipleHubRoles"> 
+								<li><wo:METSContextMenuLink options="{'top': '1px'}"><span class="action-gears-icon">Hubs</span></wo:METSContextMenuLink>
+									<ul class="dropdown-menu">
+										<webobject name = "UserAuthorizedHubs">
+											<li>
+												<wo:link action = "$setCurrentHub">
+													<webobject name = "MESHubName" />
+												</wo:link>
+											</li>
+										</webobject>
+									</ul>
+									Hubs
+								</li>						
+							</webobject>
+							<li>
+								<wo:link action = "$logout">
+									<span class="logout-icon">Logout</span>
+								</wo:link>Logout
+							</li>						
+						</ul>
+				      </div>
+				    </div>
+					</div>
+				</div>
+				<div class="prg-table-row">
+					<div class="prg-table-column" id="PRGContentFrame">
+						<div class="prg-table">
+							<div class="prg-table-row">
+								<webobject name = "ComponentContent"></webobject>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<webobject name = "IFLTIE9Conditional">
+				<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			</webobject>
+			<script type="text/javascript">
+				window.addEvent('domready', function() {
+					new Behavior().apply(document.body);
+					new Delegator().attach(document.body);
+					var prgPortal = new PRGPortal();
+				});
+			</script>
+		</wo:if>
+		<wo:else>
+			<webobject name = "LoginPage"></webobject>
+		</wo:else>
+	</body>
+</html>

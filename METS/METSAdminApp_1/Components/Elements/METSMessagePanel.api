@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+    <wo class="METSMessagePanel" wocomponentcontent="true">    <binding name="errors"/>
+        <binding name="messages"/>
+    <validation message="'errors' is a required binding.">
+            <unbound name="errors"/>
+        </validation>
+    </wo>
+</wodefinitions>

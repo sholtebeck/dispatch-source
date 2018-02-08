@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+    <wo class="METSPopUpButton" wocomponentcontent="true">    <binding name="disabled"/>
+        <binding name="helpText"/>
+        <binding name="id"/>
+        <binding name="inputClassName"/>
+        <binding name="labelText"/>
+        <binding name="item"/>
+        <binding name="displayString"/>
+        <binding name="noSelectionString"/>
+        <binding name="list"/>
+        <binding name="selection"/>
+    <binding name="value"/>
+    </wo>
+</wodefinitions>

@@ -1,0 +1,43 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.interfaces.MESEditorInterface;
+import com.mauishuttle.eo.MESAbstractZone;
+import com.mauishuttle.eo.MESLocation;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+
+@SuppressWarnings("serial")
+public class MESLocationEditor extends MESNonSynchronizingEditor implements MESEditorInterface {
+	
+	private MESLocation _location;
+	public MESAbstractZone _zone;
+	
+    public MESLocationEditor(WOContext context) {
+        super(context);
+    }
+
+	public MESLocation object() {
+		if(_location == null) {
+			_location = (MESLocation)valueForBinding("object");
+		}
+		return _location;
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+
+		try {
+			_location = (MESLocation)object;
+		} catch (ClassCastException e) {
+			throw new ClassCastException("Object must be of type MESLocation");
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAbstractZone> hubZones() {
+		return MESAbstractZone.fetchMESAbstractZones(ec(), 
+				MESAbstractZone.HUB.eq(session().currentHub()), 
+				MESAbstractZone.NAME.ascs());
+	}
+
+}

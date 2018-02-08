@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><wodefinitions>
+        <wo class="KMIEmailConcealer.java" wocomponentcontent="true">
+
+        <binding name="body"/>
+        <binding name="contact"/>
+        <validation message="'contact' is a required binding.">
+            <unbound name="contact"/>
+        </validation>
+        <binding name="email"/>
+        <validation message="'email' is a required binding.">
+            <unbound name="email"/>
+        </validation>
+        <binding name="emailHost"/>
+        <validation message="'emailHost' is a required binding.">
+            <unbound name="emailHost"/>
+        </validation>
+        <binding name="style"/>
+        <binding name="subject"/>
+    </wo>
+</wodefinitions>

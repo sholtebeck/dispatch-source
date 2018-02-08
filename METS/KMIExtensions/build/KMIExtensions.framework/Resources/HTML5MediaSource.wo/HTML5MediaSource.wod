@@ -1,0 +1,5 @@
+Source : WOGenericElement {
+	elementName = "source";
+	type = ^type;
+	src = src;
+}

@@ -1,0 +1,21 @@
+AirportNavigation : AirportNavigation {
+	index = 1;
+}
+
+FacebookButton : FacebookButton {
+	css = "span-6-5";
+}
+
+Main : PageWrapper {
+	pageTitle = document.pageTitle;
+	metaDescription = document.metaDescription;
+}
+
+PageContent : WOString {
+	escapeHTML = false;
+	value = document.textContent;
+}
+
+ReservationWidget : ReservationWidget {
+	selectedValue = "JHM";
+}

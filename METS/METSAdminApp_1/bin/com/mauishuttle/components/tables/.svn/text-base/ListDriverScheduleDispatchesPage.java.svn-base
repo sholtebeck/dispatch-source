@@ -1,0 +1,80 @@
+package com.mauishuttle.components.tables;
+
+import java.text.SimpleDateFormat;
+
+import com.mauishuttle.components.editors.MESNonSynchronizingEditor;
+import com.mauishuttle.components.interfaces.MESPageNavigationControllerInterface;
+import com.mauishuttle.eo.MESAbstractPaymentInfo;
+import com.mauishuttle.eo.MESDispatch;
+import com.mauishuttle.eo.MESSchedule;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+
+@SuppressWarnings("serial")
+public class ListDriverScheduleDispatchesPage extends MESNonSynchronizingEditor {
+
+	private MESSchedule _schedule;
+	private NSArray<MESDispatch> _scheduleDispatches;
+
+	public MESDispatch _dispatch;
+	public MESAbstractPaymentInfo _paymentInfo;
+	
+	public ListDriverScheduleDispatchesPage(WOContext context) {
+        super(context);
+    }
+	
+	public void sleep() {
+		super.sleep();
+		_schedule = null;
+		_scheduleDispatches = null;
+	}
+	
+	public boolean hasResults() {
+		return scheduleDispatches() != null && scheduleDispatches().size() > 0;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAbstractPaymentInfo> dispatchBillingOptions() {
+		return MESAbstractPaymentInfo.fetchMESAbstractPaymentInfos(ec(), 
+				MESAbstractPaymentInfo.DISPATCH.eq(_dispatch), 
+				MESAbstractPaymentInfo.TYPE.asc().then(MESAbstractPaymentInfo.CREATION_DATE.asc()));
+	}
+		
+	public MESPageNavigationControllerInterface navigationController() {
+		return (MESPageNavigationControllerInterface)valueForBinding("navigationController");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESDispatch> scheduleDispatches() {
+
+		System.out.println(object().driver());
+		SimpleDateFormat formatter = new SimpleDateFormat();
+		System.out.println(formatter.format(object().startTime()));
+		System.out.println(formatter.format(object().endTime()));
+		
+		if(_scheduleDispatches == null) {
+			
+			_scheduleDispatches = MESDispatch.fetchMESDispatchs(ec(), MESDispatch.DRIVER.eq(object().driver())
+					.and(MESDispatch.RESERVATION_DATE.greaterThanOrEqualTo(object().startTime()))
+					.and(MESDispatch.RESERVATION_DATE.lessThanOrEqualTo(object().endTime())), 
+					MESDispatch.RESERVATION_DATE.ascs());
+		}
+		
+		System.out.println("Schedule dispatches: " + _scheduleDispatches);
+	
+		return _scheduleDispatches;
+
+	}
+
+	public MESSchedule object() {
+		if(_schedule == null) {
+			_schedule = (MESSchedule)valueForBinding("object");
+		}
+		return _schedule;
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+		_schedule = (MESSchedule)object;
+	}
+	
+}

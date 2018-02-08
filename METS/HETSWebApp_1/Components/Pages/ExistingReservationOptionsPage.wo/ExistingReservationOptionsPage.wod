@@ -1,0 +1,51 @@
+ConfirmationNumber : WOString {
+	value = reservation.confirmationNumber;
+}
+
+HasNotRun : WOConditional {
+	condition = reservation.hasRun;
+	negate = true;
+}
+
+HasRun : WOConditional {
+	condition = reservation.hasRun;
+}
+
+Main : PageWrapper {
+	mainNavigationIndex = -1;
+	metaDescription = metaDescription;
+	pageTitle = pageTitle;
+}
+
+MessagesPanel : MessagePanel {
+	hasErrors = hasErrors;
+	hasMessages = hasMessages;
+	errors = errors;
+	messages = messages;
+}
+
+PayDispatch : WOHyperlink {
+	action = payDispatch;
+	class = "btn pad-left";
+}
+
+PrintBoardingPass : WOHyperlink {
+	action = printBoardingPass;
+	class = "btn pad-left";
+	target = "_blank";
+}
+
+PrintReceipt : WOHyperlink {
+	action = printReceipt;
+	class = "btn pad-left";
+	target = "_blank";
+}
+
+WasCancelled : WOConditional {
+	condition = reservation.wasCancelled;
+}
+
+WasNotCancelled : WOConditional {
+	condition = reservation.wasCancelled;
+	negate = true;
+}

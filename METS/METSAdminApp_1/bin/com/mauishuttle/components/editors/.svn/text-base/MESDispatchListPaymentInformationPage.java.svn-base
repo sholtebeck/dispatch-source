@@ -1,0 +1,109 @@
+package com.mauishuttle.components.editors;
+
+import km.extensions.aim.KMCreditCard;
+
+import com.mauishuttle.components.controllers.MESDispatchEditorPagesNavigationController;
+import com.mauishuttle.eo.MESAbstractPaymentInfo;
+import com.mauishuttle.eo.MESCashPayment;
+import com.mauishuttle.eo.MESCreditCardPayment;
+import com.mauishuttle.eo.MESDispatch;
+import com.mauishuttle.eo.MESServiceOrderPayment;
+import com.mauishuttle.eo.MESVoucherPayment;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSValidation;
+
+import er.extensions.appserver.ERXWOContext;
+import er.extensions.eof.ERXEC;
+
+@SuppressWarnings("serial")
+public class MESDispatchListPaymentInformationPage extends MESDispatchEditorPagesNavigationController {
+
+	public MESAbstractPaymentInfo _paymentInformation;
+	
+	public MESDispatchListPaymentInformationPage(WOContext context) {
+        super(context);
+    }
+
+	public WOActionResults addPaymentInformation() {
+
+		// Get a child EC from the parent editing context.
+		EOEditingContext childEC = ERXEC.newEditingContext(object().editingContext().parentObjectStore(), true);
+		String type = context().request().stringFormValueForKey("type");
+
+		MESAbstractPaymentInfo newPayment = null;
+		MESDispatch localDispatch = MESDispatch.localInstanceIn(childEC, object());
+
+		switch (Integer.valueOf(type)) {
+		case 0:
+			newPayment = MESCashPayment.createMESCashPayment(childEC, localDispatch);
+			break;
+		case 1:
+			delegate().setCreditCard(new KMCreditCard());
+			newPayment = MESCreditCardPayment.createMESCreditCardPayment(childEC, localDispatch);
+			break;
+		case 2:
+			newPayment = MESServiceOrderPayment.createMESServiceOrderPayment(childEC, localDispatch);
+			break;
+		case 3:
+			newPayment = MESVoucherPayment.createMESVoucherPayment(childEC, localDispatch);
+			break;
+		default:
+			break;
+		}
+		
+		if(newPayment != null) {
+			delegate().setPaymentInfo(newPayment);
+			delegate().setBillingPageKey(ADD_UPDATE_PAYMENT_INFORMATION_PAGE_KEY);
+		}
+		
+		return navigationController().nextPage();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAbstractPaymentInfo> dispatchPayments() {
+		return MESAbstractPaymentInfo.fetchMESAbstractPaymentInfos(
+				object().editingContext(), 
+				MESAbstractPaymentInfo.DISPATCH.eq(object()), 
+				MESAbstractPaymentInfo.TYPE.asc().then(MESAbstractPaymentInfo.CREATION_DATE.asc()));
+	}	
+	
+	public WOActionResults inspectPaymentInformation() {
+		
+		delegate().setBillingPageKey(ADD_UPDATE_PAYMENT_INFORMATION_PAGE_KEY);
+		delegate().setPaymentInfo(_paymentInformation);
+
+		return navigationController().nextPage();
+
+	}	
+	
+	public String paymentDriverCollect() {
+		return _paymentInformation.driverCollect() ? YES_KEY : NO_KEY;
+	}	
+
+	public WOActionResults removePaymentInformation() {
+		
+		try {
+
+			object().editingContext().deleteObject(_paymentInformation);
+			object().editingContext().saveChanges();
+			EOEditingContext parentEditingContext = (EOEditingContext)object().editingContext().parentObjectStore();
+			parentEditingContext.saveChanges();
+			navigationController().addMessage("The record was successfully removed.");
+
+		} catch (NSValidation.ValidationException e) {
+			validationFailedWithException(e, null, null);
+		}
+		
+		return navigationController().nextPage();
+		
+	}	
+	
+	public String removePaymentInformationIdentifier() {
+		return "MESPaymentInformationRemover" + ERXWOContext.safeIdentifierName(context(), true);
+	}	
+
+}

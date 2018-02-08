@@ -1,0 +1,17 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+PrintReportButton : WOHyperlink {
+	action = printReport;
+	class = "btn btn-success";
+	target = "_blank";
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+VehicleReportsDataTable : VehicleMileageReportDataTable {
+	reports = reports;
+}

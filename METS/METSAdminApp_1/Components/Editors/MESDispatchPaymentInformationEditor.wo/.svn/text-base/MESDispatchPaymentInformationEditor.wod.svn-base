@@ -1,0 +1,33 @@
+CurrentPaymentIsNewObject : WOConditional {
+	condition = delegate.paymentInfo.isNewObject;
+}
+
+ExpirationMonthSelector : WOPopUpButton {
+	class = "span2";
+	list = expirationMonths;
+	noSelectionString = "Exp. Month";
+	selection = creditCard.expirationMonth;
+}
+
+ExpirationYearSelector : WOPopUpButton {
+	class = "span2";
+	list = expirationYears;
+	noSelectionString = "Exp. Year";
+	selection = creditCard.expirationYear;
+}
+
+IsCreditCardPayment : WOConditional {
+	condition = isCreditCardPayment;
+}
+
+IsServiceOrderPayment : WOConditional {
+	condition = isServiceOrderPayment;
+}
+
+IsVoucherPayment : WOConditional {
+	condition = isVoucherPayment;
+}
+
+PaymentInformationForm : METSHorizontalForm {
+	action = saveChanges;
+}

@@ -1,0 +1,58 @@
+package com.mauishuttle.components.elements;
+
+import java.text.Format;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSNumberFormatter;
+import com.webobjects.foundation.NSTimestampFormatter;
+
+import er.extensions.appserver.ERXWOContext;
+import er.extensions.components.ERXStatelessComponent;
+import er.extensions.foundation.ERXStringUtilities;
+
+@SuppressWarnings({ "serial", "deprecation" })
+public class METSTextInput extends ERXStatelessComponent {
+
+	private String _id;
+
+	public METSTextInput(WOContext context) {
+        super(context);
+    }
+	
+	/**
+	 * @return the id
+	 */
+	public String id() {
+		if(_id == null) {
+			_id = stringValueForBinding("id", ERXWOContext.safeIdentifierName(context(), true)) + "METSTI";
+		}
+		return _id;
+	}
+
+	public void reset() {
+		super.reset();
+		_id = null;
+	}
+
+	public Format formatter() {
+
+		Format formatter = null;
+		if(hasBinding("dateformat")) {
+			formatter = new NSTimestampFormatter((String)valueForBinding("dateformat"));
+		} else if(hasBinding("numberformat")) {
+			formatter = new NSNumberFormatter((String)valueForBinding("numberformat"));
+		}	
+		
+		return formatter;
+
+	}
+	
+	public boolean hasHelpText() {
+		return ERXStringUtilities.stringIsNullOrEmpty(valueForStringBinding("helpText", null)) == false;
+	}
+	
+	public String inputClassName() {
+		return stringValueForBinding("inputClassName", "input-xlarge");
+	}
+	
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+        <wo class="HTML5Video.java" wocomponentcontent="false">
+
+        <binding name="filename"/>
+        <binding name="src"/>
+        <binding name="framework"/>
+    <binding name="posterFileName"/>
+        <binding name="posterFramework"/>
+        <binding name="posterSrc"/>
+        <binding name="controls"/>
+        <binding name="crossorigin"/>
+        <binding name="preload"/>
+        <binding name="autoplay"/>
+        <binding name="mediagroup"/>
+        <binding name="loop"/>
+        <binding name="muted"/>
+        <binding name="width"/>
+        <binding name="height"/>
+    </wo>
+</wodefinitions>

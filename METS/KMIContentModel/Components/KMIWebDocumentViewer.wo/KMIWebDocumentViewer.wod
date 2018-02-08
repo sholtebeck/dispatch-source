@@ -1,0 +1,4 @@
+Text : WOString {
+	escapeHTML = false;
+	value = text;
+}

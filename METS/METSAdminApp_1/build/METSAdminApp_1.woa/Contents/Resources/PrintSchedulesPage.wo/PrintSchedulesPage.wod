@@ -1,0 +1,22 @@
+IsDailyScheduleView : WOConditional {
+	condition = isDailyScheduleView;
+}
+
+IsWeeklyScheduleView : WOConditional {
+	condition = isDailyScheduleView;
+	negate = true;
+}
+
+SchedulesTable : ListSchedulesTable {
+	dataSource = dataSource;
+	isPrintPage = true;
+}
+
+PrintPagesWrapper : PrintPagesWrapper {
+	pageTitle = "Dispatches";
+}
+
+WeeklySchedulesTableDataView : WeeklyDriverSchedulesTableView {
+	dataSource = dataSource;
+	isPrintPage = true;
+}

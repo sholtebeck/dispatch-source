@@ -1,0 +1,3 @@
+BoardingPass : ReservationMailer {
+	dispatch = reservation;
+}

@@ -1,0 +1,43 @@
+DeleteDispatchButton : WOSubmitButton {
+	action = deleteDispatch;
+	class = "btn btn-danger";
+	onClick = "return confirm('Are you sure you wish to delete this dispatch?')";
+	value = "Delete Dispatch";
+}
+
+IsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+IsTechnicalAdministrator : WOConditional {
+	condition = session.isTechnicalAdministrator;
+}
+
+SubmitButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary";
+	value = saveButtonLabel;
+}
+
+SubmitAndStartRoundTripButton : WOSubmitButton {
+	action = saveChangesAndStartRoundTrip;
+	class = "btn btn-primary";
+	value = "Create Dispatch And Start Round Trip";
+}
+
+SendSummaryButton : WOHyperlink {
+	action = sendSummaryToCustomer;
+	class = "btn btn-success";
+	onClick = "return confirm('Are you sure you wish to send summary to customer?')";
+}
+
+SummaryPage : MESDispatchSummaryPage {
+	delegate = delegate;
+	object = object;
+	printPage = false;
+}

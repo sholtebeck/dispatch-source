@@ -1,0 +1,61 @@
+CancelActionIsDefined : WOConditional {
+	condition = cancelActionIsDefined;
+}
+
+CancelButton : WOHyperlink {
+	action = ^cancelAction;
+	class = cancelButtonClassName;
+}
+
+CancelButtonText : WOString {
+	value = cancelButtonText;
+}
+
+DeleteActionIsDefined : WOConditional {
+	condition = deleteActionIsDefined;
+}
+
+DeleteButton : WOSubmitButton {
+	action = ^deleteAction;
+	class = deleteButtonClassName;
+	value = deleteButtonText; 
+}
+
+DeleteModalContainer : MTAjaxModalContainer {
+	ajax = true;
+	autoWrapContent = false;
+	class = deleteButtonClassName;
+	id = modalContainerId;
+	label = deleteButtonText;
+	showFooter = false;
+	showTitle = false;
+	useDefaultCSS = false;
+}
+
+DoNotUseModalForDelete : WOConditional {
+	condition = useModalForDelete;
+	negate = true;
+}
+
+IsNotNewObject : WOConditional {
+	condition = ^isNewObject;
+	negate = true;
+}
+
+ModalContainerText : WOString {
+	value = modalContainerText;
+}
+
+ModalContainerTitle : WOString {
+	value = modalContainerTitle;
+}
+
+SubmitButton : WOSubmitButton {
+	action = ^submitAction;
+	class = submitButtonClassName;
+	value = submitButtonText;
+}
+
+UseModalForDelete : WOConditional {
+	condition = useModalForDelete;
+}

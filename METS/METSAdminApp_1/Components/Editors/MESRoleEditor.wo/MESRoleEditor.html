@@ -1,0 +1,77 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href="#">Roles</a></li>
+	<li><webobject name = "RoleName"></webobject></li>
+</webobject>
+<wo:METSStaticColumn>
+	<wo:METSInfoBar>General Information</wo:METSInfoBar>
+	<div class="row-fluid">
+		<webobject name = "MessagesPanel"></webobject>
+		<webobject name = "RoleDetailsForm">
+			<wo:METSTextInput helpText = "Required Information" labelText = "Role Name" value = "$object.label"></wo:METSTextInput>
+			<wo:METSTextInput helpText = "Optional" labelText = "Short Description" value = "$object.shortDescription"></wo:METSTextInput>
+			<webobject name = "IsHubRole">
+				<wo:METSTextInput disabled = "true" labelText = "Hub" value = "$hubName"></wo:METSTextInput>
+			</webobject>
+			<webobject name = "SubmissionBar"></webobject>
+		</webobject>
+	</div>
+	<webobject name = "IsNotNewObject">
+		<wo:METSInfoBar>Assigned Users</wo:METSInfoBar>
+		<wo:form action = "$saveChanges" class="form-inline">
+			<div class="row-fluid prg-prepend-top">
+				<div class="span12 prg-text-align-right">
+					<webobject name = "AssignUsersToRoleModalContainer">
+						<div class = "prg-text-align-left">
+							<div class="modal-header">
+								<a class="close" data-dismiss="modal">×</a>
+								<h3>Assign New Users</h3>
+							</div>
+							<div class="modal-body">	
+								<table class="table table-striped table-bordered prg-square-table">
+									<thead>
+										<tr>
+											<th>Assign</th>
+											<th>User Name</th>
+										</tr>
+									</thead>
+									<webobject name = "UnassignedUsersRepetition">
+										<tbody>
+											<tr>
+												<td><webobject name = "AssignUserCheckbox"></webobject></td>														
+												<td>
+													<webobject name = "UserFullName" />
+												</td>
+											</tr>
+										</tbody>
+									</webobject>
+								</table>	
+							</div>
+							<div class = "modal-footer">
+								<webobject name = "AssignUsersButton" />
+								<a href="#" class="dismiss btn">Cancel</a>
+							</div>
+						</div>
+					</webobject>
+				</div>
+			</div>											
+		</wo:form>	
+		<table class="table table-striped table-bordered prg-square-table">
+			<thead>
+				<tr>
+					<th>User Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<webobject name = "AssignedUsersRepetition">
+					<tr>
+						<td><webobject name = "UserFullName"></webobject></td>														
+						<td>
+							<webobject name = "RemoveUserLink">Remove</webobject>
+						</td>
+					</tr>
+				</webobject>
+			</tbody>
+		</table>		
+	</webobject>
+</wo:METSStaticColumn>

@@ -1,0 +1,17 @@
+DispatchesViewLink : WOHyperlink {
+	action = ^dispatchesView;
+}
+
+GeneralInformationLink : WOHyperlink {
+	action = ^generalInformationLink;
+}
+
+IsNotNewObject : WOConditional {
+	condition = ^isNewObject;
+	negate = true;
+}
+
+Tab : WOGenericContainer {
+	class = tabClassName;
+	elementName = "li";
+}

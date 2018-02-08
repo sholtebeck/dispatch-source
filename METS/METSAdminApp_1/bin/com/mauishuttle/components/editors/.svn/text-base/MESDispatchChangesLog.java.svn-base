@@ -1,0 +1,39 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.controllers.MESDispatchEditorPagesNavigationController;
+import com.mauishuttle.eo.MESDispatchChangeLog;
+import com.mauishuttle.eo.MESLocation;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+
+@SuppressWarnings("serial")
+public class MESDispatchChangesLog extends MESDispatchEditorPagesNavigationController {
+
+	public MESDispatchChangeLog _dispatchChange;
+	public String _dispatchChangeKey;
+	
+	public MESDispatchChangesLog(WOContext context) {
+        super(context);
+    }
+
+	public NSArray<MESDispatchChangeLog> dispatchChanges() {
+		return object().dispatchChanges(null, MESDispatchChangeLog.CREATION_DATE.descs(), true);
+	}
+
+	public Object dispatchChangeValue() {
+		
+		Object value = _dispatchChange.changes().valueForKey(_dispatchChangeKey);
+		
+		if(value instanceof MESLocation) {
+			value = ((MESLocation)value).name();
+		}
+	
+		return value;
+
+	}	
+
+	public boolean isLastDispatchChangeKey() {
+		return _dispatchChange.changes().allKeys().lastObject().equals(_dispatchChangeKey);
+	}	
+	
+}

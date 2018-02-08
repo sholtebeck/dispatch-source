@@ -1,0 +1,36 @@
+<webobject name = "MainTableColumn">
+	<webobject name = "BreadCrumbsBar">
+		<li><a href = "#">Assets</a></li>
+		<li>
+			<webobject name = "IsNewObject">New Asset Group</webobject>
+			<webobject name = "IsNotNewObject"><webobject name = "AssetGroupName" /></webobject>
+		</li>
+	</webobject>
+	<wo:METSInfoBar>General Information</wo:METSInfoBar>
+	<div class = "row-fluid">
+		<webobject name = "MessagesPanel" />
+		<webobject name = "AssetGroupForm">
+			<wo:METSTextInput helpText = "Required" labelText = "Name" value = "$object.name" />
+			<webobject name = "FormSubmissionBar"></webobject>
+		</webobject>
+	</div>
+	<webobject name = "IsNotNewObject">
+		<wo:METSInfoBar>Assets</wo:METSInfoBar>
+		<div class = "row-fluid" id = "PRGPhotoList">
+			<wo:METSStaticColumn>
+				<ul class = "prg-action-bar">
+					<li><wo:link action = "$createNewImageAsset" class = "add-button">Add Photo</wo:link></li>
+				</ul>
+				<ul class = "prg-image-unordered-list">
+					<webobject name = "AssetGroupAssetsRepetition">
+						<webobject name = "IsImageAsset">
+							<wo:genericContainer elementName = "li" class = "img-rounded">
+								<webobject name = "InspectAssetLink">&nbsp;</webobject>
+							</wo:genericContainer>
+						</webobject>
+					</webobject>
+				</ul>
+			</wo:METSStaticColumn>	
+		</div>
+	</webobject>	
+</webobject>	

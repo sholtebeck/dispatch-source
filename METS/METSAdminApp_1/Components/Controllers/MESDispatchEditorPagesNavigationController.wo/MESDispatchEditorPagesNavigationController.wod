@@ -1,0 +1,98 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+
+}
+
+ConfirmationNumber : WOString {
+	value = object.confirmationNumber;
+}
+
+HasChangeLog : WOConditional {
+	condition = object.hasDispatchChanges;
+}
+
+HasParent : WOConditional {
+	condition = object.hasParent;
+}
+
+IsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+IsSummaryLinkVisible : WOConditional {
+	condition = delegate.displaySummary;
+}
+
+NoParent : WOConditional {
+	condition = object.hasParent;
+	negate = true;
+}
+
+ReturnToDispatchesLink : WOHyperlink {
+	action = returnToDispatches;
+}
+
+ReturnToParentLink : WOHyperlink {
+	action = returnToParentDispatch;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+SwitchComponent : WOSwitchComponent {
+	delegate = delegate;
+	navigationController = navigationController;
+	object = object;
+	WOComponentName = switchComponentName;
+}
+
+Tab : WOGenericContainer {
+	class = tabClassName;
+	elementName = "li";
+}
+
+ViewBillingInformationLink : WOHyperlink {
+	action = viewBillingInformation;
+	onClick = "return confirm('Continue without saving?')";
+}
+
+ViewChangeLogsLink : WOHyperlink {
+	action = viewChangeLogs;
+	onClick = "return confirm('Continue without saving?')";
+}
+
+ViewChildrenLink : WOHyperlink {
+	action = viewChildrenLink;
+	onClick = "return confirm('Continue without saving?')";
+}
+
+ViewDriverInformationLink : WOHyperlink {
+	action = viewDriverInformation;
+	onClick = "return confirm('Continue without saving?')";
+}
+
+ViewMiscellaneousInformationLink : WOHyperlink {
+	action = viewMiscellaneousInformation;
+	onClick = "return confirm('Continue without saving?')";
+}
+
+ViewPassengerInformationLink : WOHyperlink {
+	action = viewPassengerInformation;
+	onClick = "return confirm('Continue without saving?')";
+}
+
+ViewRoutingInformationLink : WOHyperlink {
+	action = viewRoutingInformation;
+	onClick = "return confirm('Continue without saving?')";
+}
+
+ViewSummaryLink : WOHyperlink {
+	action = viewSummary;
+	onClick = "return confirm('Continue without saving?')";
+}
+

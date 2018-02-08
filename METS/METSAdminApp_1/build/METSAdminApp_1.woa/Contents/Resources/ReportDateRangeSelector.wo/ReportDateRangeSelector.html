@@ -1,0 +1,24 @@
+<wo:METSInfoBar>Date Range</wo:METSInfoBar>
+<webobject name = "DateRangeForm">
+	<div class = "row-fluid prg-prepend-top">
+		<div class = "offset-left">
+			<label>Date:</label>
+			<webobject name = "DateSelector"></webobject>
+			<label class="prg-pad-left" for="scheduleStartDate">From:</label>
+			<webobject name = "CustomDateRangeStartDate"></webobject>
+			<label for="scheduleEndDate" class="prg-pad-left">To:</label>
+			<webobject name = "CustomDateRangeEndDate"></webobject>
+		</div>
+		<div class = "offset-left prg-prepend-top">
+			<label>Hubs</label>
+			<webobject name = "HubSelector"></webobject>
+			<label class="prg-pad-left">Paid/Unpaid:</label>
+			<webobject name = "PaidUnpaid"></webobject>
+			<a href="#" class="btn btn-primary prg-pad-left" onclick = "document.DateRangeForm.submit();">Search <i class="icon-search icon-white">&nbsp;</i></a>
+			<webobject name = "PrintReportButton">
+				Print <i class="icon-print icon-white">&nbsp;</i>
+			</webobject>
+		</div>
+	</div>
+</webobject>
+<webobject name = "ComponentContent"></webobject>

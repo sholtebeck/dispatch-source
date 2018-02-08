@@ -1,0 +1,30 @@
+AirportNavigation : AirportNavigation {
+	
+}
+
+FacebookButton : FacebookButton {
+	style = "margin-top: 0px;";
+}
+
+LimosineRentalPageLink : WOHyperlink {
+	class = "btn btn-small";
+	href = limousineInformationPageLink;
+}
+
+Main : PageWrapper {
+	metaDescription = document.metaDescription;
+	pageTitle = document.pageTitle;
+}
+
+PageCopy : PageCopy {
+	pageCopy = document.textContent;
+}
+
+ReservationWidget : ReservationWidget {
+}
+
+Van : WOImage {
+	alt = "Our Kahului Airport Shuttle - A Mercedes Sprinter Van";
+	class = "sprinter-van";
+	filename = "images/mercedes-sprinter-van4.png";
+}

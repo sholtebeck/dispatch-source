@@ -1,0 +1,17 @@
+PageWrapper : PrintPagesWrapper {
+	pageTitle = pageTitle;
+}
+
+ListDriverScheduleDispatches : ListDriverScheduleDispatchesPage {
+	object = schedule;
+	isPrintPage = true;
+}
+
+PageTitle : WOString {
+	value = schedulePageTitle;
+}
+
+SchedulesRepetition : WORepetition {
+	item = schedule;
+	list = schedules;
+}

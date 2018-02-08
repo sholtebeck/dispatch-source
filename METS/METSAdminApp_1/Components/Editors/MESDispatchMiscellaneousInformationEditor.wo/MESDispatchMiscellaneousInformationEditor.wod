@@ -1,0 +1,44 @@
+ChildSeatsUpdateContainer : MTAjaxUpdateContainer {
+	id = "MESChildSeatsUpdateContainer";
+}
+
+GreetRadioButtonSelector : METSRadioButtonList {
+	displayString = greet.key;
+	escapeHTML = false;
+	helpText = "Please select one";
+	item = greet;
+	labelText = "Greet";
+	list = greets;
+	selection = selectedGreet;	
+}
+
+MiscFees : METSTextInput {
+	helpText = "Optional";
+	labelText = "Miscellaneous Fees";
+	numberformat = "#,##0.00";
+	value = object.miscellaneousFee;
+}
+
+MiscFeesNotes : METSTextArea {
+	helpText = "Optional";
+	labelText = "Miscellaneous Fees Notes";
+	value = object.miscellaneousFeesNotes;
+}
+
+RequiresChildSeats : WOConditional {
+	condition = willRequireChildSeats;
+}
+
+RequiresChildSeatsSelector : METSPopUpButton {
+	helpText = "Optional";
+	id = "MESRequiresChildSeatsSelector";
+	labelText = "Requires Child Seats?";
+	list = yesOrNoArray;
+	selection = delegate.requiresChildSeats;
+}
+
+RequiresChildSeatsSelectorObserveField : MTAjaxObserveField {
+	observeFieldID = "MESRequiresChildSeatsSelector";
+	updateContainerID = "MESChildSeatsUpdateContainer";
+}
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wodefinitions>
+        <wo class="METSKMIHTMLTextNodeEditor.java" wocomponentcontent="true">
+
+        <binding name="object"/>
+        <binding name="controller"/>
+        <validation message="'object' is a required binding.">
+            <unbound name="object"/>
+        </validation>
+        <validation message="'controller' is a required binding.">
+            <unbound name="controller"/>
+        </validation>
+    </wo>
+</wodefinitions>

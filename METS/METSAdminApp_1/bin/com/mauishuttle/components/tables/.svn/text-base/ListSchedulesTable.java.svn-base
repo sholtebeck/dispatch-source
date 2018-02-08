@@ -1,0 +1,148 @@
+package com.mauishuttle.components.tables;
+
+import com.mauishuttle.components.interfaces.MESPageNavigationControllerInterface;
+import com.mauishuttle.components.interfaces.MESScheduleTableControllerInterface;
+import com.mauishuttle.eo.MESSchedule;
+import com.mauishuttle.eo.MESScheduleVehicles;
+import com.mauishuttle.eo.MESVehicle;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSValidation;
+
+import er.extensions.appserver.ERXWOContext;
+import er.extensions.batching.ERXBatchingDisplayGroup;
+import er.extensions.components.ERXNonSynchronizingComponent;
+
+@SuppressWarnings("serial")
+public class ListSchedulesTable extends ERXNonSynchronizingComponent {
+
+	private Boolean _isPrintPage;
+	private ERXBatchingDisplayGroup<MESSchedule> _displayGroup;
+	private EOEditingContext _ec;
+	private MESScheduleTableControllerInterface _dataSource;
+	public MESSchedule _schedule;
+	public MESVehicle _vehicle;
+	
+	public ListSchedulesTable(WOContext context) {
+        super(context);
+    }
+
+	public void sleep() {
+		super.sleep();
+		_dataSource = null;
+		_displayGroup = null;
+		_ec = null;
+		_isPrintPage = null;
+	}
+	
+
+	public MESScheduleTableControllerInterface dataSource() {
+		if(_dataSource == null) {
+			_dataSource = (MESScheduleTableControllerInterface)valueForBinding("dataSource");
+		}
+		return _dataSource;
+	}
+	
+	
+	public MESPageNavigationControllerInterface navigationController() {
+		return (MESPageNavigationControllerInterface)valueForBinding("navigationController");
+	}
+	
+	public boolean hasResults() {
+		return displayGroup() != null && displayGroup().allObjects().size() > 0;
+	}
+
+	@SuppressWarnings("unchecked")
+	public ERXBatchingDisplayGroup<MESSchedule> displayGroup() {
+	
+		if(_displayGroup == null) {		
+			if(dataSource() != null) {
+				_displayGroup = (ERXBatchingDisplayGroup<MESSchedule>)dataSource().schedulesDisplayGroup();
+			} else {
+				_displayGroup = (ERXBatchingDisplayGroup<MESSchedule>)valueForBinding("displayGroup");
+			}
+		}
+
+		return _displayGroup;
+	
+	}
+
+	public void setDisplayGroup(ERXBatchingDisplayGroup<MESSchedule> displayGroup) {
+		this._displayGroup = displayGroup;
+	}
+	
+	public WOActionResults deleteSchedule() {
+		
+		try {
+
+			for(MESScheduleVehicles schedulesVehicle : _schedule.scheduledVehicles()) {
+				schedulesVehicle.delete();
+			}
+
+			ec().saveChanges();
+			_schedule.delete();
+			ec().saveChanges();
+			navigationController().addMessage("The schedule was successfully removed.");
+
+		} catch (NSValidation.ValidationException e) {
+			navigationController().validationFailedWithException(e, null, null);
+		}
+		
+		return dataSource().filter();
+	
+	}	
+	
+	public EOEditingContext ec() {
+		if(_ec == null) {
+			if(dataSource() != null) {
+				_ec = dataSource().ec();
+			} else {
+				_ec = (EOEditingContext)valueForBinding("ec");
+			}
+		}
+		return _ec;
+	}
+
+	public void setEc(EOEditingContext ec) {
+		this._ec = ec;
+	}
+	
+	public WOActionResults inspectSchedule() {
+		navigationController().setSelectedObject(_schedule);
+		navigationController().setEditorPageKey(MESScheduleTableControllerInterface.EDIT_SCHEDULE_PAGE_KEY);
+		return navigationController().nextPage();
+	}
+
+	public WOActionResults listPayouts() {
+	
+		navigationController().setSelectedObject(_schedule);
+		navigationController().setEditorPageKey(MESScheduleTableControllerInterface.LIST_PAYOUTS_FOR_SCHEDULE_OBJECT_PAGE_KEY);
+		return navigationController().nextPage();
+
+	}
+	
+	public String scheduleRemoverModalContainerId() {
+		return "MESScheduleRemover" + ERXWOContext.safeIdentifierName(context(), false);
+	}
+	
+	public NSArray<MESVehicle> scheduleVehicles() {
+		return _schedule.vehicles(null, MESVehicle.MAKE.asc().then(MESVehicle.MODEL.asc()));
+	}
+
+	public Boolean isPrintPage() {
+		
+		if(_isPrintPage == null) {
+			_isPrintPage = booleanValueForBinding("isPrintPage", false);
+		}
+
+		return _isPrintPage;
+
+	}
+
+	public void setIsPrintPage(Boolean isPrintPage) {
+		this._isPrintPage = isPrintPage;
+	}	
+
+}

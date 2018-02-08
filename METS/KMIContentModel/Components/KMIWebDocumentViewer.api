@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+        <wo class="KMIWebDocumentViewer.java" wocomponentcontent="false">
+
+        <binding name="document"/>
+        <validation message="'document' is a required binding.">
+            <unbound name="document"/>
+        </validation>
+    <binding name="sectionName"/>
+    </wo>
+</wodefinitions>

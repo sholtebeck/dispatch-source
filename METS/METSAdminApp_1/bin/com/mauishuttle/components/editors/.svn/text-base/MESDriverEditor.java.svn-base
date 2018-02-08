@@ -1,0 +1,50 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.interfaces.MESEditorInterface;
+import com.mauishuttle.eo.MESDriver;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+
+import er.extensions.appserver.ERXResponseRewriter;
+
+@SuppressWarnings("serial")
+public class MESDriverEditor extends MESNonSynchronizingEditor implements MESEditorInterface {
+
+	private MESDriver _driver;
+	
+	public MESDriverEditor(WOContext context) {
+        super(context);
+    }
+	
+	public void appendToResponse(WOResponse response, WOContext context) {
+		super.appendToResponse(response, context);
+		ERXResponseRewriter.addStylesheetResourceInHead(
+				response, 
+				context,
+				"app", 
+				"stylesheets/datepicker_dashboard.css");
+	}	
+	
+	public MESDriver object() {
+		if(_driver == null) {
+			_driver = (MESDriver)valueForBinding("object");
+		}
+		return _driver;
+	}
+
+	public void sleep() {
+
+		super.sleep();
+		_driver = null;
+
+	}
+	
+	public void setObject(Object object) throws ClassCastException {
+		try {
+			_driver = (MESDriver)object;
+		} catch(ClassCastException e) {
+			throw new ClassCastException("Object must be of type MESDriver");
+		}
+	}
+	
+}

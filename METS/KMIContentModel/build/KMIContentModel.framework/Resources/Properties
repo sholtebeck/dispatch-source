@@ -1,0 +1,3 @@
+er.attachment.KMIImageAsset.attachment.file.filesystemPath=/Library/WebServer/CMS/images/${hash}/${pk}${ext}
+er.attachment.KMIImageAsset.attachment.file.webPath=/images/cms/${hash}/${pk}${ext}
+er.attachment.KMIImageAsset.attachment.attachment.storageType=file

@@ -1,0 +1,964 @@
+package com.mauishuttle.components.controllers;
+
+import java.util.GregorianCalendar;
+
+import km.extensions.aim.KMCreditCard;
+import km.foundation.extensions.KMTimeUtilities;
+
+import com.mauishuttle.components.Main;
+import com.mauishuttle.components.editors.MESAirportZoneEditor;
+import com.mauishuttle.components.editors.MESDriverEditor;
+import com.mauishuttle.components.editors.MESExclusiveServiceEditor;
+import com.mauishuttle.components.editors.MESLocationEditor;
+import com.mauishuttle.components.editors.MESPhoneEditor;
+import com.mauishuttle.components.editors.MESSharedServiceEditor;
+import com.mauishuttle.components.editors.MESVehicleEditor;
+import com.mauishuttle.components.editors.MESZoneEditor;
+import com.mauishuttle.components.interfaces.MESDispatchPagesEditorDelegateInterface;
+import com.mauishuttle.components.interfaces.MESDispatchTableControllerInterface;
+import com.mauishuttle.components.interfaces.MESPageNavigationControllerInterface;
+import com.mauishuttle.components.interfaces.MESScheduleTableControllerInterface;
+import com.mauishuttle.eo.MESAbstractPaymentInfo;
+import com.mauishuttle.eo.MESAbstractService;
+import com.mauishuttle.eo.MESAccount;
+import com.mauishuttle.eo.MESAirportZone;
+import com.mauishuttle.eo.MESDispatch;
+import com.mauishuttle.eo.MESDriver;
+import com.mauishuttle.eo.MESExclusiveService;
+import com.mauishuttle.eo.MESHub;
+import com.mauishuttle.eo.MESLocation;
+import com.mauishuttle.eo.MESPhone;
+import com.mauishuttle.eo.MESSchedule;
+import com.mauishuttle.eo.MESSharedService;
+import com.mauishuttle.eo.MESUser;
+import com.mauishuttle.eo.MESVehicle;
+import com.mauishuttle.eo.MESVehicleType;
+import com.mauishuttle.eo.MESZone;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eoaccess.EODatabaseDataSource;
+import com.webobjects.eoaccess.EOUtilities;
+import com.webobjects.eocontrol.EOAndQualifier;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOEnterpriseObject;
+import com.webobjects.eocontrol.EOQualifier;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSDictionary;
+import com.webobjects.foundation.NSMutableArray;
+import com.webobjects.foundation.NSTimestamp;
+import com.webobjects.foundation.NSValidation;
+
+import er.extensions.batching.ERXBatchingDisplayGroup;
+import er.extensions.eof.ERXEC;
+import er.extensions.eof.ERXEOControlUtilities;
+import er.extensions.foundation.ERXStringUtilities;
+
+@SuppressWarnings("serial")
+public class MESHubPagesController extends Main implements MESPageNavigationControllerInterface, 
+MESDispatchTableControllerInterface, MESDispatchPagesEditorDelegateInterface, MESScheduleTableControllerInterface {
+
+	private static final String DISPATCH_PAGES_DEFAULT_EDITOR_PAGE_KEY = "1";
+	private static final String CURRENT_LINK_CLASS_NAME = "active";
+	private static final int DEFAULT_DISPATCH_DISPLAY_GROUP_SIZE = 50;
+	private static final int DEFAULT_SCHEDULE_DISPLAY_GROUP_SIZE = 20;
+	public static final String VIEW_HUB_OBJECTS_PAGE_KEY = "ViewHubObjects";
+	public static final String VIEW_DISPATCHES_PAGE_KEY = "ViewDispatches";
+	public static final String VIEW_SCHEDULES_PAGE_KEY = "ViewSchedules";
+
+	private EOEnterpriseObject _selectedObject;
+	public EOEnterpriseObject _eo;
+	private MESAbstractPaymentInfo _paymentInfo;
+	private MESAbstractService _selectedService;
+	private MESAccount _selectedAccount;
+	private MESDriver _selectedDriver;
+	private MESLocation _selectedLocation;
+
+	private Boolean _displaySummary;
+	private ERXBatchingDisplayGroup<MESDispatch> _dispatchDisplayGroup;
+	private ERXBatchingDisplayGroup<MESSchedule> _schedulesDisplayGroup;
+	private KMCreditCard _creditCard;
+	private NSDictionary<String, Object> _dispatchSnapshot;
+	private NSMutableArray<MESDispatch.Status> _checkedStatuses;
+	private NSTimestamp _searchEndDate;
+	private NSTimestamp _searchStartDate;
+	private String _billingPageKey;
+	private String _confirmationNumber;
+	private String _dropOffLocationUserInput;
+	private String _editorPageKey;
+	private String _enableDateFiltering;
+	private String _navigationPageKey;
+	private String _pickUpLocationUserInput;
+	private String _requiresChildSeats;
+	
+	public MESHubPagesController(WOContext context) {
+        super(context);
+    }
+
+	private NSArray<Integer> _checkedStatusesValues() {
+		NSMutableArray<Integer> checkedStatuses = new NSMutableArray<Integer>();
+		for(MESDispatch.Status status : checkedStatuses()) {
+			checkedStatuses.addObject(status.value());
+		}
+		return checkedStatuses;
+	}
+	
+	public void _resetFilters() {
+
+		setPageKey(VIEW_DISPATCHES_PAGE_KEY);
+		setSelectedObject(null);
+		setSelectedAccount(null);
+		setSelectedDriver(null);
+		setSelectedLocation(null);
+		setSelectedService(null);
+		setCheckedStatuses(null);
+		setConfirmationNumber(null);
+		setEnableDateFiltering(NO_KEY);
+		setSearchStartDate(KMTimeUtilities.todayAtMidnight());
+		setSearchEndDate(KMTimeUtilities.tomorrowAtMidnight());
+			
+	}
+	
+	public void _resetScheduleFilter() {
+
+		setPageKey(VIEW_SCHEDULES_PAGE_KEY);
+		setEditorPageKey(MESSchedulePagesController.LIST_PAGE_KEY);
+		setEnableDateFiltering(NO_KEY);
+		setSelectedObject(null);
+		setSelectedDriver(null);
+		setSearchEndDate(null);
+		setSearchStartDate(null);
+
+	}
+
+	public void addAdditionalRoute(EOEditingContext ec, MESDispatch parent) {
+		
+		EOEditingContext childEc = ERXEC.newEditingContext(ec, false);
+		MESDispatch newRoute = MESDispatch.createMESDispatch(childEc);
+		newRoute.setHubRelationship(MESHub.localInstanceIn(childEc, session().currentHub()));
+		newRoute.setUserRelationship(MESUser.localInstanceIn(childEc, session().authenticatedUser()));
+		newRoute.setAccountRelationship(MESAccount.localInstanceIn(childEc, parent.account()));
+		newRoute.setParentRelationship(MESDispatch.localInstanceIn(childEc, parent));
+		setSelectedObject(newRoute);
+
+	}
+
+	public String billingPageKey() {
+		if(ERXStringUtilities.stringIsNullOrEmpty(_billingPageKey)) {
+			_billingPageKey = MESDispatchEditorPagesNavigationController.LIST_PAYMENT_INFORMATION_PAGE_KEY;
+		}
+		return _billingPageKey;
+	}
+
+	public void setBillingPageKey(String billingPageKey) {
+		_billingPageKey = billingPageKey;
+	}
+
+	public WOActionResults cancelChanges() {
+		if(ec().hasChanges()) {
+			ec().revert();
+		}
+		addMessage("The changes were successfully cancelled");
+		return context().page();
+	}
+	
+	public NSMutableArray<MESDispatch.Status> checkedStatuses() {
+		if(_checkedStatuses == null) {
+			_checkedStatuses = new NSMutableArray<MESDispatch.Status>();
+			_checkedStatuses.addObjectsFromArray(statuses());
+		}
+		return _checkedStatuses;
+	}
+
+	public void setCheckedStatuses(NSMutableArray<MESDispatch.Status> checkedStatuses) {
+		this._checkedStatuses = checkedStatuses;
+	}
+
+	public String confirmationNumber() {
+		return _confirmationNumber;
+	}
+
+	public void setConfirmationNumber(String confirmationNumber) {
+		this._confirmationNumber = confirmationNumber;
+	}
+
+	public WOActionResults createNewAccount() {
+
+		revertChanges();
+
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+
+		MESAccount account = MESAccount.createMESAccount(childEc, 
+				MESHub.localInstanceIn(childEc, session().currentHub()));
+		
+		setSelectedObject(account);
+		return context().page();
+		
+	}
+	
+	public WOActionResults createNewAirportZone() {
+	
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+		
+		MESAirportZone airport = MESAirportZone.createMESAirportZone(childEc, 
+				MESHub.localInstanceIn(childEc, session().currentHub()));
+		
+		setSelectedObject(airport);
+
+		return context().page();
+
+	}
+	
+	public WOActionResults createNewDispatch() {
+		
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), false);
+		MESDispatch dispatch = MESDispatch.createMESDispatch(childEc);
+		dispatch.setHubRelationship(MESHub.localInstanceIn(childEc, session().currentHub()));
+		dispatch.setUserRelationship(MESUser.localInstanceIn(childEc, session().authenticatedUser()));
+		setSelectedObject(dispatch);
+		setEditorPageKey(DISPATCH_PAGES_DEFAULT_EDITOR_PAGE_KEY);
+		setBillingPageKey(LIST_PAYOUTS_FOR_SCHEDULE_OBJECT_PAGE_KEY);
+		
+		return context().page();
+		
+	}
+
+	public WOActionResults createNewDriver() {
+		
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+
+		MESDriver newDriver = MESDriver.createMESDriver(childEc, 
+				MESHub.localInstanceIn(childEc, session().currentHub()));
+
+		setSelectedObject(newDriver);
+		
+		return context().page();
+
+	}
+
+	public WOActionResults createNewExclusiveService() {
+
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+
+		MESExclusiveService newExclusiveService = MESExclusiveService.createMESExclusiveService(childEc, 
+				MESHub.localInstanceIn(childEc, session().currentHub()));
+		
+		setSelectedObject(newExclusiveService);
+	
+		return context().page();
+
+	}
+	
+	public WOActionResults createNewLocation() {
+		
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+
+		MESLocation newLocation = MESLocation.createMESLocation(childEc);
+		setSelectedObject(newLocation);
+		
+		return context().page();
+		
+	}	
+	
+	public WOActionResults createNewPhone() {
+		
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+		
+		MESPhone newPhone = MESPhone.createMESPhone(childEc, 
+				MESHub.localInstanceIn(childEc, session().currentHub()));
+		setSelectedObject(newPhone);
+
+		return context().page();
+		
+	}
+	
+	public WOActionResults createNewSchedule() {
+		
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+		
+		MESSchedule schedule = MESSchedule.createMESSchedule(childEc);
+		schedule.setHubRelationship(MESHub.localInstanceIn(childEc, session().currentHub()));
+		setSelectedObject(schedule);
+		setEditorPageKey(MESScheduleTableControllerInterface.EDIT_SCHEDULE_PAGE_KEY);
+
+		return context().page();
+
+	}		
+	
+	public WOActionResults createNewSharedService() {
+	
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext(ec(), true);
+
+		MESSharedService service = MESSharedService.createMESSharedService(childEc, 
+				MESHub.localInstanceIn(childEc, session().currentHub()));
+		setSelectedObject(service);
+
+		return context().page();
+
+	}	
+	
+	public WOActionResults createNewVehicle() {
+		
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext();
+
+		MESVehicle newVehicle = MESVehicle.createMESVehicle(childEc, 
+				MESHub.localInstanceIn(childEc, session().currentHub()));
+		setSelectedObject(newVehicle);
+
+		return context().page();
+		
+	}
+	
+	public WOActionResults createNewZone() {
+		
+		revertChanges();
+		EOEditingContext childEc = ERXEC.newEditingContext();
+		
+		MESZone newZone = MESZone.createMESZone(childEc, 
+				MESHub.localInstanceIn(childEc, session().currentHub()));
+		setSelectedObject(newZone);
+		
+		return context().page();
+		
+	}	
+	
+	public KMCreditCard creditCard() {
+		return _creditCard;
+	}
+
+	public void setCreditCard(KMCreditCard creditCard) {
+		this._creditCard = creditCard;
+	}
+	
+	public MESHub currentHub() {
+		return session().currentHub();
+	}
+	public void setCurrentHub(MESHub hub) {
+		session().setCurrentHub(hub);
+	}
+	
+	public MESDispatchTableControllerInterface dataSource() {
+		return this;
+	}
+	
+	public void setDataSource(MESDispatchTableControllerInterface dataSource) {
+		
+	}
+	
+	public ERXBatchingDisplayGroup<MESDispatch> dispatchDisplayGroup() {
+
+		if(_dispatchDisplayGroup == null) {
+			_dispatchDisplayGroup = new ERXBatchingDisplayGroup<MESDispatch>();
+			_dispatchDisplayGroup.setDataSource(new EODatabaseDataSource(ec(), MESDispatch.ENTITY_NAME));
+			_dispatchDisplayGroup.setFetchesOnLoad(true);
+			_dispatchDisplayGroup.setNumberOfObjectsPerBatch(DEFAULT_DISPATCH_DISPLAY_GROUP_SIZE);
+			_dispatchDisplayGroup.setSortOrderings(MESDispatch.RESERVATION_DATE.descs());
+		}
+
+		return _dispatchDisplayGroup;
+	
+	}
+	
+	public void setDispatchDisplayGroup(ERXBatchingDisplayGroup<MESDispatch> dispatchDisplayGroup) {
+		this._dispatchDisplayGroup = dispatchDisplayGroup;
+	}
+
+	public MESDispatchPagesEditorDelegateInterface dispatchEditorDelegate() {
+		return this;
+	}
+
+	public NSDictionary<String, Object> dispatchSnapshot() {
+		return _dispatchSnapshot;
+	}
+
+	public void setDispatchSnapshot(NSDictionary<String, Object> dispatchSnapshot) {
+		this._dispatchSnapshot = dispatchSnapshot;
+	}
+
+	public Boolean displaySummary() {
+		return _displaySummary;
+	}
+
+	public void setDisplaySummary(Boolean displaySummary) {
+		this._displaySummary = displaySummary;
+	}	
+	
+	public String dropOffLocationUserInput() {
+		return _dropOffLocationUserInput;
+	}
+
+	public void setDropOffLocationUserInput(String dropOffLocationUserInput) {
+		this._dropOffLocationUserInput = dropOffLocationUserInput;
+	}
+
+	public String editorPageKey() {
+		return _editorPageKey;
+	}
+
+	public void setEditorPageKey(String editorPageKey) {
+		this._editorPageKey = editorPageKey;
+	}
+
+	public void setEditorPageKey(Integer value) {
+		setEditorPageKey(String.valueOf(value));
+	}
+	
+	public String enableDateFiltering() {
+		if(_enableDateFiltering == null) {
+			_enableDateFiltering = NO_KEY;
+		}
+		return _enableDateFiltering;
+	}
+
+	public void setEnableDateFiltering(String enableDateFiltering) {
+		this._enableDateFiltering = enableDateFiltering;
+	}
+
+	@SuppressWarnings("unchecked")
+	public WOActionResults filter() {
+
+		if(pageKey().equals(VIEW_DISPATCHES_PAGE_KEY)) {
+			
+			NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+			qualifiers.addObject(MESDispatch.HUB.eq(currentHub()));
+
+			if(ERXStringUtilities.stringIsNullOrEmpty(confirmationNumber()) == false) {
+				qualifiers.addObject(MESDispatch.CONFIRMATION_NUMBER.eq(confirmationNumber()));
+			}
+			
+			if(selectedAccount() != null) {
+				qualifiers.addObject(MESDispatch.ACCOUNT.eq(selectedAccount()));
+			}
+			
+			if(selectedDriver() != null) {
+				qualifiers.addObject(MESDispatch.DRIVER.eq(selectedDriver()));
+			}
+			
+			if(selectedLocation() != null) {
+				qualifiers.addObject(MESDispatch.DROP_OFF_LOCATION.eq(selectedLocation()));
+			}
+			
+			if(selectedService() != null) {
+				qualifiers.addObject(MESDispatch.SERVICE.eq(selectedService()));
+			}
+			
+			if(enableDateFiltering().equals(YES_KEY)) {
+				qualifiers.addObject(MESDispatch.RESERVATION_DATE.greaterThanOrEqualTo(searchStartDate()));
+				qualifiers.addObject(MESDispatch.RESERVATION_DATE.lessThan(searchEndDate()));
+			}
+			
+			if(checkedStatuses().size() > 0 && checkedStatuses().size() < statuses().size()) {
+				qualifiers.addObject(MESDispatch.STATUS.in(_checkedStatusesValues()));
+			}
+			
+			dispatchDisplayGroup().setQualifier(new EOAndQualifier(qualifiers));
+			dispatchDisplayGroup().fetch();
+			
+		} else if(pageKey().equals(VIEW_SCHEDULES_PAGE_KEY)) {
+
+			NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+
+			qualifiers.addObject(MESSchedule.HUB.eq(session().currentHub()));
+			
+			if(selectedDriver() != null) {
+				qualifiers.addObject(MESSchedule.DRIVER.eq(selectedDriver()));
+			}
+			
+			if(enableDateFiltering().equals(YES_KEY)) { 
+				
+				if(searchStartDate() != null) {
+					qualifiers.addObject(MESSchedule.START_TIME.greaterThanOrEqualTo(searchStartDate()));
+				}
+
+				if(searchEndDate() != null) {
+					qualifiers.addObject(MESSchedule.START_TIME.lessThan(searchEndDate()));
+				}
+				
+			}
+
+			schedulesDisplayGroup().setQualifier(new EOAndQualifier(qualifiers));
+			schedulesDisplayGroup().fetch();
+			
+		}
+
+		return context().page();
+
+	}
+	
+	public boolean hasResults() {
+
+		boolean hasResults = false;
+		
+		if(pageKey().equals(VIEW_HUB_OBJECTS_PAGE_KEY) || pageKey().equals(VIEW_DISPATCHES_PAGE_KEY)) {
+			hasResults = dispatchDisplayGroup().allObjects() != null 
+					&& dispatchDisplayGroup().allObjects().size() > 0;
+		}
+		
+		return hasResults;
+
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAccount> hubAccounts() {
+		return MESAccount.fetchMESAccounts(ec(), 
+				MESAccount.HUB.eq(session().currentHub()), 
+				MESAccount.NAME.ascs());
+	}	
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAirportZone> hubAirports() {
+		return MESAirportZone.fetchMESAirportZones(ec(), 
+				MESAirportZone.HUB.eq(session().currentHub()), 
+				MESAirportZone.NAME.ascs());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESDriver> hubDrivers() {
+		return MESDriver.fetchMESDrivers(ec(), 
+				MESDriver.HUB.eq(session().currentHub()), 
+				MESDriver.LAST_NAME.asc().then(MESDriver.FIRST_NAME.asc()));
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESExclusiveService> hubExclusiveServices() {
+		return MESExclusiveService.fetchMESExclusiveServices(ec(), 
+				MESExclusiveService.ZONE.dot(MESZone.HUB).eq(session().currentHub()), 
+				MESExclusiveService.NAME.ascs());
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESLocation> hubLocations() {
+		return MESLocation.fetchMESLocations(ec(), 
+				MESLocation.ZONE.dot(MESZone.HUB).eq(session().currentHub()), 
+				MESLocation.NAME.ascs());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESPhone> hubPhones() {
+		return MESPhone.fetchMESPhones(ec(), 
+				MESPhone.HUB.eq(session().currentHub()), 
+				MESPhone.PHONE_NUMBER.ascs());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESSharedService> hubSharedServices() {
+		return MESSharedService.fetchMESSharedServices(ec(), 
+				MESSharedService.ZONE.dot(MESZone.HUB).eq(session().currentHub()), 
+				MESSharedService.NAME.ascs());
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESVehicle> hubVehicles() {
+		return MESVehicle.fetchMESVehicles(ec(), 
+				MESVehicle.HUB.eq(session().currentHub()), 
+				MESVehicle.VEHICLE_TYPE.dot(MESVehicleType.NAME).asc().then(MESVehicle.MAKE.asc()));
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESZone> hubZones() {
+		return MESZone.fetchMESZones(ec(), 
+				MESZone.HUB.eq(session().currentHub()), 
+				MESZone.NAME.ascs());
+	}
+	
+	public String hubObjectEditorComponentName() {
+
+		String hubObjectEditorComponentName = null;
+
+		if(selectedObject() instanceof MESAccount) {
+			hubObjectEditorComponentName = MESAccountPagesController.class.getName();
+		} else if(selectedObject() instanceof MESDriver) {
+			hubObjectEditorComponentName = MESDriverEditor.class.getName();
+		} else if(selectedObject() instanceof MESLocation) {
+			hubObjectEditorComponentName = MESLocationEditor.class.getName();
+		} else if(selectedObject() instanceof MESPhone) {
+			hubObjectEditorComponentName = MESPhoneEditor.class.getName();
+		} else if(selectedObject() instanceof MESExclusiveService) {
+			hubObjectEditorComponentName = MESExclusiveServiceEditor.class.getName();
+		} else if(selectedObject() instanceof MESSharedService) {
+			hubObjectEditorComponentName = MESSharedServiceEditor.class.getName();
+		} else if(selectedObject() instanceof MESVehicle) {
+			hubObjectEditorComponentName = MESVehicleEditor.class.getName();
+		} else if(selectedObject() instanceof MESAirportZone) {
+			hubObjectEditorComponentName = MESAirportZoneEditor.class.getName();
+		} else if(selectedObject() instanceof MESZone) {
+			hubObjectEditorComponentName = MESZoneEditor.class.getName();
+		}
+		
+		return hubObjectEditorComponentName;
+
+	}
+	
+	public WOActionResults listAllDispatches() {
+		_resetFilters();
+		return filter();
+	}
+
+	public WOActionResults listAllSchedules() {
+		_resetScheduleFilter();
+		setSearchStartDate(KMTimeUtilities.todayAtMidnight());
+		setSearchEndDate(KMTimeUtilities.tomorrowAtMidnight());
+		return filter();
+	}
+	
+	public WOActionResults listTodaysSchedules() {
+		_resetScheduleFilter();
+		setEnableDateFiltering(YES_KEY);
+		setSearchStartDate(KMTimeUtilities.todayAtMidnight());
+		setSearchEndDate(KMTimeUtilities.tomorrowAtMidnight());
+		return filter();
+	}
+	
+	public WOActionResults listTomorrowsSchedules() {
+		_resetScheduleFilter();
+		setEnableDateFiltering(YES_KEY);
+		setSearchStartDate(KMTimeUtilities.tomorrowAtMidnight());
+		setSearchEndDate(KMTimeUtilities.nextDay(searchStartDate()));
+		return filter();
+	}
+	
+	public WOActionResults listThisWeekSchedules() {
+		_resetScheduleFilter();
+		setEnableDateFiltering(YES_KEY);
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(KMTimeUtilities.todayAtMidnight());
+		calendar.set(GregorianCalendar.DAY_OF_WEEK, GregorianCalendar.SUNDAY);
+		setSearchStartDate(new NSTimestamp(calendar.getTime()));
+		setSearchEndDate(searchStartDate().timestampByAddingGregorianUnits(0, 0, 7, 0, 0, 0));
+		return filter();
+	}
+
+	public WOActionResults listNextWeekSchedules() {
+		_resetScheduleFilter();
+		setEnableDateFiltering(YES_KEY);
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(KMTimeUtilities.todayAtMidnight());
+		calendar.set(GregorianCalendar.DAY_OF_WEEK, GregorianCalendar.SUNDAY);
+		calendar.add(GregorianCalendar.DATE, 7);
+		setSearchStartDate(new NSTimestamp(calendar.getTime()));
+		setSearchEndDate(searchStartDate().timestampByAddingGregorianUnits(0, 0, 7, 0, 0, 0));
+		return filter();
+	}
+
+	public WOActionResults listThisMonthSchedules() {
+		_resetScheduleFilter();
+		setEnableDateFiltering(YES_KEY);
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(KMTimeUtilities.todayAtMidnight());
+		calendar.set(GregorianCalendar.DAY_OF_MONTH, 1);
+		setSearchStartDate(new NSTimestamp(calendar.getTime()));
+		calendar.add(GregorianCalendar.MONTH, 1);
+		setSearchEndDate(new NSTimestamp(calendar.getTime()));
+		return filter();
+	}
+	
+	public WOActionResults listNextMonthSchedules() {
+		_resetScheduleFilter();
+		setEnableDateFiltering(YES_KEY);
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(KMTimeUtilities.todayAtMidnight());
+		calendar.set(GregorianCalendar.DAY_OF_MONTH, 1);
+		calendar.add(GregorianCalendar.MONTH, 1);
+		setSearchStartDate(new NSTimestamp(calendar.getTime()));
+		calendar.add(GregorianCalendar.MONTH, 1);
+		setSearchEndDate(new NSTimestamp(calendar.getTime()));
+		return filter();
+	}	
+	
+	public WOActionResults listTodaysDispatches() {
+		_resetFilters();
+		setEnableDateFiltering(YES_KEY);
+		return filter();
+	}
+	
+	public WOActionResults listTomorrowsDispatches() {
+		_resetFilters();
+		setEnableDateFiltering(YES_KEY);
+		setSearchStartDate(KMTimeUtilities.tomorrowAtMidnight());
+		setSearchEndDate(KMTimeUtilities.nextDay(searchStartDate()));
+		return filter();
+	}
+
+	public WOActionResults listYesterdaysDispatches() {
+		_resetFilters();
+		setEnableDateFiltering(YES_KEY);
+		setSearchStartDate(KMTimeUtilities.yesterdayAtMidnight());
+		setSearchEndDate(KMTimeUtilities.nextDay(searchStartDate()));
+		return filter();
+	}	
+	
+	public String navigationPageKey() {
+		
+		if(ERXStringUtilities.stringIsNullOrEmpty(_navigationPageKey)) {
+			setNavigationPageKey(VIEW_DISPATCHES_PAGE_KEY);
+		}
+
+		return _navigationPageKey;
+	}
+
+	public void setNavigationPageKey(String navigationPageKey) {
+		this._navigationPageKey = navigationPageKey;
+	}
+
+	public WOComponent nextPage() {
+		return context().page();
+	}
+	
+	public MESPageNavigationControllerInterface navigationController() {
+		return this;
+	}
+
+	public String pageKey() {
+		
+		if(ERXStringUtilities.stringIsNullOrEmpty(super.pageKey())) {
+			setPageKey(VIEW_DISPATCHES_PAGE_KEY);
+		}
+	
+		return super.pageKey();
+
+	}		
+	
+	public MESAbstractPaymentInfo paymentInfo() {
+		return _paymentInfo;
+	}
+	
+	public WOActionResults saveChanges() {
+		
+		boolean isNew = ERXEOControlUtilities.isNewObject(selectedObject());
+		
+		if(! hasError()) {
+		
+			try {
+				selectedObject().editingContext().saveChanges();
+				if(isNew) {
+					ec().saveChanges();
+					// promote to top level editing context.
+					_selectedObject = EOUtilities.localInstanceOfObject(ec(), selectedObject());
+				}
+				addMessage(RECORD_UPDATE_MESSAGE);
+			} catch (NSValidation.ValidationException e) {
+				validationFailedWithException(e, null, null);
+			}
+
+		}
+	
+		return context().page();
+
+	}
+
+	public void setPaymentInfo(MESAbstractPaymentInfo paymentInfo) {
+		this._paymentInfo = paymentInfo;
+	}
+
+	public String pickUpLocationUserInput() {
+		return _pickUpLocationUserInput;
+	}
+
+	public void setPickUpLocationUserInput(String pickUpLocationUserInput) {
+		this._pickUpLocationUserInput = pickUpLocationUserInput;
+	}
+
+	public String requiresChildSeats() {
+		
+		MESDispatch object = (MESDispatch)selectedObject();
+		
+		if(_requiresChildSeats == null) {
+			_requiresChildSeats = object.booster() > 0 ||
+					object.toddler() > 0 ||
+					object.childSeats() > 0 ||
+					object.infant() > 0 ? YES_KEY : NO_KEY;
+		}
+
+		return _requiresChildSeats;
+
+	}
+
+	protected void revertChanges() {
+		if(ec().hasChanges()) {
+			ec().revert();
+		}
+	}
+	
+	public void setRequiresChildSeats(String requiresChildSeats) {
+		this._requiresChildSeats = requiresChildSeats;
+	}
+
+	public ERXBatchingDisplayGroup<MESSchedule> schedulesDisplayGroup() {
+		if(_schedulesDisplayGroup == null) {
+			_schedulesDisplayGroup = new ERXBatchingDisplayGroup<MESSchedule>();
+			_schedulesDisplayGroup.setDataSource(new EODatabaseDataSource(ec(), MESSchedule.ENTITY_NAME));
+			_schedulesDisplayGroup.setFetchesOnLoad(true);
+			_schedulesDisplayGroup.setNumberOfObjectsPerBatch(DEFAULT_SCHEDULE_DISPLAY_GROUP_SIZE);
+			_schedulesDisplayGroup.setSortOrderings(MESSchedule.START_TIME.descs());
+		}
+		return _schedulesDisplayGroup;
+	}
+
+	public void setSchedulesDisplayGroup(ERXBatchingDisplayGroup<MESSchedule> schedulesDisplayGroup) {
+		this._schedulesDisplayGroup = schedulesDisplayGroup;
+	}
+	
+	public NSTimestamp searchEndDate() {
+		return _searchEndDate;
+	}
+
+	public void setSearchEndDate(NSTimestamp searchEndDate) {
+		this._searchEndDate = searchEndDate;
+	}
+
+	public NSTimestamp searchStartDate() {
+		return _searchStartDate;
+	}
+
+	public void setSearchStartDate(NSTimestamp searchStartDate) {
+		this._searchStartDate = searchStartDate;
+	}
+	
+	public MESAccount selectedAccount() {
+		return _selectedAccount;
+	}
+
+	public void setSelectedAccount(MESAccount selectedAccount) {
+		this._selectedAccount = selectedAccount;
+	}
+
+	public MESDriver selectedDriver() {
+		return _selectedDriver;
+	}
+
+	public MESLocation selectedLocation() {
+		return _selectedLocation;
+	}
+
+	public void setSelectedLocation(MESLocation selectedLocation) {
+		this._selectedLocation = selectedLocation;
+	}
+
+	public void setSelectedDriver(MESDriver selectedDriver) {
+		this._selectedDriver = selectedDriver;
+	}
+
+	public EOEnterpriseObject selectedObject() {
+		return _selectedObject;
+	}
+	
+	public void setSelectedObject(EOEnterpriseObject object) {
+
+		if(object != null && object.equals(selectedObject()) == false) {
+
+			if(object instanceof MESDispatch) {
+
+				setDisplaySummary(((MESDispatch) object).isNewObject() == false);
+				setDropOffLocationUserInput(new String());
+				setPickUpLocationUserInput(new String());
+				setRequiresChildSeats(null);
+				setPaymentInfo(null);
+
+				// Always put the dispatch object in a child editing context
+				if(! ((MESDispatch)object).isNewObject()) {
+					EOEditingContext childEC = ERXEC.newEditingContext(ec(), false);
+					object = MESDispatch.localInstanceIn(childEC, (MESDispatch)object);
+				}
+
+				setDispatchSnapshot(object.snapshot());
+				setPageKey(VIEW_DISPATCHES_PAGE_KEY);
+
+			} else if(object instanceof MESSchedule) {
+				
+				setPageKey(VIEW_SCHEDULES_PAGE_KEY);
+				
+			} else {
+			
+				setPageKey(VIEW_HUB_OBJECTS_PAGE_KEY);
+				
+				if(object instanceof MESAccount) {
+					setSearchEndDate(KMTimeUtilities.tomorrowAtMidnight());
+					GregorianCalendar calendar = new GregorianCalendar();
+					calendar.setTime(searchEndDate());
+					calendar.add(GregorianCalendar.MONTH, -1);
+					setSearchStartDate(new NSTimestamp(calendar.getTime()));
+					setEditorPageKey(MESAccountPagesController.GENERAL_INFORMATION_VIEW_PAGE_KEY);
+				}
+
+			}
+
+			this._selectedObject = object;
+
+		} else if(object == null) {
+			_selectedObject = null;
+		}
+		
+	}
+	
+	public MESAbstractService selectedService() {
+		return _selectedService;
+	}
+
+	public void setSelectedService(MESAbstractService selectedService) {
+		this._selectedService = selectedService;
+	}
+	
+	public final NSArray<MESDispatch.Status> statuses() {
+		return MESDispatch.Status.statuses();
+	}
+	
+	public WOActionResults viewDispatches() {
+		setNavigationPageKey(VIEW_DISPATCHES_PAGE_KEY);
+		return null;
+	}	
+
+	public WOActionResults viewSchedules() {
+		setNavigationPageKey(VIEW_SCHEDULES_PAGE_KEY);
+		return null;
+	}
+
+	public WOActionResults viewHubObjects() {
+		setNavigationPageKey(VIEW_HUB_OBJECTS_PAGE_KEY);
+		return null;
+	}
+	
+	public String viewDispatchesListItemClassName() {
+		
+		String className = null;
+		
+		if(navigationPageKey().equals(VIEW_DISPATCHES_PAGE_KEY)) {		
+			className = CURRENT_LINK_CLASS_NAME;
+		}
+
+		return className;
+	
+	}	
+	
+	public String viewHubObjectsListItemClassName() {
+
+		String className = null;
+		
+		if(navigationPageKey().equals(VIEW_HUB_OBJECTS_PAGE_KEY)) {		
+			className = "active";
+		}
+
+		return className;
+
+	}		
+	
+	public String viewSchedulesListItemClassName() {
+		
+		String className = null;
+		
+		if(navigationPageKey().equals(VIEW_SCHEDULES_PAGE_KEY)) {
+			className = "active";
+		}
+		
+		return className;
+
+	}
+	
+}

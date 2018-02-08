@@ -1,0 +1,90 @@
+DispatchAmount : METSTextInput {
+	helpText = "Required Information";
+	numberformat = "#,##0.00";
+	labelText = "Amount";
+	value = object.subTotal;
+}
+
+DispatchTipAmount : METSTextInput {
+	helpText = "Required Information";
+	numberformat = "#,##0.00";
+	labelText = "Tip Amount";
+	value = object.tipAmount;
+}
+
+DropOffLocationTypeAheadInput : METSTypeAheadInput {
+	displayString = location.name;
+	helpText = "Begin typing to see suggestions";
+	item = location;
+	labelText = "Drop Off Location";
+	list = dropOffLocations;
+	selection = object.dropOffLocation;	
+	value = delegate.dropOffLocationUserInput;	
+}
+
+IsExclusiveService : WOConditional {
+	condition = isExclusiveService;
+}
+
+IsServiceDefined : WOConditional {
+	condition = object.isServiceDefined;
+}
+
+IsSharedService : WOConditional {
+	condition = isSharedService;
+}
+
+PickUpDate : METSDatePicker {
+	dateformat = "%m/%d/%Y";	
+	helpText = "Required Information";
+	labelText = "Pick Up Date";
+	value = pickUpDate;
+}
+
+PickUpLocationTypeAheadInput : METSTypeAheadInput {
+	displayString = location.name;
+	helpText = "Begin typing to see suggestions";
+	item = location;
+	labelText = "Pick Up Location";
+	list = pickUpLocations;
+	selection = object.pickUpLocation;	
+	value = delegate.pickUpLocationUserInput;
+}
+
+PickUpTimeHourSelector : WOPopUpButton {
+	class = "span1";
+	list = hours;
+	selection = pickUpTimeHour; 
+}
+
+PickUpTimeMeridiemSelector : WOPopUpButton {
+	class = "span1";
+	list = meridiems;
+	selection = pickUpTimeMeridiem;
+}
+
+PickUpTimeMinuteSelector : WOPopUpButton {
+	class = "span1";
+	list = minutes;
+	selection = pickUpTimeMinute;
+}
+
+ServiceDetailsUpdateContainer : MTAjaxUpdateContainer {
+	id = "METSDispatchServiceDetailsContainer";
+}
+
+ServiceTypeSelector : METSPopUpButton {
+	displayString = service|displayName;
+	helpText = "Required Information";
+	id = "METSDispatchServiceSelector";
+	item = service;
+	labelText = "Service Type";
+	list = hubServices;
+	noSelectionString = "Please pick a service type";
+	selection = object.service;
+}
+
+ServiceTypeSelectorObserver : MTAjaxObserveField {
+	observeFieldID = "METSDispatchServiceSelector";
+	updateContainerID = "METSDispatchServiceDetailsContainer";
+}

@@ -1,0 +1,23 @@
+AjaxExpansion : MTAjaxExpansion {
+	initiallyExpanded = initiallyExpanded;
+	id = id;
+	onComplete = onSuccess;
+	string = label;
+}
+
+Display : WOConditional {
+	condition = display;
+}
+
+DisplayKeyValue : WOString {
+	value = displayKeyValue;
+}
+
+InspectLink : WOHyperlink {
+	action = inspectItem;
+}
+
+Repetition : WORepetition {
+	item = item;
+	list = items;
+}

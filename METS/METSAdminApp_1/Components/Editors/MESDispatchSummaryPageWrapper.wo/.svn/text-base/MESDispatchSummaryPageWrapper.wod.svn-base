@@ -1,0 +1,36 @@
+ChildRoutesRepetition : WORepetition {
+	item = child;
+	list = children;
+	printPage = false;
+}
+
+ChildSummaryPage : MESDispatchSummaryPage {
+	ec = object.editingContext;
+	object = child;
+}
+
+InfoBar : METSInfoBar {
+	
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+SubmitButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary";
+	value = saveButtonLabel;
+}
+
+SendSummaryButton : WOHyperlink {
+	action = sendSummaryToCustomer;
+	class = "btn btn-success";
+}
+
+SummaryPage : MESDispatchSummaryPage {
+	delegate = delegate;
+	object = object;
+	printPage = false;
+}

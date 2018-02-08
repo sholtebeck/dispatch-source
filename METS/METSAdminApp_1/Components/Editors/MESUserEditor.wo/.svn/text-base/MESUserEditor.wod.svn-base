@@ -1,0 +1,93 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+ConfirmRemovalButton : WOSubmitButton {
+	action = deleteUser;
+	class = "btn btn-danger";
+	value = "Remove User";
+}
+
+HubCheckbox : WOCheckBox {
+	checked = hubRoleChecked;
+}
+
+HubRoleName : WOString {
+	value = hubRole.label;
+}
+
+HubRolesRepetition : WORepetition {
+	item = hubRole;
+	list = hubRolesList;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+
+ObjectDefined : ERXNonNullConditional {
+	condition = object;
+}
+
+ObjectNotDefined : ERXNonNullConditional {
+	condition = object;
+	negate = true;
+}
+
+RemoveUserModalContainer : MTAjaxModalContainer {
+	ajax = true;
+	autoWrapContent = false;
+	class = "btn btn-danger";
+	id = "MESUserRemove";
+	label = "Remove User";
+	showFooter = false;
+	showTitle = false;
+	useDefaultCSS = false;
+}
+
+RolesCheckbox : WOCheckBox {
+	checked = roleChecked;
+}
+
+RolesForm : WOForm {
+	action = navigationController.saveChanges;
+	class = "form-horizontal";
+	multipleSubmit = true;
+}
+
+RoleName : WOString {
+	value = role.label;
+}
+
+RolesRepetition : WORepetition {
+	item = role;
+	list = rolesList;
+}
+
+RoleShortDescription : WOString {
+	value = role.shortDescription;
+}
+
+SubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	deleteAction = deleteUser;
+	deleteButtonText = "Remove User";
+	isNewObject = object.isNewObject;
+	useModalForDelete = true;
+	submitAction = saveUserDetails;
+}
+
+UserDetailsForm : METSHorizontalForm {
+	action = saveUserDetails;
+}
+
+UserFullName : WOString {
+	value = object|fullName(false);
+}
+

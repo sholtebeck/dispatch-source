@@ -1,0 +1,31 @@
+DispatchChangeDate : WOString {
+	dateformat = "%m/%d/%y %H:%M:%S"; 
+	value = dispatchChange.creationDate;
+}
+
+DispatchChangeKey : WOString {
+	value = dispatchChangeKey;
+}
+
+DispatchChanger : WOString {
+	value = dispatchChange.user|fullName(true);
+}
+
+DispatchChangesRepetition : WORepetition {
+	item = dispatchChange;
+	list = dispatchChanges;
+}
+
+DispatchChangesAllKeysRepetition : WORepetition {
+	item = dispatchChangeKey;
+	list = dispatchChange.changes.allKeys;
+}
+
+DispatchChangeValue : WOString {
+	value = dispatchChangeValue;
+}
+
+IsNotLastDispatchChageKey : WOConditional {
+	condition = isLastDispatchChangeKey;
+	negate = true;
+}

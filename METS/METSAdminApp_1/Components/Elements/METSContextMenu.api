@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wodefinitions>
+        <wo class="METSContextMenu.java" wocomponentcontent="true">
+
+        <binding name="display"/>
+        <binding name="left"/>
+        <binding name="top"/>
+        <binding name="id"/>
+        <binding name="class"/>
+        <binding name="style"/>
+    </wo>
+</wodefinitions>

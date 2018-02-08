@@ -1,0 +1,44 @@
+package com.mauishuttle.components.interfaces;
+
+import com.mauishuttle.eo.MESAbstractService;
+import com.mauishuttle.eo.MESAccount;
+import com.mauishuttle.eo.MESDispatch;
+import com.mauishuttle.eo.MESDriver;
+import com.mauishuttle.eo.MESHub;
+import com.mauishuttle.eo.MESLocation;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WODisplayGroup;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSMutableArray;
+import com.webobjects.foundation.NSTimestamp;
+
+public interface MESDispatchTableControllerInterface {
+
+	public MESHub currentHub();
+	public void setCurrentHub(MESHub hub);
+	public String confirmationNumber();
+	public void setConfirmationNumber(String confirmationNumber);
+	public WODisplayGroup dispatchDisplayGroup();
+	public EOEditingContext ec();
+	public MESAccount selectedAccount();
+	public void setSelectedAccount(MESAccount account);
+	public MESDriver selectedDriver();
+	public void setSelectedDriver(MESDriver driver);
+	public MESLocation selectedLocation();
+	public void setSelectedLocation(MESLocation location);
+	public MESAbstractService selectedService();
+	public void setSelectedService(MESAbstractService service);
+	public String enableDateFiltering();
+	public void setEnableDateFiltering(String enableDateFiltering);
+	public NSMutableArray<MESDispatch.Status> checkedStatuses();
+	public void setCheckedStatuses(NSMutableArray<MESDispatch.Status> statuses);
+	public NSTimestamp searchStartDate();
+	public void setSearchStartDate(NSTimestamp searchStartDate);
+	public NSTimestamp searchEndDate();
+	public void setSearchEndDate(NSTimestamp searchEndDate);
+	public NSArray<MESDispatch.Status> statuses();
+	public boolean hasResults();
+	public WOActionResults filter();
+	
+}

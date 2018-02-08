@@ -1,0 +1,8 @@
+Main : PageWrapper {
+	metaDescription = document.metaDescription;
+	pageTitle = document.pageTitle;
+}
+
+PageCopy : PageCopy {
+	pageCopy = document.textContent;
+}

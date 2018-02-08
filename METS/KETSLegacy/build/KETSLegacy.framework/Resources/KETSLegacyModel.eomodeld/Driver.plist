@@ -1,0 +1,128 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = Active; 
+            externalType = VARCHAR; 
+            name = active; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = Contacted; 
+            externalType = ENUM; 
+            name = contacted; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = DriverFName; 
+            externalType = VARCHAR; 
+            name = driverfname; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = DriverID; 
+            externalType = INT; 
+            name = driverid; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = DriverLName; 
+            externalType = VARCHAR; 
+            name = driverlname; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = EndTime; 
+            externalType = TIME; 
+            name = endtime; 
+            valueClassName = NSCalendarDate; 
+            valueType = t; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = Location; 
+            externalType = VARCHAR; 
+            name = location; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 25; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = Notes; 
+            externalType = TEXT; 
+            name = notes; 
+            valueClassName = NSString; 
+            valueType = C; 
+            width = 65535; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "Phone_ID"; 
+            externalType = INT; 
+            name = phoneId; 
+            precision = 10; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = StartTime; 
+            externalType = TIME; 
+            name = starttime; 
+            valueClassName = NSCalendarDate; 
+            valueType = t; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "Vehicle_ID"; 
+            externalType = INT; 
+            name = vehicleId; 
+            precision = 10; 
+            valueType = l; 
+        }
+    ); 
+    attributesUsedForLocking = (driverid); 
+    className = "com.mauishuttle.legacy.eo.Driver"; 
+    classProperties = (
+        active, 
+        contacted, 
+        dispatches, 
+        driverfname, 
+        driverlname, 
+        endtime, 
+        location, 
+        notes, 
+        phoneId, 
+        starttime, 
+        vehicleId
+    ); 
+    externalName = driver; 
+    fetchSpecificationDictionary = {}; 
+    name = Driver; 
+    primaryKeyAttributes = (driverid); 
+    relationships = (
+        {
+            destination = DailyDispatch; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = driverId; sourceAttribute = driverid; }); 
+            name = dispatches; 
+        }
+    ); 
+}

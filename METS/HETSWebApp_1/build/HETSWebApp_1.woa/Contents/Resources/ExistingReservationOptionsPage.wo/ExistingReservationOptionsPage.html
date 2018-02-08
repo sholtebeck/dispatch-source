@@ -1,0 +1,52 @@
+<webobject name = "Main">
+	<div class="billboard inner-billboard reservations-billboard">
+		<div class="container">
+			<div class="span-24">
+			</div>
+		</div>
+	</div>
+	<div id="HTContent">
+		<div class="container">
+			<div class="span-24">
+				<div class="span-16-5">
+					<div class="page-copy clearfix reservations">
+						<h1>Reservation Options</h1>
+						<h2>Please see your options below</h2>
+						<div class="span-15-5 push-1-2 last">
+							<webobject name = "MessagesPanel"></webobject>
+							<div class="span-15-5 push-1-2 last reservations-panel">
+								<h3>Confirmation Number: <webobject name = "ConfirmationNumber"></webobject></h3>
+								<div class = "span-15-5 push-1-2 last prepend-top append-bottom">
+									<webobject name = "HasRun">
+										<webobject name = "WasCancelled">
+											<p>Your reservation has been cancelled.  Please call 1-800-833-2303 for support.</p>
+										</webobject>
+										<webobject name = "WasNotCancelled">
+											<webobject name = "PrintReceipt">Print Receipt</webobject>
+										</webobject>
+									</webobject>
+									<webobject name = "HasNotRun">
+										<wo:if condition = "$reservation.isPaid">
+											<webobject name = "PrintBoardingPass">Print Boarding Pass</webobject>
+										</wo:if>
+										<wo:else>
+											<webobject name = "PayDispatch">View Transfer Details or Pay for Reservation</webobject>
+										</wo:else>
+									</webobject>
+								</div>
+							</div>
+						</div>						
+					</div>
+				</div>
+				<div class="span-6-5 push-1 last">
+					<div class="span-6-5 info-panel last">
+						<h4>
+							Need assistance?
+							<span>Please call: 1-800-833-2303</span>
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</webobject>

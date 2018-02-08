@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+        <wo class="ServiceSelector.java" wocomponentcontent="true">
+
+        
+        <binding name="dispatch"/>
+        <binding name="direction"/>
+    <validation message="'dispatch' is a required binding.">
+            <unbound name="dispatch"/>
+        </validation>
+        
+    <validation message="'direction' is a required binding.">
+            <unbound name="direction"/>
+        </validation>
+    </wo>
+</wodefinitions>

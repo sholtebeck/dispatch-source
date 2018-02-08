@@ -1,0 +1,70 @@
+<webobject name = "PageWrapper">
+	<webobject name = "ResizeColumn">
+		<span class="prg-handle">&harr;</span>
+		<webobject name = "LeftNavigationUpdateContainer">
+			<ul class="prg-column-header-bar">
+				<webobject name = "IsSuperAdministrator">
+					<li class = "active">
+						<webobject name = "ViewSchedulesAction"><span><i class = "icon-calendar">&nbsp;</i></span></webobject>
+					</li>
+				</webobject>
+			</ul>
+			<webobject name = "StaticColumn">
+				<webobject name = "SearchForm">
+					<ul class = "column-form">
+						<li>
+							<label>Date:</label>
+							<div class = "column-form-input">
+								<webobject name = "DateSelector"></webobject>
+							</div>
+						</li>
+					</ul>
+					<div class = "column-form-submit">
+						<wo:submitButton action = "$filter" class = "btn" value = "Get Daily Schedule" />
+					</div>
+					<ul class = "column-form">
+						<li>
+							<label>Year:</label>
+							<div class = "column-form-input">
+								<webobject name = "YearSelector"></webobject>
+							</div>
+						</li>
+						<li>
+							<label>Month:</label>
+							<div class = "column-form-input">
+								<webobject name = "MonthSelector"></webobject>
+							</div>
+						</li>
+						<webobject name = "WeekSelectorUpdateContainer">
+							<label class="prg-pad-left">Week:</label>
+							<div class = "column-form-input">
+							<webobject name = "WeekSelector"></webobject>
+							</div>
+						</webobject>
+						<webobject name = "YearSelectorObserveField"></webobject>
+						<webobject name = "MonthSelectorObserveField"></webobject>
+					</ul>
+					<div class = "column-form-submit">
+						<wo:submitButton action = "$filterWeekly" class = "btn" value = "Get Weekly Schedule" />
+					</div>
+				</webobject>		
+				<webobject name = "FooterBar">
+					<li>
+						<webobject name = "FooterContextMenu"><span><i class="icon-plus"></i></span></webobject>
+						<ul class="dropdown-menu">
+							<li><webobject name = "AddNewScheduleLink">Create New Schedule</webobject></li>
+						</ul>
+					</li>	
+				</webobject>
+			</webobject>
+		</webobject>		
+	</webobject>
+	<webobject name = "AlleyColumn">&nbsp;</webobject>
+	<webobject name = "MainTableColumn">	
+		<div class = "row-fluid">
+			<webobject name = "ViewSchedulesPageKey">
+				<webobject name = "MESSchedulePagesController"></webobject>
+			</webobject>
+		</div>
+	</webobject>	
+</webobject>

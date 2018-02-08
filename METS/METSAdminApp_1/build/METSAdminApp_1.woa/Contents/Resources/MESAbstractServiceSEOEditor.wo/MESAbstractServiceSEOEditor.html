@@ -1,0 +1,18 @@
+<webobject name = "MainTableColumn">
+	<webobject name = "BreadCrumbsBar">
+		<li><a href="#">Services</a></li>
+		<li><webobject name = "ServiceName"></webobject></li>
+	</webobject>
+	<webobject name = "StaticColumn">
+		<wo:METSInfoBar>General Information</wo:METSInfoBar>
+		<div class="row-fluid">
+			<webobject name = "MessagesPanel" />
+			<webobject name = "Form">
+				<wo:METSTextInput helpText = "80 characters or less" labelText = "PageTitle" value = "$object.pageTitle" />
+				<wo:METSTextInput helpText = "No special characters.  Use hyphers in place of spaces." labelText = "Slug" value = "$object.slug" />
+				<wo:METSTextArea helpText = "155 characters or less" labelText = "Description" value = "$object.metaDescription" />
+				<webobject name = "SubmissionBar" />
+			</webobject>
+		</div>	
+	</webobject>
+</webobject>

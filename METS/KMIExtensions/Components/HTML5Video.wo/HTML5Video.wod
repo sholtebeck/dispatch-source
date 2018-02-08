@@ -1,0 +1,17 @@
+ComponentContent : WOComponentContent {
+	
+}
+
+Video : WOGenericContainer {
+	autoplay = ^autoplay;
+	crossorigin = ^crossorigin;
+	elementName = "video";
+	height = ^height;
+	loop = ^loop;
+	mediagroup = ^mediagroup;
+	muted = ^muted;
+	poster = poster;
+	preload = ^preload;
+	src = src;
+	width = ^width;
+}

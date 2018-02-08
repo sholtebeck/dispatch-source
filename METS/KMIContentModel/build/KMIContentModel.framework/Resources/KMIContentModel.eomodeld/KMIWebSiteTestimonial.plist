@@ -1,0 +1,52 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = attester; 
+            name = attester; 
+            prototypeName = varchar100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "create_date"; 
+            name = createDate; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = testimonial; 
+            name = testimonial; 
+            prototypeName = varchar1000; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "testimonial_date"; 
+            name = testimonialDate; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = "web_site_id"; 
+            name = webSiteID; 
+            prototypeName = id; 
+        }
+    ); 
+    attributesUsedForLocking = (id, webSiteID); 
+    className = "km.content.eo.KMIWebSiteTestimonial"; 
+    classProperties = (attester, createDate, testimonial, testimonialDate, webSite); 
+    externalName = Testimonial; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIWebSiteTestimonial; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = KMIWebSite; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = webSiteID; }); 
+            name = webSite; 
+        }
+    ); 
+}

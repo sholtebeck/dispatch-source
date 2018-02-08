@@ -1,0 +1,259 @@
+package com.mauishuttle.components.pages;
+
+import com.mauishuttle.components.Main;
+import com.mauishuttle.eo.MESAbstractMessage;
+import com.mauishuttle.eo.MESSystemMessage;
+import com.mauishuttle.eo.MESUser;
+import com.mauishuttle.eo.MESUserMessage;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eocontrol.EOFetchSpecification;
+import com.webobjects.eocontrol.EOQualifier;
+import com.webobjects.eocontrol.EOSortOrdering;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSValidation;
+
+import er.extensions.eof.ERXEOControlUtilities;
+import er.extensions.foundation.ERXStringUtilities;
+
+@SuppressWarnings("serial")
+public class DashboardPage extends Main {
+
+	private NSArray<Object> _messageList;
+	private MESAbstractMessage _aMessage;
+	private MESAbstractMessage _currentMessage;
+	private final static int NUMBER_OBJECTS_PER_BATCH = 50;
+	private int _batchIndex;
+	private EOFetchSpecification _fetchSpecification;
+	private EOQualifier _qualifier;
+	private String _entityName;
+	private NSArray<EOSortOrdering> _sortOrderings;
+	private MESUserMessage _newMessage;
+	public MESUser _user;
+	
+	public DashboardPage(WOContext context) {
+        super(context);
+    }
+
+	public void awake() {
+		super.awake();
+		_batchIndex = 1;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public WOActionResults displayMoreResults() {
+		_batchIndex++;
+		_fetchSpecification.setFetchLimit(_fetchLimit());
+		setMessageList(ec().objectsWithFetchSpecification(_fetchSpecification));
+		return null;
+	}	
+	
+	public boolean hasMoreResults() {
+
+		return ERXEOControlUtilities.objectCountWithQualifier(ec(), 
+				_entityName(), 
+				_qualifier()) > _fetchLimit();
+	
+	}
+
+	public String listItemContainerClassName() {
+		
+		String listItemContainerClassName = null;
+		
+		if(currentMessage().equals(aMessage())) {
+			listItemContainerClassName = "selected";
+		}
+	
+		return listItemContainerClassName;
+
+	}
+	
+	public MESUserMessage newMessage() {
+		
+		if(_newMessage == null) {
+			ec().revert();
+			_newMessage = MESUserMessage.createMESUserMessage(ec(), MESUser.localInstanceIn(ec(), session().authenticatedUser()));
+		}
+	
+		return _newMessage;
+
+	}
+
+	public void setNewMessage(MESUserMessage message) {
+		_newMessage = message;
+	}
+	
+	/**
+	 * @return the messageList
+	 */
+	public NSArray<Object> messageList() {
+		if(_messageList == null) {
+			listReceivedMessages();
+		}
+		return _messageList;
+	}
+
+	/**
+	 * @param messageList the messageList to set
+	 */
+	public void setMessageList(NSArray<Object> messageList) {
+		this._messageList = messageList;
+	}
+
+	/**
+	 * @return the aMessage
+	 */
+	public MESAbstractMessage aMessage() {
+		return _aMessage;
+	}
+
+	/**
+	 * @param aMessage the aMessage to set
+	 */
+	public void setAMessage(MESAbstractMessage aMessage) {
+		this._aMessage = aMessage;
+	}
+
+	public MESAbstractMessage currentMessage() {
+		if(_currentMessage == null) {
+			if(messageListIsNotNullOrEmpty()) {
+				_currentMessage = (MESAbstractMessage)messageList().get(0);
+			}
+		}
+		return _currentMessage;
+	}
+
+	public void setCurrentMessage(MESAbstractMessage currentMessage) {
+		this._currentMessage = currentMessage;
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESUser> systemUsers() {
+		return MESUser.fetchMESUsers(ec(), MESUser.ACTIVE.eq(true), MESUser.LAST_NAME.asc().then(MESUser.FIRST_NAME.asc()));
+	}
+	
+	public WOActionResults viewMessage() {
+		
+		setCurrentMessage(aMessage());
+	
+		return null;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private void _loadMessages() {
+
+		_fetchSpecification = new EOFetchSpecification();
+		_fetchSpecification.setEntityName(_entityName());
+		_fetchSpecification.setQualifier(_qualifier());
+		_fetchSpecification.setSortOrderings(_sortOrderings());
+		_fetchSpecification.setFetchLimit(_fetchLimit());
+		setMessageList(ec().objectsWithFetchSpecification(_fetchSpecification));
+
+	}
+	
+	public WOActionResults listReceivedMessages() {
+	
+		setCurrentMessage(null);
+		_setEntityName(MESUserMessage.ENTITY_NAME);
+		_setQualifier(MESUserMessage.RECIPIENTS.containsObject(session().authenticatedUser()));
+		_setSortOrderings(MESUserMessage.CREATION_DATE.descs());
+		_loadMessages();
+
+		return null;
+
+	}
+
+	private int _fetchLimit() {
+		return _batchIndex * NUMBER_OBJECTS_PER_BATCH;
+	}
+
+	@SuppressWarnings("unchecked")
+	public WOActionResults listSentMessages() {
+
+		setCurrentMessage(null);
+		_setEntityName(MESUserMessage.ENTITY_NAME);
+		_setQualifier(MESUserMessage.SENDER.eq(session().authenticatedUser()));
+		_setSortOrderings(MESUserMessage.CREATION_DATE.descs());
+		_loadMessages();
+		
+		return null;
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public WOActionResults listSystemMessages() {
+		setCurrentMessage(null);
+		_setEntityName(MESSystemMessage.ENTITY_NAME);
+		_setQualifier(MESSystemMessage.LEVEL.greaterThan(0));
+		_setSortOrderings(MESUserMessage.CREATION_DATE.descs());
+		_loadMessages();
+		
+		return null;
+
+	}
+
+	private EOQualifier _qualifier() {
+	
+		if(_qualifier == null) {
+			_qualifier = MESUserMessage.RECIPIENTS.containsObject(session().authenticatedUser());
+		}
+		
+		return _qualifier;
+
+	}
+	
+	public WOActionResults saveChanges() {
+
+		System.out.println(hasError());
+		
+		if(! hasError()) {
+		
+			try {
+				ec().saveChanges();
+				addMessage(RECORD_UPDATE_MESSAGE);
+				_newMessage = null;
+				_loadMessages();
+			} catch (NSValidation.ValidationException e) {
+				System.out.println(e.getMessage());
+				validationFailedWithException(e, null, null);
+			}
+			
+		}
+
+		return null;
+
+	}
+
+
+	private void _setQualifier(EOQualifier qualifier) {
+		this._qualifier = qualifier;
+	}
+
+	private String _entityName() {
+		if(ERXStringUtilities.stringIsNullOrEmpty(_entityName)) {
+			_entityName = MESUserMessage.ENTITY_NAME;
+		}
+		return _entityName;
+	}
+
+	private void _setEntityName(String entityName) {
+		this._entityName = entityName;
+	}
+
+	private NSArray<EOSortOrdering> _sortOrderings() {
+		if(_sortOrderings == null) {
+			_sortOrderings = MESUserMessage.CREATION_DATE.descs();
+		}
+		return _sortOrderings;
+	}
+
+	private void _setSortOrderings(NSArray<EOSortOrdering> sortOrderings) {
+		this._sortOrderings = sortOrderings;
+	}
+
+	public boolean messageListIsNotNullOrEmpty() {
+		return messageList() != null && messageList().size() > 0;
+	}
+	
+}

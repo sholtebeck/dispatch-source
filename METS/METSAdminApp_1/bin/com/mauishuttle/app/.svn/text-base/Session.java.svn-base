@@ -1,0 +1,118 @@
+package com.mauishuttle.app;
+
+import java.util.NoSuchElementException;
+
+import com.mauishuttle.eo.MESHub;
+import com.mauishuttle.eo.MESRole;
+import com.mauishuttle.eo.MESUser;
+import com.webobjects.eoaccess.EOObjectNotAvailableException;
+import com.webobjects.foundation.NSDictionary;
+
+import er.extensions.appserver.ERXSession;
+
+public class Session extends ERXSession {
+
+	private static final long serialVersionUID = 1L;
+
+	private MESUser _authenticatedUser;
+	private MESHub _currentHub;
+	private String _pickUpLocationUserInput;
+	private String _dropOffLocationUserInput;
+	private NSDictionary<String, Object> _dispatchSnapshot;
+	
+	public Session() {
+		setStoresIDsInCookies(true);
+		setStoresIDsInURLs(false);
+	}
+
+	public MESUser authenticatedUser() {
+		return _authenticatedUser;
+	}
+
+	public void setAuthenticatedUser(MESUser authenticatedUser) {
+		this._authenticatedUser = authenticatedUser;
+	}
+	
+	public void setAuthenticatedUser(String userName, String password) 
+		throws EOObjectNotAvailableException, NoSuchElementException, IllegalStateException
+	{
+		setAuthenticatedUser(MESUser.authenticatedUser(session().defaultEditingContext(), userName, password));
+	}
+	
+	public MESHub currentHub() {
+		return _currentHub;
+	}
+
+	public void setCurrentHub(MESHub currentHub) {
+		this._currentHub = currentHub;
+	}
+
+	public boolean isUserAuthenticated() {
+		return null != authenticatedUser();
+	}
+
+	public String pickUpLocationUserInput() {
+		return _pickUpLocationUserInput;
+	}
+
+	public void setPickUpLocationUserInput(String pickUpLocationUserInput) {
+		this._pickUpLocationUserInput = pickUpLocationUserInput;
+	}
+
+	public String dropOffLocationUserInput() {
+		return _dropOffLocationUserInput;
+	}
+
+	public void setDropOffLocationUserInput(String dropOffLocationUserInput) {
+		this._dropOffLocationUserInput = dropOffLocationUserInput;
+	}
+	
+	public boolean isTechnicalAdministrator() {
+
+		boolean isTechnicalAdministrator = false;
+		
+		if(isUserAuthenticated()) {
+
+			Application application = _application();
+			
+			if(application.technicalAdministratorRole() != null) {
+				MESRole localRole = MESRole.localInstanceIn(defaultEditingContext(), application.technicalAdministratorRole());
+				isTechnicalAdministrator = authenticatedUser().roles().containsObject(localRole);
+			}
+
+		}
+		
+		return isTechnicalAdministrator;
+	
+	}
+	
+	public boolean isSuperUser() {
+
+		boolean isSuperUser = false;
+		if(isUserAuthenticated()) {
+		
+			Application application = _application();
+			if(application.superUserRole() != null) {
+				MESRole localRole = MESRole.localInstanceIn(defaultEditingContext(), application.superUserRole());
+				isSuperUser = authenticatedUser().roles().containsObject(localRole);
+			}
+		
+		}
+
+		return isSuperUser;
+		
+	}
+
+	private Application _application() {
+		return (Application)application();
+	}
+
+	public NSDictionary<String, Object> dispatchSnapshot() {
+		return _dispatchSnapshot;
+	}
+
+	public void setDispatchSnapshot(NSDictionary<String, Object> dispatchSnapshot) {
+		this._dispatchSnapshot = dispatchSnapshot;
+	}
+	
+}

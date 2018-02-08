@@ -1,0 +1,155 @@
+AddNewAssetGroupLink : WOHyperlink {
+	action = createNewAssetGroup;
+}
+
+AddNewWebDocumentLink : WOHyperlink {
+	action = createNewWebDocument;
+}
+
+AlleyColumn : METSTableColumn {
+	class = "prg-alley";
+}
+
+AssetGroupsTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = session.isSuperUser;
+	displayKey = "name";
+	id = "MESAssetGroupExpansion";
+	initiallyExpanded = true;
+	items = assetGroups;
+	label = "Albums";
+	navigationController = navigationController;
+}
+
+AssetsEditorSwitchComponent : WOSwitchComponent {
+	navigationController = navigationController;
+	object = selectedObject;
+	WOComponentName = editorComponentName;
+}
+
+BlankPagePageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = "BlankPage";
+}
+
+FooterBar : METSTableColumnFooterBar {}
+
+FooterContextMenu : METSContextMenu {
+	display = "above";
+	left = "-6px";
+} 
+
+LeftNavigationUpdateContainer : MTAjaxUpdateContainer {
+	id = "METSLeftNavigationUpdateContainer";
+}
+
+PageWrapper : PageWrapper {
+	pageTitle = pageTitle;
+}
+
+ResizeColumn : METSResizeColumn {
+	class = "prg-side-column";
+	id = "PRGLeftColumn";
+	otherColumn = mainColumnName;
+}
+
+ServicesEditor : MESAbstractServiceSEOEditor {
+	navigationController = navigationController;
+	object = selectedObject;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+ViewAssetsLink : MTAjaxUpdateLink {
+	action = viewAssets;
+	class = "icon";
+	onComplete = "PRGPortalUtilities.setColumnHeights()";
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+}
+
+WebContentEditorSwitchComponent : WOSwitchComponent {
+	controller = webDocumentEditorController;
+	navigationController = navigationController;
+	object = selectedObject;
+	WOComponentName = editorComponentName;
+}
+
+ViewAssetsListItem : WOGenericContainer {
+	class = viewAssetsListItemClassName;
+	elementName = "li";
+}
+
+ViewAssetsNavigationPageKey : WOKeyValueConditional {
+	key = "navigationPageKey";
+	value = "ViewAssets";
+}
+
+ViewAssetsPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = "ViewAssets";
+}
+
+ViewServicesListItem : WOGenericContainer {
+	class = viewServicesListItemClassName;
+	elementName = "li";
+}
+
+ViewWebContentNavigationPageKey : WOKeyValueConditional {
+	key = "navigationPageKey";
+	value = "ViewWebPages";
+}
+
+ViewServicesNavigationPageKey : WOKeyValueConditional {
+	key = "navigationPageKey";
+	value = "ViewServices";
+}
+
+ViewWebContentPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = "ViewWebPages";
+}
+
+ViewWebPagesLink : MTAjaxUpdateLink {
+	action = viewWebContent;
+	class = "icon";
+	onComplete = "PRGPortalUtilities.setColumnHeights()";
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+}
+
+ViewServicesPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = "ViewServices";
+}
+
+ViewServicesPageLink : MTAjaxUpdateLink {
+	action = viewServices;
+	class = "icon";
+	onComplete = "PRGPortalUtilities.setColumnHeights()";
+	updateContainerID = "METSLeftNavigationUpdateContainer";
+}
+
+ViewWebPagesListItem : WOGenericContainer {
+	class = viewWebContentListItemClassName;
+	elementName = "li";	
+}
+
+ServicesTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = session.isSuperUser;
+	displayKey = "name";
+	id = "MESAbstractServicesExpansion";
+	initiallyExpanded = true;
+	items = services;
+	label = "Services";
+	navigationController = navigationController;
+}
+
+WebDocumentsTreeNavigation : MESNonSynchronizedTreeNavigationView {
+	display = session.isSuperUser;
+	displayKey = "name";
+	id = "MESWebDocumentsExpansion";
+	initiallyExpanded = true;
+	items = webDocuments;
+	label = "Web Pages";
+	navigationController = navigationController;
+}

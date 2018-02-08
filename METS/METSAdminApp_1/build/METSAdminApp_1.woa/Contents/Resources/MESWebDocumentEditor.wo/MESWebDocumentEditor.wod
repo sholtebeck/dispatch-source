@@ -1,0 +1,82 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+ContentEditorColumn : METSResizeColumn {
+	class = "prg-table-column";
+	id = "ContentEditorColumn";
+	otherColumn = "WebDocumentInspector";
+}
+
+Form : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	isNewObject = object.isNewObject;
+	submitAction = navigationController.saveChanges;
+}
+
+InspectorColumn : METSTableColumn {
+	class = "prg-table-column";
+	id = "WebDocumentInspector";
+}
+
+InspectorNavigationUpdateContainer : MTAjaxUpdateContainer {
+	id = "MESWebInspector";
+}
+
+IsCurrentNode : WOConditional {
+	condition = isCurrentNode;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+
+NotCurrentNdoe : WOConditional {
+	condition = isCurrentNode;
+	negate = true;
+}
+
+NodeEditor : WOSwitchComponent {
+	controller = controller;
+	navigationController = navigationController;
+	object = node;
+	WOComponentName = nodeEditorComponentName;
+}
+
+NodesRepetition : WORepetition {
+	item = node;
+	list = nodes;
+}
+
+NodeViewer : WOSwitchComponent {
+	controller = controller;
+	navigationController = navigationController;
+	object = node;
+	WOComponentName = nodeViewerComponentName;
+}
+
+ViewDocumentInfoLink : MTAjaxUpdateLink {
+	action = viewDocumentInfo;
+	class = "icon";
+	onComplete = "PRGPortalUtilities.setColumnHeights()";
+	updateContainerID = "MESWebInspector";
+}
+
+ViewDocumentInfoListItem : WOGenericContainer {
+	class = viewDocumentInfoClassName;
+	elementName = "li";
+}
+
+WebDocumentName : WOString {
+	value = object.name;
+}

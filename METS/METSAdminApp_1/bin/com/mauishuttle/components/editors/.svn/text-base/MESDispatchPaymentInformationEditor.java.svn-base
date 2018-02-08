@@ -1,0 +1,93 @@
+package com.mauishuttle.components.editors;
+
+import java.util.Calendar;
+
+import km.extensions.aim.KMCreditCard;
+
+import com.mauishuttle.components.controllers.MESDispatchEditorPagesNavigationController;
+import com.mauishuttle.eo.MESCreditCardPayment;
+import com.mauishuttle.eo.MESServiceOrderPayment;
+import com.mauishuttle.eo.MESVoucherPayment;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSMutableArray;
+import com.webobjects.foundation.NSValidation;
+
+@SuppressWarnings("serial")
+public class MESDispatchPaymentInformationEditor extends MESDispatchEditorPagesNavigationController {
+	
+	public MESDispatchPaymentInformationEditor(WOContext context) {
+        super(context);
+    }
+
+	public KMCreditCard creditCard() {
+		return delegate().creditCard();
+	}	
+
+	public String currentPaymentInformationPaid() {
+		return delegate().paymentInfo().paid() ? YES_KEY : NO_KEY;
+	}
+
+	public String currentPaymentDriverCollect() {
+		return delegate().paymentInfo().driverCollect() ? YES_KEY : NO_KEY;
+	}
+
+	public void setCurrentPaymentDriverCollect(String value) {
+		delegate().paymentInfo().setDriverCollect(value.equals(YES_KEY));
+	}
+	
+	public NSArray<String> expirationYears() {
+		
+		NSMutableArray<String> expirationYears = new NSMutableArray<String>();
+		Calendar calendar = Calendar.getInstance();
+	
+		for(int i = 0; i <= 10; i++) {
+			expirationYears.addObject(String.valueOf(calendar.get(Calendar.YEAR)).substring(2));
+			calendar.add(Calendar.YEAR, 1);
+		}
+		
+		return expirationYears;
+
+	}	
+
+	public boolean isCreditCardPayment() {
+		return delegate().paymentInfo() instanceof MESCreditCardPayment;
+	}	
+	
+	public boolean isServiceOrderPayment() {
+		return delegate().paymentInfo() instanceof MESServiceOrderPayment;
+	}
+	
+	public boolean isVoucherPayment() {
+		return delegate().paymentInfo() instanceof MESVoucherPayment;
+	}
+	
+	public WOActionResults saveChanges() {
+
+		boolean isNew = delegate().paymentInfo().isNewObject();
+		
+		try {
+			
+			delegate().paymentInfo().editingContext().saveChanges();
+			EOEditingContext parentEditingContext = (EOEditingContext)delegate().paymentInfo().editingContext().parentObjectStore();
+			parentEditingContext.saveChanges();
+
+			if(isNew) {
+				navigationController().addMessage("The payment information was successfully added.");
+			} else {
+				navigationController().addMessage(RECORD_UPDATE_MESSAGE);
+			}
+
+			delegate().setBillingPageKey(LIST_PAYMENT_INFORMATION_PAGE_KEY);
+
+		} catch (NSValidation.ValidationException e) {
+			validationFailedWithException(e, null, null);
+		}
+
+		return navigationController().nextPage();
+		
+	}
+	
+}

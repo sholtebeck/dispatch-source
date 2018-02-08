@@ -1,0 +1,17 @@
+AssetIsDefined : ERXNonNullConditional {
+	condition = asset;
+}
+
+AssetIsNotDefined : ERXNonNullConditional {
+	condition = asset;
+	negate = true;
+}
+
+DefaultImage : WOImage {
+	src = ^defaultSrc;
+}
+
+Image : ERAttachmentImageViewer {
+	alt = asset.alt;
+	attachment = attachment;
+}

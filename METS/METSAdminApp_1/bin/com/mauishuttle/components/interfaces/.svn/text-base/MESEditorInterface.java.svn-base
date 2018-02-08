@@ -1,0 +1,20 @@
+package com.mauishuttle.components.interfaces;
+
+import com.webobjects.eocontrol.EOEnterpriseObject;
+import com.webobjects.foundation.NSMutableArray;
+
+public interface MESEditorInterface {
+
+	public abstract EOEnterpriseObject object();
+	public abstract void setObject(Object object) throws ClassCastException;
+	
+	public NSMutableArray<String> errors();
+	public void setErrors(NSMutableArray<String> errors);
+
+	public NSMutableArray<String> messages();
+	public void setMessages(NSMutableArray<String> messages);
+	
+	public MESPageNavigationControllerInterface navigationController();
+	public void setNavigationController(MESPageNavigationControllerInterface navigationController);
+	
+}

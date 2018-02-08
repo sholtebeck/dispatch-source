@@ -1,0 +1,17 @@
+<div class="row-fluid">
+	<webobject name = "Form">
+		<wo:METSTextInput helpText = "Required Information" labelText = "Name" value = "$object.name"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "Contant Person (1)" value = "$object.contactOne"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "Contant Person (2)" value = "$object.contactTwo"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "Contant Person (3)" value = "$object.contactThree"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "Phone Number" value = "$object.phoneNumber"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "Fax Number" value = "$object.faxNumber"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "Address One" value = "$object.addressOne"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "Address Two" value = "$object.addressTwo"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "City" value = "$object.city"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "State" value = "$object.state"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "Country" value = "$object.country"></wo:METSTextInput>
+		<wo:METSTextInput helpText = "Optional" labelText = "Zip Code" value = "$object.zipCode"></wo:METSTextInput>
+		<webobject name = "FormSubmissionBar" />
+	</webobject>
+</div>

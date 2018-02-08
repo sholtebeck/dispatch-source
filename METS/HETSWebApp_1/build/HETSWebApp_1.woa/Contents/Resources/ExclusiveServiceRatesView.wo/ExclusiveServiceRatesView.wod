@@ -1,0 +1,35 @@
+HourlyRate : WOString {
+	numberformat = "#,##0.00";
+	value = service.hourlyRate;
+}
+
+PrimaryZoneName : WOString {
+	value = service.zone.name;
+}
+
+RateAmount : WOString {
+	numberformat = "$#,##0.00";
+	value = rate.transferRate;
+}
+
+SecondaryZoneName : WOString {
+	value = rate.secondaryZone.name;
+}
+
+ServiceName : WOString {
+	value = service.name;
+}
+
+ServiceShortDescription : WOString {
+	value = service.shortDescription;
+}
+
+TableRow : WOGenericContainer {
+	class = tableRowClassName;
+	elementName = "tr";
+}
+
+TransferRatesRepetition : WORepetition {
+	item = rate;
+	list = rates;
+}

@@ -1,0 +1,33 @@
+<thead>
+	<tr>
+		<th>Payment Type</th>
+		<th>Number of Dispatches</th>
+		<th>Revenue</th>
+	</tr>
+</thead>
+<tbody>
+	<webobject name = "ReportsRepetition">
+		<tr>
+			<td><webobject name = "ViewDispatchesLink"><webobject name = "PaymentType" /></webobject></td>
+			<td><webobject name = "NumberOfDispatches"></webobject></td>
+			<td><webobject name = "RevenueForPaymentType" /></td>			
+		</tr>
+	</webobject>
+</tbody>
+<tfoot>
+	<tr>
+		<td class = "prg-text-align-right"><b>Sub Total:</b></td>
+		<td><webobject name = "SubTotalCount"></webobject></td>
+		<td><webobject name = "SubTotalRevenue"></webobject></td>
+	</tr>	
+	<tr>
+		<td class = "prg-text-align-right"><b>Comps:</b></td>
+		<td><webobject name = "CompsCount"></webobject></td>
+		<td><webobject name = "CompRevenue"></webobject></td>
+	</tr>	
+	<tr>
+		<td class = "prg-text-align-right"><b>Total:</b></td>
+		<td><webobject name = "TotalCount"></webobject></td>
+		<td><webobject name = "TotalRevenue"></webobject></td>
+	</tr>	
+</tfoot>

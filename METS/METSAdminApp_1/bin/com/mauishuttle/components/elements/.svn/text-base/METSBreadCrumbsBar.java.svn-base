@@ -1,0 +1,17 @@
+package com.mauishuttle.components.elements;
+
+import com.webobjects.appserver.WOContext;
+
+@SuppressWarnings("serial")
+public class METSBreadCrumbsBar extends METSUIElements {
+
+	public METSBreadCrumbsBar(WOContext context) {
+        super(context);
+    }
+
+	@Override
+	public String defaultClassName() {
+		return "prg-column-header-bar";
+	}
+
+}

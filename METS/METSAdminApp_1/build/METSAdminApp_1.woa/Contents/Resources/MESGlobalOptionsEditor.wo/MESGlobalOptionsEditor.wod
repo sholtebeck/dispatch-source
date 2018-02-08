@@ -1,0 +1,25 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+Form :  METSHorizontalForm {
+	action = saveChanges;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}
+
+PropertiesFileLoaded : ERXNonNullConditional {
+	condition = properties;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+SubmissionBar : METSFormSubmissionBar {
+	isNewObject = false;
+	submitAction = saveChanges;
+}

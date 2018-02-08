@@ -1,0 +1,46 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href = "#"><wo:str value = "$session.currentHub.name" /></a></li>
+	<li><a href="#">Reports</a></li>
+	<li>Daily Revenue Report</li>
+</webobject>
+<wo:METSInfoBar>Date Range</wo:METSInfoBar>
+<webobject name = "DateRangeForm">
+	<div class = "row-fluid prg-prepend-top">
+		<div class = "offset-left">
+			<label>Date:</label>
+			<webobject name = "DateSelector"></webobject>
+			<label class="prg-pad-left" for="scheduleStartDate">From:</label>
+			<webobject name = "CustomDateRangeStartDate"></webobject>
+			<label for="scheduleEndDate" class="prg-pad-left">To:</label>
+			<webobject name = "CustomDateRangeEndDate"></webobject>
+		</div>
+		<div class = "offset-left prg-prepend-top">
+			<label>Hubs</label>
+			<webobject name = "HubSelector"></webobject>
+			<label class="prg-pad-left">View</label>
+			<webobject name = "ZoneReportType"></webobject>
+			<label class="prg-pad-left">Paid/Unpaid:</label>
+			<webobject name = "PaidUnpaid"></webobject>
+			<a href="#" class="btn btn-primary prg-pad-left" onclick = "document.DateRangeForm.submit();">Search <i class="icon-search icon-white">&nbsp;</i></a>
+			<webobject name = "PrintReportButton">
+				Print <i class="icon-print icon-white">&nbsp;</i>
+			</webobject>
+		</div>
+	</div>
+</webobject>
+<wo:METSInfoBar>Chart</wo:METSInfoBar>
+<div class = "row-fluid">
+	<div class = "span12 prg-text-align-center">
+		<div id="chart_div"></div>
+	</div>
+</div>	
+<wo:METSInfoBar>Data</wo:METSInfoBar>
+	<webobject name = "StaticColumn">
+		<div class = "row-fluid">
+			<div class="span12">
+				<table class="table table-striped table-bordered">
+					<webobject name = "ZoneRevenueReportDataTable"></webobject>
+				</table>
+			</div>
+		</div>
+</webobject>

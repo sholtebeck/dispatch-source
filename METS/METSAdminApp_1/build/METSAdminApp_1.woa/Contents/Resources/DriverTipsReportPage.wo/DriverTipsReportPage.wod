@@ -1,0 +1,54 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+DriverTipInformation : DriverTipDataRow {
+	driver = aDriver;
+	ec = ec;
+	endDate = endDate;
+	startDate = startDate;
+}
+
+DriversRepetition : WORepetition {
+	item = aDriver;
+	list = drivers;
+}
+
+EndDateSelector : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = endDate;
+}
+
+
+HubSelector : WOPopUpButton {
+	class = "input-small";
+	displayString = aHub.name;
+	id = "HubSelector";
+	item = aHub;
+	list = hubs;
+	noSelectionString = "All Hubs";
+	selection = selectedHub;
+}
+
+SearchForm : WOForm {
+	action = filter;
+	class = "form-inline";
+	name = "OutstandingPaymentsForm";
+}
+
+StartDateSelector : MTJSDatePicker {
+	class = "input-small";
+	dateformat = "%m/%d/%Y";
+	pickerClass = "datepicker_dashboard";
+	value = startDate;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+Wrapper : AccountingController {
+	
+}

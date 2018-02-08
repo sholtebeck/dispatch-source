@@ -1,0 +1,37 @@
+EmailAddress : ERXWOEmailField {
+	name = "emailAddress";
+	otherTagString = "required";
+	value = emailAddress;
+}
+
+FirstName : WOTextField {
+	name = "firstName";
+	otherTagString = "required";
+	value = firstName;
+}
+
+Form : JQValidateForm {
+	directActionName = "submitPrivateCarInformationRequest";
+	id = "ReservationRequestForm";
+}
+
+LastName : WOTextField {
+	name = "lastName";
+	otherTagString = "required";
+	value = lastName;	
+}
+
+Main : PageWrapper {
+}
+
+PhoneNumber : WOTextField {
+	name = "phoneNumber";
+	otherTagString = "required";
+	value = phoneNumber;	
+}
+
+ReservationDate : MTJSDatePicker {
+	name = "reservationDate";
+	otherTagString = "required";
+	value = reservationDate;
+}

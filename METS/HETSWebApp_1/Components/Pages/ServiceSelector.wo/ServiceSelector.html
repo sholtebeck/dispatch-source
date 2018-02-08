@@ -1,0 +1,63 @@
+<div class = "span-15-5 last reservations-panel prepend-top">
+	<h3><webobject name = "RouteInformationHeader"></webobject></h3>
+	<div class = "reservations-panel-content">
+		<webobject name = "ToDirectionPageKey">
+			<label>Pick Up Location</label>
+			<webobject name = "PickUpLocation"></webobject>
+		</webobject>
+		<webobject name = "FromDirectionPageKey">
+			<label>Drop Off Location</label>
+			<webobject name = "DropOffLocation"></webobject>
+		</webobject>
+		<webobject name = "FromDirectionPageKey">
+			<label>Reservation Date</label>
+			<webobject name = "ReservationDate"></webobject>
+		</webobject>
+		<webobject name = "ToDirectionPageKey">
+			<label>Flight Date Time</label>
+			<webobject name = "FlightDate"></webobject>
+		</webobject>
+	</div>
+</div>
+<webobject name = "HasAvailableServices">
+	<div class = "span-15-5 last reservations-panel prepend-top">
+		<h3 class = "no-append-bottom">Available Services</h3>
+		<div class = "reservations-table-panel-content no-prepend-top">
+			<table id = "HETSServiceSelectorTable">
+				<thead>
+					<tr>
+						<th>Select</th>
+						<th>Service</th>
+						<th>Base</th>
+						<th>Misc Fees</th>
+						<th>Total</th>
+					</tr>
+				</thead>	
+				<tbody>
+					<webobject name = "ServicesList">
+						<webobject name = "TableRow">	
+							<td>
+								<wo:if condition = "$service.isSharedService">
+									<wo:img class = "thumbnail" src = "images/reservations/shuttle.jpg" />
+								</wo:if>
+								<wo:if condition = "$service.isExclusiveService">
+									<wo:if condition = "$exclusiveService.vehicleType.hasPicture">
+										<webobject name = "VehiclePhoto"></webobject>
+									</wo:if>
+									<wo:else>
+										<wo:img class = "thumbnail" src = "images/reservations/image-coming-soon.jpg" />
+									</wo:else>
+								</wo:if>
+								<div class = "radio-button-wrapper"><webobject name = "RadioButton" /></div>
+							</td>
+							<td class = "align-left" width = "200px;"><wo:str value = "$service.name" /></td>
+							<td class = "align-center"><webobject name = "ServiceBaseRate" /></td>
+							<td class = "align-center"><webobject name = "MiscellaneousFee" /></td>
+							<td class = "align-center"><webobject name = "ServiceTotal"></webobject></td>
+						</webobject>
+					</webobject>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</webobject>

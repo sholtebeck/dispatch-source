@@ -1,0 +1,29 @@
+<webobject name = "Wrapper">
+	<webobject name = "BreadCrumbsBar">
+		<li><a href="#">Accounting</a></li>
+		<li><webobject name = "ReportName" /></li>
+	</webobject>
+	<webobject name = "SearchForm">
+		<div class = "row-fluid prg-prepend-top">
+			<div class = "offset-left">
+				<label>Hubs</label>
+				<webobject name = "HubSelector"></webobject>	
+				<label>Paid</label>
+				<webobject name = "PaidSelector"></webobject>
+				<label>Start Date:</label>
+				<webobject name = "StartDateSelector"></webobject>
+				<label>End Date:</label>
+				<webobject name = "EndDateSelector"></webobject>
+				<a href="#" class="btn btn-primary prg-pad-left" onclick = "document.OutstandingPaymentsForm.submit();">Search <i class="icon-search icon-white">&nbsp;</i></a>
+			</div>
+		</div>	
+	</webobject>
+	<wo:METSInfoBar>Reports</wo:METSInfoBar>
+	<webobject name = "StaticColumn">
+		<div class = "row-fluid">
+			<div class="span12">
+				<webobject name = "ComponentContent" />
+			</div>	
+		</div>
+	</webobject>
+</webobject>

@@ -1,0 +1,22 @@
+Label: WOString {
+	value = ^displayString;
+}
+
+RadioButton: WOGenericElement {
+	elementName = "input";
+	name = uniqueID;
+	otherTagString = isCurrentItemSelected;
+	type = "radio";
+	value = index;
+}
+
+RadioButtonRepetition: WORepetition {
+	index = index;
+    list = ^list;
+    item = currentItem;
+}
+ 
+RadioButtonWrapper: WOGenericContainer {
+	class = ^wrapperClass;
+    elementName = ^wrapperElementName;
+}

@@ -1,0 +1,28 @@
+Driver : WOString {
+	value = report.driver|fullName(true);
+}
+
+HoursWorked : WOString {
+	numberformat = "0.00";
+	value = report.hours;
+}
+
+OvertimeWorked : WOString {
+	numberformat = "0.00";
+	value = report.overTime;
+}
+
+ReportsRepetition : WORepetition {
+	item = report;
+	list = reports;
+}
+
+TotalHoursWorked : WOString {
+	numberformat = "#,##0.00";
+	value = totalHoursWorked;
+}
+
+TotalOvertimeHoursWorked : WOString {
+	numberformat = "#,##0.00";
+	value = totalOvertimeHoursWorked;
+}

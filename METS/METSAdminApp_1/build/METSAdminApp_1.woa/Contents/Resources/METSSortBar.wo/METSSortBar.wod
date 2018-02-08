@@ -1,0 +1,9 @@
+ComponentContent : WOComponentContent {
+	
+}
+
+SortBarContainer : WOGenericContainer {
+	class = classNameWithDefault;
+	elementName = elementNameWithDefault;
+	id = id;	
+}

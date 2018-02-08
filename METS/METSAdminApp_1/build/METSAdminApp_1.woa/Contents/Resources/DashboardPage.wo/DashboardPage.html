@@ -1,0 +1,154 @@
+<webobject name = "PageWrapper">
+	<webobject name = "LeftTableColumn">
+		<ul class="prg-column-header-bar">
+			<li>Mailboxes</li>
+		</ul>
+		<webobject name = "StaticColumn">
+			<ul class = "prg-tree nav">
+				<li><webobject name = "ListReceivedMessages"><i class = "icon icon-inbox">&nbsp;</i>&nbsp;&nbsp;Inbox</webobject></li>
+				<li><webobject name = "ListSentMessages"><i class = "icon icon-envelope">&nbsp;</i>&nbsp;&nbsp;Outbox</webobject></li>
+				<webobject name = "IsTechnicalAdministrator">
+					<li><webobject name = "ListSystemMessages"><i class = "icon icon-tag">&nbsp;</i>&nbsp;&nbsp;System</webobject></li>
+				</webobject>
+			</ul>
+			<webobject name = "LeftColumnFooterBar">
+				<li>
+					<span><webobject name = "NewMessageModalContainer">
+						<webobject name = "Form">
+							<div class = "prg-text-align-left">
+								<div class = "modal-header">
+									<a class = "close" data-dismiss = "modal">x</a>
+									<h3>Create New Message</h3>
+								</div>
+								<div class="modal-body">	
+									<div class = "control-group">
+										<label>Recipients</label>
+										<div class = "controls">
+											<webobject name = "UserBrowser"></webobject>
+										</div>
+									</div>
+									<wo:METSTextInput helpText = "Required Information" labelText = "Subject" value = "$newMessage.subject"></wo:METSTextInput>
+									<div class = "control-group">
+										<label>Message</label>
+										<div class = "controls">
+											<webobject name = "MessageBody"></webobject>
+										</div>
+									</div>
+								</div>
+								<div class = "modal-footer">
+									<webobject name = "SendMessage"></webobject>
+									<a href="#" class="dismiss btn">Cancel</a>
+								</div>
+							</div>									
+						</webobject>
+					</webobject></span>
+				</li>	
+			</webobject>
+		</webobject>
+	</webobject>
+	<webobject name = "MessageListTableColumn">
+		<webobject name = "MessageListSortBar">Sort by: </webobject>
+		<webobject name = "MessageListUpdateContainer">
+			<ul id = "PRGMessageTable" style = "width: 100%">
+				<webobject name = "HasMessages">
+					<webobject name = "MessageListRepetition">
+						<webobject name = "MessageListItemContainer">
+							<webobject name = "ViewMessageUpdateLink">
+								<span>
+									<b><webobject name = "ListItemSubject" /></b><i><webobject name = "ListItemDate" /></i>
+								</span>		
+							</webobject>
+							<webobject name = "IsUserMessage">
+								<webobject name = "ViewMessageUpdateLink">
+									<span class="justify">
+										<webobject name = "ListItemShortenedMessageString" />
+									</span>
+								</webobject>
+							</webobject>
+						</webobject>
+					</webobject>
+					<webobject name = "HasMoreResultsToShow">
+						<li>
+							<webobject name = "DisplayMoreResults">Show Next 50 Messages</webobject>
+						</li>
+					</webobject>
+				</webobject>
+				<webobject name = "NotHaveMessages">
+					<li><a href = "#"><span>There are no messages to view.</span></a></li>
+				</webobject>
+			</ul>
+		</webobject>
+	</webobject>
+	<webobject name = "MessageDetailTableColumn">
+		<webobject name = "CurrentMessageUpdateContainer">
+			<webobject name = "CurrentMessageIsNotNull">
+				<ul class = "prg-action-bar">
+					<webobject name = "MessageIsEditable">
+						<li><wo:link class = "cancel-button" action = "$cancelEditMessage">Cancel</wo:link></li>
+					</webobject>
+					<webobject name = "MessageIsNotEditable">
+						<li><wo:link class = "edit-button" action = "$editMessage">Edit</wo:link></li>
+					</webobject>
+					<li><wo:link class = "delete-message-button" action = "$deleteMessage" onclick = "return confirm('Are you sure you wish to delete this message?');">Delete</wo:link></li>
+					<webobject name = "IsSuperUser">
+						<webobject name = "IsUserMessage">
+							<webobject name = "IsNotSender">
+								<li><wo:link class = "delete-all-messages-button" action = "$deleteAllMessages" onclick = "return confirm('Are you sure you wish to delete all the messages?');">Delete All</wo:link></li>
+							</webobject>
+						</webobject>					
+					</webobject>
+				</ul>
+				<webobject name = "SubjectBar">Message Content</webobject>
+				<webobject name = "StaticColumn">
+					<div id = "PRGContentPreview">
+						<div class="row-fluid">
+							<div class="span12">
+								<h1><webobject name = "CurrentMessageSubject" /></h1>
+								<div class="row-fluid">
+									<div class="span6"><h4 class="prg-message-status"><webobject name = "From"></webobject></h4></div>
+									<div class="span6"><h4><webobject name = "CurrentMessageDate" /></h4></div>
+								</div>
+								<hr/>
+								<div class="row-fluid">
+									<div class="span12">
+										<webobject name = "MessageIsEditable">
+											<wo:form action = "$saveMessageEdit" id="toolbar">
+												<ul id="textarea-wysihtml5-toolbar" class="wysihtml5-toolbar">
+													<li>
+														<div class="btn-group">
+															<a class = "btn" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1">H1</a>
+															<a class = "btn" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2">H2</a>
+															<a class = "btn" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="p">P</a>
+														</div>
+													</li>
+													<li>
+														<div class="btn-group">
+															<a class="btn" data-wysihtml5-command="bold" title="CTRL+B"><i class = "icon-bold"></i></a>
+															<a class="btn" data-wysihtml5-command="italic" title="CTRL+I"><i class = "icon-italic"></i></a>
+															<a class="btn" data-wysihtml5-command="underline" title="CTRL+U">U</a>
+														</div>
+													</li>
+												</ul>	
+												<webobject name = "MessageBodyEditor"></webobject>
+												<wo:submit class = "btn btn-primary" value = "Save Changes" action = "$saveMessageEdit"></wo:submit>
+												<wo:link class = "btn" action = "$cancelEditMessage">Cancel</wo:link>
+											</wo:form>
+										</webobject>
+										<webobject name = "MessageIsNotEditable">
+											<p><webobject name = "CurrentMessageBody" /></p>
+										</webobject>	
+									</div>    	
+								</div>    	
+							</div>
+						</div>
+					</div>
+				</webobject>
+			</webobject>
+			<webobject name = "CurrentMessageIsNull">
+				<webobject name = "SubjectBar">
+					No messages
+				</webobject>
+			</webobject>
+		 </webobject>
+	</webobject>		 
+</webobject>

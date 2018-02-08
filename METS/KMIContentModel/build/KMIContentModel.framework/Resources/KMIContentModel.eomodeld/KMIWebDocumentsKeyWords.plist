@@ -1,0 +1,40 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = "document_id"; 
+            name = documentID; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = "key_word_id"; 
+            name = keyWordID; 
+            prototypeName = id; 
+        }
+    ); 
+    attributesUsedForLocking = (documentID, keyWordID); 
+    className = EOGenericRecord; 
+    externalName = DocumentsKeyWords; 
+    fetchSpecificationDictionary = {}; 
+    name = KMIWebDocumentsKeyWords; 
+    primaryKeyAttributes = (documentID, keyWordID); 
+    relationships = (
+        {
+            destination = KMIWebDocument; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = documentID; }); 
+            name = document; 
+        }, 
+        {
+            destination = KMIWebDocumentKeyWord; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = keyWordID; }); 
+            name = keyWord; 
+        }
+    ); 
+}

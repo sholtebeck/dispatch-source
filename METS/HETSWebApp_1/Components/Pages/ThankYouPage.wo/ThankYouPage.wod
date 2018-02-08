@@ -1,0 +1,4 @@
+Main : PageWrapper {
+	metaDescription = document.metaDescription;
+	pageTitle = document.pageTitle;
+}

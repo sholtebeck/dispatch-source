@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+        <wo class="ReportDateRangeSelector.java" wocomponentcontent="true">
+
+        <binding name="endDate"/>
+    <binding name="startDate"/>
+    <binding name="filter"/>
+        <binding name="selectedStandardDateRange"/>
+    <binding name="standardDateRange"/>
+    <binding name="standardDateRanges"/>
+    </wo>
+</wodefinitions>

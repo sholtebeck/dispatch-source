@@ -1,0 +1,60 @@
+package com.mauishuttle.components;
+
+import km.extensions.components.KMComponent;
+
+import com.mauishuttle.app.Application;
+import com.mauishuttle.app.Session;
+import com.mauishuttle.components.pages.DashboardPage;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WORedirect;
+import com.webobjects.foundation.NSArray;
+
+@SuppressWarnings("serial")
+public class Main extends KMComponent {
+
+	protected static final String NO_KEY = "No";
+	protected static final String YES_KEY = "Yes";
+
+	public final NSArray<String> hours = new NSArray<String>(new String[] {
+			"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
+	});
+
+	public final NSArray<String> minutes = new NSArray<String>(new String[] {
+			"0", "10", "20", "30", "40", "50"	
+	});
+
+	public final NSArray<String> meridiems = new NSArray<String>(new String[] {
+			"AM", "PM"	
+	});
+
+	public final NSArray<String> expirationMonths = new NSArray<String>(new String[] {
+			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+	});
+	
+	public Main(WOContext context) {
+		super(context);
+	}
+	
+	public Application application() {
+		return (Application)super.application();
+	}
+	
+	public Session session() {
+		return (Session)super.session();
+	}
+	
+	public WOActionResults listReceivedMessages() {
+		return pageWithName(DashboardPage.class);
+	}
+	
+	public WOActionResults logout() {
+		session().terminate();
+		session().setAuthenticatedUser(null);
+		WORedirect redirect = (WORedirect)pageWithName("WORedirect");
+		redirect.setUrl(context().directActionURLForActionNamed("default", null));
+		return redirect;
+	}	
+	
+}
+

@@ -1,0 +1,316 @@
+package com.mauishuttle.components.editors;
+
+import java.util.GregorianCalendar;
+
+import com.mauishuttle.eo.MESDriver;
+import com.mauishuttle.eo.MESPhone;
+import com.mauishuttle.eo.MESSchedule;
+import com.mauishuttle.eo.MESScheduleVehicles;
+import com.mauishuttle.eo.MESVehicle;
+import com.mauishuttle.eo.MESVehicleType;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.eoaccess.EOUtilities;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSTimestamp;
+import com.webobjects.foundation.NSValidation;
+
+@SuppressWarnings("serial")
+public class MESDriverScheduleEditor extends MESNonSynchronizingEditor {
+
+	public MESDriver _driver;
+	private MESSchedule _schedule;
+	public MESVehicle _vehicle;
+	public MESPhone _phone;
+	private GregorianCalendar _startDateTime;
+	private GregorianCalendar _endDateTime;
+	private MESScheduleVehicles _newScheduleVehicle;
+	public MESScheduleVehicles _scheduleVehicle;
+	
+	public final NSArray<String> hours = new NSArray<String>(new String[] {
+		"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
+	});
+	
+	public final NSArray<String> minutes = new NSArray<String>(new String[] {
+		"0", "15", "30", "45"	
+	});
+	
+	public final NSArray<String> meridiems = new NSArray<String>(new String[] {
+		"AM", "PM"	
+	});
+	
+	public MESDriverScheduleEditor(WOContext context) {
+        super(context);
+    }
+	
+	public void sleep() {
+		super.sleep();
+		setStartDate(null);
+		setStartDateTime(null);
+		setEndDate(null);
+		setEndDateTime(null);
+		setNewScheduleVehicle(null);
+	}
+	
+	public WOActionResults assignVehicle() {
+		
+		try {
+			ec().saveChanges();
+			addMessage(RECORD_UPDATE_MESSAGE);
+		} catch (NSValidation.ValidationException e) {
+			validationFailedWithException(e, null, null);
+		}
+		
+		return context().page();
+	}
+
+	public WOActionResults cancelEditInPlace() {
+		ec().revert();
+		return context().page();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESDriver> hubDrivers() {
+		return MESDriver.fetchMESDrivers(ec(), 
+				MESDriver.HUB.eq(session().currentHub()), 
+				MESDriver.LAST_NAME.asc().then(MESDriver.FIRST_NAME.asc()));
+	}
+	
+	public WOActionResults saveEditInPlace() {
+		
+		try {
+			ec().saveChanges();
+		} catch (NSValidation.ValidationException e) {
+			validationFailedWithException(e, null, null);
+		}
+		
+		return null;
+		
+	}
+	
+	public WOActionResults saveChanges() {
+
+		boolean isNew = object().isNewObject();
+		EOEditingContext parentEditingContext = null;
+		if(isNew) {
+			parentEditingContext = (EOEditingContext)ec().parentObjectStore();
+		}
+		if(! navigationController().hasError()) {
+			
+			try {
+
+				GregorianCalendar dateTime = new GregorianCalendar();
+				dateTime.setTime(startDate());
+
+				dateTime.set(GregorianCalendar.HOUR, startDateTime().get(GregorianCalendar.HOUR));
+				dateTime.set(GregorianCalendar.MINUTE, startDateTime().get(GregorianCalendar.MINUTE));
+				dateTime.set(GregorianCalendar.AM_PM, startDateTime().get(GregorianCalendar.AM_PM));
+				
+				object().setStartTime(new NSTimestamp(dateTime.getTime()));
+				
+				dateTime.setTime(endDate());
+				dateTime.set(GregorianCalendar.HOUR, endDateTime().get(GregorianCalendar.HOUR));
+				dateTime.set(GregorianCalendar.MINUTE, endDateTime().get(GregorianCalendar.MINUTE));
+				dateTime.set(GregorianCalendar.AM_PM, endDateTime().get(GregorianCalendar.AM_PM));
+
+				object().setEndTime(new NSTimestamp(dateTime.getTime()));
+
+				if(object().startTime().after(object().endTime())) {
+					addErrorMessage("A schedule cannot end before it begins.  Please check times.");
+				}
+			
+				ec().saveChanges();
+				
+				if(isNew) {
+					parentEditingContext.saveChanges();
+					navigationController().setSelectedObject(EOUtilities.localInstanceOfObject(parentEditingContext, object()));
+				}
+				
+				addMessage(RECORD_UPDATE_MESSAGE);
+
+			} catch (NSValidation.ValidationException e) {
+				validationFailedWithException(e, null, null);
+			}
+		
+		}
+	
+		return navigationController().nextPage();
+	
+	}
+	
+	public WOActionResults unassignVehicle() {
+		
+		try {
+			_scheduleVehicle.delete();
+			ec().saveChanges();
+			addMessage(RECORD_UPDATE_MESSAGE);
+		} catch (NSValidation.ValidationException e) {
+			validationFailedWithException(e, null, null);
+		}
+	
+		return navigationController().nextPage();
+
+	}	
+	
+	public MESSchedule object() {
+	
+		if(_schedule == null) {
+			_schedule = (MESSchedule)valueForBinding("object");
+		}
+		
+		return _schedule;
+
+	}
+
+	public void setObject(Object object) throws ClassCastException {
+		_schedule = (MESSchedule)object;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESPhone> phones() {
+		return MESPhone.fetchMESPhones(ec(), 
+				MESPhone.HUB.eq(session().currentHub()), MESPhone.PHONE_NUMBER.ascs());
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESVehicle> vehicles() {
+
+		return MESVehicle.fetchMESVehicles(ec(), 
+				MESVehicle.HUB.eq(session().currentHub()), 
+				MESVehicle.VEHICLE_TYPE.dot(MESVehicleType.NAME).asc().then(MESVehicle.MAKE.asc()).then(MESVehicle.MODEL.asc()));
+	
+	}
+	
+	public NSTimestamp startDate() {
+
+		if(super.startDate() == null) {
+			setStartDate(object().startTime());
+		}
+	
+		return super.startDate();
+	
+	}
+	
+	public NSTimestamp endDate() {
+		if(super.endDate() == null) {
+			setEndDate(object().endTime());
+		}
+	
+		return super.endDate();
+	}
+
+	public GregorianCalendar startDateTime() {
+	
+		if(_startDateTime == null) {
+			_startDateTime = new GregorianCalendar();
+			_startDateTime.setTime(startDate());
+		}
+
+		return _startDateTime;
+	
+	}
+	
+	public void setStartDateTime(GregorianCalendar startDateTime) {
+		this._startDateTime = startDateTime;
+	}
+	
+	public String startDateTimeHour() {
+		return String.valueOf(startDateTime().get(GregorianCalendar.HOUR));
+	}
+
+	public void setStartDateTimeHour(String value)	{
+		int hour = Integer.valueOf(value);
+		startDateTime().set(GregorianCalendar.HOUR, hour);
+	}
+
+	public String startDateTimeMinute() {
+		return String.valueOf(startDateTime().get(GregorianCalendar.MINUTE));
+	}
+
+	public void setStartDateTimeMinute(String value) {
+		int minute = Integer.valueOf(value);
+		startDateTime().set(GregorianCalendar.MINUTE, minute);
+	}
+
+	public String startDateTimeMeridiem() {
+		return meridiems.get(startDateTime().get(GregorianCalendar.AM_PM));
+	}
+	
+	public void setStartDateTimeMeridiem(String value) {
+		int index = meridiems.indexOf(value);
+		if(index == 0) {
+			startDateTime().set(GregorianCalendar.AM_PM, GregorianCalendar.AM);
+		} else {
+			startDateTime().set(GregorianCalendar.AM_PM, GregorianCalendar.PM);
+		}
+	}
+
+	public GregorianCalendar endDateTime() {
+		
+		if(_endDateTime == null) {
+			_endDateTime = new GregorianCalendar();
+			_endDateTime.setTime(endDate());
+		}
+
+		return _endDateTime;
+	
+	}
+
+	public void setEndDateTime(GregorianCalendar endDateTime) {
+		this._endDateTime = endDateTime;
+	}
+
+	public String endDateTimeHour() {
+		return String.valueOf(endDateTime().get(GregorianCalendar.HOUR));
+	}
+
+	public void setEndDateTimeHour(String value)	{
+		int hour = Integer.valueOf(value);
+		endDateTime().set(GregorianCalendar.HOUR, hour);
+	}
+
+	public String endDateTimeMinute() {
+		return String.valueOf(endDateTime().get(GregorianCalendar.MINUTE));
+	}
+
+	public void setEndDateTimeMinute(String value) {
+		int minute = Integer.valueOf(value);
+		endDateTime().set(GregorianCalendar.MINUTE, minute);
+	}
+
+	public String endDateTimeMeridiem() {
+		return meridiems.get(endDateTime().get(GregorianCalendar.AM_PM));
+	}
+	
+	public void setEndDateTimeMeridiem(String value) {
+		int index = meridiems.indexOf(value);
+		if(index == 0) {
+			endDateTime().set(GregorianCalendar.AM_PM, GregorianCalendar.AM);
+		} else {
+			endDateTime().set(GregorianCalendar.AM_PM, GregorianCalendar.PM);
+		}
+	}
+
+	public MESScheduleVehicles newScheduleVehicle() {
+
+		if(_newScheduleVehicle == null) {
+			ec().revert();
+			_newScheduleVehicle = MESScheduleVehicles.createMESScheduleVehicles(ec());
+			_newScheduleVehicle.setScheduleRelationship(object());
+		}
+		
+		return _newScheduleVehicle;
+
+	}
+
+	public void setNewScheduleVehicle(MESScheduleVehicles newScheduleVehicle) {
+		this._newScheduleVehicle = newScheduleVehicle;
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESScheduleVehicles> scheduleVehicles() {
+		return object().scheduledVehicles(null, MESScheduleVehicles.VEHICLE.dot(MESVehicle.MAKE).ascs(), true);
+	}
+		
+}

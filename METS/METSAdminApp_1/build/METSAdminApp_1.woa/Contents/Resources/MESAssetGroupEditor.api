@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wodefinitions>
+        <wo class="MESAssetGroupEditor.java" wocomponentcontent="true">
+
+        <binding name="object"/>
+        <validation message="'object' is a required binding.">
+            <unbound name="object"/>
+        </validation>
+        <binding name="navigationController"/>
+        <validation message="'navigationController' is a required binding.">
+            <unbound name="navigationController"/>
+        </validation>
+    </wo>
+</wodefinitions>

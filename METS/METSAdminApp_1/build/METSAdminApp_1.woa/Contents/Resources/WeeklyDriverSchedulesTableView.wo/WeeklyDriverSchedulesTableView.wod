@@ -1,0 +1,73 @@
+DailyTotal : WOString {
+	numberformat = "0.00";
+	value = dailyTotal;
+}
+
+DayOfWeekRepetition : WORepetition {
+	item = dayOfWeek;
+	list = daysOfWeek;
+}
+
+DriverName : WOString {
+	value = driver|fullName(true);
+}
+
+DriversRepetition : WORepetition {
+	item = driver;
+	list = drivers;
+}
+
+DriverWorkedThatWeek : WOConditional {
+	condition = driverWorkedThatWeek;
+}
+
+EndTime : WOString {
+	dateformat = "%b %d, %Y";
+	value = dataSource.searchEndDate;
+}
+
+HeaderDate : WOString {
+	dateformat = "%m/%d/%y";
+	value = dayOfWeekTimestamp;
+}
+
+IsNotPrintPage : WOConditional {
+	condition = isPrintPage;
+	negate = true;
+}
+
+OvertimeHoursWorked : WOString {
+	numberformat = "0.00";
+	value = overtimeHoursWorkedForWeekByDriver;
+}
+
+PrintSchedulesButton : WOHyperlink {
+	action = printSchedules;
+	class = "btn btn-success";
+	target = "_blank";
+}
+
+StartTime : WOString {
+	dateformat = "%b %d, %Y";
+	value = dataSource.searchStartDate;	
+}
+
+TotalHoursWorked : WOString {
+	numberformat = "0.00";
+	value = totalHoursWorkedForWeekByDriver;
+}
+
+TotalHoursWorkedForDate : WOString {
+	numberformat = "0.00";
+	value = totalHoursWorkedForDate;
+}
+
+TotalHoursWorkedForWeek : WOString {
+	numberformat = "0.00";
+	value = totalHoursWorkedForWeek;
+}
+
+TotalOvertimeHoursWorkedForWeek : WOString {
+	numberformat = "0.00";
+	value = totalOvertimeHoursWorkedForWeek;
+}

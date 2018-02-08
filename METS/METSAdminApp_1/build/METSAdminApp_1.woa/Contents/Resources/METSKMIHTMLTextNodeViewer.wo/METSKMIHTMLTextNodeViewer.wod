@@ -1,0 +1,12 @@
+EditNodeLink : WOHyperlink {
+	action = editNode;
+}
+
+NodeContent : WOString {
+	escapeHTML = false;
+	value = object.textContent;
+}
+
+RemoveNodeLink : WOHyperlink {
+	action = removeNode;
+}

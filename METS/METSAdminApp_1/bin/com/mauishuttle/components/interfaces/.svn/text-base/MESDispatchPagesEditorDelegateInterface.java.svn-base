@@ -1,0 +1,38 @@
+package com.mauishuttle.components.interfaces;
+
+import km.extensions.aim.KMCreditCard;
+
+import com.mauishuttle.eo.MESAbstractPaymentInfo;
+import com.mauishuttle.eo.MESDispatch;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSDictionary;
+
+public interface MESDispatchPagesEditorDelegateInterface {
+
+	public void addAdditionalRoute(EOEditingContext ec, MESDispatch parent);
+	
+	public MESAbstractPaymentInfo paymentInfo();
+	public void setPaymentInfo(MESAbstractPaymentInfo paymentInfo);
+	
+	public String billingPageKey();
+	public void setBillingPageKey(String billingPageKey);
+	
+	public KMCreditCard creditCard();
+	public void setCreditCard(KMCreditCard creditCard);
+	
+	public NSDictionary<String, Object> dispatchSnapshot();
+	public void setDispatchSnapshot(NSDictionary<String, Object> dispatchSnapshot);
+	
+	public Boolean displaySummary();
+	public void setDisplaySummary(Boolean value);
+	
+	public String pickUpLocationUserInput();
+	public void setPickUpLocationUserInput(String userInput);
+	
+	public String dropOffLocationUserInput();
+	public void setDropOffLocationUserInput(String userInput);
+
+	public String requiresChildSeats();
+	public void setRequiresChildSeats(String value);
+	
+}

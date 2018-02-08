@@ -1,0 +1,135 @@
+package com.mauishuttle.components.tables;
+
+import com.mauishuttle.components.PrintDispatchesPage;
+import com.mauishuttle.components.interfaces.MESDispatchTableControllerInterface;
+import com.mauishuttle.components.interfaces.MESPageNavigationControllerInterface;
+import com.mauishuttle.components.interfaces.MESTableControllerInterface;
+import com.mauishuttle.eo.MESAbstractService;
+import com.mauishuttle.eo.MESAccount;
+import com.mauishuttle.eo.MESDispatch;
+import com.mauishuttle.eo.MESDriver;
+import com.mauishuttle.eo.MESLocation;
+import com.mauishuttle.eo.MESZone;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.foundation.NSArray;
+
+import er.ajax.mootools.MTAjaxUtils;
+import er.extensions.components.ERXNonSynchronizingComponent;
+
+@SuppressWarnings("serial")
+public class MESDispatchesTable extends ERXNonSynchronizingComponent implements MESTableControllerInterface {
+    
+	public MESAbstractService _service;
+	private MESDispatchTableControllerInterface _dataSource;
+	private MESPageNavigationControllerInterface _navigationController;
+	public MESAccount _account;
+	public MESDriver _driver;
+	public MESLocation _location;
+	public MESDispatch.Status _status;
+
+	public final NSArray<String> yesOrNoArray = new NSArray<String>(new String[] {
+			YES_KEY, NO_KEY
+	});
+
+	private static final String NO_KEY = "No";
+	private static final String YES_KEY = "Yes";	
+	
+	public MESDispatchesTable(WOContext context) {
+        super(context);
+    }
+
+	public void appendToResponse(WOResponse response, WOContext context) {
+		super.appendToResponse(response, context);
+		MTAjaxUtils.addStylesheetResourceInHead(
+				context, 
+				response, 
+				"app", 
+				"stylesheets/datepicker_dashboard.css");
+	}
+	
+	public void sleep() {
+		super.sleep();
+		setDataSource(null);
+		setNavigationController(null);
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAccount> accounts() {
+		return MESAccount.fetchMESAccounts(dataSource().ec(), 
+				MESAccount.HUB.eq(dataSource().currentHub()), 
+				MESAccount.NAME.ascs());
+	}	
+	
+	public boolean statusChecked() {
+		return dataSource().checkedStatuses().containsObject(_status);
+	}
+
+	public void setStatusChecked(boolean statusChecked) {
+
+		if(statusChecked) {
+			if(!dataSource().checkedStatuses().containsObject(_status)) {
+				dataSource().checkedStatuses().addObject(_status);
+			}
+		} else {
+			if(dataSource().checkedStatuses().containsObject(_status)) {
+				dataSource().checkedStatuses().removeObject(_status);
+			}
+		}
+
+	}
+	
+	public MESDispatchTableControllerInterface dataSource() {
+		if(_dataSource == null) {
+			_dataSource = (MESDispatchTableControllerInterface)valueForBinding("dataSource");
+		}
+		return _dataSource;
+	}
+
+	public void setDataSource(Object dataSource) {
+		this._dataSource = (MESDispatchTableControllerInterface)dataSource;
+		setValueForBinding(dataSource, "dataSource");
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESDriver> drivers() {
+		return MESDriver.fetchMESDrivers(dataSource().ec(), 
+				MESDriver.HUB.eq(dataSource().currentHub()), 
+				MESDriver.LAST_NAME.asc().then(MESDriver.FIRST_NAME.asc()));
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<MESLocation> locations() {
+		return MESLocation.fetchMESLocations(dataSource().ec(), 
+				MESLocation.ZONE.dot(MESZone.HUB).eq(dataSource().currentHub()), 
+				MESLocation.NAME.ascs());
+	}	
+	
+	public MESPageNavigationControllerInterface navigationController() {
+		if(_navigationController == null) {
+			_navigationController = (MESPageNavigationControllerInterface)valueForBinding("navigationController");
+		}
+		return _navigationController;
+	}
+
+	public void setNavigationController(MESPageNavigationControllerInterface pageController) {
+		this._navigationController = pageController;
+	}
+	
+	public WOActionResults printDispatches() {
+		PrintDispatchesPage nextPage = pageWithName(PrintDispatchesPage.class);
+		nextPage.setEc(dataSource().ec());
+		nextPage.setDisplayGroup(dataSource().dispatchDisplayGroup());
+		return nextPage;
+	}	
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESAbstractService> services() {
+		return  MESAbstractService.fetchMESAbstractServices(dataSource().ec(), 
+				MESAbstractService.HUB.eq(dataSource().currentHub()),
+				MESAbstractService.NAME.ascs());
+	}
+	
+
+}

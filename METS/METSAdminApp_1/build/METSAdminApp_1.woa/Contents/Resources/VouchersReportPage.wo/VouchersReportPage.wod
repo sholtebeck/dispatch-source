@@ -1,0 +1,40 @@
+DisplayNext : WOHyperlink {
+	action = displayGroup.displayNextBatch;
+}
+
+DisplayPrevious : WOHyperlink {
+	action = displayGroup.displayPreviousBatch;
+}
+
+HasMultipleBatches : WOConditional {
+	condition = displayGroup.hasMultipleBatches;
+}
+
+PaymentInformationRow : PaymentInformationRow {
+	accounts = accounts;
+	payment = payment;
+}
+
+VouchersRepetition : WORepetition {
+	item = payment;
+	list = displayGroup.displayedObjects;
+}
+
+Form : WOForm {
+	action = saveChanges;
+}
+
+SubmitButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary prg-pad-left";
+	value = "Update";
+}
+
+Wrapper : OutstandingPaymentsReportsPage {
+	displayGroup = displayGroup;
+	endDate = endDate;
+	reportName = "Vouchers";
+	startDate = startDate;
+	selectedHub = selectedHub;
+	selectedPaymentStatus = selectedPaymentStatus;
+}

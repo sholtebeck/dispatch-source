@@ -1,0 +1,270 @@
+AddressOneInput : WOTextField {
+	class = "text";
+	value = billingAddress.addressOne;
+}
+
+AddressTwoInput : WOTextField {
+	class = "text";
+	value = billingAddress.addressTwo;
+}
+
+CityInput : WOTextField {
+	class = "text";
+	value = billingAddress.city;
+}
+
+CountrySelect : WOPopUpButton {
+	class = "text";
+	list = countries;
+	noSelectionString = "Please pick your country";
+	selection = billingAddress.country;
+}
+
+CancelReservationButton : WOHyperlink {
+	action = cancelReservation;
+	class = "btn";
+}
+
+CellPhoneInput : WOTextField {
+	class = "text";
+	value = cellPhoneNumber;
+}
+
+ChildRoute : RouteSummary {
+	dispatch = child;
+}
+
+CreditCardNumber : WOTextField {
+	class = "text";
+	value = creditCard.creditCardNumber;
+}
+
+DisplayGratuityAmount : WOConditional {
+	condition = displayGratuityAmount;
+}
+
+DisplayGratuityAppreciatedMessage : WOConditional {
+	condition = displayGratuityAmount;
+	negate = true;
+}
+
+DisplayNavigation : WOConditional {
+	condition = displayNavigation;
+}
+
+ExpirationMonthSelector : WOPopUpButton {
+	class = "span-one-half";
+	list = months;
+	noSelectionString = "Month";
+	selection = selectedMonth;
+}
+
+ExpirationYearSelector : WOPopUpButton {
+	class = "span-one-half";
+	list = years;
+	noSelectionString = "Year";
+	selection = selectedYear;
+}
+
+EmailInput : WOTextField {
+	class = "text";
+	disabled = disableCustomerInputs;
+	value = emailAddress;
+}
+
+FirstNameInput : WOTextField {
+	class = "text";
+	disabled = disableCustomerInputs;
+	value = firstName;
+}
+
+FromAirportFirst : WOConditional {
+	condition = toAirportFirst;
+	negate = true;
+}
+
+IsAirportReservation : WOConditional {
+	condition = session.isAirportRun;
+}
+
+IsPointToPointReservation : WOConditional {
+	condition = session.isPointToPointRun;
+}
+
+LastNameInput : WOTextField {
+	class = "text";
+	disabled = disableCustomerInputs;
+	value = lastName;
+}
+
+FromAirportDefined : ERXNonNullConditional {
+	condition = session.fromAirport;
+}
+
+FromAirportIsExistingObject : WOConditional {
+	condition = session.fromAirport.isNewObject;
+	negate = true;
+}
+
+FromAirportDescendentsRepetition : WORepetition {
+	item = child;
+	list = session.fromAirport.descendents;
+}
+
+IsCharterReservation : WOConditional {
+	condition = session.isCharterRun;
+}
+
+CharterReservationSummary : CharterRouteSummary {
+	dispatch = session.charterReservation;
+	direction = charterReservationPageKey;
+}
+
+CharterReservationDescendentSummary : CharterRouteSummary {
+	dispatch = child;
+	direction = charterReservationPageKey;
+}
+
+CharterRunDescendentsRepetition : WORepetition {
+	item = child;
+	list = session.charterReservation.unpaidSortedDescendents;
+}
+
+ToAirportDescendentsRepetition : WORepetition {
+	item = child;
+	list = session.toAirport.descendents;
+}
+
+ToAirportIsExistingObject : WOConditional {
+	condition = session.toAirport.isNewObject;
+	negate = true;
+}
+
+FromAirportSummary : RouteSummary {
+	direction = fromPageKey;
+	dispatch = session.fromAirport;
+}
+
+GratuitySelector : WOPopUpButton {
+	class = "text";
+	displayString = gratuityDisplayString;
+	id = "GratuitySelector";
+	item = gratuityPercent;
+	list = gratuityOptions;
+	noSelectionString = "Please pick the percentage you would like to tip!";
+	selection = selectedGratuityAmount;
+}
+
+GratuitySelectorObserver : MTAjaxObserveField {
+	observeFieldID = "GratuitySelector";
+	updateContainerID = "GratuityAmountUpdateContainer";
+	useSpinner = true;
+}
+
+GratuitySelectorTotalAmountObserver : MTAjaxObserveField {
+	observeFieldID = "GratuitySelector";
+	updateContainerID = "TotalAmountUpdateContainer";
+	useSpinner = true;
+}
+
+GratuityAmountUpdateContainer : MTAjaxUpdateContainer {
+	class = "caption";
+	elementName = "em";
+	id = "GratuityAmountUpdateContainer";	
+}
+
+HasMultipleRoutes : WOConditional {
+	condition = session.hasMultipleRoutes;
+}
+
+IsNotPaid : WOConditional {
+	condition = isPaid;
+	negate = true;
+}
+
+IsPaid : WOConditional {
+	condition = isPaid;
+}
+
+Main : PageWrapper {
+	metaDescription = metaDescription;
+	pageTitle = pageTitle;
+}
+
+MessagesPanel : MessagePanel {
+	hasErrors = hasErrors;
+	hasMessages = hasMessages;
+	errors = errors;
+	messages = messages;
+}
+
+PointToPointDescendentsRepetition : WORepetition {
+	item = child;
+	list = session.pointToPointReservation.descendents;
+}
+
+PointToPointReservationSummary : RouteSummary {
+	dispatch = session.pointToPointReservation;
+	direction = pointToPointPageKey;
+}
+
+ProcessPayment : WOSubmitButton {
+	action = processPayment;
+	class = "btn";
+	value = "PROCESS PAYMENT";
+}
+
+SecurityIdentifier : WOTextField {
+	class = "text";
+	value = creditCard.securityID;
+}
+
+SingleRoute : WOConditional {
+	condition = session.hasMultipleRoutes;
+	negate = true;
+}
+
+StateInput : WOTextField {
+	class = "text";
+	value = billingAddress.region;
+}
+
+TermsAndConditions : WOHyperlink {
+	actionClass = "DirectAction";
+	directActionName = "termsAndConditions";
+	target = "_blank";
+}
+
+TipAmount : WOString {
+	numberformat = "$#,##0.00";
+	value = session.tipAmount;
+}
+
+ToAirportDefined : ERXNonNullConditional {
+	condition = session.toAirport;
+}
+
+ToAirportFirst : WOConditional {
+	condition = toAirportFirst;
+}
+
+ToAirportSummary : RouteSummary {
+	direction = toPageKey;
+	dispatch = session.toAirport;
+}
+
+TotalAmountUpdateContainer : MTAjaxUpdateContainer {
+	id = "TotalAmountUpdateContainer";
+}
+
+Total : WOTextField {
+	class = "text";
+	disabled = true;
+	numberformat = "$#,##0.00";
+	value = total;
+}
+
+ZipCodeInput : WOTextField {
+	class = "text";
+	value = billingAddress.zipCode;
+}

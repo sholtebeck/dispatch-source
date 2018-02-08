@@ -1,0 +1,19 @@
+PickUpTime : WOString {
+	dateformat = "%I:%M %p";
+	value = pickUpTime;
+}
+
+PickUpTimesRepetition : WORepetition {
+	item = pickUpTime;
+	list = pickUpTimeOptions;
+}
+
+RadioButton : WORadioButton {
+	checked = pickUpTimeChecked;
+	name = "PickUpTimeSelector";
+}
+
+TableRow : WOGenericContainer {
+	class = tableRowClassName;
+	elementName = "tr";
+}

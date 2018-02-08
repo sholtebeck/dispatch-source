@@ -1,0 +1,70 @@
+CurrentPaymentIsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+CurrentPaymentIsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;	
+}
+
+DisplaySecretKeyInputForCreditCardStorage : WOConditional {
+	condition = displaySecretKeyInputForCreditCardStorage;
+}
+
+DisplaySecretKeyInputForCreditCardProcessing : WOConditional {
+	condition = displaySecretKeyInputForCreditCardProcessing;
+}
+
+ExpirationMonthSelector : WOPopUpButton {
+	class = "span2";
+	list = expirationMonths;
+	noSelectionString = "Exp. Month";
+	selection = delegate.creditCard.expirationMonth;
+}
+
+ExpirationYearSelector : WOPopUpButton {
+	class = "span2";
+	list = expirationYears;
+	noSelectionString = "Exp. Year";
+	selection = delegate.creditCard.expirationYear;
+}
+
+IsEncrypted : WOConditional {
+	condition = object.creditCard.isEncrypted;
+}
+
+IsNotPaid : WOConditional {
+	condition = object.paid;
+	negate = true;
+}
+
+PaymentInformationCreditCardIsDefined : ERXNonNullConditional {
+	condition = object.creditCard;
+}
+
+ProcessCreditCardInformationSelectorObserver : MTAjaxObserveField {
+	observeFieldID = "ProcessCreditCardInformationSelector";
+	updateContainerID = "SecretPinEntryUpdateContainer";
+}
+
+SaveCreditCardInformationSelectorObserver : MTAjaxObserveField {
+	observeFieldID = "SaveCreditCardInformationSelector";
+	updateContainerID = "SecretKeyUpdateContainer";
+}
+
+SaveCreditCardInformationSelector : METSPopUpButton {
+	helpText = "Optional";
+	id = "SaveCreditCardInformationSelector";
+	labelText = "Save in Database";
+	list = yesOrNoArray;
+	noSelectionString = "Do you wish to save this credit card on file?";
+	selection = delegate.recordCreditCardInformation;
+}
+
+SecretPinEntryUpdateContainer : MTAjaxUpdateContainer {
+	id = "SecretPinEntryUpdateContainer";
+}
+
+SecretKeyUpdateContainer : MTAjaxUpdateContainer {
+	id = "SecretKeyUpdateContainer";
+}

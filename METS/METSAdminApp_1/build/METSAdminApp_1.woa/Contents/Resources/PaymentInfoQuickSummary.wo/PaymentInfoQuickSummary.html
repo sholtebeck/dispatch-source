@@ -1,0 +1,29 @@
+<webobject name = "DriverCollect">
+	<span><b>Driver Collect</b></span>
+</webobject>
+<webobject name = "DriverDoNotCollect">
+	<span><b>DNC</b></span>
+</webobject>
+<wo:condition condition = "$isCashPayment">
+	<span>Cash: <webobject name = "Total" /><webobject name = "IsPaid"> - Paid</webobject></span>
+</wo:condition>
+<wo:condition condition = "$isCreditCardPayment">
+	<span>
+		Credit Card: <webobject name = "Total" />
+		<webobject name = "IsPaid">&nbsp;-&nbsp;PAID
+			<webobject name = "DriverCollect">&nbsp;-&nbsp;AC: <webobject name = "ApprovalCode" /></webobject>
+		</webobject>
+		<webobject name = "IsNotPaid">NOT PAID</webobject>
+	</span>
+</wo:condition>
+<wo:condition condition = "$isServiceOrderPayment">
+	<webobject name = "AccountDefined">Account: <webobject name = "AccountName" /><br/></webobject>
+	<span>Service Order: <webobject name = "HasGroupName"><wo:str value = "$aServiceOrderPayment.groupName" /></webobject>, <webobject name = "Total" /></span>
+</wo:condition>
+<wo:condition condition = "$isVoucherPayment">
+	<webobject name = "AccountDefined">Account: <webobject name = "AccountName" /><br/></webobject>
+	<span>Voucher: <wo:str value = "$aVoucherPayment.voucherNumber" />, <webobject name = "Total" /></span>
+</wo:condition>
+<wo:condition condition = "$isComplementaryPayment">
+	<span>COMP TRANS</span>
+</wo:condition>

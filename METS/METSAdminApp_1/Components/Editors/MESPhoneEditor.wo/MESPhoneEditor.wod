@@ -1,0 +1,31 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	isNewObject = object.isNewObject;
+	submitAction = navigationController.saveChanges;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = errors;
+	messages = messages;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+PhoneForm : METSHorizontalForm {
+	action = navigationController.saveChanges;
+}
+
+PhoneNumber : WOString {
+	value = object.phoneNumber;
+}

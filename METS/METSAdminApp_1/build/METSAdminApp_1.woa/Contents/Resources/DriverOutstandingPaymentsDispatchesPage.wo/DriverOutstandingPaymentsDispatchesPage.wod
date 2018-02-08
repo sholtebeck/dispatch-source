@@ -1,0 +1,77 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+ConfirmationNumber : WOString {
+	value = payment.dispatch.confirmationNumber;
+}
+
+CurrentDriver : WOString {
+	value = driver.fullName;
+}
+
+DropOffLocation : WOString {
+	value = payment.dispatch.dropOffLocation.nameWithZone;
+}
+
+Form : WOForm {
+
+}
+
+NumberPassengers : WOString {
+	numberformat = "0";
+	value = payment.dispatch.numberPassengers;
+}
+
+PaymentsRepetition : WORepetition {
+	item = payment;
+	list = payments;
+}
+
+Paid : WOCheckBox {
+	checked = paymentChecked;
+}
+
+PassengerName : WOString {
+	value = payment.dispatch.customerLastName;
+}
+
+PaymentAmount : WOString {
+	value = payment.amount;
+}
+
+PaymentType : WOString {
+	value = paymentInfo;
+}
+
+PickUpDateTime : WOString {
+	dateformat = "%m/%d/%y %H:%M";
+	value = payment.dispatch.reservationDate;
+}
+
+
+PickUpLocation : WOString {
+	value = payment.dispatch.pickUpLocation.nameWithZone;
+}
+
+ReturnToDrivers : WOHyperlink {
+	action = returnToDrivers;
+}
+
+Service : WOString {
+	value = payment.dispatch.service.name;
+}
+
+StaticColumn : METSStaticColumn {
+	
+}
+
+SubmitButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn btn-primary prg-pad-left";
+	value = "Update";
+}
+
+Wrapper : AccountingController {
+	
+}

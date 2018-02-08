@@ -1,0 +1,52 @@
+<webobject name = "ContentEditorColumn">
+	<span class="prg-handle">&harr;</span>
+	<webobject name = "BreadCrumbsBar">
+		<li><a href = "#">Editor</a></li>
+		<li><webobject name = "WebDocumentName" />
+	</webobject>
+	<webobject name = "IsNotNewObject">
+		<div class = "row-fluid" id = "PRGDocumentContentEditor">
+			<wo:METSStaticColumn>
+				<ul class = "prg-action-bar">
+					<li><wo:link class = "add-button" action = "$controller.addNodeToKMIWebDocument">Add Section</wo:link></li>
+				</ul>
+				<div class = "row-fluid">
+					<div class = "span-12 prg-append-bottom">
+						<webobject name = "NodesRepetition">
+							<webobject name = "IsCurrentNode">
+								<webobject name = "NodeEditor" />
+							</webobject>
+							<webobject name = "NotCurrentNdoe">
+								<webobject name = "NodeViewer" />
+							</webobject>	
+						</webobject>
+					</div>
+				</div>
+			</wo:METSStaticColumn>
+		</div>
+	</webobject>
+</webobject>
+<div class="prg-table-column prg-alley">&nbsp;</div>
+<webobject name = "InspectorColumn">
+	<webobject name = "InspectorNavigationUpdateContainer">
+		<ul class="prg-column-header-bar">
+			<webobject name = "ViewDocumentInfoListItem">
+				<webobject name = "ViewDocumentInfoLink">
+					<span><i class = "icon-globe">&nbsp;</i></span>
+				</webobject>
+			</webobject>
+		</ul>
+		<wo:METSStaticColumn>
+			<wo:METSInfoBar>General Information</wo:METSInfoBar>
+			<div class = "row-fluid panel">
+				<webobject name = "MessagesPanel"></webobject>
+				<webobject name = "Form">
+					<wo:METSTextInput inputClassName = "input-small" helpText = "Required" labelText = "Name" value = "$object.name" />
+					<wo:METSTextInput inputClassName = "input-medium" helpText = "Use less than 80 characaters" labelText = "Page Title" value = "$object.pageTitle" />
+					<wo:METSTextArea inputClassName = "input-medium" helpText = "Use less than 160 characters" labelText = "Meta Description" value = "$object.metaDescription" rows = "2" />
+					<webobject name = "FormSubmissionBar"></webobject>
+				</webobject>
+			</div>
+		</wo:METSStaticColumn>
+	</webobject>
+</webobject>

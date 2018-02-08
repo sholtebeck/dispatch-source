@@ -1,0 +1,192 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href = "#"><webobject name = "HubName"></webobject></a></li>
+	<li>Dispatches</li>
+</webobject>
+<webobject name = "DispatchStaticColumn">
+	<div class="row-fluid">
+		<div class="span12">
+			<webobject name = "FilterResultsForm">
+				<div class = "row-fluid">
+					<div class = "span12">
+						<h2 class = "dispatch-table-header">Filters 
+							<span>
+								<wo:hyperlink action = "$toggleDisplayFilters">
+									<wo:if condition = "$dataSource.displayFilters">Hide Filters</wo:if>
+									<wo:else>Show Filters</wo:else>
+								</wo:hyperlink>
+							</span>
+						</h2>
+					</div>
+				</div>
+				<wo:if condition = "$dataSource.displayFilters">
+					<div class="row-fluid">
+						<div class="span12">
+							<wo:if condition = "$session.isSuperUser">
+								<div class="row-fluid">
+									<div class="span3">
+										<div class="row-fluid">
+											<webobject name = "HubSelectorPopUpButton" />
+										</div>		
+									</div>
+									<div class="span3">
+										<div class="row-fluid">
+											<webobject name = "BookedBySelectorPopUpButton" />
+										</div>		
+									</div>
+									<div class="span3">
+										<div class="row-fluid">
+											<webobject name = "PaymentTypesPopUpButton" />
+										</div>		
+									</div>
+									<div class="span3">
+										<div class="row-fluid">
+											<webobject name = "PaymentTypeStatusPopUpButton" />
+										</div>		
+									</div>
+								</div>
+							</wo:if>
+							<div class="row-fluid prg-prepend-top">
+								<div class="span3">
+									<div class="row-fluid">
+										<webobject name = "DriverSelectorPopUpButton" />	
+									</div>		
+								</div>
+								<div class="span3">
+									<div class="row-fluid">
+										<webobject name = "AccountSelectorPopUpButton" />
+									</div>		
+								</div>
+								<div class="span3">
+									<div class="row-fluid">
+										<webobject name = "ServiceTypeSelector" />	
+									</div>		
+								</div>
+								<div class="span3">
+									<div class="row-fluid">
+										<webobject name = "CreatedBySelector" />	
+									</div>		
+								</div>
+							</div>	
+							<div class="row-fluid prg-prepend-top">
+								<div class="span3">
+									<div class = "row-fluid">
+										<webobject name = "DropOffLocationSelector"></webobject>
+									</div>
+								</div>
+								<div class="span3">
+									<div class = "row-fluid">
+										<webobject name = "PickUpLocationSelector"></webobject>
+									</div>
+								</div>
+								<div class="span3">
+									<div class = "row-fluid">
+										<webobject name = "DropOffZoneSelector"></webobject>
+									</div>
+								</div>
+								<div class="span3">
+									<div class = "row-fluid">
+										<webobject name = "PickUpZoneSelector"></webobject>
+									</div>
+								</div>
+							</div>
+							<div class = "row-fluid prg-prepend-top">
+								<div class = "span12">
+									<div class = "row-fluid">
+										<div class = "span6">
+											<ul class="prg-status-selection-list">
+												<webobject name = "StatusRepetition">
+													<li>
+														<label class="checkbox">
+															<webobject name = "StatusCheckBox"></webobject>&nbsp;<webobject name = "StatusKey" />
+														</label>
+													</li>
+												</webobject>
+												<li><label class = "checkbox"><input checked type = "checkbox" onclick = "checkAll('MESFilterDispatchesForm', this.checked);" /> Check/Uncheck All</label></li>	
+											</ul>
+										</div>
+										<div class = "span6">
+											<div class = "row-fluid">
+												<div class = "span12">
+													<label>Enable Date Filtering</label>
+													<webobject name = "EnableDateFilterPopupButton"></webobject>																												
+													<label for="input01">From:</label>
+													<webobject name = "SearchStartDatePicker"></webobject>
+													<label for="input01">To:</label>
+													<webobject name = "SearchEndDatePicker"></webobject>
+												</div>
+											</div>
+											<div class = "row-fluid prg-prepend-top">														
+												<div class = "span12">
+													<label>Last Name:</label>
+													<webobject name = "PassengerLastName"></webobject>
+													<label>Confirmation Number: </label>
+													<webobject name = "ConfirmationNumber"></webobject>
+												</div>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class = "row-fluid prg-prepend-top">														
+						<div class = "span12">
+							<div class = "row-fluid">
+								<div class = "span6">
+									<webobject name = "FilterButton"></webobject>
+									<webobject name = "ResetFiltersButton">Reset</webobject>
+								</div>
+								<div class = "span6">
+									<label>Search Macros</label>
+									<webobject name = "SearchMacroSelector"></webobject>
+									<webobject name = "SearchByMacroButton"></webobject>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</wo:if>
+			</webobject>
+			<wo:if condition = "$navigationController.hasError">
+				<div class = "row-fluid">
+					<div class = "span-12">
+						<wo:METSMessagePanel errors = "$navigationController.errors" messages = "$navigationController.messages"></wo:METSMessagePanel>
+					</div>
+				</div>
+			</wo:if>
+			<div class = "row-fluid prg-append-bottom">
+				<div class = "span12">
+					<webobject name = "CreateNewDispatchButton">Create New Dispatch</webobject>
+					<webobject name = "PrintDispatchesButton">Print <i class="icon-print icon-white">&nbsp;</i></webobject>
+					<webobject name = "PrintDispatchesAsManifestButton">Print as Manifest <i class="icon-print icon-white">&nbsp;</i></webobject>
+					<webobject name = "EmailDispatchesAsManifestButton">
+						<div class="modal-header">
+							<a class="close" data-dismiss="modal">×</a>
+							<h3>E-Mail Manifest Form</h3>
+						</div>
+						<wo:form>
+							<div class="modal-body">	
+								<label>Recipient Name</label>
+								<webobject name = "RecipientName"></webobject>
+								<label>Recipient Email</label>
+								<webobject name = "RecipientEmail"></webobject>
+							</div>
+							<div class = "modal-footer">
+								<webobject name = "EmailManifestButton">Send</webobject>
+								<a href="#" class="dismiss btn">Cancel</a>
+							</div>
+						</wo:form>
+					</webobject>
+				</div>
+			</div>
+			<webobject name = "ListDispatchesTable" />
+			<webobject name = "HasMultipleBatches">
+				<div class="pagination">
+					<ul>
+						<li><webobject name = "DisplayPrevious">Previous</webobject></li>
+						<li><webobject name = "DisplayNext">Next</webobject></li>
+					</ul>
+				</div>	
+			</webobject>
+		</div>
+	</div>
+</webobject>

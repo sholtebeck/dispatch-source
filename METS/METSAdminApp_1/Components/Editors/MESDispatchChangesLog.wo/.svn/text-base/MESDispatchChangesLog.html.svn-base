@@ -1,0 +1,23 @@
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>User</th>
+			<th>Date</th>
+			<th>Changes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<webobject name = "DispatchChangesRepetition">
+			<tr>
+				<td><webobject name = "DispatchChanger"></webobject></td>
+				<td><webobject name = "DispatchChangeDate"></webobject></td>
+				<td>
+					<webobject name = "DispatchChangesAllKeysRepetition">
+						<webobject name = "DispatchChangeKey"></webobject> : <webobject name = "DispatchChangeValue"></webobject>
+						<webobject name = "IsNotLastDispatchChageKey">,&nbsp;</webobject>
+					</webobject>
+				</td>
+			</tr>
+		</webobject>
+	</tbody>			
+</table>	

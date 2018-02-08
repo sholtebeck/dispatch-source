@@ -1,0 +1,27 @@
+<webobject name = "MainTableColumn">
+	<webobject name = "BreadCrumbsBar">
+		<li><a href="#"><webobject name = "GroupName"></webobject></a></li>
+		<li>
+			<webobject name = "IsNewObject"></webobject>
+			<webobject name = "IsNotNewObject"></webobject>
+		</li>
+	</webobject>
+	<wo:METSStaticColumn>
+		<wo:METSInfoBar>General Information</wo:METSInfoBar>
+		<div class="row-fluid">
+			<webobject name = "MessagesPanel"></webobject>
+			<webobject name = "Form">
+				<wo:METSTextInput helpText = "Required" labelText = "Name" value = "$object.name" />
+				<webobject name = "HasAttachment">
+					<webobject name = "ImageViewWrapper">
+						<wo:ERAttachmentImageViewer attachment="$object.attachment" width = "80%" />
+					</webobject>
+				</webobject>
+				<webobject name = "EditorWrapper">
+					<webobject name = "ImageFileUploader"></webobject>
+				</webobject>
+				<webobject name = "FormSubmissionBar"></webobject>
+			</webobject>
+		</div>
+	</wo:METSStaticColumn>
+</webobject>

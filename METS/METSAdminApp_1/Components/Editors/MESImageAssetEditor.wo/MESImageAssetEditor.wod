@@ -1,0 +1,60 @@
+BreadCrumbsBar : METSBreadCrumbsBar {
+	
+}
+
+EditorWrapper : METSEditorWrapper {
+	id = "METSImageUploader";
+	labelText = "File";
+}
+
+Form: METSHorizontalForm {
+	action = navigationController.saveChanges;
+	enctype = "multipart/form-data";
+}
+
+FormSubmissionBar : METSFormSubmissionBar {
+	cancelAction = navigationController.cancelChanges;
+	deleteAction = deleteObject;
+	deleteButtonText = "Remove Image";
+	isNewObject = object.isNewObject;
+	useModalForDelete = true;
+	submitAction = navigationController.saveChanges;
+}
+
+GroupName : WOString {
+	value = object.group.name;
+}
+
+HasAttachment : ERXNonNullConditional {
+	condition = object.attachment;
+}
+
+ImageFileUploader : ERAttachmentUpload {
+	attachment = object.attachment;
+	configurationName = "KMIImageAsset.attachment";
+	editingContext = ec;
+}
+
+ImageViewWrapper : METSEditorWrapper {
+	hasHelpText = false;
+	labelText = "Current Image";
+}
+
+IsNewObject : WOConditional {
+	condition = object.isNewObject;
+}
+
+IsNotNewObject : WOConditional {
+	condition = object.isNewObject;
+	negate = true;
+}
+
+MainTableColumn : METSTableColumn {
+	class = "prg-main-column";
+	id = "PRGMainColumn";
+}
+
+MessagesPanel : METSMessagePanel {
+	errors = navigationController.errors;
+	messages = navigationController.messages;
+}

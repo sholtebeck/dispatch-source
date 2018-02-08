@@ -1,0 +1,101 @@
+AirportIsSelected : ERXNonNullConditional {
+	condition = selectedAirportZone;
+}
+
+AirportSelector : WOPopUpButton {
+	displayString = airport.displayString;
+	id = "METSRouteAirportSelector";
+	item = airport;
+	list = airportZones;
+	noSelectionString = "Please select an airport";
+	selection = selectedAirportZone;
+}
+
+AirportSelectorObserver : MTAjaxObserveField {
+	observeFieldID = "METSRouteAirportSelector";
+	updateContainerID = "METSRouteUpdateContainer";
+	useSpinner = true;
+}
+
+ContinueButton : WOSubmitButton {
+	action = saveChanges;
+	class = "btn";
+	value = "Continue";
+}
+
+FromAirportRoute : AirportRoute {
+	controller = controller;
+	dispatch = session.fromAirport;
+	direction = fromPageKey;
+}
+
+FromPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = fromPageKey;
+}
+
+HasMultipleRoutes : WOConditional {
+	condition = session.hasMultipleRoutes;
+}
+
+Main : PageWrapper {
+	mainNavigationIndex = -1;
+	metaDescription = metaDescription;
+	pageTitle = pageTitle;
+}
+
+MessagesPanel : MessagePanel {
+	hasErrors = hasErrors;
+	hasMessages = hasMessages;
+	errors = errors;
+	messages = messages;
+}
+
+RoundTripFromAirportRoute : AirportRoute {
+	controller = controller;
+	dispatch = session.fromAirport;
+	direction = fromPageKey;
+	panelClassName = "span-7-3-4";
+}
+
+RoundTripFromAirportRouteLast : AirportRoute {
+	controller = controller;
+	dispatch = session.fromAirport;
+	direction = fromPageKey;
+	panelClassName = "span-7-3-4 last";
+}
+
+RoundTripToAirportRoute : AirportRoute {
+	controller = controller;
+	dispatch = session.toAirport;
+	direction = toPageKey;
+	panelClassName = "span-7-3-4";
+}
+
+RoundTripToAirportRouteLast : AirportRoute {
+	controller = controller;
+	dispatch = session.toAirport;
+	direction = toPageKey;
+	panelClassName = "span-7-3-4 last";
+}
+
+RoutingInformationUpdateContainer : MTAjaxUpdateContainer {
+	class = "span-16 last append-bottom";
+	id = "METSRouteUpdateContainer";
+}
+
+SingleRoute : WOConditional {
+	condition = session.hasMultipleRoutes;
+	negate = true;
+}
+
+ToAirportRoute : AirportRoute {
+	controller = controller;
+	dispatch = session.toAirport;
+	direction = toPageKey;
+}
+
+ToPageKey : WOKeyValueConditional {
+	key = "pageKey";
+	value = toPageKey;
+}

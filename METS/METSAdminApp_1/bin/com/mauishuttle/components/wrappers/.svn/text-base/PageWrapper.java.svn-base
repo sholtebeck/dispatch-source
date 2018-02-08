@@ -1,0 +1,106 @@
+package com.mauishuttle.components.wrappers;
+
+import com.mauishuttle.components.Main;
+import com.mauishuttle.components.controllers.MESGlobalObjectsPagesController;
+import com.mauishuttle.components.controllers.MESHubPagesController;
+import com.mauishuttle.components.pages.DashboardPage;
+import com.mauishuttle.eo.MESDispatch;
+import com.mauishuttle.eo.MESHub;
+import com.mauishuttle.eo.MESHubRole;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.eocontrol.EOEnterpriseObject;
+import com.webobjects.foundation.NSArray;
+
+import er.ajax.mootools.MTAjaxUtils;
+import er.extensions.qualifiers.ERXKeyValueQualifier;
+
+@SuppressWarnings("serial")
+public class PageWrapper extends Main {
+	
+	private EOEnterpriseObject _selectedObject;
+	public MESHubRole _role;
+	
+    public PageWrapper(WOContext context) {
+        super(context);
+    }
+    
+    public void appendToResponse(WOResponse response, WOContext context) {
+
+    	super.appendToResponse(response, context);
+    	
+    	if(session().isUserAuthenticated()) {
+
+    		response.appendContentString("");
+    		MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", MTAjaxUtils.MOOTOOLS_CORE_JS); 
+	    	MTAjaxUtils.addScriptResourceInHead(context, response, "MooTools", MTAjaxUtils.MOOTOOLS_MORE_JS);
+	    	MTAjaxUtils.addScriptResourceInHead(context, response, "app", "javascript/prgPortal.js");
+    	
+    	}
+
+    }	    
+
+    @SuppressWarnings("unchecked")
+	protected ERXKeyValueQualifier dq() {
+    	return MESDispatch.HUB.eq(session().currentHub());
+    }
+    
+    public WOActionResults viewDashboard() {
+    	return pageWithName(DashboardPage.class);
+    }
+
+    public WOActionResults viewUsers() {
+    	return pageWithName(MESGlobalObjectsPagesController.class);
+    }
+
+    public WOActionResults viewDispatches() {
+    	MESHubPagesController nextPage = pageWithName(MESHubPagesController.class);
+    	nextPage.listTodaysDispatches();
+    	return nextPage;
+    }
+    
+	public EOEnterpriseObject selectedObject() {
+		return _selectedObject;
+	}
+
+	public void setSelectedObject(EOEnterpriseObject selectedObject) {
+		this._selectedObject = selectedObject;
+	}
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESHubRole> userAuthorizedHubs() {
+
+		NSArray<MESHubRole> roles = null;
+		
+		if(session().isSuperUser()) {
+
+			roles = MESHubRole.fetchMESHubRoles(ec(), null, MESHubRole.HUB.dot(MESHub.NAME).ascs());
+			
+		} else {
+			
+			roles = MESHubRole.fetchMESHubRoles(session().defaultEditingContext(), 
+					MESHubRole.USERS.containsObject(session().authenticatedUser()), 
+					MESHubRole.HUB.dot(MESHub.NAME).ascs());
+
+		}
+		
+		return roles;
+
+	}
+
+	public WOActionResults setCurrentHub() {
+	
+		session().setCurrentHub(_role.hub());
+		WOComponent nextPage = context().page();
+		
+		if(nextPage instanceof MESHubPagesController) {
+			((MESHubPagesController)nextPage).setDispatchDisplayGroup(null);
+		}
+		
+		return nextPage;
+
+	}
+    
+}

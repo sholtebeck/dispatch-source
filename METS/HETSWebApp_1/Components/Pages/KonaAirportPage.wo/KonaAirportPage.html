@@ -1,0 +1,65 @@
+<webobject name = "Main">
+	<div id = "AirportPage" class="billboard airport-billboard kona-airport">
+		<div class="container">
+			<div class="span-24">
+				<div>
+					<h1>Aloha and Welcome to the Big Island!</h1>
+				</div>
+				<div>
+					<webobject name = "ReservationWidget" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="HTContent">
+		<div class = "container">
+			<div class = "span-24">
+				<div class="span-16-5">
+					<div class="page-copy clearfix">
+						<webobject name = "PageContent"></webobject>
+						<h3>Terminal Map</h3>
+						<webobject name = "TerminalMapZoom"><webobject name = "TerminalMap" /></webobject>
+						<span class = "caption">Click to zoom - <a target = "_blank" href = "http://hawaii.gov/koa/terminal-information/images/KonaAirportMap.pdf">Printable Version</a></span>
+						<h3>Big Island Hotels we are proud to support:</h3>
+						<ul class = "hotels-list">
+							<li>
+								<a href = "http://www.royalkona.com" target = "_blank">
+									<wo:image framework = "app" filename = "images/hotels/royal-kona.gif" alt = "Hawaii Executive Transportation provides airport transportation to the Royal Kona Hotel located in Kailua-Kona town, Hawaii" />
+								</a>								
+							</li>
+							<li>
+								<a href = "http://www.westinmaui.com" target = "_blank">
+									<wo:image framework = "app" filename = "images/hotels/classic-resorts-mauna-lani.gif" alt = "Hawaii Executive Transportation provides airport shuttle services to the Classic Resorts Hotel at Mauna Lani" />
+								</a>								
+							</li>
+						</ul>
+					</div>
+					<div class = "ad-wrap">
+						<script type="text/javascript" language="javascript" src="http://www.tkqlhce.com/placeholder-7360932?target=_top&mouseover=N"></script>
+					</div>
+				</div>
+				<div class="span-6-5 push-1 last">
+					<div class="span-6-5 side-navigation last prepend-top">
+						<webobject name = "AirportNavigation" />
+					</div>
+					<div class="span-6-5 info-panel last prepend-top">
+						<h4>
+							Make a Reservation Today!
+							<span>1-800-833-2303</span>
+						</h4>
+					</div>
+					<webobject name = "FacebookButton" />
+					<div class="span-6-5 info-panel last prepend-top greeter">
+						<span>Our friendly staff greets exclusive transfers in baggage claim</span>
+					</div>
+					<wo:link href = "$ironmanPageLink" class="span-6-5 info-panel last prepend-top ironman">
+						<span>Important information regarding the Kona IRONMAN tournament.</span>
+					</wo:link>
+					<div class="span-6-5 info-panel last prepend-top courtesy-phone">
+						<span>For assistance "Dial 55" from the courtesy phone in baggage claim</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</webobject>

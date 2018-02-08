@@ -1,0 +1,57 @@
+package com.mauishuttle.components.editors;
+
+import com.mauishuttle.components.controllers.MESDispatchEditorPagesNavigationController;
+import com.mauishuttle.eo.MESDispatch;
+import com.mauishuttle.eo.MESDispatch.Status;
+import com.mauishuttle.eo.MESDriver;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+
+@SuppressWarnings("serial")
+public class MESDispatchDriverInformationEditor extends MESDispatchEditorPagesNavigationController {
+
+	public MESDriver _driver;
+	public MESDispatch.Status _status;
+	
+	public MESDispatchDriverInformationEditor(WOContext context) {
+        super(context);
+    }
+
+	@SuppressWarnings("unchecked")
+	public NSArray<MESDriver> hubDrivers() {
+		return MESDriver.fetchMESDrivers(
+				object().editingContext(), 
+				MESDriver.HUB.eq(session().currentHub()), 
+				MESDriver.LAST_NAME.asc().then(MESDriver.FIRST_NAME.asc()));
+	}
+	
+	public WOActionResults saveChanges() {
+		
+		saveStep();
+		
+		if(! hasError()) {
+			if(delegate().displaySummary() == false) {
+				delegate().setDisplaySummary(true);
+			}
+			setEditorPageKey(SUMMARY_PAGE_KEY);
+		}
+
+		return navigationController().nextPage();
+		
+	}	
+	
+	public Status selectedStatus() {
+		return Status.statuses().get(object().status());
+	}
+
+	public void setSelectedStatus(Status selectedStatus) {
+		object().setStatus(selectedStatus.value());
+	}
+	
+	public NSArray<MESDispatch.Status> statuses() {
+		return MESDispatch.Status.statuses();
+	}
+	
+}
+

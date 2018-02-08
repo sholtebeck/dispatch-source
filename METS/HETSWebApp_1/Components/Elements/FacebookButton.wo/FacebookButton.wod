@@ -1,0 +1,5 @@
+Container : WOGenericContainer {
+	elementName = "div";
+	class = css;
+	style = ^style;
+}

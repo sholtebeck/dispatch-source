@@ -1,0 +1,23 @@
+<webobject name = "BreadCrumbsBar">
+	<li><a href = "#"><wo:str value = "$session.currentHub.name" /></a></li>
+	<li><a href="#">Reports</a></li>
+	<li>Accounts Revenue Report</li>
+</webobject>
+<webobject name = "DateRangeSelector">
+	<webobject name = "StaticColumn">
+		<wo:METSInfoBar>Chart</wo:METSInfoBar>
+		<div class = "row-fluid">
+			<div class = "span12 prg-text-align-center">
+				<div id="chart_div"></div>
+			</div>
+		</div>	
+		<wo:METSInfoBar>Data</wo:METSInfoBar>
+		<div class = "row-fluid">
+			<div class="span12">
+				<table class="table table-striped table-bordered" id = "PRGDispatchTable">
+					<webobject name = "ServicesRevenueReportsDataTable"></webobject>
+				</table>
+			</div>
+		</div>
+	</webobject>
+</webobject>

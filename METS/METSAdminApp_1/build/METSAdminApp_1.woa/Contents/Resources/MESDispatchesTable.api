@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+        <wo class="MESDispatchesTable.java" wocomponentcontent="true">
+
+        <binding name="dataSource"/>
+    <binding name="navigationController"/>
+        <validation message="'pageController' is a required binding.">
+            <unbound name="navigationController"/>
+        </validation>
+    <validation message="'dataSource' is a required binding.">
+            <unbound name="dataSource"/>
+        </validation>
+    
+    </wo>
+</wodefinitions>
